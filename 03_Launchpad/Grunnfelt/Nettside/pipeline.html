@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Grunnfelt — Eiendomspipeline</title>
+<meta name="description" content="Grunnfelt intern pipeline for eiendomsidentifikasjon og grunneieroppfølging">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --jord:#1c2b1a;--gress:#4a7a45;--lys:#8ab885;--sand:#e8e0d0;--krem:#f5f0e8;--hvit:#fafaf7;--gull:#c8a84b;
+  --bg:#f5f0e8;--surf:#fafaf7;--surf2:#eee9df;
+  --tx:#1c2b1a;--tx2:#5a6e58;--tx3:#8a9e88;
+  --bd:rgba(74,122,69,.15);--bd2:rgba(74,122,69,.25);
+  --green:#4a7a45;--green-bg:#edf5ec;--green-bd:rgba(74,122,69,.3);
+  --amber:#b8860b;--amber-bg:#fef9ec;--amber-bd:#e8d48a;
+  --blue:#1a4a8e;--blue-bg:#eef3fb;--blue-bd:#a8c0e8;
+  --red:#8e1a1a;--red-bg:#fbeeed;--red-bd:#e8a8a8;
+  --gray-bg:#f0ede8;
+  --r:10px;--r-sm:7px;
+  --hdr:58px;--sidebar:230px;
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+html,body{height:100%;background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--gress);text-decoration:none}
+
+/* ── HEADER ── */
+.hdr{height:var(--hdr);background:var(--surf);border-bottom:1px solid var(--bd);display:flex;align-items:center;padding:0 1.5rem;gap:1rem;position:sticky;top:0;z-index:50;flex-shrink:0}
+.hdr-logo{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--tx)}
+.hdr-logo em{color:var(--gress);font-style:italic}
+.hdr-sep{width:1px;height:18px;background:var(--bd)}
+.hdr-title{font-size:.9rem;color:var(--tx2)}
+.hdr-right{margin-left:auto;display:flex;align-items:center;gap:.8rem}
+.hdr-badge{font-size:.72rem;font-weight:500;padding:.2rem .65rem;border-radius:20px;background:var(--green-bg);color:var(--gress);border:1px solid var(--green-bd)}
+.hdr-back{font-size:.82rem;color:var(--tx3);text-decoration:none;display:flex;align-items:center;gap:.3rem}
+.hdr-back:hover{color:var(--tx2)}
+
+/* ── LAYOUT ── */
+.app{display:flex;height:calc(100vh - var(--hdr));overflow:hidden}
+.sidebar{width:var(--sidebar);background:var(--surf);border-right:1px solid var(--bd);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;padding:.8rem 0}
+.nav-sect{padding:.4rem 1rem .2rem;font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);margin-top:.4rem}
+.nav-it{display:flex;align-items:center;gap:.65rem;padding:.55rem 1rem;margin:.08rem .5rem;border-radius:var(--r-sm);font-size:.9rem;color:var(--tx2);cursor:pointer;border:none;background:none;width:calc(100% - 1rem);text-align:left;font-family:'DM Sans',sans-serif;transition:.12s}
+.nav-it:hover{background:var(--surf2);color:var(--tx)}
+.nav-it.active{background:var(--green-bg);color:var(--gress);font-weight:500}
+.nav-it svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.8;fill:none;flex-shrink:0}
+.nav-count{margin-left:auto;font-size:.72rem;background:var(--surf2);color:var(--tx3);padding:.1rem .5rem;border-radius:20px}
+.nav-it.active .nav-count{background:rgba(74,122,69,.15);color:var(--gress)}
+
+.main{flex:1;overflow-y:auto;overflow-x:hidden}
+.page{display:none;padding:1.5rem;max-width:860px}
+.page.active{display:block}
+
+/* ── COMPONENTS ── */
+.ptitle{font-family:'DM Serif Display',serif;font-size:1.7rem;color:var(--tx);margin-bottom:.3rem}
+.psub{font-size:.95rem;color:var(--tx2);margin-bottom:1.5rem}
+.slabel{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--bd);margin-top:1.3rem}
+.slabel:first-of-type{margin-top:0}
+
+/* STATS */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.7rem;margin-bottom:1.5rem}
+.sc{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r);padding:.9rem 1.1rem}
+.sc.ok{border-color:var(--green-bd);background:var(--green-bg)}
+.sc.warn{border-color:var(--amber-bd);background:var(--amber-bg)}
+.slbl{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--tx3);margin-bottom:.25rem}
+.sval{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--tx);line-height:1}
+.sval.green{color:var(--gress)}
+.ssub{font-size:.78rem;color:var(--tx2);margin-top:.25rem}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;font-size:.72rem;font-weight:500;padding:.2rem .65rem;border-radius:20px;white-space:nowrap}
+.badge.green{background:var(--green-bg);color:var(--gress);border:1px solid var(--green-bd)}
+.badge.amber{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-bd)}
+.badge.blue{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-bd)}
+.badge.gray{background:var(--gray-bg);color:var(--tx3);border:1px solid var(--bd)}
+.badge.red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd)}
+
+/* FORM */
+.card{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r);padding:1.2rem 1.3rem;margin-bottom:.8rem;transition:.12s}
+.card:hover{border-color:var(--bd2)}
+label{display:block;font-size:.8rem;color:var(--tx3);margin-bottom:.3rem;margin-top:.9rem;text-transform:uppercase;letter-spacing:.06em}
+label:first-child{margin-top:0}
+input,select,textarea{width:100%;padding:.6rem .85rem;border:1px solid var(--bd2);border-radius:var(--r-sm);font-size:.95rem;font-family:'DM Sans',sans-serif;color:var(--tx);background:var(--surf);outline:none;transition:.12s}
+input:focus,select:focus,textarea:focus{border-color:var(--gress);box-shadow:0 0 0 2px rgba(74,122,69,.1)}
+textarea{min-height:70px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8rem}
+.btn{padding:.65rem 1.2rem;border-radius:var(--r-sm);font-size:.9rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;border:1px solid var(--bd2);background:var(--surf);color:var(--tx);transition:.12s}
+.btn:hover{background:var(--surf2)}
+.btn.primary{background:var(--gress);color:#fff;border-color:transparent}
+.btn.primary:hover{background:var(--jord)}
+.btn.danger{background:var(--red-bg);color:var(--red);border-color:var(--red-bd)}
+.btn.sm{padding:.4rem .85rem;font-size:.82rem}
+
+/* EIENDOM KORT */
+.prop-card{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r);padding:1rem 1.2rem;margin-bottom:.6rem;transition:.12s;border-left:3px solid var(--gress)}
+.prop-card:hover{border-color:var(--bd2);box-shadow:0 2px 10px rgba(28,43,26,.05)}
+.prop-card.status-dialog{border-left-color:var(--amber)}
+.prop-card.status-avtale{border-left-color:#1a4a8e}
+.prop-card.status-nei{border-left-color:var(--red);opacity:.65}
+.prop-top{display:flex;align-items:flex-start;gap:.8rem}
+.prop-body{flex:1}
+.prop-name{font-size:1rem;font-weight:500;color:var(--tx);margin-bottom:.2rem}
+.prop-meta{font-size:.82rem;color:var(--tx3)}
+.prop-note{font-size:.82rem;color:var(--tx2);font-style:italic;margin-top:.3rem}
+.prop-badges{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+.prop-actions{display:flex;gap:.5rem;flex-shrink:0;margin-top:.2rem}
+
+/* KILDE */
+.source{border-left:3px solid;padding:.9rem 1.1rem;border-radius:0 var(--r) var(--r) 0;margin-bottom:.8rem;background:var(--surf2)}
+.source-name{font-size:.95rem;font-weight:500;margin-bottom:.3rem}
+.source-desc{font-size:.84rem;color:var(--tx2);line-height:1.55;margin-bottom:.6rem}
+
+/* BREV */
+.brev-tekst{background:var(--surf2);border:1px solid var(--bd);border-radius:var(--r);padding:1.2rem 1.4rem;font-size:.9rem;line-height:1.8;white-space:pre-wrap;color:var(--tx);min-height:200px}
+
+/* PROSESS */
+.step{display:flex;gap:1rem;margin-bottom:1rem}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--green-bg);border:1px solid var(--green-bd);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:500;color:var(--gress);flex-shrink:0}
+.step-body{flex:1;padding-top:.2rem}
+.step-title{font-size:.95rem;font-weight:500;color:var(--tx);margin-bottom:.2rem}
+.step-desc{font-size:.84rem;color:var(--tx2);line-height:1.55}
+
+/* INFO BOX */
+.info-box{background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:var(--r-sm);padding:.75rem 1rem;font-size:.84rem;color:var(--blue);line-height:1.55;margin:.8rem 0}
+
+/* MOBIL */
+@media(max-width:700px){
+  .sidebar{display:none}
+  .main{width:100%}
+  .page{padding:1rem}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .ptitle{font-size:1.4rem}
+}
+</style>
+</head>
+<body>
+
+
+<!-- LOGIN -->
+<div id="scrLogin">
+  <div class="lcard">
+    <div class="llogo">
+      <svg viewBox="0 0 40 40" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(20,20)">
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#2e4a2b" transform="rotate(0)"/>
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#4a7a45" transform="rotate(45)"/>
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#2e4a2b" transform="rotate(90)"/>
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#4a7a45" transform="rotate(135)"/>
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#2e4a2b" transform="rotate(180)"/>
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#4a7a45" transform="rotate(225)"/>
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#2e4a2b" transform="rotate(270)"/>
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#4a7a45" transform="rotate(315)"/>
+        </g>
+        <circle cx="20" cy="20" r="8" fill="#2e4a2b"/>
+        <circle cx="20" cy="20" r="4.5" fill="#4a7a45"/>
+      </svg>
+      <div class="llogo-txt">Grunn<em>felt</em></div>
+    </div>
+    <div class="ltitle">Intern pipeline</div>
+    <div class="lsub">Kun for Grunnfelt-teamet.<br>Logg inn med din Google-konto for å få tilgang.</div>
+    <div id="g_id_onload"
+      data-client_id="155233765122-fcji10bhiqdo66gv2kiq41cr8qe3kvc3.apps.googleusercontent.com"
+      data-callback="onGoogleLogin"
+      data-auto_select="true"
+      data-use_fedcm_for_prompt="true">
+    </div>
+    <div id="g_id_signin"
+      data-type="standard"
+      data-size="large"
+      data-theme="outline"
+      data-text="sign_in_with"
+      data-shape="rectangular"
+      data-logo_alignment="left"
+      data-width="340">
+    </div>
+    <div class="ldiv">eller</div>
+    <button class="gbtn" onclick="document.querySelector('#g_id_signin div[role=button]')?.click()">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      Logg inn med Google
+    </button>
+    <div class="lnote">Kun autoriserte Grunnfelt-brukere får tilgang.</div>
+  </div>
+</div>
+
+<div id="app-shell" style="display:none"><header class="hdr">
+  <div class="hdr-logo">Grunn<em>felt</em></div>
+  <div class="hdr-sep"></div>
+  <div class="hdr-title" id="hdr-bruker-rolle">Pipeline</div>
+  <div class="hdr-right">
+    <span class="hdr-badge" id="hdr-badge-navn">Intern</span>
+    <a href="index.html" class="hdr-back" style="margin-left:.5rem">← Nettside</a>
+    <button onclick="loggUt()" style="background:none;border:none;font-size:.8rem;color:var(--tx3);cursor:pointer;padding:.15rem .4rem;border-radius:4px;font-family:'DM Sans',sans-serif;margin-left:.3rem" onmouseover="this.style.background='var(--surf2)'" onmouseout="this.style.background='none'">Logg ut</button>
+  </div>
+</header>
+
+<div class="app">
+  <nav class="sidebar">
+    <div class="nav-sect">Oversikt</div>
+    <button class="nav-it active" onclick="goPage('oversikt',this)">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </button>
+    <button class="nav-it" onclick="goPage('slagplan',this)">
+      <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      Slagplan
+    </button>
+    <div class="nav-sect">Pipeline</div>
+    <button class="nav-it" onclick="goPage('pipeline',this)">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+      Alle eiendommer
+      <span class="nav-count" id="nc-alle">0</span>
+    </button>
+    <button class="nav-it" onclick="goPage('ny',this)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      Legg til eiendom
+    </button>
+    <div class="nav-sect">Verktøy</div>
+    <button class="nav-it" onclick="goPage('brev',this)">
+      <svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      Brevgenerator
+    </button>
+    <button class="nav-it" onclick="goPage('prosess',this)">
+      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Arbeidsprosess
+    </button>
+    <div class="nav-sect">Oppslagsverk</div>
+    <button class="nav-it" onclick="goPage('utbyggere',this)">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+      Utbyggere
+      <span class="nav-count" id="nc-utb">25</span>
+    </button>
+    <button class="nav-it" onclick="goPage('marked',this)">
+      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Marked &amp; byer
+    </button>
+    <button class="nav-it" onclick="goPage('kart',this)">
+      <svg viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+      Kart
+    </button>
+    <button class="nav-it" onclick="goPage('datakilder',this)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Datakilder
+    </button>
+    <div class="nav-sect">Workspace</div>
+    <button class="nav-it" onclick="goPage('workspace',this)">
+      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      Mitt arbeidsrom
+    </button>
+  </nav>
+
+  <main class="main">
+
+    <!-- DASHBOARD -->
+    <div class="page active" id="pg-oversikt">
+      <div class="ptitle">Dashboard</div>
+      <div class="psub">Grunnfelt — eiendomspipeline · <span id="dato"></span></div>
+
+      <div class="sgrid">
+        <div class="sc"><div class="slbl">Totalt registrert</div><div class="sval green" id="s-total">0</div><div class="ssub">eiendommer</div></div>
+        <div class="sc ok"><div class="slbl">Klar til kontakt</div><div class="sval green" id="s-klar">0</div><div class="ssub">prioritet</div></div>
+        <div class="sc warn"><div class="slbl">I dialog</div><div class="sval" id="s-dialog">0</div><div class="ssub">pågående</div></div>
+        <div class="sc"><div class="slbl">Avtaler</div><div class="sval" id="s-avtale">0</div><div class="ssub">inngått</div></div>
+      </div>
+
+      <div class="slabel">Siste eiendommer</div>
+      <div id="siste-liste"><div style="color:var(--tx3);font-size:.9rem;padding:1rem 0">Ingen eiendommer registrert ennå.</div></div>
+
+      <div style="margin-top:1rem;display:flex;gap:.6rem">
+        <button class="btn primary" onclick="goPage('ny',document.querySelector('[onclick*=ny]'))">+ Legg til eiendom</button>
+        <button class="btn" onclick="goPage('datakilder',document.querySelector('[onclick*=datakilder]'))">Se datakilder</button>
+      </div>
+    </div>
+
+
+    <!-- SLAGPLAN -->
+    <div class="page" id="pg-slagplan">
+      <div class="ptitle">Slagplan</div>
+      <div class="psub">Grunnfelt AS · Operativ fremdrift · Oppdatert 3. juni 2026</div>
+
+      <div class="sgrid">
+        <div class="sc ok"><div class="slbl">Founder</div><div class="sval green" style="font-size:1.1rem;font-family:'DM Sans',sans-serif;font-weight:500">Kim S.</div><div class="ssub">60% · CEO & Founder</div></div>
+        <div class="sc ok"><div class="slbl">Partner</div><div class="sval green" style="font-size:1.1rem;font-family:'DM Sans',sans-serif;font-weight:500">Aton</div><div class="ssub">40% · Strategisk</div></div>
+        <div class="sc warn"><div class="slbl">Stiftelse</div><div class="sval" style="font-size:1.1rem;font-family:'DM Sans',sans-serif;font-weight:500">~20. juni</div><div class="ssub">Etter Aton org.nr.</div></div>
+        <div class="sc"><div class="slbl">Aksjonæravtale</div><div class="sval green" style="font-size:1.1rem;font-family:'DM Sans',sans-serif;font-weight:500">Utkast ✓</div><div class="ssub">Klar for signering</div></div>
+      </div>
+
+      <div class="slabel">Fase 1 — Etablering (juni 2026)</div>
+      <div class="card" style="border-left:3px solid var(--gress);background:var(--green-bg)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem">
+          <span style="font-weight:500;font-size:.95rem">Fundament</span>
+          <span class="badge amber">Pågår</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.3rem">
+          <div style="font-size:.88rem;color:var(--green)">✓ Forretningsmodell og konsept klar</div>
+          <div style="font-size:.88rem;color:var(--green)">✓ Kontrakter og juridiske maler klar</div>
+          <div style="font-size:.88rem;color:var(--green)">✓ Kim Skjæveland — CEO & Founder (60%)</div>
+          <div style="font-size:.88rem;color:var(--green)">✓ Aksjonæravtale-utkast v1.0 klar</div>
+          <div style="font-size:.88rem;color:var(--green)">✓ Nettside grunnfelt.no live</div>
+          <div style="font-size:.88rem;color:var(--green)">✓ Pipeline-app med utbygger-DB og markedskart</div>
+          <div style="font-size:.88rem;color:var(--tx2)">→ Signer aksjonæravtale (Scrive)</div>
+          <div style="font-size:.88rem;color:var(--tx2)">→ Stift Grunnfelt AS i Altinn (~20. juni)</div>
+          <div style="font-size:.88rem;color:var(--tx2)">→ Sett opp post@grunnfelt.no</div>
+        </div>
+      </div>
+
+      <div class="slabel">Fase 2 — Oppstart (juli–august 2026)</div>
+      <div class="card" style="border-left:3px solid var(--amber)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem">
+          <span style="font-weight:500;font-size:.95rem">Første prospektering</span>
+          <span class="badge gray">Planlagt</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.3rem">
+          <div style="font-size:.88rem;color:var(--tx2)">→ Send SkatteFUNN-søknad etter org.nr.</div>
+          <div style="font-size:.88rem;color:var(--tx2)">→ Kim starter tomteprospektering — Stavanger/Nord-Jæren</div>
+          <div style="font-size:.88rem;color:var(--tx2)">→ Første eiendom registrert i pipeline</div>
+          <div style="font-size:.88rem;color:var(--tx2)">→ Kontakt BoligPartner og Axer Eiendom</div>
+          <div style="font-size:.88rem;color:var(--tx2)">→ Rekrutter første stedsagent</div>
+        </div>
+      </div>
+
+      <div class="slabel">Fase 3 — Vekst (høst 2026)</div>
+      <div class="card" style="border-left:3px solid var(--tx3)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem">
+          <span style="font-weight:500;font-size:.95rem">Skalering</span>
+          <span class="badge gray">Fremtid</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.3rem">
+          <div style="font-size:.88rem;color:var(--tx3)">→ Første rettighetsavtale signert med grunneier</div>
+          <div style="font-size:.88rem;color:var(--tx3)">→ Første salg til utbygger</div>
+          <div style="font-size:.88rem;color:var(--tx3)">→ Stedsagent-nettverk i 3+ byer</div>
+          <div style="font-size:.88rem;color:var(--tx3)">→ IN Oppstartsstøtte søkt</div>
+          <div style="font-size:.88rem;color:var(--tx3)">→ Bergen og Oslo pipeline aktiv</div>
+        </div>
+      </div>
+
+      <div class="slabel">Kritiske oppgaver nå</div>
+      <div class="tasks">
+        <div class="task"><div class="tdot td-r"></div><div class="tbody"><div class="ttxt">Signer aksjonæravtale — Kim og Leif</div><div class="tmeta">Utkast klar · gjennomgås på møte 4. juni</div></div></div>
+        <div class="task"><div class="tdot td-r"></div><div class="tbody"><div class="ttxt">Stift Grunnfelt AS i Altinn</div><div class="tmeta">Venter på Aton Group AS org.nr. ~20. juni 2026</div></div></div>
+        <div class="task"><div class="tdot td-a"></div><div class="tbody"><div class="ttxt">Sett opp post@grunnfelt.no</div><div class="tmeta">Etter org.nr. · Google Workspace</div></div></div>
+        <div class="task"><div class="tdot td-a"></div><div class="tbody"><div class="ttxt">Send SkatteFUNN-søknad</div><div class="tmeta">Straks etter org.nr. · rettighetsbasert støtte</div></div></div>
+        <div class="task"><div class="tdot td-b"></div><div class="tbody"><div class="ttxt">Første tomteprospektering — Stavanger/Nord-Jæren</div><div class="tmeta">Kim starter etter signering · bruk pipeline-appen</div></div></div>
+        <div class="task"><div class="tdot td-b"></div><div class="tbody"><div class="ttxt">Kontakt BoligPartner — høyeste prioritet som kjøper</div><div class="tmeta">Etter første eiendom er identifisert</div></div></div>
+      </div>
+
+      <div class="slabel">Økonomi</div>
+      <div class="card">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
+          <div>
+            <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--tx3);margin-bottom:.3rem">Aksjekapital ved stiftelse</div>
+            <div style="font-size:1.5rem;font-weight:500;color:var(--tx)">NOK 30 000</div>
+            <div style="font-size:.82rem;color:var(--tx2);margin-top:.2rem">Kim: NOK 18 000 · Aton: NOK 12 000</div>
+          </div>
+          <div>
+            <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--tx3);margin-bottom:.3rem">SkatteFUNN (estimat)</div>
+            <div style="font-size:1.5rem;font-weight:500;color:var(--gress)">NOK 1–5M</div>
+            <div style="font-size:.82rem;color:var(--tx2);margin-top:.2rem">Etter org.nr. · 19% av FoU-kostnader</div>
+          </div>
+          <div>
+            <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--tx3);margin-bottom:.3rem">Inntektsmodell</div>
+            <div style="font-size:1.5rem;font-weight:500;color:var(--tx)">3–8%</div>
+            <div style="font-size:.82rem;color:var(--tx2);margin-top:.2rem">Av salgspris per tomt realisert</div>
+          </div>
+          <div>
+            <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--tx3);margin-bottom:.3rem">IN Oppstartsstøtte</div>
+            <div style="font-size:1.5rem;font-weight:500;color:var(--gress)">NOK 500k–1M</div>
+            <div style="font-size:.82rem;color:var(--tx2);margin-top:.2rem">Søkes etter registrering</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ALLE EIENDOMMER -->
+    <div class="page" id="pg-pipeline">
+      <div class="ptitle">Alle eiendommer</div>
+      <div class="psub">Søk, filtrer og administrer pipelinen din</div>
+
+      <div style="display:flex;gap:.6rem;margin-bottom:1rem;flex-wrap:wrap">
+        <select id="fil-status" onchange="renderPipeline()" style="width:auto;min-width:145px">
+          <option value="">Alle statuser</option>
+          <option>Ny</option>
+          <option>Klar til kontakt</option>
+          <option>Kontaktet</option>
+          <option>I dialog</option>
+          <option>Avtale inngått</option>
+          <option>Ikke interessert</option>
+        </select>
+        <select id="fil-type" onchange="renderPipeline()" style="width:auto;min-width:145px">
+          <option value="">Alle typer</option>
+          <option>Boligtomt</option>
+          <option>Næringstomt</option>
+          <option>Landbruk</option>
+          <option>Ubebygd mark</option>
+          <option>Fritidstomt</option>
+        </select>
+        <input id="fil-sok" placeholder="Søk kommune, eier..." oninput="renderPipeline()" style="width:180px">
+        <button class="btn primary sm" onclick="goPage('ny',document.querySelector('[onclick*=ny]'))">+ Ny</button>
+      </div>
+
+      <div id="pipeline-liste"><div style="color:var(--tx3);font-size:.9rem;padding:1rem 0">Ingen eiendommer ennå.</div></div>
+    </div>
+
+    <!-- NY EIENDOM -->
+    <div class="page" id="pg-ny">
+      <div class="ptitle" id="form-tittel">Ny eiendom</div>
+      <div class="psub">Registrer eiendom fra Seeiendom, Norgeskart eller kommunale kart</div>
+
+      <div class="card">
+        <div class="slabel" style="margin-top:0">Eiendomsidentitet</div>
+        <div class="grid3">
+          <div><label>Kommunenummer</label><input id="f-knr" placeholder="f.eks. 1103" maxlength="4"></div>
+          <div><label>Kommune</label><input id="f-kommune" placeholder="f.eks. Stavanger"></div>
+          <div><label>Adresse / stednavn</label><input id="f-adresse" placeholder="f.eks. Sørnesvegen 12"></div>
+        </div>
+        <div class="grid3">
+          <div><label>Gårdsnummer (gnr)</label><input id="f-gnr" placeholder="f.eks. 17" type="number" min="1"></div>
+          <div><label>Bruksnummer (bnr)</label><input id="f-bnr" placeholder="f.eks. 235" type="number" min="1"></div>
+          <div><label>Festenr. (valgfri)</label><input id="f-fnr" placeholder="0" type="number" min="0"></div>
+        </div>
+
+
+        <div class="info-box" id="brreg-boks" style="display:none">
+          <strong>Bedriftseier funnet:</strong>
+          <span id="brreg-navn" style="font-weight:500"></span> ·
+          <span id="brreg-org" style="color:var(--tx3)"></span> ·
+          <span id="brreg-adr" style="color:var(--tx3)"></span>
+          <button class="btn sm" style="margin-left:.5rem;padding:.2rem .6rem;font-size:.75rem" onclick="brregBruk()">Bruk dette</button>
+        </div>
+        <div class="info-box">
+          <strong>Finn gnr/bnr:</strong> Gå til <a href="https://seeiendom.no" target="_blank" style="color:var(--blue);font-weight:500">seeiendom.no</a> eller <a href="https://norgeskart.no" target="_blank" style="color:var(--blue);font-weight:500">norgeskart.no</a> → søk på adresse eller klikk i kart → gnr/bnr vises øverst. Hjemmelshavers navn finner du under «Grunnbok».
+        </div>
+
+        <div class="slabel">Eiendomsdetaljer</div>
+        <div class="grid3">
+          <div>
+            <label>Type eiendom</label>
+            <select id="f-type">
+              <option>Boligtomt</option>
+              <option>Næringstomt</option>
+              <option>Landbruk</option>
+              <option>Ubebygd mark</option>
+              <option>Fritidstomt</option>
+            </select>
+          </div>
+          <div><label>Areal (dekar, ca.)</label><input id="f-areal" placeholder="f.eks. 15" type="number" min="0" step="0.1"></div>
+          <div>
+            <label>Status</label>
+            <select id="f-status">
+              <option>Ny</option>
+              <option>Klar til kontakt</option>
+              <option>Kontaktet</option>
+              <option>I dialog</option>
+              <option>Avtale inngått</option>
+              <option>Ikke interessert</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label>Prioritet</label>
+          <select id="f-prio">
+            <option value="2">Normal</option>
+            <option value="3">Høy</option>
+            <option value="1">Lav</option>
+          </select>
+        </div>
+
+        <div class="slabel">Grunneier</div>
+        <div class="grid2">
+          <div>
+            <label>Hjemmelshaver (navn fra grunnboken)</label>
+            <div style="display:flex;gap:.4rem">
+              <input id="f-eier" placeholder="Ola Nordmann" style="flex:1" oninput="brregSok(this.value)">
+              <button class="btn sm" type="button" onclick="brregSokOrg()" title="Søk i Brønnøysund (bedrifter)">🔍 Brreg</button>
+            </div>
+          </div>
+          <div><label>Fødselsdato (fra grunnboken)</label><input id="f-fdato" placeholder="dd.mm.åååå"></div>
+        </div>
+        <div class="grid2">
+          <div><label>Kjent telefon</label><input id="f-tlf" placeholder="+47 900 00 000" type="tel"></div>
+          <div><label>Kjent e-post</label><input id="f-epost" placeholder="eier@epost.no" type="email"></div>
+        </div>
+        <div><label>Postadresse (hvis kjent)</label><input id="f-postadresse" placeholder="Gateveien 1, 4000 Stavanger"></div>
+
+        <div class="slabel">Vurdering</div>
+        <div><label>Hvorfor interessant — reguleringsplan, beliggenhet, potensial</label>
+          <textarea id="f-notat" placeholder="Regulert til boligformål iht. kommuneplanen, men ikke utbygd. Sentralt beliggende nær skole og kollektivtransport. Grunneier er privatperson, sannsynligvis arv..."></textarea>
+        </div>
+        <div class="grid2">
+          <div><label>Kilde (hvor fant du dette?)</label>
+            <select id="f-kilde">
+              <option>seeiendom.no</option>
+              <option>norgeskart.no</option>
+              <option>gardskart.nibio.no</option>
+              <option>planregister.no</option>
+              <option>Kommunens kart</option>
+              <option>Befaring</option>
+              <option>Tips</option>
+            </select>
+          </div>
+          <div><label>Estimert tomteverdi (NOK)</label><input id="f-verdi" placeholder="f.eks. 2500000" type="number"></div>
+        </div>
+
+        <div style="display:flex;gap:.6rem;margin-top:1.2rem;flex-wrap:wrap">
+          <button class="btn primary" onclick="lagreEiendom()" id="btn-lagre">Lagre eiendom</button>
+          <button class="btn" onclick="nullstillForm()">Nullstill</button>
+          <button class="btn" onclick="goPage('pipeline',document.querySelector('[onclick*=pipeline]'))">Avbryt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BREVGENERATOR -->
+    <div class="page" id="pg-brev">
+      <div class="ptitle">Brevgenerator</div>
+      <div class="psub">Generer personalisert brev til grunneier basert på eiendomsdata</div>
+
+      <div class="card">
+        <label>Velg eiendom fra pipeline</label>
+        <select id="brev-velg" onchange="genererBrev()" style="margin-bottom:1rem">
+          <option value="">— Velg eiendom —</option>
+        </select>
+
+        <div style="display:flex;gap:.6rem;margin-bottom:.8rem;flex-wrap:wrap">
+          <select id="brev-type" onchange="genererBrev()" style="width:auto;min-width:160px">
+            <option value="forste">Første kontakt</option>
+            <option value="oppfolging">Oppfølging</option>
+            <option value="formell">Formell henvendelse</option>
+          </select>
+          <select id="brev-kanal" onchange="genererBrev()" style="width:auto;min-width:130px">
+            <option value="brev">Fysisk brev</option>
+            <option value="epost">E-post</option>
+            <option value="sms">SMS</option>
+          </select>
+        </div>
+
+        <div class="brev-tekst" id="brev-tekst">Velg en eiendom ovenfor for å generere brev.</div>
+
+        <div style="display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap">
+          <button class="btn primary" onclick="kopierBrev()">Kopier brev</button>
+          <button class="btn" onclick="skrivUtBrev()">Skriv ut</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARBEIDSPROSESS -->
+    <div class="page" id="pg-prosess">
+      <div class="ptitle">Arbeidsprosess</div>
+      <div class="psub">Slik jobber Grunnfelt fra tomteidentifikasjon til avtale</div>
+
+      <div class="slabel">Fase 1 — Identifikasjon</div>
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Finn ubebygde tomter i reguleringsplanskart</div><div class="step-desc">Bruk planregister.no eller kommunens egne kartløsninger. Se etter eiendommer regulert til bolig/næring uten byggeaktivitet. Klikk på tomten for å få gnr/bnr.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Slå opp eiendom på seeiendom.no</div><div class="step-desc">Skriv inn gnr/bnr og kommunenummer. Under «Grunnbok» finner du hjemmelshavers fulle navn og fødselsdato. Sjekk om det er heftelser eller sameierkonflikter.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Registrer i pipeline</div><div class="step-desc">Legg inn alle opplysninger i Grunnfelt-pipelinen. Sett status «Ny» og skriv notater om hvorfor eiendommen er interessant.</div></div></div>
+
+      <div class="slabel">Fase 2 — Kontakt</div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Finn kontaktinformasjon</div><div class="step-desc">Bruk 1881.no eller gulesider.no med navn og fødselsdato fra grunnboken. For bedrifter: slå opp i Brønnøysundregistrene (brreg.no) med org.nr.</div></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Send brev / e-post</div><div class="step-desc">Bruk brevgeneratoren i dette systemet. For fysisk brev: send rekommandert. For e-post: bruk post@grunnfelt.no. Oppdater status til «Kontaktet» og noter dato.</div></div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-body"><div class="step-title">Oppfølging etter 2 uker</div><div class="step-desc">Hvis ingen respons, send oppfølgingsbrev/SMS. Maks 3 kontaktforsøk per eiendom. Sett deretter «Ikke interessert» og gå videre.</div></div></div>
+
+      <div class="slabel">Fase 3 — Avtale</div>
+      <div class="step"><div class="step-num">7</div><div class="step-body"><div class="step-title">Innledende samtale</div><div class="step-desc">Presenter Grunnfelt-konseptet: ingen kostnad for grunneier, Grunnfelt tar risiko og arbeid, grunneier mottar andel av salgspris ved overdragelse til utbygger.</div></div></div>
+      <div class="step"><div class="step-num">8</div><div class="step-body"><div class="step-title">Rettighetsavtale</div><div class="step-desc">Bruk standardkontrakten fra 02_Kontrakter-mappen. Notarbekreftet underskrift anbefales. Varighet 12–24 måneder med opsjon på forlengelse.</div></div></div>
+      <div class="step"><div class="step-num">9</div><div class="step-body"><div class="step-title">Salg til utbygger</div><div class="step-desc">Markedsfør tomten til relevante utbyggere. Grunnfelt tar 3–8% av salgsprisen. Resten til grunneier. Oppdater pipeline til «Avtale inngått».</div></div></div>
+    </div>
+
+    <!-- DATAKILDER -->
+    <div class="page" id="pg-datakilder">
+      <div class="ptitle">Datakilder</div>
+      <div class="psub">Gratis og betalte kilder for å finne eiendommer og grunneiere i Norge</div>
+
+      <div class="slabel">Gratis — åpne offentlige kilder</div>
+
+      <div class="source" style="border-color:#378ADD">
+        <div class="source-name">seeiendom.no — Kartverkets eiendomsregister</div>
+        <div class="source-desc">Søk på adresse, gnr/bnr eller naviger i kart. Viser hjemmelshavers fulle navn og fødselsdato, heftelser, grenser og areal. Det viktigste verktøyet for Grunnfelt. Gratis og åpent for alle.</div>
+        <a href="https://seeiendom.no" target="_blank" class="btn sm">Åpne seeiendom.no ↗</a>
+      </div>
+
+      <div class="source" style="border-color:#4a7a45">
+        <div class="source-name">norgeskart.no — Statens kartverk</div>
+        <div class="source-desc">Klikk på hvilken som helst eiendom i kartet for å se gnr/bnr, kommunenummer og eiendomsgrenser. Utmerket for å finne ubebygde tomter visuelt. Kombiner med flyfoto-lag for å se hva som er utbygd.</div>
+        <a href="https://norgeskart.no" target="_blank" class="btn sm">Åpne norgeskart.no ↗</a>
+      </div>
+
+      <div class="source" style="border-color:#639922">
+        <div class="source-name">gardskart.nibio.no — Landbrukseiendomsregister</div>
+        <div class="source-desc">Viser alle landbrukseiendommer med gnr/bnr, arealinformasjon og arealtype (skog, dyrket mark, bebygd). Gratis. Ideelt for å finne uutviklede landbrukstomter med bolig- eller næringspotensial.</div>
+        <a href="https://gardskart.nibio.no" target="_blank" class="btn sm">Åpne gardskart.nibio.no ↗</a>
+      </div>
+
+      <div class="source" style="border-color:#c8a84b">
+        <div class="source-name">planregister.no — Reguleringsplanskart</div>
+        <div class="source-desc">Viser vedtatte reguleringsplaner for hele Norge. Finn tomter regulert til bolig eller næring som ikke er utbygd — dette er kjernen i Grunnfelt-strategien. Søk på kommune og filtrer på arealformål.</div>
+        <a href="https://planregister.no" target="_blank" class="btn sm">Åpne planregister.no ↗</a>
+      </div>
+
+      <div class="source" style="border-color:#8a9e88">
+        <div class="source-name">1881.no / gulesider.no — Personoppslag</div>
+        <div class="source-desc">Når du har navn og fødselsdato fra grunnboken, kan du søke opp adresse og telefon. Nyttig for å finne kontaktinformasjon til privatpersoner. Husk GDPR — bruk kun til næringsformål.</div>
+        <a href="https://1881.no" target="_blank" class="btn sm">1881.no ↗</a>
+        <a href="https://gulesider.no" target="_blank" class="btn sm" style="margin-left:.4rem">gulesider.no ↗</a>
+      </div>
+
+      <div class="slabel">Betalt / med avtale</div>
+
+      <div class="source" style="border-color:#7F77DD">
+        <div class="source-name">Kartverket Matrikkel-API — for virksomheter</div>
+        <div class="source-desc">Når Grunnfelt AS er stiftet og har org.nr. kan dere søke om «berettiget interesse»-tilgang. Gir navn, fødselsdato og postadresse på eiere. Næringsformål godkjennes normalt uten høy terskel. Krever avtale med Kartverket.</div>
+        <a href="https://kartverket.no/api-og-data/eiendomsdata/soknad-api-tilgang" target="_blank" class="btn sm">Søk om API-tilgang ↗</a>
+      </div>
+
+      <div class="source" style="border-color:#E24B4A">
+        <div class="source-name">tinglysing.no — Bekreftet grunnbokutskrift</div>
+        <div class="source-desc">Bestill offisiell grunnbokutskrift for kr 172 per eiendom. Inneholder hjemmelshaver, heftelser og servitutter med rettskraftvirkning. Nyttig ved konkrete forhandlinger der du trenger formell dokumentasjon.</div>
+        <a href="https://tinglysing.no" target="_blank" class="btn sm">Åpne tinglysing.no ↗</a>
+      </div>
+
+      <div class="source" style="border-color:#1a4a8e">
+        <div class="source-name">Norkart / Easy Eiendom — kommersiell API</div>
+        <div class="source-desc">Kommersielle leverandører som gir strukturert tilgang til matrikkel, grunnbok, heftelser og markedsdata i ett API. Relevant når Grunnfelt skalerer og trenger automatisert oppslag på mange eiendommer. Månedlig abonnement.</div>
+        <a href="https://www.easyeiendom.no" target="_blank" class="btn sm">easyeiendom.no ↗</a>
+        <a href="https://www.norkart.no" target="_blank" class="btn sm" style="margin-left:.4rem">norkart.no ↗</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+let eiendommer = JSON.parse(localStorage.getItem('gf_pipeline') || '[]');
+let editIdx = -1;
+
+document.getElementById('dato').textContent = new Date().toLocaleDateString('no-NO',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+const STATUS_BADGE = {
+  'Ny':'gray','Klar til kontakt':'blue','Kontaktet':'amber',
+  'I dialog':'amber','Avtale inngått':'green','Ikke interessert':'red'
+};
+const STATUS_CLASS = {
+  'I dialog':'status-dialog','Kontaktet':'status-dialog',
+  'Avtale inngått':'status-avtale','Ikke interessert':'status-nei'
+};
+
+function lagre(){localStorage.setItem('gf_pipeline',JSON.stringify(eiendommer));}
+
+function goPage(id, btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('pg-'+id).classList.add('active');
+  document.querySelectorAll('.nav-it').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  if(id==='brev')oppdaterBrevVelg();
+  if(id==='oversikt')renderDashboard();
+  if(id==='pipeline')renderPipeline();
+}
+
+function lagreEiendom(){
+  const e={
+    knr:v('f-knr'),kommune:v('f-kommune'),gnr:v('f-gnr'),bnr:v('f-bnr'),
+    fnr:v('f-fnr')||'0',adresse:v('f-adresse'),areal:v('f-areal'),
+    type:v('f-type'),status:v('f-status'),prio:v('f-prio'),
+    eier:v('f-eier'),fdato:v('f-fdato'),tlf:v('f-tlf'),
+    epost:v('f-epost'),postadresse:v('f-postadresse'),
+    notat:v('f-notat'),kilde:v('f-kilde'),verdi:v('f-verdi'),
+    dato:new Date().toLocaleDateString('no-NO'),
+    kontaktlogg:[]
+  };
+  if(!e.gnr||!e.bnr||!e.kommune){alert('Fyll inn minst: kommune, gnr og bnr.');return;}
+  if(editIdx>=0){eiendommer[editIdx]=Object.assign(eiendommer[editIdx],e);editIdx=-1;}
+  else eiendommer.push(e);
+  lagre();nullstillForm();oppdaterTeller();
+  goPage('pipeline',document.querySelector('[onclick*="pipeline"]'));
+}
+
+function v(id){return document.getElementById(id).value.trim();}
+
+function nullstillForm(){
+  ['f-knr','f-kommune','f-gnr','f-bnr','f-fnr','f-adresse','f-areal',
+   'f-eier','f-fdato','f-tlf','f-epost','f-postadresse','f-notat','f-verdi'].forEach(id=>{
+    document.getElementById(id).value='';
+  });
+  document.getElementById('f-status').value='Ny';
+  document.getElementById('f-type').value='Boligtomt';
+  document.getElementById('f-prio').value='2';
+  document.getElementById('f-kilde').value='seeiendom.no';
+  document.getElementById('form-tittel').textContent='Ny eiendom';
+  document.getElementById('btn-lagre').textContent='Lagre eiendom';
+  editIdx=-1;
+}
+
+function rediger(i){
+  const e=eiendommer[i];editIdx=i;
+  const m={'f-knr':'knr','f-kommune':'kommune','f-gnr':'gnr','f-bnr':'bnr','f-fnr':'fnr',
+    'f-adresse':'adresse','f-areal':'areal','f-type':'type','f-status':'status','f-prio':'prio',
+    'f-eier':'eier','f-fdato':'fdato','f-tlf':'tlf','f-epost':'epost',
+    'f-postadresse':'postadresse','f-notat':'notat','f-kilde':'kilde','f-verdi':'verdi'};
+  Object.entries(m).forEach(([id,k])=>{if(document.getElementById(id))document.getElementById(id).value=e[k]||'';});
+  document.getElementById('form-tittel').textContent='Rediger eiendom';
+  document.getElementById('btn-lagre').textContent='Oppdater';
+  goPage('ny',document.querySelector('[onclick*="ny"]'));
+}
+
+function slett(i){
+  if(!confirm('Slette denne eiendommen?'))return;
+  eiendommer.splice(i,1);lagre();renderPipeline();oppdaterTeller();renderDashboard();
+}
+
+function oppdaterStatus(i,s){eiendommer[i].status=s;lagre();renderPipeline();oppdaterTeller();renderDashboard();}
+
+function renderPipeline(){
+  const fs=document.getElementById('fil-status').value;
+  const ft=document.getElementById('fil-type').value;
+  const q=document.getElementById('fil-sok').value.toLowerCase();
+  const fil=eiendommer.filter(e=>
+    (!fs||e.status===fs)&&(!ft||e.type===ft)&&
+    (!q||e.kommune.toLowerCase().includes(q)||
+      (e.eier&&e.eier.toLowerCase().includes(q))||
+      (e.adresse&&e.adresse.toLowerCase().includes(q)))
+  ).sort((a,b)=>b.prio-a.prio);
+
+  const el=document.getElementById('pipeline-liste');
+  if(!fil.length){el.innerHTML='<div style="color:var(--tx3);font-size:.9rem;padding:1rem 0">Ingen eiendommer matcher filteret.</div>';return;}
+  el.innerHTML=fil.map(e=>{
+    const i=eiendommer.indexOf(e);
+    const gnrBnr=`gnr ${e.gnr}/bnr ${e.bnr}${e.fnr&&e.fnr!='0'?'/fnr '+e.fnr:''}`;
+    return`<div class="prop-card ${STATUS_CLASS[e.status]||''}">
+      <div class="prop-top">
+        <div class="prop-body">
+          <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:.3rem">
+            <span class="prop-name">${e.kommune} — ${gnrBnr}</span>
+            <span class="badge ${STATUS_BADGE[e.status]||'gray'}">${e.status}</span>
+            <span class="badge gray">${e.type}</span>
+            ${e.areal?`<span class="badge gray">${e.areal} daa</span>`:''}
+            ${e.prio==3?'<span class="badge amber">Høy prioritet</span>':''}
+          </div>
+          <div class="prop-meta">${e.adresse||''}${e.eier?' · Eier: <strong>'+e.eier+'</strong>':''}${e.tlf?' · '+e.tlf:''}${e.verdi?' · Est. NOK '+Number(e.verdi).toLocaleString('no-NO'):''} · Registrert ${e.dato}</div>
+          ${e.notat?`<div class="prop-note">${e.notat}</div>`:''}
+          <div class="prop-badges">
+            <span class="badge gray" style="font-size:.68rem">Kilde: ${e.kilde||'–'}</span>
+          </div>
+        </div>
+        <div class="prop-actions">
+          <button class="btn sm" onclick="rediger(${i})">Rediger</button>
+          <button class="btn sm danger" onclick="slett(${i})">Slett</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderDashboard(){
+  document.getElementById('s-total').textContent=eiendommer.length;
+  document.getElementById('s-klar').textContent=eiendommer.filter(e=>e.status==='Klar til kontakt').length;
+  document.getElementById('s-dialog').textContent=eiendommer.filter(e=>e.status==='I dialog'||e.status==='Kontaktet').length;
+  document.getElementById('s-avtale').textContent=eiendommer.filter(e=>e.status==='Avtale inngått').length;
+  const siste=[...eiendommer].reverse().slice(0,3);
+  const el=document.getElementById('siste-liste');
+  if(!siste.length){el.innerHTML='<div style="color:var(--tx3);font-size:.9rem;padding:.5rem 0">Ingen eiendommer ennå.</div>';return;}
+  el.innerHTML=siste.map((e,ri)=>{
+    const i=eiendommer.indexOf(e);
+    return`<div class="prop-card" style="margin-bottom:.5rem">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem">
+        <div>
+          <span style="font-weight:500">${e.kommune} — gnr ${e.gnr}/bnr ${e.bnr}</span>
+          <span class="badge ${STATUS_BADGE[e.status]||'gray'}" style="margin-left:.5rem">${e.status}</span>
+          <div style="font-size:.82rem;color:var(--tx3);margin-top:.2rem">${e.adresse||''}${e.eier?' · '+e.eier:''}</div>
+        </div>
+        <button class="btn sm" onclick="rediger(${i})">Vis</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function oppdaterTeller(){
+  document.getElementById('nc-alle').textContent=eiendommer.length;
+}
+
+function oppdaterBrevVelg(){
+  const sel=document.getElementById('brev-velg');
+  sel.innerHTML='<option value="">— Velg eiendom —</option>'+
+    eiendommer.map((e,i)=>`<option value="${i}">${e.kommune} gnr ${e.gnr}/bnr ${e.bnr}${e.adresse?' ('+e.adresse+')':''}</option>`).join('');
+}
+
+function genererBrev(){
+  const i=parseInt(document.getElementById('brev-velg').value);
+  const type=document.getElementById('brev-type').value;
+  const kanal=document.getElementById('brev-kanal').value;
+  if(isNaN(i)){document.getElementById('brev-tekst').textContent='Velg en eiendom ovenfor for å generere brev.';return;}
+  const e=eiendommer[i];
+  const gnrBnr=`gnr ${e.gnr}, bnr ${e.bnr}${e.fnr&&e.fnr!='0'?', fnr '+e.fnr:''}`;
+  const eier=e.eier||'Grunneier';
+  const adresseInfo=`${e.kommune} (${gnrBnr})${e.adresse?', '+e.adresse:''}`;
+  const dato=new Date().toLocaleDateString('no-NO',{year:'numeric',month:'long',day:'numeric'});
+
+  let tekst='';
+  if(kanal==='sms'){
+    tekst=`Hei ${eier.split(' ')[0]}, jeg heter Leif Sunde og er daglig leder i Grunnfelt. Jeg ønsker å komme i kontakt angående din eiendom i ${e.kommune} (${gnrBnr}). Uforpliktende samtale. Ring gjerne: +47 936 14 425.`;
+  } else if(type==='oppfolging'){
+    tekst=`${eier},\n\nJeg tillater meg å følge opp mitt brev fra for to uker siden angående din eiendom i ${adresseInfo}.\n\nJeg er fremdeles svært interessert i en dialog om mulighetene knyttet til eiendommen, og håper du har hatt anledning til å vurdere henvendelsen.\n\nDet koster deg ingenting å høre hva vi kan tilby — all risiko og alt arbeid er på vår side.\n\nTa gjerne kontakt:\nGrunnfelt / Aton Group AS\nLeif E. Sunde\n+47 936 14 425\npost@grunnfelt.no\n\nMed vennlig hilsen,\nLeif E. Sunde\nGrunnfelt`;
+  } else if(type==='formell'){
+    tekst=`${dato}\n\nTil hjemmelshaver av eiendommen ${adresseInfo}\n\nFormal henvendelse fra Grunnfelt AS\n\nGrunnfelt AS er et norsk selskap som spesialiserer seg på identifikasjon og utvikling av tomtearealer for bolig- og næringsformål i samarbeid med norske grunneiere.\n\nVi henvender oss herved til deg som registrert hjemmelshaver av ovennevnte eiendom, idet vi har vurdert eiendommen som egnet for utvikling og ønsker å drøfte mulighetene for et samarbeid.\n\nGrunnfelt påtar seg alt arbeid og alle kostnader knyttet til regulering, fremforhandling og salg til utbygger. Grunneier mottar en avtalt andel av salgsprisen ved realisering, uten at det påløper kostnader for grunneier i prosessen.\n\nVi ber om en uforpliktende samtale og ber deg ta kontakt innen 14 dager:\n\nLeif E. Sunde\nGrunnfelt / Aton Group AS\nStavanger\n+47 936 14 425\npost@grunnfelt.no\nwww.atongroup.no\n\nMed vennlig hilsen,\nLeif E. Sunde\nDaglig leder\nGrunnfelt / Aton Group AS`;
+  } else {
+    tekst=`${eier},\n\nJeg heter Leif Sunde og er daglig leder i Grunnfelt — et norsk selskap som arbeider med tomteidentifikasjon og -utvikling over hele Norge.\n\nVi har registrert din eiendom i ${adresseInfo} som potensielt interessant for utvikling, og ønsker gjerne å komme i kontakt for en uforpliktende samtale.\n\nHva vi kan tilby:\n– Grunnfelt tar all risiko og alle kostnader\n– Du som grunneier mottar en andel av salgsprisen\n– Ingen forpliktelse til å selge — vi bygger på dine premisser\n– All dialog er konfidensielt\n\nTa gjerne kontakt med meg direkte:\n\nLeif E. Sunde\nGrunnfelt / Aton Group AS\n+47 936 14 425\npost@grunnfelt.no\nwww.atongroup.no\n\nMed vennlig hilsen,\nLeif E. Sunde`;
+  }
+  document.getElementById('brev-tekst').textContent=tekst;
+}
+
+function kopierBrev(){
+  const t=document.getElementById('brev-tekst').textContent;
+  if(navigator.clipboard)navigator.clipboard.writeText(t).then(()=>alert('Kopiert til utklippstavle!'));
+}
+
+function skrivUtBrev(){window.print();}
+
+const UTBYGGERE = [
+  // ── KATEGORI 1: Store nasjonale boligutbyggere ──
+  {navn:"OBOS",type:"bolig",geo:["oslo","vest","midt"],størrelse:"Stor",tomtebank:"180 000+ boliger nasjonalt",kontakt:"akkvisisjon@obos.no",tlf:"02900",nett:"obos.no",notat:"Norges desidert største boligutvikler. Kjøper tomter over hele Norge, men tyngst i Oslo-regionen og de store byene. Aktiv tomteakkvisisjon.",prioritet:3},
+  {navn:"Selvaag Bolig ASA",type:"bolig",geo:["oslo","vest"],størrelse:"Stor",tomtebank:"10 000+ boliger",kontakt:"post@selvaagbolig.no",tlf:"915 02 224",nett:"selvaagbolig.no",notat:"Børsnotert. 70 år lang boligbyggingshistorie. Aktiv på Oslo-regionen og Bergen. Kjøper ferdig regulerte og delvis regulerte tomter.",prioritet:3},
+  {navn:"Fredensborg Bolig",type:"bolig",geo:["oslo","vest","midt"],størrelse:"Stor",tomtebank:"5 000+ boliger",kontakt:"post@fredensborgbolig.no",tlf:"",nett:"fredensborgbolig.no",notat:"Svært aktiv på tomtekjøp i Oslo, Bergen, Akershus og Trondheim. Kjøper enkelteiendommer og større pakker. Nylig kjøp på Hamang (63 mål, 600 boliger).",prioritet:3},
+  {navn:"JM Norge",type:"bolig",geo:["oslo","vest","midt"],størrelse:"Stor",tomtebank:"4 000+ boliger",kontakt:"jm@jm.no",tlf:"22 06 77 00",nett:"jm.no",notat:"Svensk konsern med sterk norsk tilstedeværelse. Fokus på arkitektur og kvalitet. Tiltrer nye prosjektledere aktivt — indikerer vekstambisjoner.",prioritet:2},
+  {navn:"Veidekke Eiendom",type:"bolig",geo:["oslo","vest","midt","nord"],størrelse:"Stor",tomtebank:"6 000+ boliger",kontakt:"eiendom@veidekke.no",tlf:"22 22 18 00",nett:"veidekke.no/eiendom",notat:"Norsk børsnotert konsern. Kombinerer bygg og eiendomsutvikling. Svært aktiv på tomtekjøp, særlig i byvekstkorridorene.",prioritet:2},
+  {navn:"Skanska Bolig",type:"bolig",geo:["oslo","vest","midt"],størrelse:"Stor",tomtebank:"5 000+ boliger",kontakt:"norge@skanska.no",tlf:"22 54 50 00",nett:"skanska.no",notat:"Internasjonal konsern. Fokus på bærekraft og energieffektivitet. Kjøper tomter med reguleringsrisiko på grunn av stor kapasitet til å bære risiko.",prioritet:2},
+  {navn:"AF Gruppen",type:"bolig",geo:["oslo","vest","midt"],størrelse:"Stor",tomtebank:"3 000+ boliger",kontakt:"post@afgruppen.no",tlf:"22 89 11 00",nett:"afgruppen.no",notat:"Børsnotert bygg- og anleggskonsern med eiendomsutvikling. Aktiv i transformasjonsprosjekter og fortetting.",prioritet:2},
+  {navn:"Bane NOR Eiendom",type:"bolig",geo:["oslo"],størrelse:"Stor",tomtebank:"15 000+ boliger",kontakt:"post@banenoreiendom.no",tlf:"",nett:"banenoreiendom.no",notat:"Statlig eiendomsutvikler rundt norske jernbanestasjoner. Jobber med knutepunktfortetting. Kjøper tilstøtende eiendommer.",prioritet:1},
+  {navn:"Axer Eiendom",type:"bolig",geo:["vest"],størrelse:"Stor",tomtebank:"4 000+ boliger (60% Bergen)",kontakt:"post@axer.no",tlf:"55 23 78 00",nett:"axer.no",notat:"Dominerende aktør på Vestlandet/Bergen. Tomtebank tungt vektet mot Bergen-regionen. Svært relevant for Grunnfelt i Vestland-fylke.",prioritet:3},
+  {navn:"Usbl",type:"bolig",geo:["oslo"],størrelse:"Stor",tomtebank:"2 500+ boliger",kontakt:"post@usbl.no",tlf:"23 08 58 00",nett:"usbl.no",notat:"Boligbyggelag aktivt på tomtekjøp. Øker tomtebanken målrettet. Fokus på Stor-Oslo (30 min fra sentrum). Leder for akkvisisjon: Petter Bringedal.",prioritet:2},
+  {navn:"Profier",type:"bolig",geo:["oslo","midt"],størrelse:"Mellomstor",tomtebank:"3 000+ boliger",kontakt:"post@profier.no",tlf:"",nett:"profier.no",notat:"Bjørn Rune Gjelsten-selskap. Aktiv kjøper av industri- og næringstomter for transformasjon til bolig. Kjøpte KPS-bygget i Sarpsborg (145 mål).",prioritet:2},
+  {navn:"Hav Eiendom",type:"bolig",geo:["oslo"],størrelse:"Mellomstor",tomtebank:"1 500 boliger",kontakt:"post@haveiendom.no",tlf:"",nett:"haveiendom.no",notat:"Utvikler Grønlikaia og Filipstad i Oslo — Oslos råeste tomtebank. Fokus på sentrale, store transformasjonsprosjekter.",prioritet:1},
+  {navn:"Nåbo",type:"bolig",geo:["oslo","vest"],størrelse:"Mellomstor",tomtebank:"2 000+ boliger",kontakt:"post@nabo.no",tlf:"",nett:"nabo.no",notat:"Voksende aktør med fokus på næringsfortetting og transformasjon. Aktiv i hele Sør-Norge.",prioritet:2},
+  {navn:"Scandinavian Property Group (SPG)",type:"bolig",geo:["oslo","vest","midt"],størrelse:"Stor",tomtebank:"3 385 boliger Norge (6 640 inkl. Sverige)",kontakt:"post@spg.no",tlf:"",nett:"spg.no",notat:"Stor norsk-svensk boligutvikler. Aktiv i begge land. Norsk tomtebank gir rom for mye akkvisisjon.",prioritet:2},
+  {navn:"Löwenskiold Eiendom",type:"bolig",geo:["oslo"],størrelse:"Stor",tomtebank:"3 000 boliger",kontakt:"post@loevenskiold-eiendom.no",tlf:"23 10 12 00",nett:"loevenskiold-eiendom.no",notat:"Historisk storlandbruker med stor tomtebeholdning rundt Oslo. Jakter nye prosjekter aktivt for å opprettholde boligsalget.",prioritet:1},
+  {navn:"Solon Eiendom",type:"bolig",geo:["oslo"],størrelse:"Mellomstor",tomtebank:"2 000+ boliger",kontakt:"post@soloneiendom.no",tlf:"22 12 10 50",nett:"soloneiendom.no",notat:"Børsnotert (OBOS 49,5%). Fokus på Oslo-regionen. Utvikler både leiligheter og rekkehus med fokus på god arkitektur.",prioritet:2},
+  {navn:"Attivo",type:"bolig",geo:["oslo"],størrelse:"Mellomstor",tomtebank:"1 500+ boliger",kontakt:"post@attivo.no",tlf:"",nett:"attivo.no",notat:"Solgte 210 boliger i fjor. Styrker tomtebanken aktivt for å opprettholde salgsvolum.",prioritet:2},
+  // ── KATEGORI 2: Regionale utbyggere ──
+  {navn:"Pilares Eiendom",type:"bolig",geo:["oslo"],størrelse:"Liten",tomtebank:"500+ boliger",kontakt:"post@pilares.no",tlf:"",nett:"pilares.no",notat:"Aktiv kjøper av tidligere industrieiendommer. Kjøpte Elopak-tomten ved Spikkestad stasjon. Søker transformasjonskandidater.",prioritet:2},
+  {navn:"Trym Bolig",type:"bolig",geo:["vest"],størrelse:"Liten",tomtebank:"400+ boliger (moden)",kontakt:"post@trymbolig.no",tlf:"",nett:"trymbolig.no",notat:"Lang og tålmodig tomtebank som nå er moden. Relevant for Vestlandet/Rogaland-tomter.",prioritet:2},
+  {navn:"Attento Eiendom",type:"bolig",geo:["midt"],størrelse:"Liten",tomtebank:"300+ boliger",kontakt:"post@attento.no",tlf:"",nett:"attento.no",notat:"Midt-Norge. Fokus på Trondheim-regionen.",prioritet:1},
+  // ── KATEGORI 3: Næringsutbyggere ──
+  {navn:"Entra ASA",type:"naring",geo:["oslo","vest","midt"],størrelse:"Stor",tomtebank:"Kontorbygg/næring",kontakt:"post@entra.no",tlf:"22 40 30 00",nett:"entra.no",notat:"Børsnotert. Norges største kontorutleier. Kjøper og utvikler næringstomter i bysentra.",prioritet:1},
+  {navn:"Olav Thon Gruppen",type:"naring",geo:["oslo","vest","midt","nord"],størrelse:"Stor",tomtebank:"Kjøpesenter/næring",kontakt:"post@olavthon.no",tlf:"23 08 00 00",nett:"olavthon.no",notat:"Kjøpesenter og eiendomsimperium. Kjøper næringstomter i hele Norge.",prioritet:1},
+  {navn:"Norwegian Property",type:"naring",geo:["oslo","vest"],størrelse:"Mellomstor",tomtebank:"Kontorbygg",kontakt:"post@npro.no",tlf:"22 83 40 20",nett:"npro.no",notat:"Børsnotert norsk næringsutleier. Fokus på kontor i Oslo og Stavanger.",prioritet:1},
+  // ── KATEGORI 4: Husprodusentkjeder (fradeling) ──
+  {navn:"BoligPartner",type:"lokal",geo:["oslo","vest","midt","nord"],størrelse:"Stor",tomtebank:"Løpende akkvisisjon",kontakt:"post@boligpartner.no",tlf:"62 52 82 00",nett:"boligpartner.no",notat:"Kjøper aktivt fradelte tomter via opsjonsavtale. Grunnfelt-relevant: de gjør alt det praktiske (fradeling, søknad, salg) mot at kunden bygger BoligPartner-hus. God samarbeidspartner.",prioritet:3},
+  {navn:"Optimera/Saint-Gobain",type:"lokal",geo:["oslo","vest","midt","nord"],størrelse:"Stor",tomtebank:"Løpende",kontakt:"",tlf:"",nett:"optimera.no",notat:"Byggevarehandel med husproduktdivisjon. Interessert i tomter for typehus-utbygging.",prioritet:1},
+];
+
+function renderUtb(liste){
+  const el=document.getElementById('utb-liste');
+  if(!liste.length){el.innerHTML='<div style="color:var(--tx3);font-size:.9rem;padding:1rem 0">Ingen treff.</div>';return;}
+  const typeMap={bolig:'Boligutbygger',naring:'Næringsutbygger',lokal:'Lokal/regional'};
+  const geoMap={oslo:'Oslo/Akershus',vest:'Vestlandet',midt:'Midt-Norge',nord:'Nord-Norge'};
+  el.innerHTML=liste.map(u=>{
+    const geoTags=u.geo.map(g=>`<span class="badge gray" style="font-size:.68rem">${geoMap[g]||g}</span>`).join(' ');
+    const priClass=u.prioritet===3?'green':u.prioritet===2?'amber':'gray';
+    const priLabel=u.prioritet===3?'Høy prioritet':u.prioritet===2?'Kontakt':'-';
+    return`<div class="prop-card" style="border-left-color:${u.prioritet===3?'var(--gress)':u.prioritet===2?'var(--amber)':'var(--tx3)'}">
+      <div class="prop-top">
+        <div class="prop-body">
+          <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:.3rem">
+            <span class="prop-name">${u.navn}</span>
+            <span class="badge ${priClass}">${priLabel}</span>
+            <span class="badge gray">${typeMap[u.type]||u.type}</span>
+            <span class="badge gray">${u.størrelse}</span>
+          </div>
+          <div class="prop-meta">
+            ${u.tlf?u.tlf+' · ':''}
+            ${u.kontakt?`<a href="mailto:${u.kontakt}" style="color:var(--gress)">${u.kontakt}</a> · `:''}
+            <a href="https://www.${u.nett}" target="_blank" style="color:var(--gress)">${u.nett} ↗</a>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.4rem">${geoTags}</div>
+          <div class="prop-note" style="margin-top:.4rem"><strong>Tomtebank:</strong> ${u.tomtebank}</div>
+          <div class="prop-note">${u.notat}</div>
+        </div>
+        <div style="flex-shrink:0">
+          <a href="mailto:${u.kontakt}" class="btn sm primary" style="text-decoration:none;display:inline-block;font-size:.78rem" ${!u.kontakt?'style="opacity:.4;pointer-events:none"':''}>Kontakt ↗</a>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterUtb(){
+  const type=document.getElementById('utb-fil-type').value;
+  const geo=document.getElementById('utb-fil-geo').value;
+  const q=document.getElementById('utb-sok').value.toLowerCase();
+  const fil=UTBYGGERE.filter(u=>
+    (!type||u.type===type)&&
+    (!geo||u.geo.includes(geo))&&
+    (!q||u.navn.toLowerCase().includes(q)||u.notat.toLowerCase().includes(q))
+  ).sort((a,b)=>b.prioritet-a.prioritet);
+  renderUtb(fil);
+}
+
+// Init utbyggere
+renderUtb(UTBYGGERE);
+
+// ── AUTENTISERING ─────────────────────────────────────────────
+const TILLATTE = [
+  atob('a2ltLnNramFldmVsYW5kQGdtYWlsLmNvbQ=='),  // KIM — bytt til riktig e-post etter møtet
+  atob('bGVpZkBhdG9uZ3JvdXAubm8='),               // Leif
+  atob('bGVpZnN1bmRlQGdtYWlsLmNvbQ=='),           // Leif gmail
+];
+
+const BRUKERE = {
+  [atob('bGVpZkBhdG9uZ3JvdXAubm8=')]: { navn: 'Leif', rolle: 'Styreleder · Aton Group AS' },
+  [atob('bGVpZnN1bmRlQGdtYWlsLmNvbQ==')]: { navn: 'Leif', rolle: 'Styreleder · Aton Group AS' },
+};
+
+let innloggetBruker = null;
+
+function onGoogleLogin(resp) {
+  const pl = JSON.parse(atob(resp.credential.split('.')[1]));
+  const epost = (pl.email || '').toLowerCase();
+  
+  if (TILLATTE.includes(epost) || TILLATTE.some(t => t.toLowerCase() === epost)) {
+    innloggetBruker = { epost, navn: pl.name, ...( BRUKERE[epost] || { navn: pl.name.split(' ')[0], rolle: 'Grunnfelt' }) };
+    visApp();
+  } else {
+    document.getElementById('scrLogin').innerHTML += '<p style="color:#8e1a1a;text-align:center;margin-top:1rem;font-size:.88rem">⛔ Ingen tilgang. Kontakt post@grunnfelt.no</p>';
+  }
+}
+
+function loggUt() {
+  document.getElementById('scrLogin').classList.remove('hidden');
+  document.getElementById('app-shell').style.display = 'none';
+  innloggetBruker = null;
+  if (window.google?.accounts?.id) google.accounts.id.disableAutoSelect();
+}
+
+function visApp() {
+  document.getElementById('scrLogin').classList.add('hidden');
+  document.getElementById('app-shell').style.display = 'flex';
+  document.getElementById('app-shell').style.flexDirection = 'column';
+  document.getElementById('app-shell').style.height = '100vh';
+  
+  // Personaliser hilsen
+  const h = new Date().getHours();
+  const t = h < 5 ? 'God natt' : h < 12 ? 'God morgen' : h < 18 ? 'God dag' : 'God kveld';
+  const el = document.getElementById('ws-hils');
+  if (el) el.textContent = t + ', ' + innloggetBruker.navn;
+  
+  // Vis e-post i workspace
+  const gsub = document.getElementById('ws-gmail-sub');
+  if (gsub) gsub.textContent = innloggetBruker.epost;
+  
+  // Oppdater header med brukerinfo
+  const hdr = document.getElementById('hdr-bruker-rolle');
+  if (hdr) hdr.textContent = innloggetBruker.rolle;
+  const badge = document.getElementById('hdr-badge-navn');
+  if (badge) badge.textContent = innloggetBruker.navn;
+}
+
+// ── CLAUDE CHAT FOR KIM ───────────────────────────────────────
+
+// ── FLYTENDE CLAUDE FAB ───────────────────────────────────────
+let fabOpen = false;
+const fabHistory = [];
+
+function toggleFab() {
+  fabOpen = !fabOpen;
+  document.getElementById('fab-chat').classList.toggle('open', fabOpen);
+  if (fabOpen) {
+    setTimeout(() => document.getElementById('fab-inp')?.focus(), 100);
+  }
+}
+
+async function sendFab() {
+  const inp = document.getElementById('fab-inp');
+  const msgs = document.getElementById('fab-msgs');
+  if (!inp || !msgs) return;
+  const txt = inp.value.trim();
+  if (!txt) return;
+  inp.value = '';
+  inp.style.height = 'auto';
+
+  const uMsg = document.createElement('div');
+  uMsg.className = 'fab-msg-user';
+  uMsg.textContent = txt;
+  msgs.appendChild(uMsg);
+
+  const loading = document.createElement('div');
+  loading.className = 'fab-msg-load';
+  loading.textContent = 'Claude tenker...';
+  msgs.appendChild(loading);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  fabHistory.push({ role: 'user', content: txt });
+
+  const navn = innloggetBruker?.navn || 'Kim';
+  const system = `Du er ${navn}s personlige AI-assistent i Grunnfelt AS — norsk tomteutviklingsselskap.
+CEO & Founder: Kim Skjæveland (60%). Strategisk partner: Leif E. Sunde / Aton Group AS (40%).
+Forretningsmodell: Finn uutviklede tomter → rettighetsavtale med grunneier (0 kr for dem) → selg til utbygger (3-8% honorar).
+Datakilder: seeiendom.no (gnr/bnr/hjemmelshaver), norgeskart.no, arealplaner.no.
+Prioriterte markeder: Stavanger, Bergen, Oslo, Trondheim, Kristiansand.
+Brukeren kan lime inn gnr/bnr, adresser, eiendomsinfo eller utbyggernavn direkte i chatten.
+Svar alltid på norsk. Vær kort og praktisk — Kim er handlingsorientert og kjenner bransjen.`;
+
+  try {
+    const res = await fetch(CLAUDE_PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        secret: 'AtonGroup2026!GmailSender#Leif',
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system,
+        messages: fabHistory.slice(-12)
+      })
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || 'Noe gikk galt. Prøv igjen.';
+    fabHistory.push({ role: 'assistant', content: reply });
+
+    loading.remove();
+    const aMsg = document.createElement('div');
+    aMsg.className = 'fab-msg-ai';
+    aMsg.textContent = reply;
+    msgs.appendChild(aMsg);
+  } catch(e) {
+    loading.remove();
+    const err = document.createElement('div');
+    err.className = 'fab-msg-ai';
+    err.textContent = 'Feil: kunne ikke nå Claude. Sjekk internett.';
+    msgs.appendChild(err);
+  }
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+// Vis FAB etter innlogging
+const _origVisApp = visApp;
+visApp = function() {
+  _origVisApp();
+  document.getElementById('claude-fab').classList.add('synlig');
+};
+
+// ── BRREG API ─────────────────────────────────────────────────
+let brregTimer = null;
+let brregData = null;
+
+async function brregSok(navn) {
+  clearTimeout(brregTimer);
+  if (navn.length < 3) { document.getElementById('brreg-boks').style.display='none'; return; }
+  brregTimer = setTimeout(async () => {
+    try {
+      const r = await fetch(`https://data.brreg.no/enhetsregisteret/api/enheter?navn=${encodeURIComponent(navn)}&size=1`);
+      const d = await r.json();
+      const e = d._embedded?.enheter?.[0];
+      if (!e) { document.getElementById('brreg-boks').style.display='none'; return; }
+      brregData = e;
+      document.getElementById('brreg-navn').textContent = e.navn;
+      document.getElementById('brreg-org').textContent = 'Org.nr: ' + e.organisasjonsnummer;
+      const adr = e.forretningsadresse;
+      document.getElementById('brreg-adr').textContent = adr ? adr.adresse?.join(', ') + ', ' + adr.poststed : '';
+      document.getElementById('brreg-boks').style.display = 'block';
+    } catch(err) { document.getElementById('brreg-boks').style.display='none'; }
+  }, 400);
+}
+
+async function brregSokOrg() {
+  const navn = document.getElementById('f-eier').value.trim();
+  if (!navn) { alert('Skriv inn navn eller organisasjonsnavn først'); return; }
+  await brregSok(navn);
+}
+
+function brregBruk() {
+  if (!brregData) return;
+  document.getElementById('f-eier').value = brregData.navn;
+  const adr = brregData.forretningsadresse;
+  if (adr) {
+    const full = [adr.adresse?.join(' '), adr.postnummer, adr.poststed].filter(Boolean).join(' ');
+    document.getElementById('f-postadresse').value = full;
+  }
+  document.getElementById('brreg-boks').style.display = 'none';
+}
+
+// ── KART (Leaflet + Geonorge) ─────────────────────────────────
+let leafletKart = null;
+let kartMarkorer = [];
+let aktiveiendom = null;
+
+function initKart() {
+  if (leafletKart) return;
+
+  // Last Leaflet CSS + JS dynamisk
+  if (!document.getElementById('leaflet-css')) {
+    const lnk = document.createElement('link');
+    lnk.id = 'leaflet-css';
+    lnk.rel = 'stylesheet';
+    lnk.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+    document.head.appendChild(lnk);
+  }
+
+  if (!window.L) {
+    const sc = document.createElement('script');
+    sc.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    sc.onload = () => byggKart();
+    document.head.appendChild(sc);
+  } else {
+    byggKart();
+  }
+}
+
+function byggKart() {
+  leafletKart = L.map('leaflet-kart').setView([59.911, 10.752], 6);
+
+  // Kartverket WMS bakgrunnskart (Geonorge åpne data)
+  L.tileLayer('https://cache.kartverket.no/v1/wmts/1.0.0/topo/default/webmercator/{z}/{y}/{x}.png', {
+    attribution: '© Kartverket',
+    maxZoom: 19
+  }).addTo(leafletKart);
+
+  // Klikk i kart
+  leafletKart.on('click', async (e) => {
+    const {lat, lng} = e.latlng;
+    await kartSlaSoppEiendom(lat, lng);
+  });
+}
+
+async function kartSlaSoppEiendom(lat, lng) {
+  document.getElementById('kart-info').textContent = 'Henter eiendomsinfo...';
+  try {
+    // Geonorge Eiendom REST API (åpent, ingen nøkkel)
+    const r = await fetch(`https://ws.geonorge.no/eiendom/v1/punkt?nord=${lat}&ost=${lng}&koordsys=4326`);
+    const d = await r.json();
+    const e = d[0];
+    if (!e) { document.getElementById('kart-info').textContent = 'Ingen eiendom funnet på dette punktet.'; return; }
+
+    aktiveiendom = {
+      kommune: e.kommunenavn || '',
+      knr: e.kommunenummer || '',
+      gnr: e.gaardsnummer || '',
+      bnr: e.bruksnummer || '',
+      fnr: e.festenummer || '0',
+      adresse: e.adressetekst || '',
+      lat, lng
+    };
+
+    const gnrBnr = `gnr ${aktiveiendom.gnr} / bnr ${aktiveiendom.bnr}`;
+    document.getElementById('kart-eiendom-navn').textContent = `${aktiveiendom.kommune} — ${gnrBnr}`;
+    document.getElementById('kart-eiendom-meta').textContent = aktiveiendom.adresse || 'Ingen adresse registrert';
+    document.getElementById('kart-eiendom').style.display = 'block';
+    document.getElementById('kart-info').textContent = `Klikket på: ${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+
+    // Markør
+    kartMarkorer.forEach(m => leafletKart.removeLayer(m));
+    kartMarkorer = [];
+    const m = L.marker([lat, lng]).addTo(leafletKart)
+      .bindPopup(`<strong>${aktiveiendom.kommune}</strong><br>${gnrBnr}<br>${aktiveiendom.adresse}`).openPopup();
+    kartMarkorer.push(m);
+
+  } catch(err) {
+    document.getElementById('kart-info').textContent = 'Feil ved henting av eiendomsinfo. Prøv igjen.';
+    document.getElementById('kart-eiendom').style.display = 'none';
+  }
+}
+
+async function kartSok() {
+  const q = document.getElementById('kart-sok').value.trim();
+  if (!q) return;
+  document.getElementById('kart-info').textContent = 'Søker...';
+  try {
+    // Kartverket Adresse API (åpent, ingen nøkkel)
+    const r = await fetch(`https://ws.geonorge.no/adresser/v1/?sok=${encodeURIComponent(q)}&fuzzy=true&treffPerSide=1`);
+    const d = await r.json();
+    const a = d.adresser?.[0];
+    if (!a) { document.getElementById('kart-info').textContent = 'Ingen adresse funnet.'; return; }
+    const lat = a.representasjonspunkt?.lat;
+    const lng = a.representasjonspunkt?.lon;
+    if (!lat || !lng) return;
+    leafletKart.setView([lat, lng], 16);
+    await kartSlaSoppEiendom(lat, lng);
+  } catch(err) {
+    document.getElementById('kart-info').textContent = 'Søkefeil. Prøv igjen.';
+  }
+}
+
+function kartTilbakestill() {
+  leafletKart?.setView([59.911, 10.752], 6);
+  kartMarkorer.forEach(m => leafletKart?.removeLayer(m));
+  kartMarkorer = [];
+  aktiveiendom = null;
+  document.getElementById('kart-eiendom').style.display = 'none';
+  document.getElementById('kart-info').textContent = 'Klikk i kartet for å se gnr/bnr og eiendomsinfo.';
+}
+
+function kartLeggTilPipeline() {
+  if (!aktiveiendom) return;
+  // Fyll inn skjema og gå til legg-til-siden
+  document.getElementById('f-knr').value = aktiveiendom.knr;
+  document.getElementById('f-kommune').value = aktiveiendom.kommune;
+  document.getElementById('f-gnr').value = aktiveiendom.gnr;
+  document.getElementById('f-bnr').value = aktiveiendom.bnr;
+  document.getElementById('f-fnr').value = aktiveiendom.fnr;
+  document.getElementById('f-adresse').value = aktiveiendom.adresse;
+  goPage('ny', document.querySelector('[onclick*="ny"]'));
+  window.scrollTo(0,0);
+}
+
+// Init kart når fanen åpnes
+const _origGoPage = goPage;
+goPage = function(id, btn) {
+  _origGoPage(id, btn);
+  if (id === 'kart') setTimeout(initKart, 100);
+};
+
+oppdaterTeller();
+renderDashboard();
+</script>
+
+</div><!-- /app-shell -->
+<!-- FLYTENDE CLAUDE -->
+<div id="claude-fab">
+  <div class="fab-chat" id="fab-chat">
+    <div class="fab-chat-hdr">
+      <div class="fab-chat-title">
+        <svg viewBox="0 0 32 32" width="18" height="18"><ellipse cx="16" cy="13" rx="7" ry="8" fill="#4a7a45" opacity=".8"/><ellipse cx="16" cy="13" rx="4" ry="5" fill="#8ab885" opacity=".9"/><circle cx="16" cy="11" r="2.5" fill="#fff" opacity=".9"/></svg>
+        Claude — Grunnfelt AI
+      </div>
+      <button class="fab-chat-close" onclick="toggleFab()" title="Lukk">×</button>
+    </div>
+    <div class="fab-msgs" id="fab-msgs">
+      <div class="fab-msg-ai">Hei! Jeg er her for å hjelpe deg med Grunnfelt. Lim inn gnr/bnr, eiendomsinfo eller still et spørsmål 👋</div>
+    </div>
+    <div class="fab-inp-wrap">
+      <textarea class="fab-inp" id="fab-inp" placeholder="Skriv eller lim inn info..." rows="1"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendFab()}"
+        oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,80)+'px'"></textarea>
+      <button class="fab-send" onclick="sendFab()" title="Send">
+        <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <button class="fab-btn" onclick="toggleFab()" title="Spør Claude">
+    <svg viewBox="0 0 32 32" width="24" height="24"><ellipse cx="16" cy="13" rx="7" ry="8" fill="#4a7a45" opacity=".8"/><ellipse cx="16" cy="13" rx="4" ry="5" fill="#8ab885" opacity=".9"/><circle cx="16" cy="11" r="2.5" fill="#fff" opacity=".9"/></svg>
+    <div class="fab-dot"></div>
+  </button>
+</div>
+
+</body>
+</html>
