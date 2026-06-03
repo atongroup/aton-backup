@@ -123,7 +123,8 @@ body{background:var(--dark);color:var(--tx1);font-family:'Outfit',sans-serif;fon
         data-context="signin"
         data-callback="handleGoogleLogin"
         data-auto_select="false"
-        data-itp_support="true">
+        data-cancel_on_tap_outside="true"
+        data-itp_support="false">
       </div>
       <div class="g_id_signin"
         data-type="standard"
@@ -267,11 +268,17 @@ function enterHub() {
 }
 
 function logout() {
+  const userEmail = currentUser ? currentUser.email : null;
   currentUser = null; messages = [];
   document.getElementById('hub-view').classList.remove('active');
   document.getElementById('login-view').classList.add('active');
   document.getElementById('messages').innerHTML = '<div class="welcome" id="welcome-msg"><div class="welcome-icon">✦</div><h2>God dag, <span id="welcome-name"></span></h2><p>Hva kan jeg hjelpe deg med i dag?</p></div>';
   document.getElementById('login-error').style.display = 'none';
+  // Revoke Google session så brukervalg vises ved neste innlogging
+  if (userEmail && window.google && google.accounts && google.accounts.id) {
+    google.accounts.id.revoke(userEmail, () => {});
+    google.accounts.id.disableAutoSelect();
+  }
 }
 
 function setPreset(btn, id) {
