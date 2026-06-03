@@ -205,12 +205,12 @@ button{font-family:'DM Sans',sans-serif}
 .md{font-size:.9rem;color:var(--tx2);margin-top:.2rem}
 
 /* WORKSPACE LINKS */
-.ws-lnk{display:flex;align-items:center;gap:.85rem;padding:.85rem 1rem;background:var(--surf);border:1px solid var(--bd);border-radius:var(--r-sm);margin-bottom:.4rem;text-decoration:none;transition:.12s;color:var(--tx)}
+.ws-lnk{display:flex;align-items:center;gap:.7rem;padding:.55rem .85rem;background:var(--surf);border:1px solid var(--bd);border-radius:var(--r-sm);margin-bottom:.4rem;text-decoration:none;transition:.12s;color:var(--tx)}
 .ws-lnk:hover{border-color:var(--bd2);box-shadow:0 1px 8px rgba(0,0,0,.05)}
-.ws-ic{width:36px;height:36px;border-radius:8px;border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ws-ic{width:30px;height:30px;border-radius:7px;border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ws-body{flex:1;min-width:0}
-.ws-name{font-size:1rem;font-weight:500;color:var(--tx);margin-bottom:.1rem}
-.ws-sub{font-size:.85rem;color:var(--tx3)}
+.ws-name{font-size:.92rem;font-weight:500;color:var(--tx);margin-bottom:.1rem}
+.ws-sub{font-size:.78rem;color:var(--tx3)}
 .ws-arr{font-size:.85rem;color:var(--tx3);flex-shrink:0}
 
 /* CLAUDE CHAT */
@@ -248,6 +248,53 @@ button{font-family:'DM Sans',sans-serif}
   .pipe{flex-direction:column;align-items:flex-start;gap:.4rem}
   .pipe-r{margin-left:0}
 }
+
+/* FAMILIE — VERDI-BANNER */
+.fam-banner{background:linear-gradient(135deg,#1a1814 0%,#2a2218 100%);border-radius:var(--r);padding:2rem 1.5rem;margin-bottom:1.2rem;position:relative;overflow:hidden}
+.fam-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(200,152,24,.18) 0%,transparent 65%);pointer-events:none}
+.fam-greeting{font-size:.85rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,152,24,.7);margin-bottom:.5rem}
+.fam-name{font-family:'DM Serif Display',serif;font-size:2.1rem;color:#f8f4ec;line-height:1.1;margin-bottom:.35rem}
+.fam-name em{color:#c89818;font-style:italic}
+.fam-title{font-size:.88rem;color:rgba(248,244,236,.5);letter-spacing:.06em}
+.fam-value-row{display:flex;align-items:flex-end;gap:.5rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(200,152,24,.2)}
+.fam-value-main{font-family:'DM Serif Display',serif;font-size:2.4rem;color:#c89818;line-height:1}
+.fam-value-label{font-size:.78rem;color:rgba(248,244,236,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem}
+
+/* VERDI-TRAPP */
+.val-ladder{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:1.4rem}
+.val-rung{border-radius:var(--r);padding:.85rem 1rem;border:1px solid}
+.val-rung.now{background:var(--green-bg);border-color:var(--green-bd)}
+.val-rung.trigger{background:var(--blue-bg);border-color:var(--blue-bd)}
+.val-rung.exit{background:var(--gold-bg);border-color:var(--gold-bd)}
+.val-rung-lbl{font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem}
+.val-rung.now .val-rung-lbl{color:var(--green)}
+.val-rung.trigger .val-rung-lbl{color:var(--blue)}
+.val-rung.exit .val-rung-lbl{color:var(--gold-l)}
+.val-rung-val{font-family:'DM Serif Display',serif;font-size:1.2rem}
+.val-rung.now .val-rung-val{color:var(--green)}
+.val-rung.trigger .val-rung-val{color:var(--blue)}
+.val-rung.exit .val-rung-val{color:var(--gold-l)}
+.val-rung-note{font-size:.72rem;margin-top:.2rem}
+.val-rung.now .val-rung-note{color:var(--green)}
+.val-rung.trigger .val-rung-note{color:var(--blue)}
+.val-rung.exit .val-rung-note{color:var(--gold-l)}
+
+/* FAMILIE-KORT */
+.fam-card{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r);padding:1.1rem 1.2rem;margin-bottom:.55rem;display:flex;align-items:center;gap:1rem}
+.fam-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:1.1rem;flex-shrink:0}
+.fam-av.gold{background:var(--gold-bg);border:1px solid var(--gold-bd);color:var(--gold-l)}
+.fam-av.green{background:var(--green-bg);border:1px solid var(--green-bd);color:var(--green)}
+.fam-av.blue{background:var(--blue-bg);border:1px solid var(--blue-bd);color:var(--blue)}
+.fam-card-name{font-size:1rem;font-weight:500;color:var(--tx);margin-bottom:.1rem}
+.fam-card-role{font-size:.82rem;color:var(--tx3)}
+.fam-card-contact{font-size:.84rem;color:var(--tx2);margin-top:.25rem}
+
+/* ROLLE-BADGE */
+.role-box{background:var(--surf2);border:1px solid var(--bd);border-radius:var(--r);padding:1rem 1.2rem;margin-bottom:1rem}
+.role-title{font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);margin-bottom:.6rem}
+.role-item{font-size:.92rem;color:var(--tx2);padding:.2rem 0 .2rem .9rem;position:relative}
+.role-item::before{content:'·';position:absolute;left:0;color:var(--gold-l)}
+
 </style>
 </head>
 <body>
@@ -593,15 +640,7 @@ button{font-family:'DM Sans',sans-serif}
           <div class="ws-body"><div class="ws-name">Apps Script — e-postsender</div><div class="ws-sub">Gmail API · atongroup.no + bladeship.no</div></div>
           <span class="ws-arr">↗</span>
         </a>
-
-        <div class="slabel">Grunnfelt — eiendomspipeline</div>
-        <a href="https://bladeship.no/grunnfelt/pipeline.html" target="_blank" class="ws-lnk" style="border-color:var(--green-bd);background:var(--green-bg)">
-          <div class="ws-ic" style="background:var(--green-bg);border-color:var(--green-bd)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#1a6e3c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
-          <div class="ws-body"><div class="ws-name" style="color:var(--green)">Grunnfelt Pipeline</div><div class="ws-sub" style="color:var(--green);opacity:.7">Eiendomsidentifikasjon · grunneieroppfølging · brevgenerator</div></div>
-          <span class="ws-arr" style="color:var(--green)">↗</span>
-        </a>
-
-        <div class="slabel">AI-assistent</div>
+<div class="slabel">AI-assistent</div>
         <div class="claude-box">
           <div class="claude-hdr">
             <div style="display:flex;align-items:center;gap:.6rem">
@@ -665,29 +704,69 @@ button{font-family:'DM Sans',sans-serif}
         </div>
       </div>
 
-      <!-- ═══════════════ LONE: HJEM ═══════════════ -->
+            <!-- ═══════════════ LONE: HJEM ═══════════════ -->
       <div class="page" id="pg-lone-hjem">
-        <div class="ptitle" id="greetLone">God dag, Lone</div>
-        <div class="psub">Board Member &amp; Country Director — Spain · Marbella</div>
-        <div class="sgrid">
-          <div class="sc ok"><div class="slbl">Din aksjeandel</div><div class="sval gold">10%</div><div class="ssub">B-aksjer · Aton Group AS</div></div>
-          <div class="sc"><div class="slbl">Her &amp; nå-verdi</div><div class="sval gold">NOK 2,9M</div><div class="ssub">10% av NOK 29M</div></div>
-          <div class="sc"><div class="slbl">Post-trigger</div><div class="sval gold">NOK 10M</div><div class="ssub">10% etter EIC-tilsagn</div></div>
-          <div class="sc"><div class="slbl">Exit-potensial</div><div class="sval gold">NOK 200M+</div><div class="ssub">10% ved salg 2031</div></div>
-        </div>
-        <div class="slabel">Din rolle</div>
-        <div class="phase">
-          <div class="phdr"><span class="ptitl">Country Director — Spain</span><span class="badge gn">Aktiv</span></div>
-          <div class="pitems">
-            <div class="pitem">Koordinerer Aton-aktiviteter i Spania</div>
-            <div class="pitem">Aton España SL — planlagt stiftelse 2027</div>
-            <div class="pitem">Eiendomsnettverk og kontaktbygging Marbella</div>
-            <div class="pitem">Board Member — Aton Group AS</div>
+
+        <div class="fam-banner">
+          <div class="fam-greeting">Aton Group AS · Privat portal</div>
+          <div class="fam-name" id="greetLone">God dag, <em>Lone</em></div>
+          <div class="fam-title">Board Member &amp; Country Director — Spain</div>
+          <div class="fam-value-row">
+            <div>
+              <div class="fam-value-label">Din andel i dag</div>
+              <div class="fam-value-main">NOK 2,9M</div>
+            </div>
+            <div style="margin-left:1.5rem">
+              <div class="fam-value-label">Exit-potensial 2031</div>
+              <div style="font-family:'DM Serif Display',serif;font-size:1.4rem;color:rgba(200,152,24,.7)">NOK 200M+</div>
+            </div>
           </div>
         </div>
+
+        <div class="val-ladder">
+          <div class="val-rung now">
+            <div class="val-rung-lbl">Her &amp; nå</div>
+            <div class="val-rung-val">NOK 2,9M</div>
+            <div class="val-rung-note">10% av NOK 29M</div>
+          </div>
+          <div class="val-rung trigger">
+            <div class="val-rung-lbl">Post-EIC</div>
+            <div class="val-rung-val">NOK 10M</div>
+            <div class="val-rung-note">Etter tilsagn</div>
+          </div>
+          <div class="val-rung exit">
+            <div class="val-rung-lbl">Exit 2031</div>
+            <div class="val-rung-val">NOK 200M+</div>
+            <div class="val-rung-note">10% ved salg</div>
+          </div>
+        </div>
+
+        <div class="slabel">Din rolle</div>
+        <div class="role-box">
+          <div class="role-title">Country Director — Spain · Board Member</div>
+          <div class="role-item">Representerer Aton Group i Spania</div>
+          <div class="role-item">Aton España SL — planlagt stiftelse 2027</div>
+          <div class="role-item">Eiendomsnettverk og kontaktbygging, Marbella</div>
+          <div class="role-item">Styremedlem — Aton Group AS</div>
+        </div>
+
+        <div class="slabel">Familie</div>
+        <div class="fam-card">
+          <div class="fam-av gold">LS</div>
+          <div><div class="fam-card-name">Leif E. Sunde</div><div class="fam-card-role">Din far · CEO &amp; Founder · A-aksjer 80%</div><div class="fam-card-contact">+47 936 14 425 · leif@atongroup.no</div></div>
+        </div>
+        <div class="fam-card">
+          <div class="fam-av blue">Al</div>
+          <div><div class="fam-card-name">Alexandra Sunde Lindum</div><div class="fam-card-role">Din søster · Board Member &amp; Country Director — Denmark</div><div class="fam-card-contact">+45 22 77 75 02 · Langå, Danmark</div></div>
+        </div>
+        <div class="fam-card">
+          <div class="fam-av green">El</div>
+          <div><div class="fam-card-name">Elias &amp; Isabella</div><div class="fam-card-role">Leifs barnebarn · G3 · Barn av Alexandra</div><div class="fam-card-contact">Fremtidige arvtakere i Sunde-dynastiet</div></div>
+        </div>
+
       </div>
 
-      <!-- ═══════════════ LONE: PORTEFØLJE ═══════════════ -->
+<!-- ═══════════════ LONE: PORTEFØLJE ═══════════════ -->
       <div class="page" id="pg-lone-port">
         <div class="ptitle">Portefølje</div>
         <div class="psub">Din andel i Aton-porteføljen</div>
@@ -749,28 +828,68 @@ button{font-family:'DM Sans',sans-serif}
         <div class="mem"><div class="mav gn">El</div><div><div class="mn">Elias &amp; Isabella</div><div class="mr">Leifs barnebarn · G3</div><div class="md">Barn av Alexandra · fremtidige arvtakere</div></div></div>
       </div>
 
-      <!-- ═══════════════ ALEXANDRA: HJEM ═══════════════ -->
+            <!-- ═══════════════ ALEXANDRA: HJEM ═══════════════ -->
       <div class="page" id="pg-alex-hjem">
-        <div class="ptitle" id="greetAlex">God dag, Alexandra</div>
-        <div class="psub">Board Member &amp; Country Director — Denmark · Langå</div>
-        <div class="sgrid">
-          <div class="sc ok"><div class="slbl">Din aksjeandel</div><div class="sval gold">10%</div><div class="ssub">B-aksjer · Aton Group AS</div></div>
-          <div class="sc"><div class="slbl">Her &amp; nå-verdi</div><div class="sval gold">NOK 2,9M</div><div class="ssub">10% av NOK 29M</div></div>
-          <div class="sc"><div class="slbl">Post-trigger</div><div class="sval gold">NOK 10M</div><div class="ssub">10% etter EIC-tilsagn</div></div>
-          <div class="sc"><div class="slbl">Exit-potensial</div><div class="sval gold">NOK 200M+</div><div class="ssub">10% ved salg 2031</div></div>
-        </div>
-        <div class="slabel">Din rolle</div>
-        <div class="phase">
-          <div class="phdr"><span class="ptitl">Country Director — Denmark</span><span class="badge gn">Aktiv</span></div>
-          <div class="pitems">
-            <div class="pitem">Koordinerer Aton-aktiviteter i Danmark</div>
-            <div class="pitem">Aton Danmark ApS — planlagt stiftelse 2027</div>
-            <div class="pitem">Board Member — Aton Group AS</div>
+
+        <div class="fam-banner">
+          <div class="fam-greeting">Aton Group AS · Privat portal</div>
+          <div class="fam-name" id="greetAlex">God dag, <em>Alexandra</em></div>
+          <div class="fam-title">Board Member &amp; Country Director — Denmark</div>
+          <div class="fam-value-row">
+            <div>
+              <div class="fam-value-label">Din andel i dag</div>
+              <div class="fam-value-main">NOK 2,9M</div>
+            </div>
+            <div style="margin-left:1.5rem">
+              <div class="fam-value-label">Exit-potensial 2031</div>
+              <div style="font-family:'DM Serif Display',serif;font-size:1.4rem;color:rgba(200,152,24,.7)">NOK 200M+</div>
+            </div>
           </div>
         </div>
+
+        <div class="val-ladder">
+          <div class="val-rung now">
+            <div class="val-rung-lbl">Her &amp; nå</div>
+            <div class="val-rung-val">NOK 2,9M</div>
+            <div class="val-rung-note">10% av NOK 29M</div>
+          </div>
+          <div class="val-rung trigger">
+            <div class="val-rung-lbl">Post-EIC</div>
+            <div class="val-rung-val">NOK 10M</div>
+            <div class="val-rung-note">Etter tilsagn</div>
+          </div>
+          <div class="val-rung exit">
+            <div class="val-rung-lbl">Exit 2031</div>
+            <div class="val-rung-val">NOK 200M+</div>
+            <div class="val-rung-note">10% ved salg</div>
+          </div>
+        </div>
+
+        <div class="slabel">Din rolle</div>
+        <div class="role-box">
+          <div class="role-title">Country Director — Denmark · Board Member</div>
+          <div class="role-item">Representerer Aton Group i Danmark</div>
+          <div class="role-item">Aton Danmark ApS — planlagt stiftelse 2027</div>
+          <div class="role-item">Styremedlem — Aton Group AS</div>
+        </div>
+
+        <div class="slabel">Familie</div>
+        <div class="fam-card">
+          <div class="fam-av gold">LS</div>
+          <div><div class="fam-card-name">Leif E. Sunde</div><div class="fam-card-role">Din far · CEO &amp; Founder · A-aksjer 80%</div><div class="fam-card-contact">+47 936 14 425 · leif@atongroup.no</div></div>
+        </div>
+        <div class="fam-card">
+          <div class="fam-av gold">Lo</div>
+          <div><div class="fam-card-name">Lone Daniela Mercedes Sunde</div><div class="fam-card-role">Din søster · Board Member &amp; Country Director — Spain</div><div class="fam-card-contact">+47 984 96 631 · Marbella, España</div></div>
+        </div>
+        <div class="fam-card">
+          <div class="fam-av green">El</div>
+          <div><div class="fam-card-name">Elias &amp; Isabella</div><div class="fam-card-role">Dine barn · Leifs barnebarn · G3</div><div class="fam-card-contact">Fremtidige arvtakere i Sunde-dynastiet</div></div>
+        </div>
+
       </div>
 
-      <!-- ═══════════════ ALEXANDRA: PORTEFØLJE ═══════════════ -->
+<!-- ═══════════════ ALEXANDRA: PORTEFØLJE ═══════════════ -->
       <div class="page" id="pg-alex-port">
         <div class="ptitle">Portefølje</div>
         <div class="psub">Din andel i Aton-porteføljen</div>
