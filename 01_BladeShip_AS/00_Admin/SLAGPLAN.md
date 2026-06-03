@@ -145,3 +145,36 @@
 ---
 
 *Sist oppdatert: [DATO] · v1.0.5 · Aton AdVentures AS*
+
+---
+
+## Markedsdata og teknisk grunnlag — oppdatert 4. juni 2026
+
+### Markedstall (verifisert)
+- Globalt marked bladgjenvinning: $64,96B (2024) → $158,9B (2030), CAGR 16,6% (BCC Research, mai 2026)
+- Europeisk markedsandel: 50,7% (tidligst ute med dekommisjonering)
+- Bladavfall Europa: ~20 000t (2025) → ~55 000t/år (2030) (WindEurope)
+- Blader som risikerer deponi innen 2040: opptil 20 000 enheter (NTNU, april 2026)
+- EU selvpålagt landfill-ban: i kraft 1. januar 2026
+
+### Konkurrenter — oppdatert status
+- Stena Recycling / Vestas CETEC: kjemisk resirkulering, testbed Halmstad (mai 2026) — "innen noen få år kommersielt" — IKKE offshore
+- Regen Fiber (USA): landbasert, 30 000t/år kapasitet åpnet 2024
+- Acciona Waste2Fiber (Spania): landbasert, 6 000t/år, operasjonell 2025
+- **Ingen har offshore-kapasitet**
+
+### Dekommisjoneringsøkonomi
+- Totalkostnad dekomm. per turbin: €930k–€1,51M (Finsk miljøinstitutt aug 2025)
+- 1 GW offshore vindpark dekomm.: ~EUR 352M totalt
+- Landbasert GRP-resirkulering: USD 1 000–2 000/tonn
+- BladeShip target pris: USD 40 000–70 000/turbin (under landbasert alt. for offshore)
+
+### TRL
+- Mekanisk GRP-shredding/grinding: TRL 7–9 (kommersielt bevist)
+- BladeShips offshore-integrasjon (patent): TRL 3–4 (innovasjonen)
+
+### ATEX-strategi
+- Skip dekkes av IMO/DNV regler, ikke EU ATEX-direktiv
+- Prosesseringsrom: Zone 21 (Cat 2D utstyr), siloer: Zone 20 (Cat 1D)
+- Enclosed negativt trykk rom + HEPA-filtrering + eksplosjonssikring
+
