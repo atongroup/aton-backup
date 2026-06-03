@@ -375,10 +375,7 @@ function fmt(t) {
   t = t.replace(/\*([^*]+)\*/g, '<em>$1</em>');
   t = t.replace(/^###\s(.+)$/gm, '<strong>$1</strong>');
   t = t.replace(/^##\s(.+)$/gm, '<strong>$1</strong>');
-  t = t.split('
-
-').map(p => p.trim() ? '<p>' + p.replace(/
-/g,'<br>') + '</p>' : '').join('');
+  t = t.split('\n\n').map(p => p.trim() ? '<p>' + p.replace(/\n/g,'<br>') + '</p>' : '').join('');
   return t;
 }
 </script>
