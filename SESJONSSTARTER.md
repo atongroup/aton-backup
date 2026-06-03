@@ -80,13 +80,29 @@
 
 ---
 
+## E-POST KVALITETSSJEKKISTE
+*Kjøres automatisk før ethvert utkast presenteres — uten unntak*
+
+| # | Sjekk | Handling ved funn |
+|---|-------|-------------------|
+| 1 | **Anti-dobbelsend** — er det allerede sendt svar i denne tråden? | Ikke lag utkast — informer om hva som ble sendt og når |
+| 2 | **Hel tråd lest** — er alle tidligere meldinger i tråden gjennomgått? | Les hele tråden bakover før utkast skrives |
+| 3 | **Delivery failure** — har denne adressen feilet tidligere? | Bruk bekreftet fungerende adresse, flagg feilen |
+| 4 | **Avsenderadresse** — hvilket alias fungerer faktisk? | Bruk sist bekreftet fungerende alias (sjekk sendt-mappe) |
+| 5 | **NDA-status** — sendes teknisk info til ny part? | Bekreft at NDA er signert før tekniske docs vedlegges |
+| 6 | **Partnerstatus** — omtales noen som partner/samarbeidspartner? | Kun «dialog pågår» / «kontaktet» / «bekreftet» basert på faktisk status |
+| 7 | **Kalender-kollisjon** — bekreftes møte eller tidspunkt? | Sjekk Google Calendar for konflikt før bekreftelse sendes |
+| 8 | **Vedlegg eksisterer** — refereres det til vedlegg i teksten? | Bekreft at filen finnes i GitHub/Drive og er riktig versjon |
+
+---
+
 ## OPERATIVE REGLER (sammendrag)
 
-- **E-post — anti-dobbelsend:** Før ethvert e-postutkast lages, sjekk alltid sendt-mappe for eksisterende svar i samme tråd. Finn sendt e-post → ikke lag nytt utkast → informer Leif om hva som allerede er sendt og hva det inneholdt
-- **E-post:** Sjekk alltid tidligere tråd før utkast. Vis utkast, vent på «send»
+- **E-post:** Kjør alltid E-POST KVALITETSSJEKKISTE før utkast. Vis utkast, vent på «send» fra Leif
 - **Dokumenter:** Advokatsjekk før ferdigstilling — parter, datoer, beløp, forpliktelser
 - **Filer:** GitHub = master. Nettside = ZIP → Leif laster opp selv
 - **Partner:** Aldri skriv «partner/avtale/samarbeider» uten skriftlig bekreftelse
+- **NDA:** Aldri foreslå å sende tekniske BladeShip-dokumenter uten bekreftet signert NDA fra mottaker
 - **Gavebrev:** Lone (Scrive ID 09222115557579576827) + Alexandra (09222115557579576821) — signert 30.mai.2026
 
 ---
@@ -101,4 +117,4 @@
 
 ---
 
-*Sist oppdatert: 3. juni 2026 | Versjon: live-github*
+*Sist oppdatert: 3. juni 2026 v2 | Versjon: live-github*
