@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /index.en.html
+Allow: /index.no.html
+Allow: /index.de.html
+Allow: /index.es.html
+Allow: /index.da.html
+Allow: /index.pl.html
+Allow: /index.ar.html
+
+# Sensitive sider — ikke indekser
+Disallow: /hub.html
+Disallow: /team.html
+Disallow: /marketplace.html
+Disallow: /marketplace.no.html
+Disallow: /marketplace.ar.html
+Disallow: /marketplace.de.html
+Disallow: /marketplace.es.html
+Disallow: /marketplace.pl.html
+Disallow: /venture_portal.html
+Disallow: /concepts.html
+
+Sitemap: https://www.atongroup.no/sitemap.xml
