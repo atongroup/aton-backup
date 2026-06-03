@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Velumen — norsk luksus i resirkulert glass, corten-stål og norsk stein. Gravminner, urner og Opus — signerte kunstarbeider. Lansering 2026.">
+<meta property="og:title" content="Velumen">
+<meta property="og:description" content="Gravminner og urner ingen har laget før. Signerte kunstarbeider. Norske hender, for verden.">
+<title>Velumen</title>
+<link rel="alternate" hreflang="no" href="https://velumen.no/">
+<link rel="alternate" hreflang="en" href="https://velumen.no/index_en.html">
+<link rel="alternate" hreflang="de" href="https://velumen.no/index_de.html">
+<link rel="alternate" hreflang="da" href="https://velumen.no/index_da.html">
+<link rel="alternate" hreflang="x-default" href="https://velumen.no/">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta property="og:image" content="assets/og-image.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #0e0c09;
+  --deep: #141109;
+  --surface: #1c1810;
+  --lift: #232018;
+  --edge: #2a2520;
+  --mist: rgba(255,255,255,.06);
+  --fog:  rgba(255,255,255,.12);
+  --veil: rgba(255,255,255,.72);
+  --ink:  rgba(255,255,255,.92);
+  --text: rgba(255,255,255,.95);
+  --gold: #b89a5a;
+  --goldlt: #d4b878;
+  --golddk: #7a6030;
+  --goldglow: rgba(184,154,90,.12);
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Jost', sans-serif;
+  --ease: cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0 }
+html { scroll-behavior: smooth; font-size: 20px; background: var(--void) }
+body { background: var(--void); color: var(--ink); font-family: var(--sans); font-weight: 300; overflow-x: hidden; line-height: 1.75 }
+::selection { background: rgba(184,154,90,.2) }
+::-webkit-scrollbar { width: 1px } ::-webkit-scrollbar-thumb { background: var(--golddk) }
+
+/* — NAV — */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 72px; padding: 0 6vw;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(8,7,5,0); transition: background .6s var(--ease), border-color .6s;
+  border-bottom: 1px solid transparent;
+}
+nav.sc { background: rgba(8,7,5,.96); border-color: var(--edge) }
+.nav-logo {
+  font-family: var(--serif); font-size: 1.35rem; font-weight: 400;
+  letter-spacing: .12em; color: var(--text); text-decoration: none;
+  text-transform: uppercase;
+}
+.nav-logo em { font-style: italic; color: var(--gold) }
+.nav-links { display: flex; gap: 2.5rem; list-style: none }
+.nav-links a {
+  font-family: var(--sans); font-size: .65rem; font-weight: 300;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--veil);
+  text-decoration: none; transition: color .3s;
+}
+.nav-links a:hover { color: var(--goldlt) }
+.nav-cta {
+  font-family: var(--sans); font-size: .6rem; font-weight: 300;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold); text-decoration: none;
+  border: 1px solid var(--golddk); padding: .45rem 1.4rem;
+  transition: all .3s;
+}
+.nav-cta:hover { background: var(--goldglow); border-color: var(--gold) }
+.lang { font-family: var(--sans); font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); text-decoration: none; margin-right: 1.2rem; transition: color .3s; opacity: .75 }
+.lang-active { color: var(--goldlt) !important; opacity: 1 !important; cursor: default }
+.lang:hover { color: var(--goldlt) }
+.ham { display: none; flex-direction: column; gap: 6px; cursor: pointer; background: none; border: none; padding: 4px }
+.ham span { display: block; width: 20px; height: 1px; background: var(--veil); transition: all .3s }
+.ham.open span:nth-child(1) { transform: translateY(7px) rotate(45deg) }
+.ham.open span:nth-child(2) { opacity: 0 }
+.ham.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) }
+.mob { display: none; position: fixed; top: 72px; inset-inline: 0; background: var(--deep); border-top: 1px solid var(--edge); z-index: 199; padding: 2.5rem 6vw; flex-direction: column; gap: 1.6rem }
+.mob.open { display: flex }
+.mob a { font-family: var(--sans); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--veil); text-decoration: none; padding-bottom: 1.4rem; border-bottom: 1px solid var(--edge) }
+.mob a:last-child { border-bottom: none; padding-bottom: 0 }
+@media (min-width: 1025px) { .ham, .mob { display: none !important } }
+@media (max-width: 1024px) { .nav-links, .nav-cta { display: none } .lang { font-size:.55rem; margin-right:.7rem } .ham { display: flex } }
+
+/* — HERO SVG GRAFIKK — */
+.hero-svg-stage {
+  position: absolute; top: 0; right: 0; width: 52%; height: 100%;
+  z-index: 0; pointer-events: none; overflow: hidden;
+}
+.hero-svg { width: 100%; height: 100%; opacity: .85 }
+.svg-float-a { animation: floatA 9s ease-in-out infinite }
+.svg-float-b { animation: floatB 12s ease-in-out infinite }
+.svg-float-c { animation: floatC 11s ease-in-out infinite }
+.svg-float-d { animation: floatD 8s ease-in-out infinite }
+.svg-particles { animation: pulseP 6s ease-in-out infinite }
+@keyframes floatA {
+  0%,100% { transform: translateY(0) rotate(0deg) }
+  33% { transform: translateY(-14px) rotate(.8deg) }
+  66% { transform: translateY(8px) rotate(-.5deg) }
+}
+@keyframes floatB {
+  0%,100% { transform: translateY(0) translateX(0) }
+  40% { transform: translateY(-18px) translateX(6px) }
+  70% { transform: translateY(10px) translateX(-4px) }
+}
+@keyframes floatC {
+  0%,100% { transform: translateY(0) rotate(0) }
+  50% { transform: translateY(-10px) rotate(.4deg) }
+}
+@keyframes floatD {
+  0%,100% { transform: translateY(0) scale(1) }
+  50% { transform: translateY(-12px) scale(1.04) }
+}
+@keyframes pulseP {
+  0%,100% { opacity: 1 }
+  50% { opacity: .4 }
+}
+@media (max-width: 1024px) { .hero-svg-stage { width: 100%; opacity: .25 } }
+
+/* — MATERIALSEKSJON — */
+.mat-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1px;
+  background: var(--edge); margin-top: 3.5rem;
+}
+.mat-card {
+  background: var(--deep); padding: 2.5rem 2rem;
+  display: flex; flex-direction: column; gap: 1.5rem;
+}
+.mat-svg-wrap { height: 120px; display: flex; align-items: center; justify-content: center }
+.mat-title {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 400;
+  color: var(--text); line-height: 1.2;
+}
+.mat-title em { color: var(--gold); font-style: italic }
+.mat-.mat-
+.mat-tag {
+  font-family: var(--sans); font-size: .52rem; font-weight: 300;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: .6rem;
+}
+.mat-tag::before { content: ''; display: block; width: 16px; height: 1px; background: var(--golddk) }
+
+/* — STATISTIKK COUNTER — */
+.stats-band {
+  background: var(--surface); border-top: 1px solid var(--edge); border-bottom: 1px solid var(--edge);
+  padding: 4rem 8vw;
+}
+.stats-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 1px;
+  background: var(--edge); max-width: 1100px; margin: 0 auto;
+}
+.stat-box { background: var(--deep); padding: 2rem 1.5rem; text-align: center }
+.stat-num {
+  font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400; color: var(--gold); line-height: 1; display: block;
+  margin-bottom: .5rem;
+}
+.stat-lbl {
+  font-family: var(--sans); font-size: .5rem; font-weight: 300;
+  letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.45);
+  line-height: 1.6;
+}
+
+/* — PROSESS VISUELL — */
+.proc-visual { margin-top: 3.5rem; position: relative }
+.proc-line {
+  position: absolute; top: 28px; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, var(--edge) 10%, var(--edge) 90%, transparent);
+  z-index: 0;
+}
+.proc-grid-v {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 2px;
+  position: relative; z-index: 1;
+}
+.pv { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; padding: 0 1rem; text-align: center }
+.pv-dot {
+  width: 56px; height: 56px; border-radius: 50%;
+  border: 1px solid var(--edge); background: var(--deep);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 1rem; font-weight: 400;
+  color: var(--gold); flex-shrink: 0; position: relative;
+  transition: border-color .3s, box-shadow .3s;
+}
+.pv-dot::after {
+  content: ''; position: absolute; inset: -4px; border-radius: 50%;
+  border: 1px solid var(--golddk); opacity: 0; transition: opacity .3s;
+}
+.pv:hover .pv-dot { border-color: var(--gold); box-shadow: 0 0 24px var(--goldglow) }
+.pv:hover .pv-dot::after { opacity: 1 }
+.pv-title {
+  font-family: var(--serif); font-size: .95rem; font-weight: 400;
+  color: var(--text); line-height: 1.2;
+}
+.pv-.pv-
+
+/* — INVESTOR PIPELINE VISUELL — */
+.pip-bar-wrap { margin-bottom: 1rem }
+.pip-bar-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .4rem }
+.pip-bar-lbl { font-family: var(--sans); font-size: .56rem; letter-spacing: .12em; text-transform: uppercase; color: var(--veil) }
+.pip-bar-val { font-family: var(--serif); font-size: .85rem; color: var(--gold) }
+.pip-bar-track { height: 2px; background: var(--edge); border-radius: 1px; overflow: hidden }
+.pip-bar-fill { height: 100%; border-radius: 1px; background: linear-gradient(to right, var(--golddk), var(--gold)); transition: width 1.4s cubic-bezier(.22,1,.36,1) }
+.pip-bar-fill.anim { width: 0 }
+
+/* — MATERIAL-IKON I PRODUKTKORT — */
+.pc-icon { margin-bottom: 1rem; opacity: .7 }
+
+@media (max-width: 860px) {
+  .mat-grid { grid-template-columns: 1fr }
+  .stats-grid { grid-template-columns: repeat(2,1fr) }
+  .proc-grid-v { grid-template-columns: repeat(2,1fr) }
+  .proc-line { display: none }
+}
+@media (max-width: 520px) {
+  .stats-grid { grid-template-columns: 1fr }
+  .proc-grid-v { grid-template-columns: 1fr }
+}
+
+/* — EKSISTERENDE HERO CSS FORTSETTER — */
+.hero {
+  min-height: 100vh; padding-top: 72px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding-bottom: 8vh; padding-left: 8vw; padding-right: 8vw;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 75% 40%, rgba(184,154,90,.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 70%, rgba(184,154,90,.04) 0%, transparent 60%);
+}
+.hero-grain {
+  position: absolute; inset: 0; z-index: 0; opacity: .4;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+.hero-line {
+  position: absolute; top: 0; right: 22vw; width: 1px; height: 100vh;
+  background: linear-gradient(to bottom, transparent, var(--edge) 30%, var(--edge) 70%, transparent);
+  z-index: 0;
+}
+.hero-content { position: relative; z-index: 1; max-width: 800px }
+.hero-eyebrow {
+  font-family: var(--sans); font-size: .58rem; font-weight: 300;
+  letter-spacing: .28em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 2rem; display: flex; align-items: center; gap: 1.2rem;
+}
+.hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--golddk) }
+.hero-h1 {
+  font-family: var(--serif); font-size: clamp(3.2rem, 6vw, 7.5rem);
+  font-weight: 400; line-height: .9; letter-spacing: -.02em;
+  color: var(--text); margin-bottom: 2rem;
+}
+.hero-h1 em { font-style: italic; color: var(--gold) }
+.hero-deck {
+  font-family: var(--serif); font-size: 1rem; font-weight: 400; font-style: italic;
+  color: var(--veil); line-height: 1.8; max-width: 480px; margin-bottom: 3rem;
+}
+.hero-deck strong { font-style: normal; color: var(--ink); font-weight: 400 }
+.hero-actions { display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap }
+.btn-primary {
+  font-family: var(--sans); font-size: .6rem; font-weight: 300;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--void); background: var(--gold);
+  padding: .85rem 2.4rem; text-decoration: none; transition: background .3s;
+}
+.btn-primary:hover { background: var(--goldlt) }
+.btn-text {
+  font-family: var(--sans); font-size: .6rem; font-weight: 300;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--veil);
+  text-decoration: none; transition: color .3s;
+  display: flex; align-items: center; gap: .6rem;
+}
+.btn-text::after { content: '↓'; font-size: .7rem }
+.btn-text:hover { color: var(--goldlt) }
+.hero-scroll {
+  position: absolute; bottom: 8vh; right: 8vw; z-index: 1;
+  writing-mode: vertical-rl; letter-spacing: .2em;
+  font-family: var(--sans); font-size: .5rem; font-weight: 300; text-transform: uppercase;
+  color: rgba(255,255,255,.2); display: flex; align-items: center; gap: 1rem;
+}
+.hero-scroll::after { content: ''; display: block; width: 1px; height: 40px; background: var(--edge) }
+
+/* — MARQUEE — */
+.marquee-wrap {
+  overflow: hidden; border-top: 1px solid var(--edge); border-bottom: 1px solid var(--edge);
+  padding: 1rem 0;
+}
+.marquee-track {
+  display: flex; gap: 4rem; white-space: nowrap;
+  animation: marquee 30s linear infinite;
+}
+@keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+.marquee-item {
+  font-family: var(--sans); font-size: .58rem; font-weight: 300;
+  letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.2);
+  flex-shrink: 0;
+}
+.marquee-item.gold { color: var(--golddk) }
+
+/* — SEKSJONER — */
+.sec { padding: 10rem 8vw; border-top: 1px solid var(--edge); position: relative }
+.sec.bg-lift { background: var(--lift) }
+.sec.bg-surface { background: var(--surface) }
+.sec-ey {
+  font-family: var(--sans); font-size: .55rem; font-weight: 300;
+  letter-spacing: .28em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.2rem; display: flex; align-items: center; gap: 1.2rem;
+}
+.sec-ey::after { content: ''; display: block; width: 28px; height: 1px; background: var(--golddk) }
+.sec-h {
+  font-family: var(--serif); font-size: clamp(2.4rem, 4vw, 5rem);
+  font-weight: 400; line-height: .9; color: var(--text); margin-bottom: 1.8rem;
+}
+.sec-h em { font-style: italic; color: var(--gold) }
+.sec-intro {
+  font-family: var(--serif); font-size: .95rem; font-style: italic;
+  color: var(--veil); max-width: 600px; line-height: 1.85; margin-bottom: 4rem;
+}
+.goldbar { width: 40px; height: 1px; background: var(--golddk); margin: 2rem 0 }
+
+/* — OPUS — */
+.opus-wrap { position: relative }
+.opus-number {
+  position: absolute; top: -1rem; right: 0;
+  font-family: var(--serif); font-size: 12rem; font-weight: 400;
+  color: rgba(184,154,90,.04); line-height: 1; pointer-events: none;
+  letter-spacing: -.04em;
+}
+.opus-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--edge) }
+.opus-card {
+  background: var(--deep); padding: 3rem 2.5rem;
+  transition: background .4s var(--ease); position: relative; overflow: hidden;
+}
+.opus-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform: scaleX(0); transform-origin: center; transition: transform .6s var(--ease);
+}
+.opus-card:hover { background: var(--surface) }
+.opus-card:hover::before { transform: scaleX(1) }
+.opus-num {
+  font-family: var(--serif); font-size: 3.5rem; font-weight: 400; font-style: italic;
+  color: rgba(184,154,90,.2); line-height: 1; margin-bottom: 2rem; display: block;
+}
+.opus-label {
+  font-family: var(--sans); font-size: .55rem; font-weight: 300;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: .6rem; display: block;
+}
+.opus-name {
+  font-family: var(--serif); font-size: 1.6rem; font-weight: 400;
+  color: var(--text); line-height: 1.1; margin-bottom: .4rem;
+}
+.opus-name em { font-style: italic; color: var(--goldlt) }
+.opus-sub {
+  font-family: var(--sans); font-size: .58rem; font-weight: 300;
+  letter-spacing: .08em; color: rgba(255,255,255,.3);
+  margin-bottom: 1.4rem; text-transform: uppercase;
+}
+.opus-.pc-
+.opus-price {
+  font-family: var(--sans); font-size: .58rem; font-weight: 300;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--gold);
+  border-top: 1px solid var(--edge); padding-top: 1.2rem; margin-top: auto;
+}
+.opus-limit {
+  font-family: var(--sans); font-size: .52rem; font-weight: 300;
+  letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.18);
+  margin-top: .3rem;
+}
+.opus-cta-wrap {
+  margin-top: 4rem; padding: 2.5rem; border: 1px solid var(--edge);
+  max-width: 560px; background: var(--mist);
+}
+.opus-cta-text {
+  font-family: var(--serif); font-size: .95rem; font-style: italic;
+  color: rgba(255,255,255,.4); line-height: 1.85; margin-bottom: 1.8rem;
+}
+
+/* — PRODUKTER — */
+.prod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--edge) }
+.pc {
+  background: var(--deep); padding: 2.5rem 2.2rem;
+  position: relative; overflow: hidden; transition: background .4s var(--ease);
+}
+.pc::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: var(--gold); transform: scaleX(0); transform-origin: left;
+  transition: transform .5s var(--ease);
+}
+.pc:hover { background: var(--surface) }
+.pc:hover::after { transform: scaleX(1) }
+.pc-badge {
+  font-family: var(--sans); font-size: .5rem; font-weight: 300;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); border: 1px solid var(--golddk);
+  padding: .15rem .55rem; display: inline-block; margin-bottom: .9rem;
+}
+.pc-tag {
+  font-family: var(--sans); font-size: .55rem; font-weight: 300;
+  letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.3);
+  display: block; margin-bottom: .6rem;
+}
+.pc-name {
+  font-family: var(--serif); font-size: 1.5rem; font-weight: 400;
+  color: var(--text); line-height: 1.05; margin-bottom: .4rem;
+}
+.pc-name em { font-style: italic; color: var(--goldlt) }
+.pc-sub {
+  font-family: var(--sans); font-size: .55rem; font-weight: 300;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(255,255,255,.50); margin-bottom: 1.2rem;
+}
+.pc-.pc-body-alt {
+  font-family: var(--serif); font-size: .92rem; color: rgba(255,255,255,.65);
+  line-height: 1.85; margin-bottom: 1.4rem;
+}
+.pc-est {
+  font-family: var(--sans); font-size: .55rem; font-weight: 300;
+  letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.3);
+}
+.pc-note {
+  font-family: var(--sans); font-size: .52rem; color: rgba(255,255,255,.2);
+  font-style: italic; margin-top: .4rem; padding-top: .4rem;
+  border-top: 1px solid var(--edge);
+}
+
+/* — URN INFO BOX — */
+.urn-notice {
+  background: var(--mist); border-left: 2px solid var(--golddk);
+  padding: 1.2rem 1.6rem; margin-bottom: 3rem; max-width: 680px;
+}
+.urn-notice p {
+  font-family: var(--sans); font-size: .68rem; font-weight: 300;
+  line-height: 1.7; color: rgba(255,255,255,.45); letter-spacing: .02em;
+}
+.urn-notice strong { color: rgba(255,255,255,.65); font-weight: 400 }
+
+/* — MANIFEST — */
+.mf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; margin-top: 3rem }
+.mf-col p {
+  font-family: var(--serif); font-size: .95rem; font-weight: 400;
+  color: var(--veil); line-height: 1.9;
+}
+.mf-col p + p { margin-top: 1.2rem }
+.mf-col strong { color: var(--ink); font-weight: 400 }
+
+/* — PROSESS — */
+.proc-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--edge); margin-top: 5rem }
+.pg { background: var(--deep); padding: 2.5rem 2rem }
+.pg-num {
+  font-family: var(--serif); font-size: 3rem; font-weight: 400;
+  color: rgba(255,255,255,.06); line-height: 1; margin-bottom: 1.5rem; display: block;
+}
+.pg-title {
+  font-family: var(--sans); font-size: .62rem; font-weight: 300;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem;
+}
+.pg-.pg-
+
+/* — INTERESSE — */
+.interest-wrap {
+  max-width: 640px; margin: 0 auto;
+  border: 1px solid var(--edge); padding: 4rem; background: var(--mist);
+}
+.int-h { font-family: var(--serif); font-size: clamp(1.8rem,3vw,2.8rem); font-weight: 400; color: var(--text); line-height: .95; margin-bottom: .6rem }
+.int-h em { font-style: italic; color: var(--gold) }
+.int-sub { font-family: var(--serif); font-size: .9rem; font-style: italic; color: var(--veil); margin-bottom: 3rem; line-height: 1.75 }
+.fg { margin-bottom: 1.8rem }
+.fl { font-family: var(--sans); font-size: .52rem; font-weight: 300; letter-spacing: .22em; text-transform: uppercase; color: var(--golddk); display: block; margin-bottom: .5rem }
+.fi {
+  width: 100%; background: transparent; border: none;
+  border-bottom: 1px solid var(--edge); padding: .6rem 0;
+  font-family: var(--serif); font-size: .95rem; color: var(--text);
+  outline: none; transition: border-color .3s; caret-color: var(--gold);
+}
+.fi:focus { border-bottom-color: var(--golddk) }
+.fi::placeholder { color: rgba(255,255,255,.15); font-style: italic }
+select.fi { cursor: pointer; -webkit-appearance: none }
+.fi option { background: var(--deep) }
+textarea.fi { resize: none; min-height: 80px; line-height: 1.7 }
+.btn-sub {
+  background: var(--gold); border: none; color: var(--void);
+  padding: .85rem 2.6rem; font-family: var(--sans); font-size: .6rem;
+  font-weight: 300; letter-spacing: .22em; text-transform: uppercase;
+  cursor: pointer; transition: background .3s;
+}
+.btn-sub:hover { background: var(--goldlt) }
+.sub-note { font-family: var(--serif); font-size: .82rem; font-style: italic; color: rgba(255,255,255,.25); margin-left: 1.4rem }
+
+/* — INVESTOR — */
+.inv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; margin-top: 4rem; align-items: start }
+.inv-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--edge); margin-bottom: 3rem }
+.inv-stat { background: var(--deep); padding: 1.8rem 2rem }
+.inv-stat-val { font-family: var(--serif); font-size: 2rem; font-weight: 400; color: var(--gold); display: block; line-height: 1; margin-bottom: .3rem }
+.inv-stat-lbl { font-family: var(--sans); font-size: .52rem; font-weight: 300; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.55) }
+.inv-.inv-
+.inv-body strong { color: var(--ink); font-weight: 400 }
+.inv-body + .inv-.inv-body + .inv-
+.inv-cta-row { display: flex; gap: 1.4rem; align-items: center; flex-wrap: wrap; margin-top: 2.5rem }
+.btn-gold { background: var(--gold); color: var(--void); padding: .85rem 2.4rem; font-family: var(--sans); font-size: .6rem; font-weight: 300; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; transition: background .3s; display: inline-block }
+.btn-gold:hover { background: var(--goldlt) }
+.inv-pipeline { border: 1px solid var(--edge) }
+.ip-row { display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 1.6rem; border-bottom: 1px solid var(--edge); flex-wrap: wrap; gap: .5rem }
+.ip-row:last-child { border-bottom: none }
+.ip-label { font-family: var(--serif); font-size: .9rem; color: var(--veil) }
+.ip-val { font-family: var(--serif); font-size: .9rem; font-style: italic; color: var(--gold) }
+.ip-status { font-family: var(--sans); font-size: .48rem; font-weight: 300; letter-spacing: .16em; text-transform: uppercase; padding: .2rem .5rem }
+.ip-status.done { color: rgba(107,160,107,.8); border: 1px solid rgba(107,160,107,.25) }
+.ip-status.pending { color: var(--golddk); border: 1px solid rgba(184,154,90,.25) }
+.ip-status.future { color: rgba(255,255,255,.25); border: 1px solid var(--edge) }
+
+/* — KONTAKT — */
+.ci { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--edge) }
+.ci:last-child { border: none; margin: 0; padding: 0 }
+.ci-l { font-family: var(--sans); font-size: .52rem; font-weight: 300; letter-spacing: .22em; text-transform: uppercase; color: var(--golddk); margin-bottom: .5rem }
+.ci-v { font-family: var(--serif); font-size: .95rem; color: var(--veil); line-height: 1.7 }
+.ci-v a { color: var(--veil); text-decoration: none; border-bottom: 1px solid var(--edge); transition: all .3s }
+.ci-v a:hover { color: var(--goldlt); border-color: var(--golddk) }
+.cont-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10vw }
+
+/* — FOOTER — */
+footer { background: var(--void); padding: 7rem 8vw 3rem; border-top: 1px solid var(--edge) }
+.ft { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4vw; margin-bottom: 5rem }
+.fl-logo { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; letter-spacing: .1em; text-transform: uppercase; color: var(--text); margin-bottom: 1rem; display: block }
+.fl-logo em { font-style: italic; color: var(--gold) }
+.fl-tag { font-family: var(--serif); font-size: .85rem; font-style: italic; color: rgba(255,255,255,.3); line-height: 1.75; max-width: 240px }
+.fc h4 { font-family: var(--sans); font-size: .52rem; font-weight: 300; letter-spacing: .22em; text-transform: uppercase; color: var(--golddk); margin-bottom: 1.4rem }
+.fc ul { list-style: none; display: flex; flex-direction: column; gap: .7rem }
+.fc a { font-family: var(--serif); font-size: .88rem; color: rgba(255,255,255,.35); text-decoration: none; transition: color .3s }
+.fc a:hover { color: var(--goldlt) }
+.fb { border-top: 1px solid var(--edge); padding-top: 2rem; display: flex; align-items: center; justify-content: space-between }
+.fb-copy { font-family: var(--sans); font-size: .5rem; font-weight: 300; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.15) }
+.fb-note { font-family: var(--serif); font-size: .78rem; font-style: italic; color: rgba(255,255,255,.1) }
+
+/* — RESPONSIV — */
+@media (max-width: 1100px) {
+  .mf-grid, .cont-grid, .inv-grid { grid-template-columns: 1fr; gap: 2.5rem }
+  .prod-grid, .opus-grid { grid-template-columns: 1fr 1fr }
+  .proc-grid { grid-template-columns: 1fr 1fr }
+  .ft { grid-template-columns: 1fr 1fr; gap: 3rem }
+}
+@media (max-width: 700px) {
+  @media (max-width: 520px) {  }
+  .hero { padding-left: 6vw; padding-right: 6vw }
+  .sec { padding: 6rem 6vw }
+  .prod-grid, .opus-grid { grid-template-columns: 1fr }
+  .proc-grid { grid-template-columns: 1fr }
+  .ft { grid-template-columns: 1fr }
+  .fb { flex-direction: column; gap: 1rem; align-items: flex-start }
+  .interest-wrap { padding: 2rem 1.5rem }
+}
+
+/* — FADE IN — */
+.fade { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease) }
+.fade.in { opacity: 1; transform: none }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo" style="display:flex;align-items:center;text-decoration:none"><svg width="180" height="52" viewBox="0 0 180 52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Velumen">
+    <path d="M16,46 L12,19 Q11.5,7 20,7 L25,7 Q26.5,4 28,4 Q29.5,4 31,7 L36,7 Q44.5,7 44,19 L40,46 Z" fill="none" stroke="#b89a5a" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/>
+    <line x1="10" y1="46" x2="46" y2="46" stroke="#b89a5a" stroke-width="1.6" stroke-linecap="round"/>
+    <line x1="12.5" y1="20" x2="43.5" y2="20" stroke="#b89a5a" stroke-width="0.6" stroke-linecap="round" opacity="0.4"/>
+    <path d="M17,13 A13,13 0 0,1 39,13" stroke="#b89a5a" stroke-width="0.7" fill="none" stroke-linecap="round" opacity="0.25"/>
+    <path d="M20,10 A10,10 0 0,1 36,10" stroke="#b89a5a" stroke-width="0.7" fill="none" stroke-linecap="round" opacity="0.5"/>
+    <path d="M23,7.5 A7,7 0 0,1 33,7.5" stroke="#b89a5a" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.75"/>
+    <text x="56" y="31" font-family="'Playfair Display', Georgia, serif" font-size="22" font-weight="400" font-style="italic" fill="#e8e4dc" letter-spacing="1">Velumen</text>
+  </svg></a>
+  <ul class="nav-links">
+    <li><a href="#gravminner">Gravminner</a></li>
+    <li><a href="#urner">Urner</a></li>
+    <li><a href="#opus">Opus</a></li>
+    <li><a href="#om">Om oss</a></li>
+    <li><a href="#investor">Investorer</a></li>
+    <li><a href="#interesse">Meld interesse</a></li>
+  </ul>
+  <span class="lang lang-active">NO</span>
+  <a href="index_en.html" class="lang">EN</a>
+  <a href="index_de.html" class="lang">DE</a>
+  <a href="index_da.html" class="lang">DA</a>
+  <a href="#interesse" class="nav-cta">Meld interesse</a>
+  <button class="ham" id="ham" aria-label="Meny"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob" id="mob">
+  <a href="#gravminner">Gravminner</a>
+  <a href="#urner">Urner</a>
+  <a href="#opus">Opus</a>
+  <a href="#om">Om oss</a>
+  <a href="#investor">Investorer</a>
+  <a href="#interesse">Meld interesse</a>
+  <div style="display:flex;gap:1.2rem;padding-top:1rem;border-top:1px solid var(--edge);margin-top:.4rem">
+    <a href="index_en.html" style="font-family:var(--sans);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--veil);text-decoration:none">EN</a>
+    <a href="index_de.html" style="font-family:var(--sans);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--veil);text-decoration:none">DE</a>
+    <a href="index_da.html" style="font-family:var(--sans);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--veil);text-decoration:none">DA</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-line"></div>
+
+  <!-- SVG — svevende produktformer høyre side -->
+  <div class="hero-svg-stage" aria-hidden="true">
+    <svg viewBox="0 0 520 700" fill="none" xmlns="http://www.w3.org/2000/svg" class="hero-svg">
+      <!-- Dekorative linjer -->
+      <line x1="260" y1="0" x2="260" y2="700" stroke="rgba(184,154,90,.06)" stroke-width="1"/>
+      <line x1="0" y1="350" x2="520" y2="350" stroke="rgba(184,154,90,.04)" stroke-width="1"/>
+      <circle cx="260" cy="350" r="200" stroke="rgba(184,154,90,.04)" stroke-width="1" fill="none"/>
+      <circle cx="260" cy="350" r="130" stroke="rgba(184,154,90,.06)" stroke-width="1" fill="none"/>
+
+      <!-- Corten-kubus (urne) — fremst -->
+      <g class="svg-float-a">
+        <rect x="150" y="230" width="140" height="140" rx="2"
+          fill="#1a140c" stroke="#b89a5a" stroke-width="1.2"/>
+        <!-- Patina-tekstur linjer -->
+        <line x1="160" y1="250" x2="275" y2="250" stroke="rgba(184,154,90,.15)" stroke-width="0.5"/>
+        <line x1="158" y1="272" x2="278" y2="272" stroke="rgba(184,154,90,.1)" stroke-width="0.5"/>
+        <line x1="162" y1="295" x2="272" y2="295" stroke="rgba(184,154,90,.12)" stroke-width="0.5"/>
+        <line x1="159" y1="318" x2="276" y2="318" stroke="rgba(184,154,90,.08)" stroke-width="0.5"/>
+        <line x1="163" y1="342" x2="274" y2="342" stroke="rgba(184,154,90,.1)" stroke-width="0.5"/>
+        <!-- Vertikale patina-linjer -->
+        <line x1="190" y1="235" x2="185" y2="365" stroke="rgba(184,154,90,.08)" stroke-width="0.5"/>
+        <line x1="225" y1="232" x2="222" y2="368" stroke="rgba(184,154,90,.06)" stroke-width="0.5"/>
+        <line x1="258" y1="233" x2="255" y2="367" stroke="rgba(184,154,90,.09)" stroke-width="0.5"/>
+        <!-- Gull-gløde -->
+        <rect x="150" y="230" width="140" height="140" rx="2"
+          fill="url(#cortenglow)" opacity="0.6"/>
+        <!-- Lokk-linje -->
+        <line x1="150" y1="268" x2="290" y2="268" stroke="#b89a5a" stroke-width="0.8" opacity="0.6"/>
+        <!-- NFC-symbol -->
+        <g transform="translate(220,310)">
+          <path d="M-8,0 Q-8,-8 0,-8 Q8,-8 8,0 Q8,8 0,8 Q-8,8 -8,0" stroke="rgba(184,154,90,.4)" stroke-width="0.8" fill="none"/>
+          <path d="M-5,0 Q-5,-5 0,-5 Q5,-5 5,0 Q5,5 0,5 Q-5,5 -5,0" stroke="rgba(184,154,90,.3)" stroke-width="0.8" fill="none"/>
+          <circle cx="0" cy="0" r="1.5" fill="rgba(184,154,90,.5)"/>
+        </g>
+      </g>
+
+      <!-- Glasskule (skulptur) — bak og til høyre -->
+      <g class="svg-float-b">
+        <ellipse cx="360" cy="180" rx="65" ry="80"
+          fill="rgba(40,80,90,.25)" stroke="rgba(100,200,200,.25)" stroke-width="1"/>
+        <!-- Indre refleks -->
+        <ellipse cx="345" cy="155" rx="22" ry="28"
+          fill="rgba(100,200,200,.08)" stroke="rgba(100,200,200,.15)" stroke-width="0.5"/>
+        <!-- Lys-flekk -->
+        <ellipse cx="338" cy="148" rx="8" ry="10"
+          fill="rgba(200,240,240,.12)"/>
+        <!-- Gass-bobler -->
+        <circle cx="370" cy="200" r="5" fill="none" stroke="rgba(100,200,200,.15)" stroke-width="0.5"/>
+        <circle cx="355" cy="215" r="3" fill="none" stroke="rgba(100,200,200,.1)" stroke-width="0.5"/>
+        <!-- Kontur -->
+        <ellipse cx="360" cy="180" rx="65" ry="80"
+          fill="url(#glassglow)" opacity="0.4"/>
+      </g>
+
+      <!-- Steinplate (gravminne) — til venstre, mørk -->
+      <g class="svg-float-c">
+        <rect x="60" y="400" width="90" height="160" rx="3"
+          fill="#111010" stroke="rgba(160,150,140,.2)" stroke-width="1"/>
+        <!-- Steinstruktur — kornete linjer -->
+        <line x1="72" y1="420" x2="138" y2="423" stroke="rgba(160,150,140,.08)" stroke-width="0.5"/>
+        <line x1="68" y1="435" x2="142" y2="432" stroke="rgba(160,150,140,.06)" stroke-width="0.5"/>
+        <line x1="70" y1="450" x2="140" y2="448" stroke="rgba(160,150,140,.1)" stroke-width="0.5"/>
+        <line x1="73" y1="465" x2="137" y2="467" stroke="rgba(160,150,140,.07)" stroke-width="0.5"/>
+        <line x1="69" y1="480" x2="141" y2="478" stroke="rgba(160,150,140,.09)" stroke-width="0.5"/>
+        <!-- Inngravert tekst-placeholder -->
+        <line x1="82" y1="510" x2="128" y2="510" stroke="rgba(184,154,90,.3)" stroke-width="0.8"/>
+        <line x1="88" y1="522" x2="122" y2="522" stroke="rgba(184,154,90,.2)" stroke-width="0.6"/>
+        <line x1="85" y1="533" x2="125" y2="533" stroke="rgba(184,154,90,.15)" stroke-width="0.6"/>
+        <!-- NFC-symbol -->
+        <g transform="translate(105,545)">
+          <path d="M-6,0 Q-6,-6 0,-6 Q6,-6 6,0 Q6,6 0,6 Q-6,6 -6,0" stroke="rgba(184,154,90,.35)" stroke-width="0.7" fill="none"/>
+          <circle cx="0" cy="0" r="1.5" fill="rgba(184,154,90,.4)"/>
+        </g>
+        <!-- Kant-highlight -->
+        <line x1="60" y1="400" x2="60" y2="560" stroke="rgba(184,154,90,.12)" stroke-width="1.5"/>
+      </g>
+
+      <!-- Smykke — liten diamant form -->
+      <g class="svg-float-d">
+        <polygon points="380,480 410,510 380,545 350,510"
+          fill="rgba(30,40,50,.4)" stroke="rgba(184,154,90,.35)" stroke-width="0.8"/>
+        <polygon points="380,480 410,510 380,510"
+          fill="rgba(184,154,90,.05)"/>
+        <polygon points="380,510 410,510 380,545"
+          fill="rgba(184,154,90,.03)"/>
+        <line x1="350" y1="510" x2="410" y2="510" stroke="rgba(184,154,90,.2)" stroke-width="0.5"/>
+        <circle cx="380" cy="510" r="2" fill="rgba(184,154,90,.5)"/>
+      </g>
+
+      <!-- Lys-partikler -->
+      <g class="svg-particles">
+        <circle cx="320" cy="420" r="1.2" fill="rgba(184,154,90,.4)"/>
+        <circle cx="200" cy="160" r="0.8" fill="rgba(184,154,90,.3)"/>
+        <circle cx="430" cy="320" r="1" fill="rgba(100,200,200,.3)"/>
+        <circle cx="130" cy="350" r="0.8" fill="rgba(184,154,90,.25)"/>
+        <circle cx="460" cy="460" r="1.2" fill="rgba(184,154,90,.2)"/>
+        <circle cx="90" cy="280" r="0.7" fill="rgba(100,200,200,.2)"/>
+        <circle cx="340" cy="600" r="0.9" fill="rgba(184,154,90,.3)"/>
+      </g>
+
+      <!-- Gradient-definisjoner -->
+      <defs>
+        <radialGradient id="cortenglow" cx="30%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#b89a5a" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#b89a5a" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="glassglow" cx="40%" cy="30%" r="60%">
+          <stop offset="0%" stop-color="#64c8c8" stop-opacity="0.2"/>
+          <stop offset="100%" stop-color="#64c8c8" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="hero-content fade">
+    <p class="hero-eyebrow">Under utvikling · Stavanger · Made in Norway</p>
+    <h1 class="hero-h1">Norsk<br>luksus.<br><em>Levende arv.</em></h1>
+    <p class="hero-deck">Vi utvikler gravminner og urner ingen har laget før — i resirkulert glass, corten-stål og norsk stein. Med NFC-minneteknologi. <strong>Norske hender. For verden.</strong></p>
+    <div class="hero-actions">
+      <a href="#interesse" class="btn-primary">Meld din interesse</a>
+      <a href="#gravminner" class="btn-text">Se konseptene</a>
+    </div>
+  </div>
+  <p class="hero-scroll">Velumen 2026</p>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Resirkulert glass</span>
+    <span class="marquee-item gold">—</span>
+    <span class="marquee-item">Corten-stål</span>
+    <span class="marquee-item gold">—</span>
+    <span class="marquee-item">Norsk stein</span>
+    <span class="marquee-item gold">—</span>
+    <span class="marquee-item">NFC-minneteknologi</span>
+    <span class="marquee-item gold">—</span>
+    <span class="marquee-item">CO₂ −70%</span>
+    <span class="marquee-item gold">—</span>
+    <span class="marquee-item">Made in Norway</span>
+    <span class="marquee-item gold">—</span>
+    <span class="marquee-item">Lansering 2026</span>
+    <span class="marquee-item gold">—</span>
+    <span class="marquee-item">Resirkulert glass</span>
+    <span class="marquee-item gold">—</span>
+    <span class="marquee-item">Corten-stål</span>
+    <span class="marquee-item gold">—</span>
+    <span class="marquee-item">Norsk stein</span>
+    <span class="marquee-item gold">—</span>
+    <span class="marquee-item">NFC-minneteknologi</span>
+    <span class="marquee-item gold">—</span>
+    <span class="marquee-item">CO₂ −70%</span>
+    <span class="marquee-item gold">—</span>
+    <span class="marquee-item">Made in Norway</span>
+    <span class="marquee-item gold">—</span>
+    <span class="marquee-item">Lansering 2026</span>
+    <span class="marquee-item gold">—</span>
+  </div>
+</div>
+
+<!-- STATISTIKKBÅND -->
+<div class="stats-band fade">
+  <div class="stats-grid">
+    <div class="stat-box">
+      <span class="stat-num" data-target="51.4" data-suffix="%">0%</span>
+      <span class="stat-lbl">Kremasjonsdel Norge 2024<br>— mot 75% innen 2050</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num" data-target="147" data-prefix="USD " data-suffix="B">USD 0B</span>
+      <span class="stat-lbl">Globalt deathcare-marked 2025<br>CAGR 6,1%</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num" data-target="80" data-suffix="%+">0%</span>
+      <span class="stat-lbl">Bruttomargin Lux-linjen<br>— i tråd med luksusmarkedet</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num" data-target="70" data-prefix="−" data-suffix="% CO₂">−0% CO₂</span>
+      <span class="stat-lbl">Lavere utslipp enn<br>importert granitt</span>
+    </div>
+  </div>
+</div>
+
+<!-- OPUS -->
+<section class="sec" id="opus">
+  <div class="opus-wrap fade">
+    <p class="sec-ey">Velumen Opus</p>
+    <h2 class="sec-h">Kunst som<br><em>varer evig.</em></h2>
+    <p class="sec-intro">Signerte, nummererte arbeider skapt i samarbeid med navngitte norske kunstnere. Aldri mer enn fem per år. Ingen katalogpris — kun dialog.</p>
+    <div class="opus-number">Opus</div>
+    <div class="opus-grid">
+      <div class="opus-card">
+        <span class="opus-num">I</span>
+        <span class="opus-label">Skulpturelt minnesmerke</span>
+        <div class="opus-name">Gravminne<br><em>som kunst</em></div>
+        <div class="opus-sub">Navngitt norsk kunstner · Signert · Nummerert</div>
+        <p class="opus-body">Velumen bringer kunstner og familie sammen. Materialet — norsk kleberstein, corten, støpt glass, bronse — velges etter personens liv. Signert av kunstneren. Dokumentasjonshefte medfølger. Produksjonstid 6–9 måneder.</p>
+        <div class="opus-price">Fra kr 300 000 — etter dialog</div>
+        <div class="opus-limit">Maks 3 per år</div>
+      </div>
+      <div class="opus-card">
+        <span class="opus-num">II</span>
+        <span class="opus-label">Urne som skulptur</span>
+        <div class="opus-name">Urne<br><em>som kunstverk</em></div>
+        <div class="opus-sub">Norsk glassblåser eller metallskulptør · Signert</div>
+        <p class="opus-body">En kremerings-urne som er skulptur først, urne annet. Skapt av en navngitt norsk kunstner. Signert og nummerert. Levert i håndlaget eikekasse med livsdokumentasjon. Mulighet for materialer fra steder med personlig betydning.</p>
+        <div class="opus-price">Fra kr 150 000 — etter dialog</div>
+        <div class="opus-limit">Maks 5 per år</div>
+      </div>
+      <div class="opus-card">
+        <span class="opus-num">III</span>
+        <span class="opus-label">Familietestament</span>
+        <div class="opus-name">En familie.<br><em>Ett verk.</em></div>
+        <div class="opus-sub">Gravminne · Urner · Smykker · Minneark</div>
+        <p class="opus-body">En komplett minneinstallasjon designet som ett sammenhengende kunstverk — for familien som vil at arven skal vare. Alt skapt av én kunstner, for én familie.</p>
+        <div class="opus-price">Fra kr 500 000 — etter dialog</div>
+        <div class="opus-limit">Maks 1 per år</div>
+      </div>
+    </div>
+    <div class="opus-cta-wrap">
+      <p class="opus-cta-text">«Vi er for øyeblikket åpne for Opus-dialoger for 2026 og 2027. Ventelisten er kort.»</p>
+      <a href="mailto:viking@velumen.no?subject=Velumen Opus — dialog" class="btn-primary">Start en dialog</a>
+    </div>
+  </div>
+</section>
+
+<!-- GRAVMINNER -->
+<section class="sec bg-surface" id="gravminner">
+  <div class="fade">
+  <p class="sec-ey">Gravminner</p>
+  <h2 class="sec-h">Til stedet der<br><em>minnet lever.</em></h2>
+  <p class="sec-intro">Tre produktnivåer under utvikling — fra bespoke luksus til tilgjengelig premiumdesign. Alle inkluderer NFC-minneteknologi og norsk produksjon. Prisene er estimater.</p>
+  <div class="prod-grid">
+    <div class="pc">
+      <span class="pc-badge">Luksus</span>
+      <span class="pc-tag">Lux Memorial</span>
+      <div class="pc-name">Bespoke<br><em>glass + stein</em></div>
+      <div class="pc-sub">Resirkulert glass · Norsk granitt · NFC</div>
+      <p class="pc-body">Lokalt glass smeltes og støpes til ett-av-ett form. Lasergravering gjennom glasset gir unikt dybdeeffekt. Kombineres med kortreist norsk stein. Hvert stykke unikt — som personen det minnes.</p>
+      <div class="pc-est">Estimert fra kr 150 000</div>
+    </div>
+    <div class="pc">
+      <span class="pc-tag">Signature</span>
+      <div class="pc-name">Corten-<br><em>stål</em></div>
+      <div class="pc-sub">Laserkuttet · Kontrollert patina · NFC</div>
+      <p class="pc-body">Corten-stål med kontrollert pre-patinering. Varm amber-rust ved levering — eldes vakkert i tiår. Brukt i prestisjearchitektur av Serra og Piano. Nå i gravminnet.</p>
+      <div class="pc-est">Estimert fra kr 55 000</div>
+    </div>
+    <div class="pc">
+      <span class="pc-tag">Origin</span>
+      <div class="pc-name">Norsk<br><em>stein</em></div>
+      <div class="pc-sub">Kortreist · CNC gravering · NFC</div>
+      <p class="pc-body">Rygge, Iddefjord eller Otta-granitt — norsk stein med en brøkdel av CO₂-avtrykket til importert granitt. CNC-presisjonsgravering og NFC-minneside som standard.</p>
+      <div class="pc-est">Estimert fra kr 25 000</div>
+    </div>
+    <div class="pc">
+      <span class="pc-tag">Tillegg</span>
+      <div class="pc-name">Glass<br><em>+ LED</em></div>
+      <div class="pc-sub">Resirkulert glass · Solcelledrevet</div>
+      <p class="pc-body">Resirkulert glass med sandblåst portrett. Solcelle i sokkelen lader LED som lyser ved solnedgang. Under testing for norsk klima.</p>
+      <div class="pc-est">Estimert fra kr 55 000</div>
+    </div>
+    <div class="pc">
+      <span class="pc-tag">Alle gravminner</span>
+      <div class="pc-name">NFC<br><em>minneside</em></div>
+      <div class="pc-sub">Ingen app · Ingen abonnement</div>
+      <p class="pc-body">NFC-chip integrert i alle produkter. Scan med telefon og kom til en privat minneside med bilder, historier og musikk. Hostet permanent.</p>
+      <div class="pc-est">Inkludert i alle konsepter</div>
+    </div>
+    <div class="pc">
+      <span class="pc-tag">Tjeneste</span>
+      <div class="pc-name"><em>Design</em>pakke</div>
+      <div class="pc-sub">Individuelt møte · 3 utkast</div>
+      <p class="pc-body">Et individuelt designmøte, research om personen og tre designutkast. Kan kombineres med ethvert produkt — eller kjøpes alene for å planlegge fremtidig minnesmerke.</p>
+      <div class="pc-est">Estimert fra kr 7 500</div>
+    </div>
+  </div>
+  <p style="font-family:var(--sans);font-size:.55rem;letter-spacing:.08em;color:rgba(255,255,255,.2);margin-top:2rem;font-style:italic">* Alle priser er estimater. Endelige priser bekreftes ved lansering 2026.</p>
+  </div>
+</section>
+
+<!-- URNER -->
+<section class="sec" id="urner">
+  <div class="fade">
+  <p class="sec-ey">Kremerings-urner</p>
+  <h2 class="sec-h">Til hjemmet der<br><em>minnet bor.</em></h2>
+  <p class="sec-intro">Over halvparten av alle som dør i Norge kremeres nå. Vi utvikler luksusurner designet for hjemmeoppbevaring og urnevegg-nisjer. Prisene er estimater.</p>
+  <div class="urn-notice">
+    <p>Velumens urner er designet for <strong>hjemmeoppbevaring og urnevegg-nisjer</strong> — ikke for jordbegravelse, da norsk lov krever nedbrytbare materialer ved nedsetting i jord. For kunder som ønsker jordbegravelse tilbyr vi et biologisk nedbrytbart alternativ i tillegg.</p>
+  </div>
+  <div class="prod-grid">
+    <div class="pc">
+      <span class="pc-badge">Halo-urne</span>
+      <span class="pc-tag">Lux Urne — Glass</span>
+      <div class="pc-name">Skulptur<br><em>i glass</em></div>
+      <div class="pc-sub">Resirkulert glass · Bespoke · Ett-av-ett</div>
+      <p class="pc-body">Lokalt resirkulert glass smeltes og formes til organisk skulptur. Hvert stykke unikt — glassets flyteegenskaper gir fargefordelinger som aldri kan reproduseres. Valgfri NFC-chip.</p>
+      <div class="pc-est">Estimert fra kr 22 000</div>
+    </div>
+    <div class="pc">
+      <span class="pc-tag">Lux Urne — Corten</span>
+      <div class="pc-name">Geometri<br><em>i stål</em></div>
+      <div class="pc-sub">Corten A588 · Laserkuttet · Pre-patinert</div>
+      <p class="pc-body">Geometrisk kubus i corten-stål. Pre-patinert med varm amber-rust direkte fra verksted. Ren form — materialet er budskapet. Valgfri NFC-chip. Eldes med verdighet.</p>
+      <div class="pc-est">Estimert fra kr 18 000</div>
+    </div>
+    <div class="pc">
+      <span class="pc-tag">Familiesett</span>
+      <div class="pc-name">Keepsake<br><em>sett</em></div>
+      <div class="pc-sub">3 mini-urner · Matching design · Presentasjonskasse</div>
+      <p class="pc-body">Sett av tre miniurner i identisk design. Hele familien kan ha sin symbolske del av asken. Leveres i felles presentasjonskasse. Kan kombineres med gravminne-bestilling.</p>
+      <div class="pc-est">Estimert fra kr 5 500 per sett</div>
+    </div>
+    <div class="pc">
+      <span class="pc-badge">B2B</span>
+      <span class="pc-tag">Nisje-front</span>
+      <div class="pc-name">Til<br><em>urneveggen</em></div>
+      <div class="pc-sub">Corten eller glass · NFC · Kirkegårder</div>
+      <p class="pc-body">Tilpassede nisje-fronter til urnevegger i corten-stål eller glass. Inngravert navn og datoer, NFC-chip inkludert. Selges direkte til kirkegårder og gravplassmyndigheter.</p>
+      <div class="pc-est">Estimert fra kr 8 000</div>
+      <div class="pc-note">Kun for kirkegårder og gravplassmyndigheter</div>
+    </div>
+    <div class="pc">
+      <span class="pc-tag">Alle urner</span>
+      <div class="pc-name">NFC<br><em>minneside</em></div>
+      <div class="pc-sub">Ingen app · Ingen abonnement · Valgfritt</div>
+      <p class="pc-body">NFC-chip kan integreres i alle urner. Scan med telefon og kom til en privat minneside med bilder og historier. Familien kan oppdatere siden i generasjoner.</p>
+      <div class="pc-est">Valgfritt tillegg</div>
+    </div>
+    <div class="pc">
+      <span class="pc-tag">Tillegg</span>
+      <div class="pc-name">Biologisk<br><em>nedbrytbar</em></div>
+      <div class="pc-sub">Bark / leire · Nedbrytbar · Norsk lov</div>
+      <p class="pc-body">For kunder som ønsker jordbegravelse. Biologisk nedbrytbar urne som oppfyller norske krav. Bestilles som tillegg til Lux-urner.</p>
+      <div class="pc-est">Estimert fra kr 1 200</div>
+    </div>
+  </div>
+  <p style="font-family:var(--sans);font-size:.55rem;letter-spacing:.08em;color:rgba(255,255,255,.2);margin-top:2rem;font-style:italic">* Alle priser er estimater. Endelige priser bekreftes ved lansering 2026.</p>
+  </div>
+</section>
+
+<!-- OM OSS -->
+<section class="sec bg-surface" id="om">
+  <div class="fade">
+  <p class="sec-ey">Vår filosofi</p>
+  <h2 class="sec-h">Et minnesmerke skal<br>fortelle en historie —<br>ikke bare <em>markere et sted.</em></h2>
+  <div class="goldbar"></div>
+  <div class="mf-grid">
+    <div class="mf-col">
+      <p>Gravstøttebransjen har vært dominert av granitt i over hundre år. Ikke fordi det er det beste valget, men fordi <strong>ingen har utfordret det.</strong> 68% av all granitt importeres fra Kina og Vietnam. Produktet er blitt en råvare, ikke et minne.</p>
+      <p>I Norge kremeres nå nær halvparten av alle som dør — og andelen vokser. Familier som kremerer fortjener noe å ta vare på — <strong>vakkert nok til å stå fremst i stuen,</strong> ikke gjemmes bort i et skap.</p>
+    </div>
+    <div class="mf-col">
+      <p>Velumen er stiftet på én overbevisning: menneskene vi elsker <strong>levde i farger, i lys, i materialer med karakter.</strong> Minnesmerket og urnen bør reflektere det.</p>
+      <p>Vi bruker resirkulert glass, corten-stål og kortreist norsk stein — materialer med <strong>70%+ lavere CO₂-avtrykk</strong> enn importert granitt. Glasset blåses for hånd på Jæren. Stålet kuttes og sveises i Stavanger. Steinen hentes fra norske forekomster. Og vi integrerer NFC-minneteknologi som lar familien bevare et helt liv, ikke bare to datoer.</p>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- MATERIALER -->
+<section class="sec">
+  <div class="fade">
+  <p class="sec-ey">Materialer</p>
+  <h2 class="sec-h">Norske materialer.<br><em>Global standard.</em></h2>
+  <div class="mat-grid">
+
+    <!-- CORTEN -->
+    <div class="mat-card">
+      <div class="mat-svg-wrap">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Corten-stål kubus illustrasjon">
+          <!-- Isometrisk kubus -->
+          <polygon points="50,8 90,30 90,70 50,92 10,70 10,30" fill="#120e08" stroke="rgba(184,154,90,.4)" stroke-width="0.8"/>
+          <!-- Topp -->
+          <polygon points="50,8 90,30 50,52 10,30" fill="#1a1408" stroke="rgba(184,154,90,.3)" stroke-width="0.6"/>
+          <!-- Venstre -->
+          <polygon points="10,30 50,52 50,92 10,70" fill="#0e0b07" stroke="rgba(184,154,90,.2)" stroke-width="0.6"/>
+          <!-- Høyre -->
+          <polygon points="90,30 50,52 50,92 90,70" fill="#161008" stroke="rgba(184,154,90,.25)" stroke-width="0.6"/>
+          <!-- Patina-striper høyre side -->
+          <line x1="65" y1="42" x2="88" y2="55" stroke="rgba(184,154,90,.12)" stroke-width="0.5"/>
+          <line x1="62" y1="52" x2="88" y2="65" stroke="rgba(184,154,90,.09)" stroke-width="0.5"/>
+          <line x1="60" y1="62" x2="87" y2="73" stroke="rgba(184,154,90,.11)" stroke-width="0.5"/>
+          <!-- Gull-gløde topp -->
+          <polygon points="50,8 90,30 50,52 10,30" fill="rgba(184,154,90,0.06)"/>
+          <!-- Kant-highlight -->
+          <polyline points="10,30 50,8 90,30" stroke="rgba(184,154,90,.5)" stroke-width="1"/>
+        </svg>
+      </div>
+      <p class="mat-tag">Corten A588 — laserkuttet</p>
+      <div class="mat-title">Stål som<br><em>eldes vakkert</em></div>
+      <p class="mat-body">Corten-stål danner en stabil rust-patina som beskytter mot videre korrosjon. Brukt av Richard Serra og Renzo Piano i prestisjearchitektur verden over. Kuttes og sveises i Stavanger av Hermes AS.</p>
+    </div>
+
+    <!-- GLASS -->
+    <div class="mat-card">
+      <div class="mat-svg-wrap">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Munnblåst glass skulptur illustrasjon">
+          <!-- Organisk glassform -->
+          <ellipse cx="50" cy="52" rx="32" ry="40" fill="rgba(30,70,80,.35)" stroke="rgba(80,180,190,.3)" stroke-width="0.8"/>
+          <!-- Indre refleks -->
+          <ellipse cx="42" cy="38" rx="12" ry="18" fill="rgba(80,180,190,.1)" stroke="rgba(80,180,190,.2)" stroke-width="0.5"/>
+          <!-- Lys-flekk -->
+          <ellipse cx="38" cy="33" rx="5" ry="7" fill="rgba(180,230,235,.15)"/>
+          <!-- Bobler / glasstekstur -->
+          <circle cx="58" cy="60" r="3" fill="none" stroke="rgba(80,180,190,.15)" stroke-width="0.5"/>
+          <circle cx="45" cy="70" r="2" fill="none" stroke="rgba(80,180,190,.1)" stroke-width="0.4"/>
+          <circle cx="55" cy="42" r="1.5" fill="none" stroke="rgba(80,180,190,.12)" stroke-width="0.4"/>
+          <!-- Bunn-flate -->
+          <ellipse cx="50" cy="88" rx="18" ry="4" fill="rgba(30,70,80,.2)" stroke="rgba(80,180,190,.15)" stroke-width="0.5"/>
+          <!-- Kontur-gløde -->
+          <ellipse cx="50" cy="52" rx="32" ry="40" fill="url(#glassgrad)"/>
+          <defs>
+            <radialGradient id="glassgrad" cx="35%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="#40b0b8" stop-opacity="0.12"/>
+              <stop offset="100%" stop-color="#40b0b8" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+      <p class="mat-tag">Resirkulert glass — Jæren</p>
+      <div class="mat-title">Glass<br><em>som lever</em></div>
+      <p class="mat-body">Hvert stykke munnblåst for hånd av Line Victorie Mingar og Benjamin Walker på Jæren — 15 minutter fra Stavanger. Glassets flyteegenskaper skaper fargefordelinger som aldri kan reproduseres.</p>
+    </div>
+
+    <!-- NORSK STEIN -->
+    <div class="mat-card">
+      <div class="mat-svg-wrap">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Norsk granitt gravminne illustrasjon">
+          <!-- Gravsteinform — rektangel med avrundet topp -->
+          <path d="M25,90 L25,30 Q25,10 50,10 Q75,10 75,30 L75,90 Z" fill="#0d0d0c" stroke="rgba(150,140,130,.25)" stroke-width="0.8"/>
+          <!-- Steinstruktur — kornete -->
+          <line x1="30" y1="40" x2="70" y2="42" stroke="rgba(150,140,130,.07)" stroke-width="0.5"/>
+          <line x1="28" y1="52" x2="72" y2="50" stroke="rgba(150,140,130,.06)" stroke-width="0.5"/>
+          <line x1="30" y1="62" x2="70" y2="64" stroke="rgba(150,140,130,.08)" stroke-width="0.5"/>
+          <line x1="29" y1="74" x2="71" y2="72" stroke="rgba(150,140,130,.06)" stroke-width="0.5"/>
+          <!-- Inngravert tekst-linjer -->
+          <line x1="35" y1="76" x2="65" y2="76" stroke="rgba(184,154,90,.35)" stroke-width="0.8"/>
+          <line x1="38" y1="82" x2="62" y2="82" stroke="rgba(184,154,90,.2)" stroke-width="0.6"/>
+          <!-- NFC-symbol -->
+          <g transform="translate(50,55)">
+            <path d="M-8,0 Q-8,-8 0,-8 Q8,-8 8,0 Q8,8 0,8 Q-8,8 -8,0" stroke="rgba(184,154,90,.3)" stroke-width="0.7" fill="none"/>
+            <path d="M-5,0 Q-5,-5 0,-5 Q5,-5 5,0 Q5,5 0,5 Q-5,5 -5,0" stroke="rgba(184,154,90,.25)" stroke-width="0.7" fill="none"/>
+            <circle cx="0" cy="0" r="1.5" fill="rgba(184,154,90,.45)"/>
+          </g>
+          <!-- Kant-highlight venstre -->
+          <line x1="25" y1="30" x2="25" y2="90" stroke="rgba(184,154,90,.15)" stroke-width="1.5"/>
+          <!-- Topp-highlight -->
+          <path d="M25,30 Q25,10 50,10 Q75,10 75,30" stroke="rgba(150,140,130,.3)" stroke-width="0.8" fill="none"/>
+          <!-- Lys-refleks -->
+          <path d="M28,30 Q28,14 50,14 Q62,14 68,22" stroke="rgba(150,140,130,.1)" stroke-width="0.5" fill="none"/>
+        </svg>
+      </div>
+      <p class="mat-tag">Norsk granitt — CNC-gravering</p>
+      <div class="mat-title">Stein<br><em>fra norsk grunn</em></div>
+      <p class="mat-body">Rygge, Iddefjord eller Otta-granitt fra norske forekomster. 70%+ lavere CO₂-avtrykk enn importert granitt fra Kina og Vietnam. CNC-presisjonsgravering og NFC-minneside som standard.</p>
+    </div>
+
+  </div>
+  </div>
+</section>
+
+<!-- PROSESS -->
+<section class="sec">
+  <div class="fade">
+  <p class="sec-ey">Slik vil det fungere</p>
+  <h2 class="sec-h">Fra samtale<br>til <em>stein — eller urn.</em></h2>
+  <div class="proc-visual">
+    <div class="proc-line"></div>
+    <div class="proc-grid-v">
+      <div class="pv">
+        <div class="pv-dot">I</div>
+        <div>
+          <div class="pv-title">Samtale</div>
+          <p class="pv-body">Vi møtes — digitalt eller i Stavanger. Du forteller om personen. Vi lytter, stiller spørsmål og finner en retning som reflekterer livet som levde.</p>
+        </div>
+      </div>
+      <div class="pv">
+        <div class="pv-dot">II</div>
+        <div>
+          <div class="pv-title">Design</div>
+          <p class="pv-body">To–tre konseptutkast. Material, form, tekst og motiv. Du velger og justerer til det er riktig. Kirkegårdsregler sjekkes i samme steg.</p>
+        </div>
+      </div>
+      <div class="pv">
+        <div class="pv-dot">III</div>
+        <div>
+          <div class="pv-title">Produksjon</div>
+          <p class="pv-body">Produksjon hos norske underleverandører. NFC-chip programmeres med minneside. Leveringstid estimert 2–10 uker etter lansering.</p>
+        </div>
+      </div>
+      <div class="pv">
+        <div class="pv-dot">IV</div>
+        <div>
+          <div class="pv-title">Levering</div>
+          <p class="pv-body">Gravminner: vi leverer og monterer — kirkegårdssøknad håndtert. Urner: leveres i presentasjonskasse direkte til deg.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- INTERESSE -->
+<section class="sec bg-surface" id="interesse">
+  <p class="sec-ey">Meld din interesse</p>
+  <h2 class="sec-h" style="margin-bottom:3rem">Vær blant<br><em>de første.</em></h2>
+  <div class="interest-wrap fade">
+    <h3 class="int-h">Tidlig tilgang<br><em>og dialog.</em></h3>
+    <p class="int-sub">Vi tar ikke imot bestillinger ennå — men vi vil gjerne snakke med deg. Meld din interesse og vi kontakter deg ved lansering.</p>
+    <div class="fg"><label class="fl">Ditt navn</label><input type="text" class="fi" placeholder="For- og etternavn"></div>
+    <div class="fg"><label class="fl">E-post</label><input type="email" class="fi" placeholder="din@epost.no"></div>
+    <div class="fg"><label class="fl">Telefon (valgfritt)</label><input type="tel" class="fi" placeholder="+47"></div>
+    <div class="fg"><label class="fl">Hva er du mest nysgjerrig på?</label>
+      <select class="fi">
+        <option value="">— Velg —</option>
+        <optgroup label="Opus">
+          <option>Opus I — skulpturelt minnesmerke</option>
+          <option>Opus II — urne som kunstverk</option>
+          <option>Opus III — familietestament</option>
+        </optgroup>
+        <optgroup label="Gravminner">
+          <option>Lux Memorial — bespoke glass + stein</option>
+          <option>Signature — corten-stål gravminne</option>
+          <option>Origin — norsk stein + NFC</option>
+        </optgroup>
+        <optgroup label="Urner">
+          <option>Lux Urne — resirkulert glass</option>
+          <option>Lux Urne — corten-stål</option>
+          <option>Keepsake-sett (3 mini-urner)</option>
+          <option>Nisje-front til urnevegg (kirkegård)</option>
+        </optgroup>
+        <optgroup label="Annet">
+          <option>Holder meg generelt oppdatert</option>
+          <option>Investor-dialog</option>
+          <option>Begravelsesbyråpartnerskap</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="fg"><label class="fl">Melding (valgfritt)</label><textarea class="fi" placeholder="Fortell gjerne litt om hva du tenker på…"></textarea></div>
+    <div style="display:flex;align-items:center;margin-top:2rem"><button class="btn-sub">Send interesse</button><span class="sub-note">Personlig svar — ingen chatbot</span></div>
+  </div>
+</section>
+
+<!-- INVESTOR -->
+<section class="sec" id="investor">
+  <div class="fade">
+  <p class="sec-ey">For investorer</p>
+  <h2 class="sec-h">Et marked ingen<br><em>andre ser.</em></h2>
+  <p class="sec-intro">€11,4 milliarder i Europa. Over halvparten kremeres nå (51,4% i 2024) — mot 75% innen 2050. ~44 000 norske dødsfall i 2024, vokser til 60 000. Ingen norsk premiumaktør. Velumen er der ingen andre er.</p>
+  <div class="inv-grid">
+    <div>
+      <div class="inv-stats">
+        <div class="inv-stat"><span class="inv-stat-val">€11 mrd</span><span class="inv-stat-lbl">Europeisk gravmarked 2026</span></div>
+        <div class="inv-stat"><span class="inv-stat-val">51%</span><span class="inv-stat-lbl">Kremasjonsdel 2024: 51,4% — mot 75% i 2050</span></div>
+        <div class="inv-stat"><span class="inv-stat-val">~44 000</span><span class="inv-stat-lbl">Norske dødsfall 2024 — vokser til 60 000</span></div>
+        <div class="inv-stat"><span class="inv-stat-val">8,2%</span><span class="inv-stat-lbl">Gravsteinmarked CAGR 2026–2034</span></div>
+      </div>
+      <p class="inv-body">Velumen er et <strong>produktutviklingsselskap</strong> — ikke en steinhugger. Vi eier design, merkevare og teknologi. Produksjonen gjøres av norske underleverandører. Modellen skalerer uten fabrikk.</p>
+      <p class="inv-body">Vi adresserer <strong>to markeder:</strong> gravminner (€11,4 mrd Europa, CAGR 5,4%) og luksusurner (USD 112M globalt, CAGR 3,3%). Ingen norsk aktør er i noen av dem.</p>
+      <p class="inv-body">Vi søker <strong>NOK 3–5 millioner</strong> for å ta produktene fra prototype til marked og inn i Europa.</p>
+      <div class="inv-cta-row">
+        <a href="mailto:viking@velumen.no?subject=Investor%20forespørsel%20Velumen" class="btn-gold">Be om pitchdekk</a>
+      </div>
+    </div>
+    <div>
+      <div class="inv-pipeline">
+        <div class="pip-bar-wrap">
+          <div class="pip-bar-head"><span class="pip-bar-lbl">Egenkapital (klar)</span><span class="pip-bar-val">NOK 50 000 ✓</span></div>
+          <div class="pip-bar-track"><div class="pip-bar-fill anim" data-width="8"></div></div>
+        </div>
+        <div class="pip-bar-wrap">
+          <div class="pip-bar-head"><span class="pip-bar-lbl">SkatteFUNN (søkes 2026)</span><span class="pip-bar-val">NOK 271 000</span></div>
+          <div class="pip-bar-track"><div class="pip-bar-fill anim" data-width="20"></div></div>
+        </div>
+        <div class="pip-bar-wrap">
+          <div class="pip-bar-head"><span class="pip-bar-lbl">IN Oppstartstilskudd 1 (søkes 2026)</span><span class="pip-bar-val">NOK 150 000</span></div>
+          <div class="pip-bar-track"><div class="pip-bar-fill anim" data-width="12"></div></div>
+        </div>
+        <div class="pip-bar-wrap">
+          <div class="pip-bar-head"><span class="pip-bar-lbl">Investorkapital (åpent)</span><span class="pip-bar-val">NOK 3–5 000 000</span></div>
+          <div class="pip-bar-track"><div class="pip-bar-fill anim" data-width="68" style="background:linear-gradient(to right,#7a6030,rgba(184,154,90,.5));"></div></div>
+        </div>
+      </div>
+      <p style="font-family:var(--serif);font-size:.82rem;font-style:italic;color:rgba(255,255,255,.25);margin-top:1.4rem;padding-left:.8rem;border-left:1px solid var(--edge);line-height:1.7">Konfidensielt. Eierstruktur: Viking Løvneseth 70% · Aton Group AS 30%. Pitchdekk tilgjengelig på forespørsel.</p>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="sec bg-surface" id="kontakt">
+  <div class="cont-grid fade">
+    <div>
+      <p class="sec-ey">Kontakt</p>
+      <h2 class="sec-h" style="margin-bottom:2rem">La oss<br><em>snakke.</em></h2>
+      <p style="font-family:var(--serif);font-size:.9rem;font-style:italic;color:var(--veil);margin-bottom:3rem;max-width:420px;line-height:1.85">Vi er under utvikling og tar ikke imot bestillinger ennå. Men vi svarer alltid — enten du er fremtidig kunde, investor eller samarbeidspartner.</p>
+      <div class="ci"><div class="ci-l">E-post</div><div class="ci-v"><a href="mailto:viking@velumen.no">viking@velumen.no</a></div></div>
+      <div class="ci"><div class="ci-l">Telefon</div><div class="ci-v"><a href="tel:+4740340830">+47 403 40 830</a><br><span style="font-size:.82rem;font-style:italic;color:rgba(255,255,255,.3)">Man–fre 09–16</span></div></div>
+      <div class="ci"><div class="ci-l">Adresse</div><div class="ci-v">Velumen AS · 4000 Stavanger, Norge</div></div>
+      <div class="ci"><div class="ci-l">Planlagt lansering</div><div class="ci-v">Gravminner og urner høst 2026 · Eksport EU fra 2027</div></div>
+    </div>
+    <div style="padding-top:4rem">
+      <div class="ci"><div class="ci-l">For investorer</div><div class="ci-v"><a href="mailto:viking@velumen.no?subject=Investor forespørsel Velumen">viking@velumen.no</a><br><span style="font-size:.82rem;font-style:italic;color:rgba(255,255,255,.3)">Be om pitchdekk</span></div></div>
+      <div class="ci"><div class="ci-l">Begravelsesbyråer</div><div class="ci-v">Interessert i partnerskap?<br><a href="mailto:viking@velumen.no?subject=Byråpartner Velumen">Ta kontakt for tidlig dialog.</a></div></div>
+      <div class="ci"><div class="ci-l">Kirkegårder / urnevegger</div><div class="ci-v">Interessert i nisje-fronter?<br><a href="mailto:viking@velumen.no?subject=Urnevegg Velumen">Ta kontakt direkte.</a></div></div>
+      <div class="ci"><div class="ci-l">Presse</div><div class="ci-v"><a href="mailto:viking@velumen.no?subject=Presse Velumen">viking@velumen.no</a></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div>
+      <span class="fl-logo" style="display:block;margin-bottom:.5rem"><svg width="200" height="58" viewBox="0 0 200 58" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Velumen">
+    <path d="M16,46 L12,19 Q11.5,7 20,7 L25,7 Q26.5,4 28,4 Q29.5,4 31,7 L36,7 Q44.5,7 44,19 L40,46 Z" fill="none" stroke="#b89a5a" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/>
+    <line x1="10" y1="46" x2="46" y2="46" stroke="#b89a5a" stroke-width="1.6" stroke-linecap="round"/>
+    <line x1="12.5" y1="20" x2="43.5" y2="20" stroke="#b89a5a" stroke-width="0.6" stroke-linecap="round" opacity="0.4"/>
+    <path d="M17,13 A13,13 0 0,1 39,13" stroke="#b89a5a" stroke-width="0.7" fill="none" stroke-linecap="round" opacity="0.25"/>
+    <path d="M20,10 A10,10 0 0,1 36,10" stroke="#b89a5a" stroke-width="0.7" fill="none" stroke-linecap="round" opacity="0.5"/>
+    <path d="M23,7.5 A7,7 0 0,1 33,7.5" stroke="#b89a5a" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.75"/>
+    <text x="56" y="28" font-family="'Playfair Display', Georgia, serif" font-size="20" font-weight="400" font-style="italic" fill="#e8e4dc" letter-spacing="1">Velumen</text>
+    <text x="56" y="44" font-family="'Jost', Arial, sans-serif" font-size="6" font-weight="300" fill="#b89a5a" letter-spacing="3.5">STAVANGER · NORWAY</text>
+  </svg></span>
+      <p class="fl-tag">Norsk luksushåndverk i resirkulert glass, corten-stål og norsk stein. Gravminner, urner og Opus — signerte kunstarbeider. Lansering 2026.</p>
+    </div>
+    <div class="fc"><h4>Gravminner</h4><ul>
+      <li><a href="#gravminner">Lux Memorial</a></li>
+      <li><a href="#gravminner">Signature — corten</a></li>
+      <li><a href="#gravminner">Origin — norsk stein</a></li>
+      <li><a href="#gravminner">NFC minneside</a></li>
+    </ul></div>
+    <div class="fc"><h4>Urner</h4><ul>
+      <li><a href="#urner">Lux Urne — Glass</a></li>
+      <li><a href="#urner">Lux Urne — Corten</a></li>
+      <li><a href="#urner">Keepsake-sett</a></li>
+      <li><a href="#urner">Nisje-front</a></li>
+    </ul></div>
+    <div class="fc"><h4>Selskap</h4><ul>
+      <li><a href="#opus">Velumen Opus</a></li>
+      <li><a href="#om">Om Velumen</a></li>
+      <li><a href="#investor">Investorer</a></li>
+      <li><a href="#interesse">Meld interesse</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul></div>
+  </div>
+  <div class="fb">
+    <div class="fb-copy">© 2026 Velumen AS · velumen.no · Stavanger · Under utvikling</div>
+    <div class="fb-note">Norsk luksus. Levende arv. Verdensmarked.</div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('sc', window.scrollY > 50));
+const ham = document.getElementById('ham'), mob = document.getElementById('mob');
+ham.addEventListener('click', () => { ham.classList.toggle('open'); mob.classList.toggle('open') });
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { ham.classList.remove('open'); mob.classList.remove('open') }));
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target) } });
+}, { threshold: .08 });
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+// Counter-animasjon for statistikk
+function animateCounter(el, target, prefix, suffix, duration) {
+  const start = performance.now();
+  const isFloat = String(target).includes('.');
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const val = target * ease;
+    el.textContent = (prefix||'') + (isFloat ? val.toFixed(1) : Math.round(val)) + (suffix||'');
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = parseFloat(el.dataset.target);
+    animateCounter(el, target, el.dataset.prefix||'', el.dataset.suffix||'', 1800);
+    counterObs.unobserve(el);
+  });
+}, { threshold: .3 });
+document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
+
+// Pipeline bar-animasjon
+const barObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.querySelectorAll('.pip-bar-fill.anim').forEach(bar => {
+      bar.style.width = (bar.dataset.width || 0) + '%';
+    });
+    barObs.unobserve(e.target);
+  });
+}, { threshold: .2 });
+document.querySelectorAll('.inv-pipeline').forEach(el => barObs.observe(el));
+</script>
+</body>
+</html>
