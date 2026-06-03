@@ -625,13 +625,15 @@ Claude gjør da:
 
 | Selskap | Her & Nå | Post-trigger | Forhandling | Trigger |
 |---------|----------|--------------|-------------|---------|
-| Aton Group AS | NOK 29M | NOK 100M | NOK 140M | EIC + Velumen launch |
-| BladeShip AS | NOK 18M | NOK 85M | NOK 90M | EIC tilsagn |
+| Aton Group AS | NOK 32M | NOK 100M | NOK 140M | EIC + Velumen launch |
+| BladeShip AS | NOK 21M | NOK 85M | NOK 90M | EIC tilsagn |
 | Velumen AS (30%) | NOK 4M | NOK 6,6M | NOK 9M | Produktlansering |
-| TrashShip (100%) | NOK 5M | NOK 22M | NOK 32M | Patent + AS stiftet |
+| TrashShip (100%) | NOK 6M | NOK 22M | NOK 32M | Patent + AS stiftet |
 | Grunnfelt (40%) | NOK 3M | NOK 17M | NOK 35M | Gründer signert |
 | Sprayvisir (20%) | NOK 2M | NOK 13M | NOK 25M | Gründer + prototype |
-| **Total Her & Nå** | **NOK 61M** | **NOK 243M** | **NOK 331M** | |
+| **Total Her & Nå** | **NOK 68M** | **NOK 243M** | **NOK 331M** | |
+
+*Oppdatert 3. juni 2026 — EU landfill-ban live jan 2026, marked bekreftet $158,9B innen 2030 (BCC Research mai 2026). BladeShip +NOK 3M, Aton Group +NOK 3M, TrashShip +NOK 1M.*
 
 ### Filer som oppdateres ved verdivurdering
 
