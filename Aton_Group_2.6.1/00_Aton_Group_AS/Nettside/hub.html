@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Aton Hub</title>
+<meta name="theme-color" content="#f4f2ed">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Aton Group">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="/verdier.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#b8860b;--gold-l:#c89818;--gold-bg:#fef9ec;--gold-bd:#e8d48a;
+  --bg:#f4f2ed;--surf:#ffffff;--surf2:#f0ede8;
+  --tx:#1a1814;--tx2:#5a5550;--tx3:#9a9490;
+  --bd:#e4e0d8;--bd2:#ccc8c0;
+  --green:#1a6e3c;--green-bg:#edf7f2;--green-bd:#a8d8bb;
+  --blue:#1a4a8e;--blue-bg:#eef3fb;--blue-bd:#a8c0e8;
+  --red:#8e1a1a;--red-bg:#fbeeed;--red-bd:#e8a8a8;
+  --amb:#8e5a1a;--amb-bg:#fdf4e8;--amb-bd:#e8c88a;
+  --purple:#5a3a9a;--purple-bg:#f0eefa;--purple-bd:#c8b8f0;
+  --teal:#1a6a5a;--teal-bg:#e8f6f2;--teal-bd:#a8d8cc;
+  --coral:#8a3a1a;--coral-bg:#faeeea;--coral-bd:#e8b8a8;
+  --r:10px;--r-sm:7px;
+  --sidebar:220px;--hdr:56px;
+  --safe-t:env(safe-area-inset-top,0px);
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+
+html,body{height:100%;background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--gold-l);text-decoration:none}
+button{font-family:'DM Sans',sans-serif}
+
+/* LOGIN */
+#scrLogin{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:100;padding:1.5rem}
+.lcard{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:2.5rem;max-width:400px;width:100%;box-shadow:0 2px 20px rgba(0,0,0,.06)}
+.llogo{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem}
+.llogo-txt{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--tx)}
+.llogo-txt em{color:var(--gold-l);font-style:italic}
+.ltitle{font-size:1.05rem;font-weight:500;margin-bottom:.35rem}
+.lsub{font-size:.88rem;color:var(--tx2);margin-bottom:1.5rem;line-height:1.5}
+.ldiv{display:flex;align-items:center;gap:.8rem;margin:1.2rem 0;font-size:.8rem;color:var(--tx3)}
+.ldiv::before,.ldiv::after{content:'';flex:1;height:1px;background:var(--bd)}
+.gbtn{width:100%;padding:.82rem;border:1px solid var(--bd2);border-radius:var(--r-sm);background:var(--surf);font-size:.92rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.6rem;color:var(--tx);transition:.12s}
+.gbtn:hover{background:var(--surf2)}
+.gbtn svg{width:18px;height:18px}
+.lnote{font-size:.76rem;color:var(--tx3);margin-top:.9rem;text-align:center;line-height:1.5}
+
+/* APP SHELL */
+#app{display:none;height:100%;flex-direction:column}
+#app.show{display:flex}
+
+/* HEADER */
+.hdr{height:var(--hdr);background:var(--surf);border-bottom:1px solid var(--bd);display:flex;align-items:center;padding:0 1.2rem;gap:.9rem;position:sticky;top:0;z-index:50;flex-shrink:0}
+.hdr-logo{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--tx)}
+.hdr-logo em{color:var(--gold-l);font-style:italic}
+.hdr-sep{width:1px;height:18px;background:var(--bd)}
+.hdr-pg{font-size:.98rem;color:var(--tx2)}
+.hdr-right{margin-left:auto;display:flex;align-items:center;gap:.7rem}
+.hdr-badge{font-size:.78rem;font-weight:500;padding:.2rem .65rem;border-radius:20px;background:var(--gold-bg);color:var(--gold-l);border:1px solid var(--gold-bd)}
+.hdr-av{width:30px;height:30px;border-radius:50%;background:var(--gold-bg);border:1px solid var(--gold-bd);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:500;color:var(--gold-l)}
+.hdr-out{background:none;border:none;font-size:.8rem;color:var(--tx3);cursor:pointer;padding:.15rem .4rem;border-radius:4px}
+.hdr-out:hover{background:var(--surf2);color:var(--tx2)}
+
+/* LAYOUT */
+.abody{display:flex;flex:1;overflow:hidden;min-height:0}
+
+/* SIDEBAR */
+.sidebar{width:var(--sidebar);background:var(--surf);border-right:1px solid var(--bd);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;padding:.8rem 0}
+.nav-sect{padding:.4rem .9rem .2rem;font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);margin-top:.4rem}
+.nav-it{display:flex;align-items:center;gap:.6rem;padding:.52rem 1rem;margin:.08rem .4rem;border-radius:var(--r-sm);font-size:.98rem;color:var(--tx2);cursor:pointer;border:none;background:none;width:calc(100% - .8rem);text-align:left;transition:.1s}
+.nav-it:hover{background:var(--surf2);color:var(--tx)}
+.nav-it.active{background:var(--gold-bg);color:var(--gold-l);font-weight:500}
+.nav-it svg{width:15px;height:15px;stroke:currentColor;stroke-width:1.8;fill:none;flex-shrink:0}
+
+/* MAIN */
+.main{flex:1;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;min-width:0;width:0}
+.page{display:none;padding:1.5rem;max-width:800px;animation:fadeIn .18s ease;width:100%;box-sizing:border-box}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* BOTTOM NAV */
+.bnav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surf);border-top:1px solid var(--bd);padding:.35rem .3rem calc(.35rem + var(--safe-b));gap:.15rem;z-index:50}
+.bnav-it{flex:1;display:flex;flex-direction:column;align-items:center;gap:.18rem;padding:.45rem .2rem;border-radius:var(--r-sm);font-size:.72rem;color:var(--tx3);cursor:pointer;border:none;background:none;transition:.1s}
+.bnav-it.active{color:var(--gold-l)}
+.bnav-it svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.8;fill:none}
+
+/* PAGE ELEMENTS */
+.ptitle{font-family:'DM Serif Display',serif;font-size:1.9rem;color:var(--tx);margin-bottom:.3rem}
+.psub{font-size:1rem;color:var(--tx2);margin-bottom:1.4rem}
+.slabel{font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);margin-bottom:.7rem;padding-bottom:.45rem;border-bottom:1px solid var(--bd);margin-top:1.4rem}
+.slabel:first-of-type{margin-top:0}
+
+/* STAT GRID */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.6rem;margin-bottom:1.4rem}
+.sc{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r);padding:.9rem 1rem}
+.sc.ok{border-color:var(--green-bd);background:var(--green-bg)}
+.sc.warn{border-color:var(--amb-bd);background:var(--amb-bg)}
+.sc.err{border-color:var(--red-bd);background:var(--red-bg)}
+.slbl{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--tx3);margin-bottom:.25rem}
+.sval{font-family:'DM Serif Display',serif;font-size:1.7rem;color:var(--tx);line-height:1}
+.sval.sm{font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500}
+.sval.gold{color:var(--gold-l)}
+.sval.ok{color:var(--green)}
+.sval.warn{color:var(--amb)}
+.sval.err{color:var(--red)}
+.ssub{font-size:.85rem;color:var(--tx2);margin-top:.25rem}
+
+/* VALUE CHART */
+.vchart{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r);padding:1.1rem;margin-bottom:1.4rem}
+.vctitle{font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);margin-bottom:.9rem}
+.vrow{display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem}
+.vlbl{font-size:.88rem;color:var(--tx2);width:105px;flex-shrink:0;text-align:right}
+.vtrack{flex:1;height:22px;background:var(--surf2);border-radius:3px;overflow:hidden}
+.vfill{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:8px;min-width:60px}
+.vnum{font-size:.86rem;font-weight:500;white-space:nowrap}
+.vf-gold{background:linear-gradient(90deg,#d4a820,#c09010)}.vf-gold .vnum{color:#3a2000}
+.vf-blue{background:var(--blue-bg);border:1px solid var(--blue-bd)}.vf-blue .vnum{color:var(--blue)}
+.vf-green{background:var(--green-bg);border:1px solid var(--green-bd)}.vf-green .vnum{color:var(--green)}
+.vf-purple{background:var(--purple-bg);border:1px solid var(--purple-bd)}.vf-purple .vnum{color:var(--purple)}
+.vf-teal{background:var(--teal-bg);border:1px solid var(--teal-bd)}.vf-teal .vnum{color:var(--teal)}
+.vf-coral{background:var(--coral-bg);border:1px solid var(--coral-bd)}.vf-coral .vnum{color:var(--coral)}
+.vtotal{display:flex;align-items:center;gap:.6rem;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--bd)}
+.vtotalbar{flex:1;height:26px;background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:3px;display:flex;align-items:center;padding-left:10px}
+.vtotalnum{font-size:.95rem;font-weight:500;color:var(--gold-l)}
+.vcfooter{font-size:.76rem;color:var(--tx3);margin-top:.7rem}
+
+/* THREE VALUE CHIPS */
+.chips{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.35rem;margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--bd)}
+.chip{border-radius:var(--r-sm);padding:.45rem .6rem}
+.chip-l{font-size:.68rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;margin-bottom:.18rem}
+.chip-v{font-size:1.05rem;font-weight:500}
+.chip.gn{background:var(--green-bg);border:1px solid var(--green-bd)}.chip.gn .chip-l,.chip.gn .chip-v{color:var(--green)}
+.chip.bl{background:var(--blue-bg);border:1px solid var(--blue-bd)}.chip.bl .chip-l,.chip.bl .chip-v{color:var(--blue)}
+.chip.go{background:var(--gold-bg);border:1px solid var(--gold-bd)}.chip.go .chip-l,.chip.go .chip-v{color:var(--gold-l)}
+
+/* TASKS */
+.tasks{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1.4rem}
+.task{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 1rem;background:var(--surf);border:1px solid var(--bd);border-radius:var(--r)}
+.tdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:.55rem}
+.td-r{background:var(--red)}.td-a{background:var(--amb)}.td-b{background:var(--blue)}.td-g{background:var(--green)}.td-x{background:var(--tx3)}
+.tbody{flex:1}
+.ttxt{font-size:1rem;color:var(--tx);line-height:1.4}
+.tmeta{font-size:.85rem;color:var(--tx3);margin-top:.12rem}
+
+/* COMPANY CARDS */
+.cc{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r);padding:1.1rem;margin-bottom:.7rem}
+.cc.est{border-left:3px solid var(--gold-l)}
+.cc.port{border-left:3px solid var(--green)}
+.cc.lpad{border-left:3px solid var(--blue);border-style:solid;border-left-style:solid}
+.cc-top{display:flex;align-items:flex-start;gap:.75rem;margin-bottom:.7rem}
+.cc-ic{width:38px;height:38px;border-radius:8px;background:var(--gold-bg);border:1px solid var(--gold-bd);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--gold-l);flex-shrink:0}
+.cc-ic.gn{background:var(--green-bg);border-color:var(--green-bd);color:var(--green)}
+.cc-ic.bl{background:var(--blue-bg);border-color:var(--blue-bd);color:var(--blue)}
+.cc-name{font-size:1.1rem;font-weight:500;color:var(--tx);margin-bottom:.15rem}
+.cc-sub{font-size:.9rem;color:var(--tx2)}
+.badges{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.7rem}
+.badge{display:inline-flex;align-items:center;font-size:.78rem;font-weight:500;padding:.18rem .6rem;border-radius:20px;white-space:nowrap}
+.badge.go{background:var(--gold-bg);color:var(--gold-l);border:1px solid var(--gold-bd)}
+.badge.gn{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)}
+.badge.bl{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-bd)}
+.badge.gy{background:var(--surf2);color:var(--tx3);border:1px solid var(--bd)}
+.badge.am{background:var(--amb-bg);color:var(--amb);border:1px solid var(--amb-bd)}
+.cc-desc{font-size:.96rem;color:var(--tx2);line-height:1.6;margin-bottom:.7rem}
+.cc-lnk{font-size:.8rem;color:var(--gold-l);font-weight:500;display:inline-block;margin-top:.4rem}
+
+/* PIPE ITEMS */
+.pipe{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem;background:var(--surf);border:1px solid var(--bd);border-radius:var(--r-sm);margin-bottom:.35rem}
+.pipe-n{font-size:.98rem;font-weight:500;color:var(--tx)}
+.pipe-s{font-size:.85rem;color:var(--tx3);margin-top:.08rem}
+.pipe-r{display:flex;align-items:center;gap:.5rem;flex-shrink:0;margin-left:1rem}
+.pipe-v{font-size:1rem;font-weight:500;color:var(--gold-l);font-family:'DM Serif Display',serif}
+
+/* CALENDAR */
+.cali{display:flex;gap:.9rem;align-items:flex-start;padding:.72rem 1rem;background:var(--surf);border:1px solid var(--bd);border-radius:var(--r-sm);margin-bottom:.35rem}
+.cali.urg{border-color:var(--red-bd);background:var(--red-bg)}
+.cal-d{font-size:.92rem;font-weight:500;color:var(--gold-l);min-width:72px;flex-shrink:0}
+.cal-t{font-size:.96rem;color:var(--tx)}
+
+/* PHASE */
+.phase{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r);padding:.9rem 1.1rem;margin-bottom:.6rem}
+.phase.done{border-color:var(--green-bd);background:var(--green-bg)}
+.phase.curr{border-color:var(--amb-bd);background:var(--amb-bg)}
+.phdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.ptitl{font-size:1.02rem;font-weight:500;color:var(--tx)}
+.pitems{display:flex;flex-direction:column;gap:.28rem}
+.pitem{font-size:.93rem;color:var(--tx2);padding-left:.9rem;position:relative}
+.pitem::before{content:'→';position:absolute;left:0;color:var(--tx3);font-size:.8rem}
+.pitem.ok{color:var(--green)}.pitem.ok::before{content:'✓';color:var(--green)}
+
+/* MEMBER */
+.mem{display:flex;gap:.9rem;align-items:flex-start;padding:.82rem 1rem;background:var(--surf);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:.45rem}
+.mav{width:38px;height:38px;border-radius:50%;background:var(--gold-bg);border:1px solid var(--gold-bd);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:500;color:var(--gold-l);flex-shrink:0}
+.mav.gn{background:var(--green-bg);border-color:var(--green-bd);color:var(--green)}
+.mav.bl{background:var(--blue-bg);border-color:var(--blue-bd);color:var(--blue)}
+.mn{font-size:1rem;font-weight:500;color:var(--tx);margin-bottom:.12rem}
+.mr{font-size:.84rem;color:var(--tx3);letter-spacing:.04em}
+.md{font-size:.9rem;color:var(--tx2);margin-top:.2rem}
+
+/* WORKSPACE LINKS */
+.ws-lnk{display:flex;align-items:center;gap:.85rem;padding:.85rem 1rem;background:var(--surf);border:1px solid var(--bd);border-radius:var(--r-sm);margin-bottom:.4rem;text-decoration:none;transition:.12s;color:var(--tx)}
+.ws-lnk:hover{border-color:var(--bd2);box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.ws-ic{width:36px;height:36px;border-radius:8px;border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ws-body{flex:1;min-width:0}
+.ws-name{font-size:1rem;font-weight:500;color:var(--tx);margin-bottom:.1rem}
+.ws-sub{font-size:.85rem;color:var(--tx3)}
+.ws-arr{font-size:.85rem;color:var(--tx3);flex-shrink:0}
+
+/* CLAUDE CHAT */
+.claude-box{background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:var(--r);overflow:hidden;margin-top:.4rem}
+.claude-hdr{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;border-bottom:1px solid var(--blue-bd);background:rgba(26,74,142,.06)}
+.claude-msgs{min-height:120px;max-height:280px;overflow-y:auto;padding:.8rem 1rem;display:flex;flex-direction:column;gap:.6rem}
+.msg-user{align-self:flex-end;background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:12px 12px 2px 12px;padding:.55rem .9rem;font-size:.92rem;color:var(--blue);max-width:85%}
+.msg-ai{align-self:flex-start;background:var(--surf);border:1px solid var(--bd);border-radius:2px 12px 12px 12px;padding:.55rem .9rem;font-size:.92rem;color:var(--tx);max-width:90%;line-height:1.5}
+.msg-loading{color:var(--tx3);font-size:.82rem;font-style:italic;padding:.3rem 0}
+.claude-inp{display:flex;gap:.5rem;padding:.7rem .8rem;border-top:1px solid var(--blue-bd);background:var(--surf)}
+.claude-inp input{flex:1;border:1px solid var(--bd2);border-radius:var(--r-sm);padding:.55rem .9rem;font-size:.96rem;font-family:'DM Sans',sans-serif;color:var(--tx);background:var(--surf);outline:none;min-width:0}
+.claude-inp input:focus{border-color:var(--blue-bd)}
+.claude-inp button{padding:.55rem 1.1rem;background:var(--blue);color:#fff;border:none;border-radius:var(--r-sm);font-size:.95rem;font-family:'DM Sans',sans-serif;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.claude-inp button:hover{opacity:.88}
+
+/* PIPELINE TOTAL BOX */
+.total-box{background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--r);padding:.9rem 1.1rem;margin-top:.35rem}
+.total-lbl{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold-l);margin-bottom:.25rem}
+.total-val{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--gold-l)}
+.total-sub{font-size:.83rem;color:var(--tx2);margin-top:.2rem}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sidebar{display:none}
+  .bnav{display:flex}
+  .main{padding-bottom:calc(58px + var(--safe-b))}
+  .page{padding:1rem}
+  .sgrid{grid-template-columns:1fr 1fr}
+}
+@media(min-width:769px){.bnav{display:none!important}}
+@media(max-width:480px){
+  .sgrid{grid-template-columns:1fr}
+  .chips{grid-template-columns:1fr}
+  .vlbl{width:80px;font-size:.72rem}
+  .pipe{flex-direction:column;align-items:flex-start;gap:.4rem}
+  .pipe-r{margin-left:0}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="scrLogin">
+  <div class="lcard">
+    <div class="llogo">
+      <svg viewBox="0 0 40 40" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(20,20)">
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#a06808" transform="rotate(0)"/>
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#c89818" transform="rotate(45)"/>
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#a06808" transform="rotate(90)"/>
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#c89818" transform="rotate(135)"/>
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#a06808" transform="rotate(180)"/>
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#c89818" transform="rotate(225)"/>
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#a06808" transform="rotate(270)"/>
+          <path d="M0,-16 C-.7,-12 -.65,-9 -.4,-7.5 C-.1,-8.5 0,-10 0,-11 C0,-10 .1,-8.5 .4,-7.5 C.65,-9 .7,-12 0,-16Z" fill="#c89818" transform="rotate(315)"/>
+        </g>
+        <circle cx="20" cy="20" r="8" fill="#d49418"/>
+        <circle cx="20" cy="20" r="4.5" fill="#f0c040"/>
+      </svg>
+      <div class="llogo-txt">Aton <em>Group</em></div>
+    </div>
+    <div class="ltitle">Intern portal</div>
+    <div class="lsub">For Sunde-familien og Aton-teamet.<br>Gründere registrerer seg med Google-konto.</div>
+    <div id="g_id_onload" data-client_id="155233765122-fcji10bhiqdo66gv2kiq41cr8qe3kvc3.apps.googleusercontent.com" data-callback="onGoogleLogin" data-auto_select="true" data-use_fedcm_for_prompt="true"></div>
+    <div id="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left" data-width="340"></div>
+    <div class="ldiv">eller</div>
+    <button class="gbtn" onclick="document.querySelector('#g_id_signin div[role=button]')?.click()">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      Logg inn med Google
+    </button>
+    <div class="lnote">Din idé er beskyttet av NDA fra første øyeblikk.</div>
+    <div style="margin-top:1rem;text-align:center">
+      <button onclick="hardRefresh()" style="background:none;border:none;font-size:.72rem;color:var(--tx3);cursor:pointer;font-family:'DM Sans',sans-serif;padding:.3rem .6rem;border-radius:4px;opacity:.45;transition:.15s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.45'">↺ Ser du en gammel versjon?</button>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <header class="hdr">
+    <div class="hdr-logo">Aton <em>Group</em></div>
+    <div class="hdr-sep"></div>
+    <div class="hdr-pg" id="hdrPg">Hub</div>
+    <div class="hdr-right">
+      <span class="hdr-badge" id="hdrBadge"></span>
+      <div class="hdr-av" id="hdrAv">–</div>
+      <button class="hdr-out" onclick="doLogout()">Logg ut</button>
+    </div>
+  </header>
+
+  <div class="abody">
+    <nav class="sidebar" id="sidebar"></nav>
+    <main class="main" id="main">
+
+      <!-- ═══════════════ LEIF: HJEM ═══════════════ -->
+      <div class="page active" id="pg-leif-hjem">
+        <div class="ptitle" id="greetLeif">God dag, Leif</div>
+        <div class="psub">CEO &amp; Founder · Aton Group AS · Stavanger</div>
+
+        <div class="sgrid">
+          <div class="sc ok"><div class="slbl">EIC Accelerator</div><div class="sval sm ok">Innlevert ✓</div><div class="ssub">€17,5M · ID 101354477</div></div>
+          <div class="sc ok"><div class="slbl">DNV møte</div><div class="sval sm ok">10. juni 11:30</div><div class="ssub">Veritasveien 25, Stavanger</div></div>
+          <div class="sc warn"><div class="slbl">Org.nr. status</div><div class="sval sm warn">Venter ~20. juni</div><div class="ssub">Aton Group + BladeShip</div></div>
+          <div class="sc"><div class="slbl">Jobb rotasjon</div><div class="sval sm">16–30. juni</div><div class="ssub">NSE Gruppen · Stord</div></div>
+          <div class="sc"><div class="slbl">Portefølje nå</div><div class="sval gold">NOK 61M</div><div class="ssub">Edruelig nåverdi</div></div>
+          <div class="sc"><div class="slbl">Post-trigger</div><div class="sval gold">NOK 200M+</div><div class="ssub">Etter EIC + org.nr.</div></div>
+        </div>
+
+        <div class="vchart">
+          <div class="vctitle">Porteføljeverdi — her &amp; nå (edruelig, kun dokumentert)</div>
+          <div class="vrow"><div class="vlbl">Aton Group AS</div><div class="vtrack"><div class="vfill vf-gold" style="width:47%"><span class="vnum">NOK 29M</span></div></div></div>
+          <div class="vrow"><div class="vlbl">BladeShip AS</div><div class="vtrack"><div class="vfill vf-gold" style="width:29%"><span class="vnum">NOK 18M</span></div></div></div>
+          <div class="vrow"><div class="vlbl">TrashShip</div><div class="vtrack"><div class="vfill vf-blue" style="width:8%"><span class="vnum">NOK 5M</span></div></div></div>
+          <div class="vrow"><div class="vlbl">Velumen AS</div><div class="vtrack"><div class="vfill vf-green" style="width:6.5%"><span class="vnum">NOK 4M</span></div></div></div>
+          <div class="vrow"><div class="vlbl">Grunnfelt</div><div class="vtrack"><div class="vfill vf-purple" style="width:5%"><span class="vnum">NOK 3M</span></div></div></div>
+          <div class="vrow"><div class="vlbl">Sprayvisir</div><div class="vtrack"><div class="vfill vf-coral" style="width:3%"><span class="vnum">NOK 2M</span></div></div></div>
+          <div class="vtotal">
+            <div class="vlbl" style="font-weight:500;color:var(--tx)">Total</div>
+            <div class="vtotalbar"><span class="vtotalnum">NOK 61M nå · NOK 200M+ etter EIC</span></div>
+          </div>
+          <div class="vcfooter">Berkus · Scorecard · TRL-justert · Risk Factor Summation · First Chicago · Equidam Q1 2025</div>
+        </div>
+
+        <div class="slabel">Kritiske oppgaver</div>
+        <div class="tasks">
+          <div class="task"><div class="tdot td-r"></div><div class="tbody"><div class="ttxt">DNV møte — forbered agenda</div><div class="tmeta">10. juni 11:30 · Veritasveien 25 · Møtepakke i GitHub meetings/DNV_10juni2026/</div></div></div>
+          <div class="task"><div class="tdot td-a"></div><div class="tbody"><div class="ttxt">IN Miljøteknologi-søknad — NOK 2M</div><div class="tmeta">Klar · venter på org.nr. (~20. juni)</div></div></div>
+          <div class="task"><div class="tdot td-a"></div><div class="tbody"><div class="ttxt">Velumen SkatteFUNN-søknad</div><div class="tmeta">Frist 1. august · utkast v1.1 klar</div></div></div>
+          <div class="task"><div class="tdot td-b"></div><div class="tbody"><div class="ttxt">Mobilisering Stord · NSE Gruppen</div><div class="tmeta">16. juni · Hugin A · Aker Solutions</div></div></div>
+          <div class="task"><div class="tdot td-g"></div><div class="tbody"><div class="ttxt">leif@bladeship.no alias ✓</div><div class="tmeta">Fikset 3. juni 2026</div></div></div>
+          <div class="task"><div class="tdot td-g"></div><div class="tbody"><div class="ttxt">BladeShip AS stiftet ✓</div><div class="tmeta">1. juni 2026</div></div></div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ LEIF: SLAGPLAN ═══════════════ -->
+      <div class="page" id="pg-leif-slagplan">
+        <div class="ptitle">Slagplan</div>
+        <div class="psub">Aton Group AS · Operativ fremdrift 2026–2027</div>
+
+        <div class="phase done">
+          <div class="phdr"><span class="ptitl">Fase 1 — Fundament</span><span class="badge gn">Fullført</span></div>
+          <div class="pitems">
+            <div class="pitem ok">BladeShip AS stiftet 1. juni 2026</div>
+            <div class="pitem ok">2 norske patenter innlevert (20260735 + 20260736)</div>
+            <div class="pitem ok">EIC Accelerator søknad innlevert — €17,5M</div>
+            <div class="pitem ok">Google Workspace atongroup.no oppe</div>
+            <div class="pitem ok">Gavebrev Lone + Alexandra signert via Scrive</div>
+            <div class="pitem ok">leif@bladeship.no alias konfigurert</div>
+          </div>
+        </div>
+
+        <div class="phase curr">
+          <div class="phdr"><span class="ptitl">Fase 2 — Org.nr. og kapital</span><span class="badge am">Pågår</span></div>
+          <div class="pitems">
+            <div class="pitem">Aton Group AS org.nr. — ~19–20. juni</div>
+            <div class="pitem">BladeShip AS org.nr. — ~19–20. juni</div>
+            <div class="pitem">Innbetaling NOK 30k Aton · NOK 30k BladeShip</div>
+            <div class="pitem">DNV møte 10. juni — AiP forberedelse</div>
+            <div class="pitem">IN Miljøteknologi søknad — NOK 2M</div>
+            <div class="pitem">Velumen SkatteFUNN innlevert (frist 1. aug)</div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="phdr"><span class="ptitl">Fase 3 — Investorer og konsepter</span><span class="badge gy">Høst 2026</span></div>
+          <div class="pitems">
+            <div class="pitem">EU LIFE Climate Action søknad — €2–10M (22. sept)</div>
+            <div class="pitem">EIC Accelerator svar — august 2026</div>
+            <div class="pitem">Sprayvisir — gründer rekruttert</div>
+            <div class="pitem">Grunnfelt — founder Kim Skjæveland operativ</div>
+            <div class="pitem">BladeShip investordialog</div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="phdr"><span class="ptitl">Fase 4 — Internasjonal ekspansjon</span><span class="badge gy">2027</span></div>
+          <div class="pitems">
+            <div class="pitem">Aton Danmark ApS — Alexandra Sunde Lindum</div>
+            <div class="pitem">Aton España SL — Lone Sunde · Marbella</div>
+            <div class="pitem">Grønn Plattform søknad — NOK 30–80M</div>
+            <div class="pitem">PCT-patent absolutt frist 28. mai 2027</div>
+            <div class="pitem">BladeShip fartøy — kontrakt og bygging</div>
+          </div>
+        </div>
+
+        <div class="slabel">Tilskuddspipeline</div>
+        <div class="pipe"><div><div class="pipe-n">EIC Accelerator 2026</div><div class="pipe-s">Innlevert · BladeShip AS</div></div><div class="pipe-r"><div class="pipe-v">€17,5M</div><span class="badge gn">Innlevert</span></div></div>
+        <div class="pipe"><div><div class="pipe-n">IN Miljøteknologi</div><div class="pipe-s">Klar · venter org.nr.</div></div><div class="pipe-r"><div class="pipe-v">NOK 2M</div><span class="badge am">Klar</span></div></div>
+        <div class="pipe"><div><div class="pipe-n">EU LIFE Climate Action</div><div class="pipe-s">Frist 22. september 2026</div></div><div class="pipe-r"><div class="pipe-v">€2–10M</div><span class="badge gy">Sept.</span></div></div>
+        <div class="pipe"><div><div class="pipe-n">Grønn Plattform</div><div class="pipe-s">2027</div></div><div class="pipe-r"><div class="pipe-v">NOK 30–80M</div><span class="badge gy">2027</span></div></div>
+
+        <div class="total-box">
+          <div class="total-lbl">Total pipeline</div>
+          <div class="total-val">€37M+</div>
+          <div class="total-sub">NOK 32–82M + €19,5–27,5M EU</div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ LEIF: PORTEFØLJE ═══════════════ -->
+      <div class="page" id="pg-leif-port">
+        <div class="ptitle">Portefølje</div>
+        <div class="psub">Alle selskaper · Her &amp; nå · Post-trigger · Forhandling</div>
+
+        <div class="slabel">Etablerte AS</div>
+
+        <div class="cc est">
+          <div class="cc-top">
+            <div class="cc-ic">BS</div>
+            <div><div class="cc-name">BladeShip AS</div><div class="cc-sub">Havgående resirkulering av vindturbinblader · Stavanger · Stiftet 1. juni 2026</div></div>
+          </div>
+          <div class="badges">
+            <span class="badge go">100% Aton</span>
+            <span class="badge gn">Stiftet ✓</span>
+            <span class="badge bl">2 Patenter</span>
+            <span class="badge gy">EIC €17,5M søkt</span>
+          </div>
+          <div class="cc-desc">Verdens første mobile, havgående prosesseringsanlegg for vindturbinblader. 180-meters spesialfartøy med patentert kran og 4-trinns GRP-prosesslinje. Konverterer blader til glassfibergranulat (GFG) direkte til havs.</div>
+          <div class="chips">
+            <div class="chip gn"><div class="chip-l">Her &amp; nå</div><div class="chip-v">NOK 18M</div></div>
+            <div class="chip bl"><div class="chip-l">Post-EIC</div><div class="chip-v">NOK 85M</div></div>
+            <div class="chip go"><div class="chip-l">Forhandling</div><div class="chip-v">NOK 90M</div></div>
+          </div>
+          <a href="https://www.bladeship.no" target="_blank" class="cc-lnk">bladeship.no ↗</a>
+        </div>
+
+        <div class="slabel">Porteføljeselskaper</div>
+
+        <div class="cc port">
+          <div class="cc-top">
+            <div class="cc-ic gn">Ve</div>
+            <div><div class="cc-name">Velumen AS</div><div class="cc-sub">Viking Løvneseth 70% · Aton Group AS 30% · Leif i styret</div></div>
+          </div>
+          <div class="badges">
+            <span class="badge gn">30% Aton</span>
+            <span class="badge go">Leif i styret</span>
+            <span class="badge gy">Pre-launch</span>
+          </div>
+          <div class="cc-desc">Produktutviklingsselskap for gravminner i norske materialer. Corten-stål, resirkulert glass og lokal stein med NFC-integrasjon. Nettside live på 4 språk. SkatteFUNN-søknad klar.</div>
+          <div class="chips">
+            <div class="chip gn"><div class="chip-l">Her &amp; nå (30%)</div><div class="chip-v">NOK 4M</div></div>
+            <div class="chip bl"><div class="chip-l">Post-lansering</div><div class="chip-v">NOK 6,6M</div></div>
+            <div class="chip go"><div class="chip-l">Forhandling</div><div class="chip-v">NOK 9M</div></div>
+          </div>
+        </div>
+
+        <div class="slabel">Launchpad — søker founder</div>
+
+        <div class="cc lpad">
+          <div class="cc-top">
+            <div class="cc-ic bl">TS</div>
+            <div><div class="cc-name">TrashShip</div><div class="cc-sub">Havgående gjenvinning av marint plastavfall · Konseptfase</div></div>
+          </div>
+          <div class="badges">
+            <span class="badge go">100% Aton</span>
+            <span class="badge bl">Konseptfase</span>
+            <span class="badge gy">Bygger på BladeShip-plattform</span>
+          </div>
+          <div class="cc-desc">Det andre fartøykonseptet i Aton-porteføljen. Dedikert offshore-system for plastavfallsgjenvinning. Arver BladeShip-IP og patentportefølje. PAUSE — oppstart 2027.</div>
+          <div class="chips">
+            <div class="chip gn"><div class="chip-l">Her &amp; nå</div><div class="chip-v">NOK 5M</div></div>
+            <div class="chip bl"><div class="chip-l">Post-patent</div><div class="chip-v">NOK 22M</div></div>
+            <div class="chip go"><div class="chip-l">Forhandling</div><div class="chip-v">NOK 32M</div></div>
+          </div>
+        </div>
+
+        <div class="cc lpad">
+          <div class="cc-top">
+            <div class="cc-ic bl">Gr</div>
+            <div><div class="cc-name">Grunnfelt AS</div><div class="cc-sub">Tomteutvikling · Nasjonal rekkevidde · Kim Skjæveland CEO 60%</div></div>
+          </div>
+          <div class="badges">
+            <span class="badge go">40% Aton</span>
+            <span class="badge gn">Kim Skjæveland 60%</span>
+            <span class="badge bl">Founder on board</span>
+          </div>
+          <div class="cc-desc">Norges spesialist på tomteidentifikasjon og utvikling. Pipeline-app live, 25 utbyggere kartlagt, 8 vekstbyer identifisert. Oppstartsmøte 4. juni 2026.</div>
+          <div class="chips">
+            <div class="chip gn"><div class="chip-l">Her &amp; nå</div><div class="chip-v">NOK 3M</div></div>
+            <div class="chip bl"><div class="chip-l">Post-founder</div><div class="chip-v">NOK 17M</div></div>
+            <div class="chip go"><div class="chip-l">Forhandling</div><div class="chip-v">NOK 35M</div></div>
+          </div>
+          <a href="https://bladeship.no/grunnfelt/" target="_blank" class="cc-lnk">Se konsept ↗</a>
+        </div>
+
+        <div class="cc lpad">
+          <div class="cc-top">
+            <div class="cc-ic bl">Sp</div>
+            <div><div class="cc-name">Sprayvisir</div><div class="cc-sub">Beauty &amp; Health · Norsk forbrukerprodukt</div></div>
+          </div>
+          <div class="badges">
+            <span class="badge go">70% Aton</span>
+            <span class="badge am">Søker founder</span>
+            <span class="badge gy">NDA + VB-avtale klar</span>
+          </div>
+          <div class="cc-desc">Beskyttelsesvisir for frisørkunder. 5 produktlinjer NOK 2–999. EU allergenforordning juli 2026 skaper sterk medvind. 50% av norske frisører utvikler yrkeseksem.</div>
+          <div class="chips">
+            <div class="chip gn"><div class="chip-l">Her &amp; nå</div><div class="chip-v">NOK 2M</div></div>
+            <div class="chip bl"><div class="chip-l">Post-founder</div><div class="chip-v">NOK 13M</div></div>
+            <div class="chip go"><div class="chip-l">Forhandling</div><div class="chip-v">NOK 25M</div></div>
+          </div>
+          <a href="https://bladeship.no/sprayvisir/" target="_blank" class="cc-lnk">Se konsept ↗</a>
+        </div>
+      </div>
+
+      <!-- ═══════════════ LEIF: KALENDER ═══════════════ -->
+      <div class="page" id="pg-leif-kal">
+        <div class="ptitle">Kalender</div>
+        <div class="psub">Kritiske frister og milepæler</div>
+
+        <div class="slabel">Kritisk — denne uken</div>
+        <div class="cali urg"><div class="cal-d">10. juni</div><div class="cal-t">DNV møte — AiP diskusjon · Veritasveien 25, Stavanger · 11:30</div></div>
+
+        <div class="slabel">Juni 2026</div>
+        <div class="cali"><div class="cal-d">16. juni</div><div class="cal-t">Mobilisering Stord · NSE Gruppen / Hugin A · Aker Solutions</div></div>
+        <div class="cali"><div class="cal-d">~20. juni</div><div class="cal-t">Org.nr. forventet — Aton Group AS + BladeShip AS</div></div>
+        <div class="cali"><div class="cal-d">30. juni</div><div class="cal-t">Leif tilbake fra Stord · 3 uker fri (1–21. juli)</div></div>
+
+        <div class="slabel">Høst 2026</div>
+        <div class="cali"><div class="cal-d">1. august</div><div class="cal-t">Velumen SkatteFUNN — anbefalt frist</div></div>
+        <div class="cali"><div class="cal-d">August</div><div class="cal-t">EIC Accelerator svar — intervju og beslutning</div></div>
+        <div class="cali"><div class="cal-d">22. sept.</div><div class="cal-t">EU LIFE Climate Action søknadsfrist — €2–10M</div></div>
+
+        <div class="slabel">2027</div>
+        <div class="cali"><div class="cal-d">28. mai 2027</div><div class="cal-t">PCT-patent absolutt frist</div></div>
+        <div class="cali"><div class="cal-d">2027</div><div class="cal-t">Grønn Plattform søknad — NOK 30–80M</div></div>
+      </div>
+
+      <!-- ═══════════════ LEIF: WORKSPACE ═══════════════ -->
+      <div class="page" id="pg-leif-ws">
+        <div class="ptitle">Workspace</div>
+        <div class="psub">Google Workspace · atongroup.no · Hurtiglenker</div>
+
+        <div class="slabel">E-post og kommunikasjon</div>
+        <a href="https://mail.google.com/a/atongroup.no" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#fce8e6;border-color:#f5c6c2"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#d93025" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Gmail — leif@atongroup.no</div><div class="ws-sub">Innboks · atongroup.no</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+        <a href="https://calendar.google.com/a/atongroup.no" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#e8f0fe;border-color:#c5d4fb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#1a73e8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Google Calendar</div><div class="ws-sub">Kalender · atongroup.no</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+        <a href="https://meet.google.com" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#e6f4ea;border-color:#c3e6cb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#1e8e3e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Google Meet</div><div class="ws-sub">Videomøter</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+
+        <div class="slabel">Filer og lagring</div>
+        <a href="https://drive.google.com/drive/folders/1Tnwxe-p_RlxVYUiHxxmjTZaIB6uQsKdo" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#fef7e0;border-color:#fce8a2"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#f9ab00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15l5-9 4 7M12 13l4-7 5 9M9 21l3-5h6l-3 5H9z"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Google Drive — ATON-mappe</div><div class="ws-sub">Hoveddokumenter · alle selskaper</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1pZMBPbT9ZZQhzFTGN47p5T-0IHzG6_z1" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#fef7e0;border-color:#fce8a2"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#f9ab00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Google Drive — BACKUP</div><div class="ws-sub">ZIP-backups · GitHub-speil</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+        <a href="https://docs.google.com" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#e8f0fe;border-color:#c5d4fb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#1a73e8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Google Docs</div><div class="ws-sub">Dokumenter</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+        <a href="https://sheets.google.com" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#e6f4ea;border-color:#c3e6cb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#1e8e3e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Google Sheets</div><div class="ws-sub">Regneark</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+
+        <div class="slabel">Administrasjon</div>
+        <a href="https://admin.google.com" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#f3e8fd;border-color:#d7b8f5"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#8430ce" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M19 8v6M16 11h6"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Google Workspace Admin</div><div class="ws-sub">Brukere · leif@, lone@, alexandra@atongroup.no</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+        <a href="https://script.google.com" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#fce8e6;border-color:#f5c6c2"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#d93025" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Apps Script — e-postsender</div><div class="ws-sub">Gmail API · atongroup.no + bladeship.no</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+
+        <div class="slabel">Grunnfelt — eiendomspipeline</div>
+        <a href="https://bladeship.no/grunnfelt/pipeline.html" target="_blank" class="ws-lnk" style="border-color:var(--green-bd);background:var(--green-bg)">
+          <div class="ws-ic" style="background:var(--green-bg);border-color:var(--green-bd)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#1a6e3c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+          <div class="ws-body"><div class="ws-name" style="color:var(--green)">Grunnfelt Pipeline</div><div class="ws-sub" style="color:var(--green);opacity:.7">Eiendomsidentifikasjon · grunneieroppfølging · brevgenerator</div></div>
+          <span class="ws-arr" style="color:var(--green)">↗</span>
+        </a>
+
+        <div class="slabel">AI-assistent</div>
+        <div class="claude-box">
+          <div class="claude-hdr">
+            <div style="display:flex;align-items:center;gap:.6rem">
+              <svg viewBox="0 0 32 32" width="22" height="22"><ellipse cx="16" cy="13" rx="7" ry="8" fill="#1a4a8e" opacity=".7"/><ellipse cx="16" cy="13" rx="4" ry="5" fill="#3a7aee" opacity=".8"/><circle cx="16" cy="11" r="2.5" fill="#fff" opacity=".9"/><path d="M9 21 Q16 26 23 21" fill="none" stroke="#1a4a8e" stroke-width="1.5" stroke-linecap="round" opacity=".6"/></svg>
+              <span style="font-weight:500;color:var(--blue)">Claude — strategisk assistent</span>
+            </div>
+            <a href="https://claude.ai" target="_blank" style="font-size:.75rem;color:var(--blue)">Åpne fullt ↗</a>
+          </div>
+          <div class="claude-msgs" id="msgs-leif"></div>
+          <div class="claude-inp">
+            <input type="text" id="inp-leif" placeholder="Spør Claude om BladeShip, investorer, strategi..." onkeydown="if(event.key==='Enter')sendMsg('leif')">
+            <button onclick="sendMsg('leif')">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ LEIF: TEAM ═══════════════ -->
+      <div class="page" id="pg-leif-team">
+        <div class="ptitle">Team</div>
+        <div class="psub">Aton Group AS · Sunde-dynastiet</div>
+
+        <div class="slabel">Styre og ledelse</div>
+        <div class="mem">
+          <div class="mav" style="width:48px;height:48px;font-size:1rem;flex-shrink:0">LS</div>
+          <div>
+            <div class="mn">Leif E. Sunde</div>
+            <div class="mr">CEO &amp; Founder · A-aksjer 80%</div>
+            <div class="md"><a href="mailto:leif@atongroup.no">leif@atongroup.no</a></div>
+            <div class="md">+47 936 14 425 · Stavanger</div>
+          </div>
+        </div>
+        <div class="mem">
+          <div class="mav" style="width:48px;height:48px;font-size:1rem;flex-shrink:0">Lo</div>
+          <div>
+            <div class="mn">Lone Daniela Mercedes Sunde</div>
+            <div class="mr">Board Member &amp; Country Director — Spain · B-aksjer 10%</div>
+            <div class="md"><a href="mailto:lone@atongroup.no">lone@atongroup.no</a></div>
+            <div class="md">+47 984 96 631 · Marbella, España</div>
+          </div>
+        </div>
+        <div class="mem">
+          <div class="mav" style="width:48px;height:48px;font-size:1rem;flex-shrink:0">Al</div>
+          <div>
+            <div class="mn">Alexandra Sunde Lindum</div>
+            <div class="mr">Board Member &amp; Country Director — Denmark · B-aksjer 10%</div>
+            <div class="md"><a href="mailto:alexandra@atongroup.no">alexandra@atongroup.no</a></div>
+            <div class="md">+45 22 77 75 02 · Langå, Danmark</div>
+          </div>
+        </div>
+
+        <div class="slabel">AI-assistent</div>
+        <div class="mem" style="border-color:var(--blue-bd);background:var(--blue-bg)">
+          <div style="width:48px;height:48px;border-radius:50%;background:rgba(26,74,142,.1);border:1px solid var(--blue-bd);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg viewBox="0 0 32 32" width="28" height="28"><ellipse cx="16" cy="13" rx="7" ry="8" fill="#1a4a8e" opacity=".7"/><ellipse cx="16" cy="13" rx="4" ry="5" fill="#3a7aee" opacity=".8"/><circle cx="16" cy="11" r="2.5" fill="#fff" opacity=".9"/><path d="M9 21 Q16 26 23 21" fill="none" stroke="#1a4a8e" stroke-width="1.5" stroke-linecap="round" opacity=".6"/></svg>
+          </div>
+          <div>
+            <div class="mn" style="color:var(--blue)">Claude — Anthropic</div>
+            <div class="mr" style="color:var(--blue);opacity:.8">AI-assistent · Aton Group strategisk partner</div>
+            <div class="md" style="color:var(--blue);opacity:.7">Verdivurderinger · dokumentasjon · investorstrategi · kode · analyse. Tilgjengelig på claude.ai</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ LONE: HJEM ═══════════════ -->
+      <div class="page" id="pg-lone-hjem">
+        <div class="ptitle" id="greetLone">God dag, Lone</div>
+        <div class="psub">Board Member &amp; Country Director — Spain · Marbella</div>
+        <div class="sgrid">
+          <div class="sc ok"><div class="slbl">Din aksjeandel</div><div class="sval gold">10%</div><div class="ssub">B-aksjer · Aton Group AS</div></div>
+          <div class="sc"><div class="slbl">Her &amp; nå-verdi</div><div class="sval gold">NOK 2,9M</div><div class="ssub">10% av NOK 29M</div></div>
+          <div class="sc"><div class="slbl">Post-trigger</div><div class="sval gold">NOK 10M</div><div class="ssub">10% etter EIC-tilsagn</div></div>
+          <div class="sc"><div class="slbl">Exit-potensial</div><div class="sval gold">NOK 200M+</div><div class="ssub">10% ved salg 2031</div></div>
+        </div>
+        <div class="slabel">Din rolle</div>
+        <div class="phase">
+          <div class="phdr"><span class="ptitl">Country Director — Spain</span><span class="badge gn">Aktiv</span></div>
+          <div class="pitems">
+            <div class="pitem">Koordinerer Aton-aktiviteter i Spania</div>
+            <div class="pitem">Aton España SL — planlagt stiftelse 2027</div>
+            <div class="pitem">Eiendomsnettverk og kontaktbygging Marbella</div>
+            <div class="pitem">Board Member — Aton Group AS</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ LONE: PORTEFØLJE ═══════════════ -->
+      <div class="page" id="pg-lone-port">
+        <div class="ptitle">Portefølje</div>
+        <div class="psub">Din andel i Aton-porteføljen</div>
+        <div class="slabel">Din aksjeposisjon</div>
+        <div class="cc est">
+          <div class="cc-top">
+            <div class="cc-ic">AG</div>
+            <div><div class="cc-name">Aton Group AS</div><div class="cc-sub">10% B-aksjer · Gavebrev signert 30. mai 2026 (Scrive)</div></div>
+          </div>
+          <div class="cc-desc">Du eier 10% B-aksjer i Aton Group AS som holdingselskap. Verdien din vokser med hele porteføljen — BladeShip, Velumen, TrashShip, Grunnfelt og Sprayvisir.</div>
+          <div class="chips">
+            <div class="chip gn"><div class="chip-l">Din andel nå</div><div class="chip-v">NOK 2,9M</div></div>
+            <div class="chip bl"><div class="chip-l">Post-EIC</div><div class="chip-v">NOK 10M</div></div>
+            <div class="chip go"><div class="chip-l">Exit 2031</div><div class="chip-v">NOK 200M+</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ LONE: WORKSPACE ═══════════════ -->
+      <div class="page" id="pg-lone-ws">
+        <div class="ptitle">Mitt arbeidsrom</div>
+        <div class="psub">Personlig workspace · lone@atongroup.no · Marbella, España</div>
+        <div class="slabel">Mine verktøy</div>
+        <a href="https://mail.google.com/a/atongroup.no" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#fce8e6;border-color:#f5c6c2"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#d93025" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Gmail — lone@atongroup.no</div><div class="ws-sub">Din Aton-innboks</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+        <a href="https://calendar.google.com/a/atongroup.no" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#e8f0fe;border-color:#c5d4fb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#1a73e8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Google Calendar</div><div class="ws-sub">Din kalender</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1Tnwxe-p_RlxVYUiHxxmjTZaIB6uQsKdo" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#fef7e0;border-color:#fce8a2"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#f9ab00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15l5-9 4 7M12 13l4-7 5 9M9 21l3-5h6l-3 5H9z"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Google Drive — Aton Group</div><div class="ws-sub">Felles dokumenter · alle selskaper</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+        <div class="slabel">AI-assistent</div>
+        <div class="claude-box">
+          <div class="claude-hdr">
+            <div style="display:flex;align-items:center;gap:.6rem"><svg viewBox="0 0 32 32" width="22" height="22"><ellipse cx="16" cy="13" rx="7" ry="8" fill="#1a4a8e" opacity=".7"/><ellipse cx="16" cy="13" rx="4" ry="5" fill="#3a7aee" opacity=".8"/><circle cx="16" cy="11" r="2.5" fill="#fff" opacity=".9"/></svg><span style="font-weight:500;color:var(--blue)">Claude</span></div>
+            <a href="https://claude.ai" target="_blank" style="font-size:.75rem;color:var(--blue)">Åpne fullt ↗</a>
+          </div>
+          <div class="claude-msgs" id="msgs-lone"></div>
+          <div class="claude-inp">
+            <input type="text" id="inp-lone" placeholder="Spør Claude om Aton, Spania, eiendom..." onkeydown="if(event.key==='Enter')sendMsg('lone')">
+            <button onclick="sendMsg('lone')">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ LONE: FAMILIE ═══════════════ -->
+      <div class="page" id="pg-lone-familie">
+        <div class="ptitle">Familie</div>
+        <div class="psub">Sunde-dynastiet</div>
+        <div class="mem"><div class="mav">LS</div><div><div class="mn">Leif E. Sunde</div><div class="mr">Din far · CEO &amp; Founder</div><div class="md">+47 936 14 425 · leif@atongroup.no</div></div></div>
+        <div class="mem"><div class="mav">Al</div><div><div class="mn">Alexandra Sunde Lindum</div><div class="mr">Din søster · Board Member &amp; Country Director — Denmark</div><div class="md">+45 22 77 75 02 · Langå, Danmark</div></div></div>
+        <div class="mem"><div class="mav gn">El</div><div><div class="mn">Elias &amp; Isabella</div><div class="mr">Leifs barnebarn · G3</div><div class="md">Barn av Alexandra · fremtidige arvtakere</div></div></div>
+      </div>
+
+      <!-- ═══════════════ ALEXANDRA: HJEM ═══════════════ -->
+      <div class="page" id="pg-alex-hjem">
+        <div class="ptitle" id="greetAlex">God dag, Alexandra</div>
+        <div class="psub">Board Member &amp; Country Director — Denmark · Langå</div>
+        <div class="sgrid">
+          <div class="sc ok"><div class="slbl">Din aksjeandel</div><div class="sval gold">10%</div><div class="ssub">B-aksjer · Aton Group AS</div></div>
+          <div class="sc"><div class="slbl">Her &amp; nå-verdi</div><div class="sval gold">NOK 2,9M</div><div class="ssub">10% av NOK 29M</div></div>
+          <div class="sc"><div class="slbl">Post-trigger</div><div class="sval gold">NOK 10M</div><div class="ssub">10% etter EIC-tilsagn</div></div>
+          <div class="sc"><div class="slbl">Exit-potensial</div><div class="sval gold">NOK 200M+</div><div class="ssub">10% ved salg 2031</div></div>
+        </div>
+        <div class="slabel">Din rolle</div>
+        <div class="phase">
+          <div class="phdr"><span class="ptitl">Country Director — Denmark</span><span class="badge gn">Aktiv</span></div>
+          <div class="pitems">
+            <div class="pitem">Koordinerer Aton-aktiviteter i Danmark</div>
+            <div class="pitem">Aton Danmark ApS — planlagt stiftelse 2027</div>
+            <div class="pitem">Board Member — Aton Group AS</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ ALEXANDRA: PORTEFØLJE ═══════════════ -->
+      <div class="page" id="pg-alex-port">
+        <div class="ptitle">Portefølje</div>
+        <div class="psub">Din andel i Aton-porteføljen</div>
+        <div class="slabel">Din aksjeposisjon</div>
+        <div class="cc est">
+          <div class="cc-top">
+            <div class="cc-ic">AG</div>
+            <div><div class="cc-name">Aton Group AS</div><div class="cc-sub">10% B-aksjer · Gavebrev signert 30. mai 2026 (Scrive)</div></div>
+          </div>
+          <div class="cc-desc">Du eier 10% B-aksjer i Aton Group AS. Verdien din vokser med hele porteføljen — BladeShip, Velumen, TrashShip, Grunnfelt og Sprayvisir.</div>
+          <div class="chips">
+            <div class="chip gn"><div class="chip-l">Din andel nå</div><div class="chip-v">NOK 2,9M</div></div>
+            <div class="chip bl"><div class="chip-l">Post-EIC</div><div class="chip-v">NOK 10M</div></div>
+            <div class="chip go"><div class="chip-l">Exit 2031</div><div class="chip-v">NOK 200M+</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ ALEXANDRA: WORKSPACE ═══════════════ -->
+      <div class="page" id="pg-alex-ws">
+        <div class="ptitle">Mitt arbeidsrom</div>
+        <div class="psub">Personlig workspace · alexandra@atongroup.no · Langå, Danmark</div>
+        <div class="slabel">Mine verktøy</div>
+        <a href="https://mail.google.com/a/atongroup.no" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#fce8e6;border-color:#f5c6c2"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#d93025" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Gmail — alexandra@atongroup.no</div><div class="ws-sub">Din Aton-innboks</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+        <a href="https://calendar.google.com/a/atongroup.no" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#e8f0fe;border-color:#c5d4fb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#1a73e8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Google Calendar</div><div class="ws-sub">Din kalender</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+        <a href="https://meet.google.com" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#e6f4ea;border-color:#c3e6cb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#1e8e3e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Google Meet</div><div class="ws-sub">Videomøter</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1Tnwxe-p_RlxVYUiHxxmjTZaIB6uQsKdo" target="_blank" class="ws-lnk">
+          <div class="ws-ic" style="background:#fef7e0;border-color:#fce8a2"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#f9ab00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15l5-9 4 7M12 13l4-7 5 9M9 21l3-5h6l-3 5H9z"/></svg></div>
+          <div class="ws-body"><div class="ws-name">Google Drive — Aton Group</div><div class="ws-sub">Felles dokumenter · alle selskaper</div></div>
+          <span class="ws-arr">↗</span>
+        </a>
+        <div class="slabel">AI-assistent</div>
+        <div class="claude-box">
+          <div class="claude-hdr">
+            <div style="display:flex;align-items:center;gap:.6rem"><svg viewBox="0 0 32 32" width="22" height="22"><ellipse cx="16" cy="13" rx="7" ry="8" fill="#1a4a8e" opacity=".7"/><ellipse cx="16" cy="13" rx="4" ry="5" fill="#3a7aee" opacity=".8"/><circle cx="16" cy="11" r="2.5" fill="#fff" opacity=".9"/></svg><span style="font-weight:500;color:var(--blue)">Claude</span></div>
+            <a href="https://claude.ai" target="_blank" style="font-size:.75rem;color:var(--blue)">Åpne fullt ↗</a>
+          </div>
+          <div class="claude-msgs" id="msgs-alex"></div>
+          <div class="claude-inp">
+            <input type="text" id="inp-alex" placeholder="Spør Claude om Aton, aksjer, strategi..." onkeydown="if(event.key==='Enter')sendMsg('alex')">
+            <button onclick="sendMsg('alex')">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ ALEXANDRA: FAMILIE ═══════════════ -->
+      <div class="page" id="pg-alex-familie">
+        <div class="ptitle">Familie</div>
+        <div class="psub">Sunde-dynastiet</div>
+        <div class="mem"><div class="mav">LS</div><div><div class="mn">Leif E. Sunde</div><div class="mr">Din far · CEO &amp; Founder</div><div class="md">+47 936 14 425 · leif@atongroup.no</div></div></div>
+        <div class="mem"><div class="mav">Lo</div><div><div class="mn">Lone Daniela Mercedes Sunde</div><div class="mr">Din søster · Board Member &amp; Country Director — Spain</div><div class="md">+47 984 96 631 · Marbella</div></div></div>
+        <div class="mem"><div class="mav gn">El</div><div><div class="mn">Elias &amp; Isabella</div><div class="mr">Dine barn · Leifs barnebarn · G3</div><div class="md">Fremtidige arvtakere i Sunde-dynastiet</div></div></div>
+      </div>
+
+      <!-- ═══════════════ GRÜNDER: PROSJEKT ═══════════════ -->
+      <div class="page" id="pg-prosjekt">
+        <div class="ptitle">Ditt prosjekt</div>
+        <div class="psub">Aton Launchpad — registrert under NDA</div>
+        <div class="phase curr">
+          <div class="phdr"><span class="ptitl">Status</span><span class="badge am">Under behandling</span></div>
+          <div class="pitems">
+            <div class="pitem">NDA aktivert fra registreringstidspunkt</div>
+            <div class="pitem">Aton-teamet gjennomgår konseptet ditt</div>
+            <div class="pitem">Du hører fra oss innen 5 virkedager</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ GRÜNDER: OM ATON ═══════════════ -->
+      <div class="page" id="pg-omaton">
+        <div class="ptitle">Om Aton Group</div>
+        <div class="psub">Vi bygger selskaper som løser reelle problemer</div>
+        <p style="font-size:.9rem;color:var(--tx2);line-height:1.7;margin-bottom:1.2rem">Aton Group AS er et norsk venture builder-selskap basert i Stavanger. Vi identifiserer problemer verden har lært seg å ignorere — og bygger selskapene som løser dem.</p>
+        <div class="slabel">Kontakt</div>
+        <div class="mem"><div class="mav">LS</div><div><div class="mn">Leif E. Sunde</div><div class="mr">CEO &amp; Founder</div><div class="md"><a href="mailto:leif@atongroup.no">leif@atongroup.no</a> · +47 936 14 425</div></div></div>
+        <p style="margin-top:1rem"><a href="https://www.atongroup.no" target="_blank" style="color:var(--gold-l);font-size:.9rem;font-weight:500">atongroup.no ↗</a></p>
+      </div>
+
+    </main>
+  </div>
+  <nav class="bnav" id="bnav"></nav>
+</div>
+
+<script>
+const CLAUDE_PROXY_URL = 'https://script.google.com/macros/s/AKfycbyot6j9kWSTvzhkGlr_8HnQ2HhcAQptw2a8Adza_X4ZacmvvqDq0edKD0-AprWqFuR4/exec';
+const CLAUDE_SECRET    = 'AtonGroup2026!GmailSender#Leif';
+
+function _a(b){return atob(b)}
+const USERS = {
+  [_a('bGVpZkBhdG9uZ3JvdXAubm8=')]:{role:'leif',name:'Leif',badge:'CEO & Founder',nav:'leif',home:'leif-hjem'},
+  [_a('bG9uZUBhdG9uZ3JvdXAubm8=')]:{role:'lone',name:'Lone',badge:'Board Member &amp; Country Director — Spain',nav:'lone',home:'lone-hjem'},
+  [_a('YWxleGFuZHJhQGF0b25ncm91cC5ubw==')]:{role:'alexandra',name:'Alexandra',badge:'Board Member &amp; Country Director — Denmark',nav:'alexandra',home:'alex-hjem'},
+};
+let cur = {};
+
+const NAVCFG = {
+  leif:[
+    {id:'leif-hjem',l:'Hjem',ic:'home'},
+    {id:'leif-slagplan',l:'Slagplan',ic:'list'},
+    {id:'leif-port',l:'Portefølje',ic:'grid'},
+    {id:'leif-kal',l:'Kalender',ic:'cal'},
+    {id:'leif-ws',l:'Workspace',ic:'ws'},
+    {id:'leif-team',l:'Team',ic:'users'},
+  ],
+  lone:[
+    {id:'lone-hjem',l:'Hjem',ic:'home'},
+    {id:'lone-port',l:'Portefølje',ic:'grid'},
+    {id:'lone-ws',l:'Arbeidsrom',ic:'ws'},
+    {id:'lone-familie',l:'Familie',ic:'users'},
+  ],
+  alexandra:[
+    {id:'alex-hjem',l:'Hjem',ic:'home'},
+    {id:'alex-port',l:'Portefølje',ic:'grid'},
+    {id:'alex-ws',l:'Arbeidsrom',ic:'ws'},
+    {id:'alex-familie',l:'Familie',ic:'users'},
+  ],
+  founder:[
+    {id:'prosjekt',l:'Prosjekt',ic:'file'},
+    {id:'omaton',l:'Om Aton',ic:'info'},
+  ],
+};
+
+const ICS = {
+  home:'<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+  list:'<line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>',
+  grid:'<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>',
+  cal:'<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+  users:'<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>',
+  file:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/>',
+  ws:'<rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>',
+  info:'<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>',
+};
+
+function ic(k){return`<svg viewBox="0 0 24 24">${ICS[k]||''}</svg>`}
+
+function hardRefresh(){
+  const url = new URL(location.href);
+  url.searchParams.set('v', Date.now());
+  location.replace(url.toString());
+}
+
+function onGoogleLogin(resp){
+  const pl = JSON.parse(atob(resp.credential.split('.')[1]));
+  const em = (pl.email||'').toLowerCase();
+  const cfg = USERS[em];
+  if(cfg){ cur = {email:em, name:pl.name||cfg.name, cfg}; showApp(cfg); }
+  else { cur = {email:em, name:pl.name||em.split('@')[0], cfg:null}; showFounder(); }
+}
+
+function showApp(cfg){
+  document.getElementById('scrLogin').style.display = 'none';
+  document.getElementById('app').classList.add('show');
+  document.getElementById('hdrBadge').innerHTML = cfg.badge;
+  document.getElementById('hdrAv').textContent = cfg.name.substring(0,2).toUpperCase();
+  buildNav(cfg.nav);
+  goPage(cfg.home);
+  setGreet();
+}
+
+function showFounder(){
+  document.getElementById('scrLogin').style.display = 'none';
+  document.getElementById('app').classList.add('show');
+  document.getElementById('hdrBadge').textContent = 'Gründer';
+  document.getElementById('hdrAv').textContent = cur.name.substring(0,2).toUpperCase();
+  buildNav('founder');
+  goPage('prosjekt');
+}
+
+function doLogout(){
+  cur = {};
+  document.getElementById('app').classList.remove('show');
+  document.getElementById('scrLogin').style.display = 'flex';
+  if(window.google?.accounts?.id) google.accounts.id.disableAutoSelect();
+}
+
+function buildNav(role){
+  const items = NAVCFG[role] || NAVCFG.founder;
+  document.getElementById('sidebar').innerHTML =
+    '<div class="nav-sect">Navigasjon</div>' +
+    items.map(i=>`<button class="nav-it" id="si-${i.id}" onclick="goPage('${i.id}')">${ic(i.ic)}${i.l}</button>`).join('');
+  document.getElementById('bnav').innerHTML =
+    items.map(i=>`<button class="bnav-it" id="bi-${i.id}" onclick="goPage('${i.id}')">${ic(i.ic)}<span>${i.l}</span></button>`).join('');
+}
+
+function goPage(id){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const pg = document.getElementById('pg-'+id);
+  if(pg){ pg.classList.add('active'); document.getElementById('main').scrollTop = 0; }
+  document.querySelectorAll('.nav-it,.bnav-it').forEach(b => {
+    b.classList.toggle('active', b.id === 'si-'+id || b.id === 'bi-'+id);
+  });
+  const role = cur.cfg?.nav || 'founder';
+  const lbl = (NAVCFG[role]||[]).find(i => i.id === id)?.l || 'Hub';
+  document.getElementById('hdrPg').textContent = lbl;
+}
+
+function setGreet(){
+  const h = new Date().getHours();
+  const t = h<5?'God natt':h<12?'God morgen':h<18?'God dag':'God kveld';
+  [{id:'greetLeif',n:'Leif'},{id:'greetLone',n:'Lone'},{id:'greetAlex',n:'Alexandra'}].forEach(g => {
+    const el = document.getElementById(g.id);
+    if(el) el.textContent = t + ', ' + g.n;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const m = document.getElementById('main');
+  if(m) m.addEventListener('wheel', e => { e.stopPropagation(); }, {passive:true});
+});
+
+const SYSTEM_PROMPTS = {
+  leif: `Du er Leif Einar Sundes dedikerte personlige AI-assistent og strategiske partner. Her er alt du vet om Leif:
+
+IDENTITET: CEO og Founder av Aton Group AS og BladeShip AS. Rigger ved NSE Gruppen på Stord (Hugin A / Aker Solutions) — rotasjon 2 uker på / 3 uker av. Neste periode starter 16. juni 2026. Født 6. mars 1973. Stavanger.
+
+SELSKAPER:
+- Aton Group AS: Venture builder / holdingselskap. Org.nr. forventet ~20. juni 2026. Aksjekapital NOK 30 000.
+- BladeShip AS: Verdens første havgående resirkulering av vindturbinblader. 180m fartøy, patentert AHC-kran, 4-trinns GRP-prosesslinje, glassfibergranulat (GFG). EIC Accelerator søknad innlevert (€17,5M, ID 101354477). 2 norske patenter (20260735 + 20260736). Stiftet 1. juni 2026. DNV møte 10. juni 2026.
+- Grunnfelt AS: Tomteutvikling. Kim Skjæveland CEO & Founder (60%), Aton Group AS 40%.
+- Velumen AS: Gravminner. Viking Løvneseth 70%, Aton 30%. Leif i styret.
+- TrashShip og Sprayvisir: Launchpad-konsepter.
+
+FAMILIE: Lone Daniela Mercedes Sunde (datter, Marbella, +47 984 96 631, lone@atongroup.no, Board Member & Country Director Spain, 10% B-aksjer). Alexandra Sunde Lindum (datter, Langå Danmark, +45 22 77 75 02, alexandra@atongroup.no, Board Member & Country Director Denmark, 10% B-aksjer). Barnebarn: Elias og Isabella (Alexandras barn).
+
+KRITISKE FRISTER: 10. juni — DNV møte 11:30. ~20. juni — org.nr. begge selskaper. 28. mai 2027 — PCT-patent absolutt frist.
+
+KOMMUNIKASJON: Svar alltid på norsk. Vær direkte, strategisk og handlingsorientert. Leif er travelt opptatt og vil ha konkrete svar. Aldri vagt eller ullent.`,
+
+  lone: `Du er Lone Daniela Mercedes Sundes personlige AI-assistent. Her er alt du vet om Lone:
+
+IDENTITET: Board Member og Country Director — Spain i Aton Group AS. Datter av Leif E. Sunde (CEO & Founder, Stavanger). Bor i Marbella, Spania. Tlf: +47 984 96 631. E-post: lone@atongroup.no.
+
+EIERSKAP: 10% B-aksjer i Aton Group AS. Gavebrev signert 30. mai 2026. Nåverdi: NOK 2,9M. Post-trigger: NOK 10M. Exit-potensial 2031: NOK 200M+.
+
+ROLLE: Bygger Aton-nettverket i Spania. Eiendomserfaring fra Marbella. Fremtidig Aton España SL (planlagt 2027).
+
+SØSTER: Alexandra Sunde Lindum — Board Member Denmark, bor i Langå, mor til Elias og Isabella.
+
+KOMMUNIKASJON: Svar på norsk som standard. Hvis Lone skriver på spansk, svar på spansk. Vær varm, støttende og profesjonell.`,
+
+  alex: `Du er Alexandra Sunde Lindums personlige AI-assistent. Her er alt du vet om Alexandra:
+
+IDENTITET: Board Member og Country Director — Denmark i Aton Group AS. Datter av Leif E. Sunde (CEO & Founder, Stavanger). Bor i Villavej 18, 8870 Langå, Danmark. Tlf: +45 22 77 75 02. E-post: alexandra@atongroup.no. Mor til Elias og Isabella.
+
+EIERSKAP: 10% B-aksjer i Aton Group AS. Gavebrev signert 30. mai 2026. Nåverdi: NOK 2,9M. Post-trigger: NOK 10M. Exit-potensial 2031: NOK 200M+.
+
+ROLLE: Koordinerer Aton-aktiviteter i Danmark. Fremtidig Aton Danmark ApS (planlagt 2027). Styremedlem Aton Group AS.
+
+SØSTER: Lone Daniela Mercedes Sunde — Board Member Spain, bor i Marbella.
+
+KOMMUNIKASJON: Svar på norsk som standard. Hvis Alexandra skriver på dansk, svar på dansk. Vær varm, tålmodig og støttende.`
+};
+
+const chatHistory = {leif:[],lone:[],alex:[]};
+
+async function sendMsg(who){
+  const inp = document.getElementById('inp-'+who);
+  const msgs = document.getElementById('msgs-'+who);
+  if(!inp || !msgs) return;
+  const txt = inp.value.trim();
+  if(!txt) return;
+  inp.value = '';
+
+  const uMsg = document.createElement('div');
+  uMsg.className = 'msg-user';
+  uMsg.textContent = txt;
+  msgs.appendChild(uMsg);
+
+  const loading = document.createElement('div');
+  loading.className = 'msg-loading';
+  loading.textContent = 'Claude tenker...';
+  msgs.appendChild(loading);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  chatHistory[who].push({role:'user', content:txt});
+
+  try {
+    const res = await fetch(CLAUDE_PROXY_URL, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        secret: CLAUDE_SECRET,
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system: SYSTEM_PROMPTS[who] || SYSTEM_PROMPTS.leif,
+        messages: chatHistory[who].slice(-10)
+      })
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || 'Noe gikk galt. Prøv igjen.';
+    chatHistory[who].push({role:'assistant', content:reply});
+    loading.remove();
+    const aMsg = document.createElement('div');
+    aMsg.className = 'msg-ai';
+    aMsg.textContent = reply;
+    msgs.appendChild(aMsg);
+  } catch(e) {
+    loading.remove();
+    const err = document.createElement('div');
+    err.className = 'msg-ai';
+    err.textContent = 'Kunne ikke koble til Claude. Sjekk internett og prøv igjen.';
+    msgs.appendChild(err);
+  }
+  msgs.scrollTop = msgs.scrollHeight;
+}
+</script>
+</body>
+</html>
