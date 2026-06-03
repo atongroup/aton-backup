@@ -9,9 +9,11 @@
 
 1. `git clone --depth=1` repo til `/tmp/aton`
 2. Les `SESJONSSTARTER.md` + `00_Aton_Group_AS/FASIT.md` + `00_Aton_Group_AS/HUSKELISTE.md`
-3. Vis kortfattet tekstoppsummering: kritiske frister, åpne oppgaver, siste e-poster
-4. **SPØR** om Leif vil se SLAGPLAN som interaktiv widget — aldri vis automatisk
-5. Sjekk Gmail (siste 3 dager) og nevn viktige meldinger
+3. Sjekk Gmail — **ALLTID BEGGE**:
+   - Innboks (siste 3 dager): viktige innkommende meldinger
+   - Sendt-mappe (siste 3 dager): hva som allerede er svart/sendt
+4. Vis kortfattet tekstoppsummering: kritiske frister, åpne oppgaver, e-poststatus
+5. **SPØR** om Leif vil se SLAGPLAN som interaktiv widget — aldri vis automatisk
 
 ---
 
@@ -80,6 +82,7 @@
 
 ## OPERATIVE REGLER (sammendrag)
 
+- **E-post — anti-dobbelsend:** Før ethvert e-postutkast lages, sjekk alltid sendt-mappe for eksisterende svar i samme tråd. Finn sendt e-post → ikke lag nytt utkast → informer Leif om hva som allerede er sendt og hva det inneholdt
 - **E-post:** Sjekk alltid tidligere tråd før utkast. Vis utkast, vent på «send»
 - **Dokumenter:** Advokatsjekk før ferdigstilling — parter, datoer, beløp, forpliktelser
 - **Filer:** GitHub = master. Nettside = ZIP → Leif laster opp selv
@@ -98,4 +101,4 @@
 
 ---
 
-*Sist oppdatert: 4. juni 2026 | Versjon: live-github*
+*Sist oppdatert: 3. juni 2026 | Versjon: live-github*
