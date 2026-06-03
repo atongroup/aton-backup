@@ -12,7 +12,7 @@
 | K3 | Fiks leif@bladeship.no alias i Gmail (Send e-post som) | ASAP | Chrome → Gmail settings | 🔄 DNS fikset (Google MX slettet) — bekreft Gmail-alias i morgen når DNS propagert |
 | K4 | Slett spraymask.no + velumen.info på one.com | 4. juni | one.com support | ✅ E-post sendt — venter bekreftelse |
 | K5 | Registrer sprayvisir.no etter K4 | Etter K4 | Chrome → one.com | ⏳ Venter |
-| K6 | Sjekk Creditsafe-brev i Digipost (mottatt 31. mai) | Snarest | Chrome → digipost.no | ⏳ Ulest |
+| K6 | ~~Creditsafe-brev Digipost~~ | — | — | ✅ Ikke relevant — kun kredittvurdering |
 | K7 | Signer stiftelsesdokument Aton Group AS + last opp erklæring fra Tom Trones | Etter Tom bekrefter | Altinn → brreg.no | 🔄 Skjema åpnet i Altinn — mangler erklæring fra finansinst. E-post til Tom sendes i morgen |
 | K8 | Nye gavebrev Lone + Alexandra (3 000 aksjer à NOK 1) | Etter org.nr. | Claude → Scrive | ⏳ Gamle feil |
 | K9 | NDA + VB-avtale Sprayvisir (Esther) — advokatsjekk | Snarest | Claude → Scrive | ⚠️ Ikke signert |
