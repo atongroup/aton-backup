@@ -1,77 +1,48 @@
-# SESJON_LOGG.md
-*Sist oppdatert: 3. juni 2026 — Automatisk generert ved Exit*
+# SESJON_LOGG.md — Siste sesjon
+*Peker alltid på siste datostemplede logg. Oppdateres automatisk ved Exit.*
 
 ---
 
-## Dato og versjon
-- Dato: 3. juni 2026
-- Versjon: v2.3.4
+## Siste sesjon
+**Dato:** 3. juni 2026
+**Versjon:** v2.6.2
+**Loggfil:** [logs/2026-06-03.md](logs/2026-06-03.md)
 
 ---
 
-## E-poster sendt i dag
-
-| Dato | Fra | Til | Emne | Status |
-|------|-----|-----|------|--------|
-| 03.06.2026 | leifsunde@gmail.com | kjetil.ostbo@dnv.com | Hyggelig å snakke med deg — BladeShip AS | ✅ Sendt |
-| 03.06.2026 | leifsunde@gmail.com | kjetil.ostbo@dnv.com + ole.johan.harnes@dnv.com | BladeShip AS — Dokumentasjon og NDA til møtet 10. juni | ✅ Sendt (2 vedlegg: NDA + konseptbeskrivelse) |
-
-## E-poster mottatt (viktige)
-
-| Fra | Emne | Status |
-|-----|------|--------|
-| Kjetil.Ostbo@dnv.com | Re: Hyggelig å snakke med deg — BladeShip AS | ✅ Lest — bekrefter møte 10. juni kl. 11:30, Veritasveien 25 |
-| support@one.com | Verify email forward from bladeship.no | ⚠️ Leif må klikke verifiseringslenke manuelt |
-| support@one.com | Verify email forward from atongroup.no | ⚠️ Leif må klikke verifiseringslenke manuelt |
-| support@one.com | Re: Conversation — remove 3 cancelled domains | ⏳ Følg opp — Rey spør om du fortsatt er tilkoblet |
-| personnel.stord@nsefagstillas.no | SV: Mobilisering | ✅ Ny mobilisering sendt — konflikt løst, samme uke som Hugin A |
-| salg@no.one.com | Ditt abonnement vil slettes 01.06.27 (atenadventures.com) | ℹ️ Info — ingen handling nødvendig |
+## ⚡ FRIST-ALARM — neste 48 timer
+| Frist | Hva | Kritisk? |
+|-------|-----|----------|
+| 4. juni 2026 | Møte Kim Skjæveland — signer aksjonæravtale Grunnfelt AS | 🔴 JA |
+| Snarest | Verifiser e-postvideresending bladeship.no + atongroup.no (one.com — 14 dagers frist) | 🔴 JA |
 
 ---
 
-## Beslutninger tatt
-
-- Gmail-sjekk (innboks + sendt, siste 14 dager) innebygd i oppstartsrutine
-- SESJON_LOGG.md på GitHub for sesjonskontinuitet — system nå aktivt
-- GitHub repo `atongroup/aton-backup` gjort **public**
-- Token `aton-backup-v2` regenerert og brukt for push
-
----
-
-## Viktige kontakter oppdatert
-
-| Person | Org | Status |
-|--------|-----|--------|
-| Kjetil Moi Østbø | DNV | Møte bekreftet 10. juni kl. 11:30, Veritasveien 25, Bjergsted. CC: Ole Johan Harnes, Andrew Fraser-Smith, Christine Adal (Høvik). Sendt NDA + konseptbeskrivelse. Venter signert NDA. |
+## Siste e-poster sendt
+| Dato | Til | Emne | Status |
+|------|-----|------|--------|
+| 03.06.2026 | kjetil.ostbo@dnv.com | Hyggelig å snakke med deg — BladeShip AS | ✅ |
+| 03.06.2026 | kjetil.ostbo@dnv.com + ole.johan.harnes@dnv.com | BladeShip AS — Dokumentasjon og NDA til møtet 10. juni | ✅ (NDA + konseptbeskrivelse vedlagt) |
 
 ---
 
-## Åpne oppgaver siden sist
-
+## Viktigste åpne oppgaver
 | Prioritet | Oppgave | Frist |
 |-----------|---------|-------|
-| 🔴 | Klikk verifiseringslenke for e-postvideresending bladeship.no + atongroup.no (one.com mail) | Snarest — 14 dagers frist |
-| 🔴 | Sett inn NOK 30 000 Folio Aton Group AS når kontonummer ankommer SMS | ~9. juni |
-| 🔴 | NDA + venture builder-avtale Sprayvisir (Esther) | Snarest |
-| 🔴 | Følg opp one.com support (Rey) om sletting av spraymask.no + velumen.info | Snarest |
-| 🟡 | Forbered materiale til DNV-møte 10. juni | Innen 10. juni |
-| 🟡 | Les NSE Fagstillas mobiliseringsbekreftelse i sin helhet | Snarest |
-| 🟡 | Last opp nettsider: atongroup_live.html, bladeship_live.html, sprayvisir_live.html | Snarest |
-| 🟡 | Last opp LinkedIn Featured-bilder (thumb_bladeship.png + thumb_aton.png) | Snarest |
+| 🔴 | Møte Kim Skjæveland — aksjonæravtale Grunnfelt | 4. juni |
+| 🔴 | Verifiser e-postvideresending bladeship.no + atongroup.no | Snarest |
+| 🔴 | Sett inn NOK 30 000 Folio Aton Group AS | ~9. juni |
+| 🔴 | Fiks leif@bladeship.no alias i Gmail | ASAP |
+| 🔴 | NDA + VB-avtale Sprayvisir (Esther) | Snarest |
+| 🟡 | DNV-møte 10. juni — forbered presentasjon | 10. juni |
+| 🟡 | Last opp nettsider aton/bladeship/sprayvisir | Snarest |
 
 ---
 
-## System-status
+## Systeminformasjon
+- **GitHub repo:** public ✅
+- **Logghistorikk:** logs/YYYY-MM-DD.md
+- **Oppstartsrutine:** Hent denne filen → les logg → sjekk Gmail → spør om SLAGPLAN
+- **Exit-rutine:** Generer datostemplet logg → oppdater denne filen → push begge
 
-| System | Status |
-|--------|--------|
-| GitHub repo atongroup/aton-backup | ✅ Public |
-| SESJON_LOGG.md | ✅ Aktiv — leses ved oppstart |
-| Gmail-sjekk ved oppstart | ✅ Innebygd i rutine |
-| Google Workspace bladeship.no | ⏳ DNS propagerer |
-| leif@bladeship.no alias | ⏳ Venter verifisering |
-| Org.nr. BladeShip AS + Aton Group AS | ⏳ Forventes ~19–20. juni |
-
----
-
-*Neste sesjon: Hent denne filen + sjekk Gmail for å gjenopprette full kontekst.*
+*For full historikk: se logs/-mappen*
