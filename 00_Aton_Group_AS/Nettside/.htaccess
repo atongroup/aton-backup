@@ -1,0 +1,67 @@
+# ══ ATON GROUP AS — Apache Security Configuration ══
+# Last opp til: atongroup.no rot-mappe pa one.com
+# Oppdater jevnlig ved endringer i nettstedet
+
+# ── HTTPS redirect ──
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ── HTTP Security Headers ──
+<IfModule mod_headers.c>
+
+    # HSTS: Tving HTTPS i 1 ar
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+    # Hindre clickjacking (innbygging i iframe)
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Hindre MIME-type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Referrer Policy: kun send origin til egne sider
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Deaktiver unodvendige nettleserfunksjoner
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=(), bluetooth=()"
+
+    # Content Security Policy
+    # Tillater: egne ressurser + Google Fonts + Google OAuth + Apps Script proxy
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://accounts.google.com https://apis.google.com https://script.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://script.google.com https://api.anthropic.com https://accounts.google.com; frame-src https://accounts.google.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io"
+
+    # Fjern server-fingerprinting
+    Header always unset X-Powered-By
+    Header always unset Server
+
+</IfModule>
+
+# ── Cache-kontroll for sensitive sider ──
+<IfModule mod_headers.c>
+    <FilesMatch "(hub\.html|team\.html|marketplace\.html|venture_portal\.html)">
+        Header always set Cache-Control "no-store, no-cache, must-revalidate, private"
+        Header always set Pragma "no-cache"
+        Header always set X-Robots-Tag "noindex, nofollow"
+    </FilesMatch>
+</IfModule>
+
+# ── Blokker tilgang til skjulte filer og backup ──
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+<FilesMatch "\.(bak|backup|old|orig|save|tmp|swp|sql|log|zip|tar|gz)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ── Blokker directory listing ──
+Options -Indexes
+
+# ── Blokker PHP-kjoring (kun statisk HTML-nettsted) ──
+<FilesMatch "\.php$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ── Rate limiting hint (one.com WAF) ──
+# Disse kjorer via one.com sin innebygde beskyttelse
