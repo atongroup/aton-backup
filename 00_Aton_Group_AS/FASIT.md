@@ -578,3 +578,66 @@ Aldri skriv «partner», «samarbeider» eller «avtale» uten skriftlig bekreft
 ### Adresse (skattemelding)
 - c/o LEILIGHET 29, Støperigata 25, H0407, 4014 Stavanger
 - Kommune: Stavanger (1103)
+
+---
+
+## Verdivurderingsprotokoll v1.0 — Aton Group AS
+*Vedtatt 3. juni 2026 — alltid aktiv*
+
+### Grunnprinsipper
+
+1. **Edruelig og nøktern** — Her & Nå-verdien skal kun reflektere det som er faktisk bevist og dokumentert. Ingen "potensiell" verdi, ingen "hvis alt går bra". Kun det som eksisterer i dag.
+2. **Tre verdier per selskap — alltid:**
+   - `her_naa` — Kun dokumentert. Det Claude ville forsvart i en due diligence.
+   - `post_trigger` — Verdi etter neste definerte hendelse (EIC, LOI, gründer, TRL-løft).
+   - `forhandling` — Gekko-åpningsposisjon (35% over post_trigger-mål).
+3. **Ingen verdi endres uten eksplisitt begrunnelse** — Claude skal alltid forklare *hvorfor* en verdi endres.
+4. **Kilder** — Equidam Q1 2025 norsk deeptech pre-seed som benchmark. NOK 40M medianbenchmark.
+
+### Hendelsesutløste verdiendringer
+
+| Hendelse | Effekt på her_naa | Kommentar |
+|----------|-------------------|-----------|
+| Org.nr. mottatt | +10–15% | Legitimitetspremie — selskapet eksisterer juridisk |
+| EIC Accelerator tilsagn (BladeShip) | +300–400% | Fra NOK 18M → NOK 85M post-trigger |
+| Patent godkjent (ikke bare innlevert) | +5–10% | Innlevert gir liten verdi, godkjent gir beskyttelse |
+| Gründer signert (konsepter) | +200–300% | Fra konseptverdi til selskapsverdi |
+| LOI fra vindoperatør | +25–40% | Bekreftet markedsinteresse |
+| Verft-kontrakt (BladeShip) | +50–80% | TRL-løft fra 2–3 til 4–5 |
+| Første inntekt / salg | +30–50% | Bevist betalingsvilje |
+| Ingen nye hendelser | 0% | Verdien endres ikke uten grunn |
+| Negativ hendelse (avslag, tap av partner) | -10 til -30% | Alltid reflekteres ærlig |
+
+### Ukentlig rutine (hver mandag kl. 08:00)
+
+Kommando: **"ta en ny runde på verdivurderinger"** (et eller alle selskaper)
+
+Claude gjør da:
+1. Stiller 3 spørsmål: hvilke selskaper, hva har endret seg, markedshendelser
+2. Oppdaterer `verdier.js` med nye tall og dato
+3. Oppdaterer Hub-verdidiagrammet (hub.html)
+4. Oppdaterer bladeship.no og atongroup.no der verdier vises
+5. Pusher til GitHub
+6. Lager ZIP-er klare for opplasting til one.com
+7. Logger endringen i `logs/YYYY-MM-DD.md`
+
+### Gjeldende verdier (per 2. juni 2026)
+
+| Selskap | Her & Nå | Post-trigger | Forhandling | Trigger |
+|---------|----------|--------------|-------------|---------|
+| Aton Group AS | NOK 29M | NOK 100M | NOK 140M | EIC + Velumen launch |
+| BladeShip AS | NOK 18M | NOK 85M | NOK 90M | EIC tilsagn |
+| Velumen AS (30%) | NOK 4M | NOK 6,6M | NOK 9M | Produktlansering |
+| TrashShip (100%) | NOK 5M | NOK 22M | NOK 32M | Patent + AS stiftet |
+| Grunnfelt (40%) | NOK 3M | NOK 17M | NOK 35M | Gründer signert |
+| Sprayvisir (20%) | NOK 2M | NOK 13M | NOK 25M | Gründer + prototype |
+| **Total Her & Nå** | **NOK 61M** | **NOK 243M** | **NOK 331M** | |
+
+### Filer som oppdateres ved verdivurdering
+
+- `/00_Aton_Group_AS/Nettside/verdier.js` — master-datasett
+- `/00_Aton_Group_AS/Nettside/hub.html` — verdidiagram på hjemside
+- `/01_BladeShip_AS/Nettside/index.html` — BladeShip-verdier
+- `/00_Aton_Group_AS/Nettside/index.html` — atongroup.no porteføljekort
+- `logs/YYYY-MM-DD.md` — endringslogg
+
