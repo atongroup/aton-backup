@@ -10,7 +10,7 @@
 | K1 | Sett inn NOK 30 000 Folio Aton Group AS (venter kontonummer ~9. juni) | ~9. juni | — Leif gjør selv | ⏳ Venter |
 | K2 | Svar Sparebanken Norge KYC hvis de tar kontakt | Løpende | Gmail MCP søk | ⚡ Overvåk |
 | K3 | Fiks leif@bladeship.no alias i Gmail (Send e-post som) | ASAP | Chrome → Gmail settings | ⚠️ Kritisk |
-| K4 | Slett spraymask.no + velumen.info på one.com | Snarest | Chrome → one.com | ⏳ Frigjør NORID |
+| K4 | Slett spraymask.no + velumen.info på one.com | 4. juni | one.com support | ✅ E-post sendt — venter bekreftelse |
 | K5 | Registrer sprayvisir.no etter K4 | Etter K4 | Chrome → one.com | ⏳ Venter |
 | K6 | Sjekk Creditsafe-brev i Digipost (mottatt 31. mai) | Snarest | Chrome → digipost.no | ⏳ Ulest |
 | K7 | Signer stiftelsesdokument Aton Group AS (Fiken/Folio) | ASAP | Chrome → fiken.no | 📧 Mottatt |

@@ -4,50 +4,43 @@
 ---
 
 ## Siste sesjon
-**Dato:** 3. juni 2026
+**Dato:** 4. juni 2026
 **Versjon:** v2.6.2
-**Loggfil:** [logs/2026-06-03.md](logs/2026-06-03.md)
+**Loggfil:** [logs/2026-06-04.md](logs/2026-06-04.md)
 
 ---
 
 ## ⚡ FRIST-ALARM — neste 48 timer
 | Frist | Hva | Kritisk? |
 |-------|-----|----------|
-| 4. juni 2026 | Møte Kim Skjæveland — signer aksjonæravtale Grunnfelt AS | 🔴 JA |
-| Snarest | Verifiser e-postvideresending bladeship.no + atongroup.no (one.com — 14 dagers frist) | 🔴 JA |
-| Snarest | Følg opp one.com support Rey — slett spraymask.no + velumen.info | 🔴 JA |
+| 10. juni 2026 | DNV møte kl. 11:30 (lunsj), Veritasveien 25 | 🔴 JA |
+| Snarest | Bekreftelse fra one.com — slett spraymask.no + velumen.info | 🔴 JA |
+| Snarest | Klikk verifiseringslenker one.com (bladeship.no + atongroup.no) | 🔴 JA — 14-dagers frist |
 
 ---
 
 ## Siste e-poster sendt
 | Dato | Fra | Til | Emne | Status |
 |------|-----|-----|------|--------|
-| 03.06.2026 | leifsunde@gmail.com | kjetil.ostbo@dnv.com | Hyggelig å snakke med deg — BladeShip AS | ✅ |
-| 03.06.2026 | leifsunde@gmail.com | kjetil.ostbo@dnv.com + ole.johan.harnes@dnv.com | BladeShip AS — Dokumentasjon og NDA til møtet 10. juni | ✅ NDA + konseptbeskrivelse vedlagt |
+| 04.06.2026 | leifsunde@gmail.com | support@one.com | Please permanently delete domains: spraymask.no and velumen.info | ✅ Draft opprettet — Leif sendte |
 
 ---
 
 ## Viktigste åpne oppgaver
 | Prioritet | Oppgave | Frist |
 |-----------|---------|-------|
-| 🔴 | Møte Kim Skjæveland — aksjonæravtale Grunnfelt (60/40) | 4. juni |
-| 🔴 | Verifiser e-postvideresending bladeship.no + atongroup.no | Snarest |
+| 🔴 | DNV møte 10. juni — møtepakke klar | 10. juni |
+| 🔴 | Venter bekreftelse one.com — slett domener | Snarest |
 | 🔴 | Sett inn NOK 30 000 Folio Aton Group AS | ~9. juni |
 | 🔴 | Fiks leif@bladeship.no alias i Gmail | ASAP |
-| 🔴 | NDA + VB-avtale Sprayvisir (Esther) | Snarest |
-| 🔴 | Følg opp one.com Rey — slett spraymask.no + velumen.info | Snarest |
-| 🟡 | DNV-møte 10. juni kl. 11:30 Veritasveien 25 — forbered presentasjon | 10. juni |
-| 🟡 | Les NSE Fagstillas mobiliseringsbekreftelse | Snarest |
-| 🟡 | Last opp nettsider aton/bladeship/sprayvisir | Snarest |
-| 🟡 | Skaff revisor BladeShip AS (kreves SkatteFUNN) | Etter org.nr. |
+| 🔴 | Signer stiftelsesdokument Aton Group AS (fiken.no) | ASAP |
+| 🟡 | Registrer grunnfelt.no etter domenesletting bekreftet | Etter one.com |
+| 🟡 | NDA + VB-avtale Sprayvisir (Esther) | Snarest |
+| 🟡 | Sjekk Creditsafe i Digipost | Snarest |
 
 ---
 
 ## Systeminformasjon
 - **GitHub repo:** public ✅
-- **Logghistorikk:** logs/YYYY-MM-DD.md
-- **GitHub Actions workflow:** .github/workflows/sesjon-push.yml ✅
-- **Oppstartsrutine:** Hent denne filen → les logg → sjekk Gmail → spør om SLAGPLAN
-- **Exit-rutine:** Generer datostemplet logg → oppdater denne filen → oppdater EmailLogg → push alt
-
-*For full historikk: se logs/-mappen*
+- **SESJONSSTARTER.md:** Oppdatert 4. juni 2026 — ny oppstartsrutine med spør-før-SLAGPLAN
+- **Minner:** Oppdatert #11, #26, #28 — klarere regler for verktøybruk og SLAGPLAN
