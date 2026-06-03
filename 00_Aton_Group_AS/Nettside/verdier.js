@@ -9,7 +9,7 @@
  */
 const ATON_VERDIER = {
   meta: {
-    versjon: "2.6.2",
+    versjon: "2.6.3",
     dato: "2026-06-02",
     metoder: ["Berkus","Scorecard","TRL-justert","Risk Factor Summation","First Chicago"],
     benchmark_nok: 40,
@@ -24,8 +24,8 @@ const ATON_VERDIER = {
       stadium: "Under stiftelse · 2026",
       // TRE VERDIER
       her_naa: {
-        verdi: 29,
-        grunnlag: "BladeShip 100% (NOK 18M) + Velumen 30% (NOK 6.6M) + launchpad-konsepter (NOK 3M) + Aton brand/WS (NOK 1M). Holdingselskap kan ikke være verdt mindre enn summen av det det eier.",
+        verdi: 32,
+        grunnlag: "BladeShip 100% (NOK 21M) + Velumen 30% (NOK 6.6M) + launchpad-konsepter (NOK 3M) + Aton brand/WS (NOK 1M). Holdingselskap kan ikke være verdt mindre enn summen av det det eier. BladeShip løftet basert på EU landfill-ban jan 2026 og bekreftet markedsvekst.",
         bevist: ["BladeShip AS 100% eierskap — NOK 18M her&nå","Velumen AS 30% andel — NOK 6.6M","Launchpad-pakker klar (Grunnfelt, Sprayvisir, TrashShip)","Google Workspace aktiv","Nettside atongroup.no live","Stiftelsesdokumenter klare"]
       },
       post_trigger: {
@@ -41,7 +41,7 @@ const ATON_VERDIER = {
       // Metodeverdier (veid snitt)
       veid_snitt: 55,
       exit_potensial: { lav: 500, mid: 1500, hoy: 4000 },
-      sist_oppdatert: "2026-06-02"
+      sist_oppdatert: "2026-06-03"
     },
     {
       id: "bladeship",
@@ -51,9 +51,9 @@ const ATON_VERDIER = {
       stadium: "Pre-seed · TRL 2–3 · 2026",
       // TRE VERDIER
       her_naa: {
-        verdi: 18,
-        grunnlag: "To patenter innlevert, EIC søknad inne (ikke tilsagn), nettside, dokumentasjon, founder med offshore-erfaring. Ingen inntekter, ingen kontrakter.",
-        bevist: ["Patent NO2026-0735 innlevert","Patent NO2026-0736 innlevert","EIC søknad ID 101354477 inne","Nettside bladeship.no live","Equinor Ventures søknad sendt"]
+        verdi: 21,
+        grunnlag: "To patenter innlevert, EIC søknad inne (ikke tilsagn), nettside, dokumentasjon, founder med offshore-erfaring. EU landfill-ban live fra 1. jan 2026 reduserer markedsrisiko vesentlig — markedet er regulatorisk bekreftet. Logistikkproblemet offshore er dokumentert uløst (BCC Research, mai 2026). Ingen inntekter, ingen kontrakter.",
+        bevist: ["Patent NO2026-0735 innlevert","Patent NO2026-0736 innlevert","EIC søknad ID 101354477 inne","Nettside bladeship.no live","Equinor Ventures søknad sendt","EU WindEurope landfill-ban live jan 2026","BCC Research: marked $159B innen 2030 (CAGR 16,6%)","GFG/GFRC-marked vokser 7% CAGR 2026-2031"]
       },
       post_trigger: {
         verdi: 85,
@@ -67,7 +67,7 @@ const ATON_VERDIER = {
       },
       veid_snitt: 52,
       exit_potensial: { lav: 1000, mid: 2500, hoy: 4000 },
-      sist_oppdatert: "2026-06-02"
+      sist_oppdatert: "2026-06-03"
     },
     {
       id: "velumen",
@@ -101,8 +101,8 @@ const ATON_VERDIER = {
       eierandel: 100,
       stadium: "Konsept · TRL 1–2",
       her_naa: {
-        verdi: 5,
-        grunnlag: "Konseptdokumentasjon, fire patentideer, BladeShip-plattform som IP-grunnlag. Ingen egne patenter innlevert ennå.",
+        verdi: 6,
+        grunnlag: "Konseptdokumentasjon, fire patentideer, BladeShip-plattform som IP-grunnlag. Ingen egne patenter innlevert ennå. Regulatorisk medvind fra EU landfill-ban styrker konseptets markedsposisjon.",
         bevist: ["Konseptdokument v1","Teknisk spesifikasjon","Markedsanalyse","BladeShip IP som plattform"]
       },
       post_trigger: {
@@ -116,7 +116,7 @@ const ATON_VERDIER = {
         bunn: 15
       },
       veid_snitt: 30,
-      sist_oppdatert: "2026-06-02"
+      sist_oppdatert: "2026-06-03"
     },
     {
       id: "grunnfelt",
