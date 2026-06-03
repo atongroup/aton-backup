@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<title>Slagplan — [Selskap AS]</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0f14;color:#e8e4d8;padding:24px;font-size:13px}
+.top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:0.5px solid rgba(255,255,255,.12)}
+.top h1{font-size:18px;font-weight:500}.top p{font-size:12px;color:#8a8880;margin-top:2px}
+.vbadge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;background:#1a3a6a;color:#6bb5f5;white-space:nowrap;flex-shrink:0}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.card{background:#111820;border:0.5px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px}
+.ct{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:#8a8880;margin-bottom:10px}
+.kv{font-size:22px;font-weight:500}.ks{font-size:11px;color:#8a8880;margin-top:3px}
+.row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid rgba(255,255,255,.06);gap:8px;font-size:12px}
+.row:last-child{border-bottom:none}
+.rn{font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rs{font-size:11px;color:#8a8880}
+.badge{font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.bg{background:rgba(99,153,34,.18);color:#8dc940}.by{background:rgba(239,159,39,.18);color:#f0c84a}
+.bb{background:rgba(55,138,221,.15);color:#6bb5f5}.bgr{background:rgba(95,94,90,.25);color:#8a8880}
+.br{background:rgba(226,75,74,.15);color:#f07070}
+.trow{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:0.5px solid rgba(255,255,255,.06);font-size:12px}
+.trow:last-child{border-bottom:none}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.dr{background:#e24b4a}.dy{background:#ef9f27}.dg{background:#639922}.dgr{background:#888}
+.tt{flex:1;color:#e8e4d8;line-height:1.4}.td{font-size:11px;color:#8a8880;white-space:nowrap;flex-shrink:0}
+.prog-wrap{margin:6px 0}
+.prog-label{display:flex;justify-content:space-between;font-size:11px;color:#8a8880;margin-bottom:4px}
+.prog-bar{height:5px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden}
+.prog-fill{height:100%;border-radius:4px}
+.cal{display:flex;gap:10px;padding:5px 0;font-size:12px;border-bottom:0.5px solid rgba(255,255,255,.06)}
+.cal:last-child{border-bottom:none}
+.cd{font-size:11px;font-weight:500;color:#c8a030;min-width:80px;flex-shrink:0;padding-top:1px}
+.concept-box{background:rgba(255,255,255,.04);border-radius:6px;padding:10px 12px;font-size:13px;line-height:1.6;margin-top:8px;border-left:2.5px solid #378add;color:#b8d0da}
+.tabs{display:flex;gap:6px;margin-bottom:10px}
+.tab{font-size:11px;font-weight:500;padding:4px 10px;border-radius:20px;border:0.5px solid rgba(255,255,255,.12);background:transparent;color:#8a8880;cursor:pointer}
+.tab.on{background:#c8a030;color:#1a1000;border-color:#c8a030}
+.pane{display:none}.pane.on{display:block}
+.footer{font-size:10px;color:#5a5a55;text-align:right;margin-top:12px;padding-top:8px;border-top:0.5px solid rgba(255,255,255,.06)}
+</style>
+</head>
+<body>
+<script>
+/* ============================================================
+   DATA — OPPDATER DENNE SEKSJONEN VED HVER SESJON
+   Les fra FASIT.md og HUSKELISTE.md
+   ============================================================ */
+const DATA = {
+  selskap:     "Selskap AS",
+  dato:        "[DATO]",
+  versjon:     "v1.0.5",
+  grunder:     "[Navn] · [e-post]",
+  orgnr:       "Under registrering",
+  atonAndel:   "[X]%",
+  domene:      "www.[selskap].no",
+  konsept:     "Fyll inn konseptbeskrivelse — hva er problemet, hva er løsningen, hvem er kunden?",
+
+  kpi: [
+    { label:"Fase",           value:"Idé",        sub:"Pre-registrering" },
+    { label:"Aksjekapital",   value:"NOK 30k",    sub:"Innbetales ved stiftelse" },
+    { label:"Åpne oppgaver",  value:"7",          sub:"Kritiske" },
+    { label:"Tilskudd søkt",  value:"NOK 0",      sub:"0 søknader sendt" },
+  ],
+
+  tasks_critical: [
+    { dot:"dr", text:"Fyll inn alle [FYLL INN]-felter i FASIT.md",  date:"Sesjon 1" },
+    { dot:"dr", text:"Bestem domenenavn — sjekk tilgjengelighet",    date:"Sesjon 1" },
+    { dot:"dr", text:"Signer Idé-NDA med gründer FØR dialog",        date:"Før dialog" },
+    { dot:"dr", text:"Avklar Aton-andel og betingelser",             date:"Sesjon 1" },
+    { dot:"dr", text:"Opprett firmakonto (FØR Altinn-registrering)", date:"Før reg." },
+    { dot:"dy", text:"Send SkatteFUNN straks etter org.nr.",          date:"Etter org.nr." },
+    { dot:"dy", text:"Skaff revisor (kreves for SkatteFUNN)",         date:"Uke 1" },
+  ],
+
+  tasks_important: [
+    { dot:"dy", text:"Sett opp e-postadresser",                       date:"Etter domene" },
+    { dot:"dy", text:"Registrer selskap i Altinn",                    date:"Etter org.nr." },
+    { dot:"dy", text:"Protokoll signeres via Scrive",                 date:"Før Altinn" },
+    { dot:"dy", text:"Opprett Fiken + koble bankkonto",               date:"Etter firmakonto" },
+    { dot:"dgr",text:"QC-sjekk FØR publisering (QC_SJEKKLISTE.md)",  date:"Løpende" },
+  ],
+
+  backlog: [
+    { dot:"dg", text:"Søk IN Miljøteknologi eller Oppstartsstøtte",   date:"Etter KK" },
+    { dot:"dg", text:"Lag pitchdekk (10 slides)",                     date:"Etter validering" },
+    { dot:"dg", text:"Identifiser 3 potensielle partnere",            date:"Etter EmailLogg" },
+  ],
+
+  fremdrift: [
+    { label:"Idé / konsept",        pct:100, cls:"#639922" },
+    { label:"Research",             pct:0,   cls:"#ef9f27" },
+    { label:"Strategi",             pct:0,   cls:"#ef9f27" },
+    { label:"Nettside",             pct:0,   cls:"#378add" },
+    { label:"Selskapsregistrering", pct:0,   cls:"#378add" },
+    { label:"Første kunde",         pct:0,   cls:"#888"    },
+  ],
+
+  kalender: [
+    { date:"Sesjon 1",  text:"Fyll ut FASIT — domene — NDA" },
+    { date:"Uke 1",     text:"Firmakonto + revisor" },
+    { date:"Uke 2",     text:"Registrer i Altinn + SkatteFUNN" },
+    { date:"Måned 1",   text:"Nettside live + IN-søknad" },
+    { date:"Måned 2",   text:"Første kundemøte" },
+  ],
+
+  kontakter: [
+    { navn:"[Potensiell partner]",  rolle:"Partner",  status:"Ikke kontaktet", cls:"bgr" },
+    { navn:"[Potensiell kunde]",    rolle:"Kunde",     status:"Ikke kontaktet", cls:"bgr" },
+    { navn:"[Potensiell investor]", rolle:"Investor",  status:"Ikke kontaktet", cls:"bgr" },
+  ],
+};
+/* ============================================================
+   RENDER — IKKE REDIGER UNDER DETTE PUNKTET
+   ============================================================ */
+function sw(id,btn){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on'); document.getElementById('p'+id).classList.add('on');
+}
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e;}
+function ap(p,...c){c.forEach(x=>x&&p.appendChild(typeof x==='string'?document.createTextNode(x):x));return p;}
+
+window.onload=function(){
+  document.getElementById('h1').textContent=DATA.selskap+' — slagplan';
+  document.getElementById('sub').textContent='Leif Sunde · leif@atongroup.no · '+DATA.dato;
+  document.getElementById('vbadge').textContent=DATA.versjon;
+  document.getElementById('iNavn').textContent=DATA.selskap;
+  document.getElementById('iGrunder').textContent=DATA.grunder;
+  document.getElementById('iOrgnr').textContent=DATA.orgnr;
+  document.getElementById('iAton').textContent=DATA.atonAndel;
+  document.getElementById('iDomene').textContent=DATA.domene;
+  document.getElementById('iKonsept').textContent=DATA.konsept;
+
+  const kg=document.getElementById('kpiGrid');
+  DATA.kpi.forEach(k=>{const c=el('div','card');ap(c,el('div','ct',k.label),el('div','kv',k.value),el('div','ks',k.sub));kg.appendChild(c);});
+
+  function taskRow(t){const r=el('div','trow');ap(r,el('span','dot '+t.dot),ap(el('span','tt'),t.text),el('span','td',t.date));return r;}
+  DATA.tasks_critical.forEach(t=>document.getElementById('pk').appendChild(taskRow(t)));
+  DATA.tasks_important.forEach(t=>document.getElementById('pv').appendChild(taskRow(t)));
+  DATA.backlog.forEach(t=>document.getElementById('pb').appendChild(taskRow(t)));
+
+  const pg=document.getElementById('progGrid');
+  DATA.fremdrift.forEach(f=>{
+    const w=el('div','prog-wrap'),lb=el('div','prog-label'),bar=el('div','prog-bar'),fill=el('div','prog-fill');
+    ap(lb,el('span',null,f.label),el('span',null,f.pct+'%'));
+    fill.style.cssText=`width:${f.pct}%;background:${f.cls}`;
+    bar.appendChild(fill);ap(w,lb,bar);pg.appendChild(w);
+  });
+
+  const kal=document.getElementById('kalender');
+  DATA.kalender.forEach(c=>{const r=el('div','cal');ap(r,el('span','cd',c.date),el('span',null,c.text));kal.appendChild(r);});
+
+  const knt=document.getElementById('kontakter');
+  DATA.kontakter.forEach(k=>{
+    const r=el('div','row'),left=el('div');
+    ap(left,el('div','rn',k.navn),el('div','rs',k.rolle));
+    ap(r,left,el('span','badge '+k.cls,k.status));knt.appendChild(r);
+  });
+};
+</script>
+
+<div class="top">
+  <div><h1 class="top-left" id="h1">Selskap AS — slagplan</h1><p id="sub"></p></div>
+  <span class="vbadge" id="vbadge">v1.0.5</span>
+</div>
+
+<div class="g4" id="kpiGrid"></div>
+
+<div class="g2">
+  <div class="card">
+    <div class="ct">Selskap og konsept</div>
+    <div class="row"><span class="rn">Selskap</span><span class="rs" id="iNavn"></span></div>
+    <div class="row"><span class="rn">Gründer</span><span class="rs" id="iGrunder"></span></div>
+    <div class="row"><span class="rn">Org.nr.</span><span class="rs" id="iOrgnr"></span></div>
+    <div class="row"><span class="rn">Aton-andel</span><span class="rs" id="iAton"></span></div>
+    <div class="row"><span class="rn">Domene</span><span class="rs" id="iDomene"></span></div>
+    <div class="concept-box" id="iKonsept"></div>
+  </div>
+  <div class="card">
+    <div class="ct">Oppgaver</div>
+    <div class="tabs">
+      <button class="tab on" onclick="sw('k',this)">Kritisk</button>
+      <button class="tab" onclick="sw('v',this)">Viktig</button>
+      <button class="tab" onclick="sw('b',this)">Backlog</button>
+    </div>
+    <div class="pane on" id="pk"></div>
+    <div class="pane" id="pv"></div>
+    <div class="pane" id="pb"></div>
+  </div>
+</div>
+
+<div class="g2">
+  <div class="card">
+    <div class="ct">Fremdrift</div>
+    <div id="progGrid"></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div class="card"><div class="ct">Kalender</div><div id="kalender"></div></div>
+    <div class="card"><div class="ct">Nøkkelkontakter</div><div id="kontakter"></div></div>
+  </div>
+</div>
+
+<div class="footer">Konfidensielt — Aton AdVentures AS — ikke distribuer eksternt</div>
+</body>
+</html>
