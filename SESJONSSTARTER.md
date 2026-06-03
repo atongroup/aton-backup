@@ -101,6 +101,7 @@
 - **E-post:** Kjør alltid E-POST KVALITETSSJEKKISTE før utkast. Vis utkast, vent på «send» fra Leif
 - **Dokumenter:** Advokatsjekk før ferdigstilling — parter, datoer, beløp, forpliktelser
 - **Filer:** GitHub = master. Nettside = ZIP → Leif laster opp selv
+- **Nettside-ZIP:** Hvis nettsidefiler er endret i løpet av en sesjon (atongroup.no, bladeship.no, grunnfelt.no eller andre), lag alltid ZIP av den aktuelle Nettside-mappen og tilby som nedlasting før Exit — uten at Leif trenger å be om det
 - **Partner:** Aldri skriv «partner/avtale/samarbeider» uten skriftlig bekreftelse
 - **NDA:** Aldri foreslå å sende tekniske BladeShip-dokumenter uten bekreftet signert NDA fra mottaker
 - **Gavebrev:** Lone (Scrive ID 09222115557579576827) + Alexandra (09222115557579576821) — signert 30.mai.2026
