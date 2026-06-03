@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submit Your Idea — Aton Group AS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0e0a02;--deep:#1a1208;--warm:#2e1f0a;--sienna:#6b4020;
+  --sand:#c8a468;--gold:#c8a030;--gold-l:#e8c060;
+  --cream:#f5e8c0;--parch:#faf3e0;--paper:#fdf8f0;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --r:6px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--cream);font-family:var(--sans);font-weight:300;overflow-x:hidden;line-height:1.7}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:.9rem 2.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(14,10,2,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,160,48,.15)}
+.nav-logo{font-family:var(--serif);font-size:1.15rem;letter-spacing:.08em;color:var(--sand)}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,232,192,.55);text-decoration:none;transition:.2s}
+.nav-links a:hover{color:var(--gold)}
+.lang-toggle{display:flex;gap:.5rem}
+.lang-btn{background:none;border:1px solid rgba(200,160,48,.3);color:rgba(245,232,192,.5);padding:.25rem .6rem;border-radius:3px;font-size:.88rem;cursor:pointer;letter-spacing:.08em;transition:.2s;font-family:var(--sans)}
+.lang-btn.active,.lang-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:7rem 2rem 4rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 40%, rgba(200,160,48,.07) 0%, transparent 70%)}
+.hero-lines{position:absolute;inset:0;pointer-events:none}
+.hero-content{position:relative;max-width:720px;text-align:center}
+.hero-tag{font-size:.88rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:block}
+.hero-h1{font-family:var(--serif);font-size:clamp(2.8rem,6vw,5rem);font-weight:400;line-height:1.12;color:var(--cream);margin-bottom:1.5rem}
+.hero-h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:1rem;color:rgba(245,232,192,.6);line-height:1.75;max-width:540px;margin:0 auto 2.5rem}
+.hero-cta{display:inline-flex;align-items:center;gap:.6rem;background:var(--gold);color:var(--ink);padding:.85rem 2.2rem;border-radius:var(--r);font-family:var(--sans);font-weight:500;font-size:1rem;letter-spacing:.06em;text-decoration:none;transition:.25s;border:none;cursor:pointer}
+.hero-cta:hover{background:var(--gold-l);transform:translateY(-1px)}
+.hero-cta svg{transition:.25s}
+.hero-cta:hover svg{transform:translateX(3px)}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:rgba(245,232,192,.3);font-size:.88rem;letter-spacing:.12em;text-transform:uppercase}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(200,160,48,.5),transparent);animation:scrollAnim 2s ease-in-out infinite}
+@keyframes scrollAnim{0%,100%{opacity:.5;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
+
+/* ── HOW IT WORKS ── */
+.section{padding:6rem 2rem}
+.section-inner{max-width:960px;margin:0 auto}
+.section-label{font-size:.88rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.section-h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:400;color:var(--cream);margin-bottom:3rem;line-height:1.2}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem}
+.step{position:relative;padding:2rem 1.5rem;border:1px solid rgba(200,160,48,.15);border-radius:var(--r);background:rgba(26,18,8,.6)}
+.step-num{font-family:var(--serif);font-size:3.5rem;font-weight:400;color:rgba(200,160,48,.15);line-height:1;margin-bottom:1rem}
+.step-title{font-family:var(--serif);font-size:1.2rem;color:var(--sand);margin-bottom:.6rem}
+.step-desc{font-size:.83rem;color:rgba(245,232,192,.55);line-height:1.7}
+
+/* ── NDA PREVIEW ── */
+.nda-section{background:var(--deep);border-top:1px solid rgba(200,160,48,.1);border-bottom:1px solid rgba(200,160,48,.1)}
+.nda-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+@media(max-width:680px){.nda-grid{grid-template-columns:1fr}}
+.nda-points{list-style:none;display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+.nda-point{display:flex;gap:.8rem;align-items:flex-start;font-size:1rem;color:rgba(245,232,192,.80);line-height:1.65}
+.nda-icon{width:18px;height:18px;border-radius:50%;background:rgba(200,160,48,.15);border:1px solid rgba(200,160,48,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem}
+.nda-icon svg{width:9px;height:9px;stroke:var(--gold)}
+.nda-doc{background:rgba(14,10,2,.8);border:1px solid rgba(200,160,48,.2);border-radius:var(--r);padding:2rem;font-size:.95rem;line-height:1.8;color:rgba(245,232,192,.55)}
+.nda-doc-title{font-family:var(--serif);font-size:1.1rem;color:var(--sand);margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid rgba(200,160,48,.15)}
+.nda-clause{margin-bottom:1rem}
+.nda-clause strong{color:rgba(245,232,192,.8);font-weight:500}
+
+/* ── FORM ── */
+.form-section{background:var(--ink)}
+.form-wrap{max-width:700px;margin:0 auto}
+.form-steps-nav{display:flex;gap:0;margin-bottom:3rem;border:1px solid rgba(200,160,48,.2);border-radius:var(--r);overflow:hidden}
+.form-step-tab{flex:1;padding:.75rem;text-align:center;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,232,192,.35);background:rgba(26,18,8,.4);border:none;cursor:pointer;transition:.2s;font-family:var(--sans)}
+.form-step-tab.done{color:var(--gold);background:rgba(200,160,48,.08)}
+.form-step-tab.active{color:var(--ink);background:var(--gold);font-weight:500}
+.form-page{display:none}
+.form-page.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.field{margin-bottom:1.75rem}
+.field label{display:block;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sand);margin-bottom:.6rem}
+.field input,.field textarea,.field select{width:100%;background:rgba(26,18,8,.8);border:1px solid rgba(200,160,48,.25);border-radius:var(--r);padding:.85rem 1rem;color:var(--cream);font-family:var(--sans);font-size:.9rem;font-weight:300;outline:none;transition:.2s;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold);background:rgba(46,31,10,.6)}
+.field input::placeholder,.field textarea::placeholder{color:rgba(245,232,192,.25)}
+.field select option{background:var(--deep);color:var(--cream)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+@media(max-width:560px){.field-row{grid-template-columns:1fr}}
+.field-hint{font-size:.75rem;color:rgba(245,232,192,.35);margin-top:.4rem}
+.upload-area{border:2px dashed rgba(200,160,48,.25);border-radius:var(--r);padding:2.5rem;text-align:center;cursor:pointer;transition:.25s;background:rgba(26,18,8,.4)}
+.upload-area:hover,.upload-area.drag{border-color:var(--gold);background:rgba(200,160,48,.06)}
+.upload-icon{font-size:2rem;margin-bottom:.75rem;opacity:.5}
+.upload-text{font-size:1rem;color:rgba(245,232,192,.5)}
+.upload-text span{color:var(--gold);cursor:pointer}
+.file-list{margin-top:1rem;display:flex;flex-direction:column;gap:.5rem}
+.file-item{display:flex;align-items:center;justify-content:space-between;background:rgba(200,160,48,.08);border:1px solid rgba(200,160,48,.2);border-radius:4px;padding:.5rem .75rem;font-size:.8rem;color:var(--sand)}
+.file-remove{background:none;border:none;color:rgba(245,232,192,.4);cursor:pointer;font-size:1.1rem;line-height:1}
+.nda-agree{display:flex;gap:.8rem;align-items:flex-start;padding:1.25rem;background:rgba(200,160,48,.06);border:1px solid rgba(200,160,48,.2);border-radius:var(--r);margin-bottom:1.75rem;cursor:pointer}
+.nda-agree input[type=checkbox]{width:16px;height:16px;accent-color:var(--gold);flex-shrink:0;margin-top:.2rem;cursor:pointer}
+.nda-agree-text{font-size:.95rem;color:rgba(245,232,192,.80);line-height:1.6}
+.nda-agree-text a{color:var(--gold);text-decoration:none}
+.nda-agree-text a:hover{text-decoration:underline}
+.btn-row{display:flex;gap:1rem;justify-content:space-between;align-items:center;margin-top:2rem}
+.btn-back{background:none;border:1px solid rgba(200,160,48,.3);color:rgba(245,232,192,.5);padding:.8rem 1.75rem;border-radius:var(--r);font-family:var(--sans);font-size:1rem;cursor:pointer;transition:.2s}
+.btn-back:hover{border-color:var(--gold);color:var(--gold)}
+.btn-next{background:var(--gold);color:var(--ink);padding:.8rem 2rem;border-radius:var(--r);font-family:var(--sans);font-weight:500;font-size:1rem;border:none;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:.5rem}
+.btn-next:hover{background:var(--gold-l)}
+.btn-next:disabled{opacity:.4;cursor:default}
+.progress-bar{height:2px;background:rgba(200,160,48,.15);border-radius:1px;margin-bottom:2rem;overflow:hidden}
+.progress-fill{height:100%;background:var(--gold);transition:width .4s ease;border-radius:1px}
+
+/* ── NDA MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(14,10,2,.85);backdrop-filter:blur(8px);z-index:200;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--deep);border:1px solid rgba(200,160,48,.3);border-radius:var(--r);max-width:600px;width:100%;max-height:85vh;display:flex;flex-direction:column}
+.modal-header{padding:1.5rem 2rem;border-bottom:1px solid rgba(200,160,48,.15);display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-family:var(--serif);font-size:1.3rem;color:var(--sand)}
+.modal-close{background:none;border:none;color:rgba(245,232,192,.4);font-size:1.4rem;cursor:pointer;line-height:1;transition:.15s}
+.modal-close:hover{color:var(--cream)}
+.modal-body{padding:2rem;overflow-y:auto;font-size:.83rem;color:rgba(245,232,192,.80);line-height:1.85}
+.modal-body h3{font-family:var(--serif);font-size:1rem;color:var(--sand);margin:1.5rem 0 .5rem}
+.modal-body p{margin-bottom:1rem}
+.modal-footer{padding:1.25rem 2rem;border-top:1px solid rgba(200,160,48,.15)}
+
+/* ── SUCCESS ── */
+.success{display:none;text-align:center;padding:4rem 2rem}
+.success.show{display:block;animation:fadeIn .5s ease}
+.success-ring{width:72px;height:72px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 2rem}
+.success-ring svg{width:32px;height:32px;stroke:var(--gold)}
+.success h2{font-family:var(--serif);font-size:2rem;color:var(--cream);margin-bottom:1rem}
+.success p{color:rgba(245,232,192,.6);font-size:.92rem;line-height:1.75;max-width:440px;margin:0 auto 2rem}
+.success-ref{display:inline-block;background:rgba(200,160,48,.1);border:1px solid rgba(200,160,48,.3);border-radius:4px;padding:.4rem 1rem;font-size:.8rem;color:var(--sand);letter-spacing:.08em;margin-bottom:2rem}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid rgba(200,160,48,.1);padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:var(--serif);color:var(--sienna);font-size:.9rem}
+.footer-copy{font-size:.75rem;color:rgba(245,232,192,.25)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){nav{padding:.8rem 1.25rem}.hero{padding:6rem 1.25rem 3rem}.section{padding:4rem 1.25rem}.section-inner{max-width:100%}.form-section .section-inner{max-width:100%}}
+</style>
+</head>
+<body>
+<a href="/" id="back-home" aria-label="Tilbake til forsiden" style="position:fixed;top:14px;left:16px;z-index:9999;display:flex;align-items:center;gap:6px;background:rgba(10,8,4,0.82);border:1px solid rgba(200,152,24,0.4);color:#c89818;text-decoration:none;font-size:13px;font-family:inherit;padding:6px 12px;border-radius:20px;backdrop-filter:blur(4px);transition:background 0.2s" onmouseover="this.style.background='rgba(200,152,24,0.18)'" onmouseout="this.style.background='rgba(10,8,4,0.82)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c89818" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>atongroup.no</a>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo" style="display:flex;align-items:center"><svg viewBox="0 0 110 110" height="28" style="vertical-align:middle;margin-right:8px" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="sm" cx="42%" cy="38%" r="60%"><stop offset="0%" stop-color="#fce878"/><stop offset="35%" stop-color="#e0a020"/><stop offset="70%" stop-color="#a06010"/><stop offset="100%" stop-color="#5c2e00"/></radialGradient></defs><g transform="translate(55,55)"><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#a06808" transform="rotate(0)"/><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#b87c14" transform="rotate(22.5)"/><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#a06808" transform="rotate(45)"/><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#b87c14" transform="rotate(67.5)"/><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#a06808" transform="rotate(90)"/><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#b87c14" transform="rotate(112.5)"/><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#a06808" transform="rotate(135)"/><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#b87c14" transform="rotate(157.5)"/><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#a06808" transform="rotate(180)"/><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#b87c14" transform="rotate(202.5)"/><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#a06808" transform="rotate(225)"/><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#b87c14" transform="rotate(247.5)"/><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#a06808" transform="rotate(270)"/><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#b87c14" transform="rotate(292.5)"/><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#a06808" transform="rotate(315)"/><path d="M0,-48 C-2,-38 -1.8,-30 -1,-26 C-0.3,-28 0,-31 0,-34 C0,-31 0.3,-28 1,-26 C1.8,-30 2,-38 0,-48Z" fill="#b87c14" transform="rotate(337.5)"/></g><circle cx="55" cy="55" r="22" fill="url(#sm)"/><circle cx="55" cy="55" r="6" fill="#fdf4c0" opacity="0.3"/></svg>Aton Group AS</span>
+  <div class="nav-links" id="navLinks">
+    <a href="#how">How it works</a>
+    <a href="#protection">NDA</a>
+    <a href="#apply">Apply</a>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="btnNO" onclick="setLang('no')">NO</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-tag" data-en="Venture Builder · Stavanger, Norway" data-no="Venture Builder · Stavanger, Norge">Venture Builder · Stavanger, Norway</span>
+    <h1 class="hero-h1" data-en="Your idea.<br><em>Our engine.</em>" data-no="Din idé.<br><em>Vår motor.</em>">Your idea.<br><em>Our engine.</em></h1>
+    <p class="hero-sub" data-en="We partner with founders to build companies from scratch. You keep your IP and vision. We bring capital, network and operations — and take equity alongside you." data-no="Vi samarbeider med gründere om å bygge selskaper fra bunnen. Du beholder din IP og visjon. Vi bidrar med kapital, nettverk og drift — og tar equity ved din side.">We partner with founders to build companies from scratch. You keep your IP and vision. We bring capital, network and operations — and take equity alongside you.</p>
+    <a href="#apply" class="hero-cta">
+      <span data-en="Submit your idea" data-no="Send inn din idé">Submit your idea</span>
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span data-en="Scroll" data-no="Scroll">Scroll</span>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <div class="section-inner">
+    <div class="section-label" data-en="The process" data-no="Prosessen">The process</div>
+    <h2 class="section-h2" data-en="From idea to company<br>in four steps" data-no="Fra idé til selskap<br>i fire steg">From idea to company<br>in four steps</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title" data-en="Submit" data-no="Send inn">Submit</div>
+        <div class="step-desc" data-en="Fill in the form and describe your idea. An NDA is signed immediately — before you share any details." data-no="Fyll ut skjemaet og beskriv ideen din. NDA signeres umiddelbart — før du deler noen detaljer.">Fill in the form and describe your idea. An NDA is signed immediately — before you share any details.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title" data-en="Evaluation" data-no="Evaluering">Evaluation</div>
+        <div class="step-desc" data-en="We review your submission within 5 business days and come back with honest, direct feedback." data-no="Vi gjennomgår innsendingen din innen 5 virkedager og kommer tilbake med ærlig, direkte tilbakemelding.">We review your submission within 5 business days and come back with honest, direct feedback.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title" data-en="Term sheet" data-no="Term sheet">Term sheet</div>
+        <div class="step-desc" data-en="If we move forward, we agree on equity split, roles and milestones. You retain IP ownership throughout." data-no="Hvis vi går videre, avtaler vi equity-fordeling, roller og milepæler. Du beholder IP-eierskap gjennom hele prosessen.">If we move forward, we agree on equity split, roles and milestones. You retain IP ownership throughout.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title" data-en="Build" data-no="Bygg">Build</div>
+        <div class="step-desc" data-en="We incorporate the company, deploy capital and start building — together." data-no="Vi stifter selskapet, setter inn kapital og begynner å bygge — sammen.">We incorporate the company, deploy capital and start building — together.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NDA SECTION -->
+<section class="section nda-section" id="protection">
+  <div class="section-inner">
+    <div class="nda-grid">
+      <div>
+        <div class="section-label" data-en="Your protection" data-no="Din beskyttelse">Your protection</div>
+        <h2 class="section-h2" data-en="You are protected<br>before you say a word" data-no="Du er beskyttet<br>før du sier et ord">You are protected<br>before you say a word</h2>
+        <ul class="nda-points">
+          <li class="nda-point"><div class="nda-icon"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><span data-en="NDA is signed digitally before any confidential information is shared." data-no="NDA signeres digitalt før konfidensiell informasjon deles.">NDA is signed digitally before any confidential information is shared.</span></li>
+          <li class="nda-point"><div class="nda-icon"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><span data-en="You retain full intellectual property ownership at all times." data-no="Du beholder fullt eierskap til intellektuell eiendom til enhver tid.">You retain full intellectual property ownership at all times.</span></li>
+          <li class="nda-point"><div class="nda-icon"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><span data-en="Confidentiality obligation: 5 years. Any breach triggers liquidated damages." data-no="Konfidensialitetsplikt: 5 år. Ethvert brudd utløser forhåndsbestemt erstatning.">Confidentiality obligation: 5 years. Any breach triggers liquidated damages.</span></li>
+          <li class="nda-point"><div class="nda-icon"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><span data-en="Governed by Norwegian law. Venue: Stavanger District Court." data-no="Regulert av norsk lov. Verneting: Stavanger tingrett.">Governed by Norwegian law. Venue: Stavanger District Court.</span></li>
+          <li class="nda-point"><div class="nda-icon"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><span data-en="Aton Group may not use the idea without a signed term sheet." data-no="Aton Group kan ikke benytte ideen uten signert term sheet.">Aton Group may not use the idea without a signed term sheet.</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="nda-doc">
+          <div class="nda-doc-title" data-en="Non-Disclosure Agreement — Summary" data-no="Taushetserklæring — Sammendrag">Non-Disclosure Agreement — Summary</div>
+          <div class="nda-clause"><strong data-en="Parties" data-no="Parter">Parties</strong><br><span data-en="Aton Group AS (org. no. pending) · Disclosing Party: Founder (the Applicant)" data-no="Aton Group AS (org.nr. under registrering) · Avslørende part: Gründer (søkeren)">Aton Group AS (org. no. pending) · Disclosing Party: Founder (the Applicant)</span></div>
+          <div class="nda-clause"><strong data-en="Confidential Information" data-no="Konfidensiell informasjon">Confidential Information</strong><br><span data-en="All business ideas, technical concepts, market analyses, prototypes and documents shared through this portal." data-no="Alle forretningsideer, tekniske konsepter, markedsanalyser, prototyper og dokumenter delt gjennom denne portalen.">All business ideas, technical concepts, market analyses, prototypes and documents shared through this portal.</span></div>
+          <div class="nda-clause"><strong data-en="Obligations" data-no="Forpliktelser">Obligations</strong><br><span data-en="Aton Group shall: (1) keep all information strictly confidential, (2) not disclose to third parties without prior written consent, (3) use information solely to evaluate a potential partnership." data-no="Aton Group skal: (1) holde all informasjon strengt konfidensiell, (2) ikke videreformidle til tredjeparter uten forhåndsskriftlig samtykke, (3) kun bruke informasjon for å vurdere et potensielt partnerskap.">Aton Group shall: (1) keep all information strictly confidential, (2) not disclose to third parties without prior written consent, (3) use information solely to evaluate a potential partnership.</span></div>
+          <div class="nda-clause"><strong data-en="Term & Remedy" data-no="Varighet og mislighold">Term & Remedy</strong><br><span data-en="5 years from submission date. Breach: NOK 500 000 in liquidated damages, plus injunctive relief." data-no="5 år fra innsendingsdato. Brudd: NOK 500 000 i forhåndsbestemt erstatning, samt rettsforbud.">5 years from submission date. Breach: NOK 500 000 in liquidated damages, plus injunctive relief.</span></div>
+          <button onclick="openNDA()" style="background:none;border:1px solid rgba(200,160,48,.3);color:var(--sand);padding:.5rem 1rem;border-radius:4px;font-size:.78rem;cursor:pointer;margin-top:.75rem;font-family:var(--sans);transition:.2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(200,160,48,.3)'" data-en="Read full NDA →" data-no="Les full NDA →">Read full NDA →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION FORM -->
+<section class="section form-section" id="apply">
+  <div class="section-inner">
+    <div class="section-label" data-en="Application" data-no="Søknad">Application</div>
+    <h2 class="section-h2" data-en="Tell us about<br>your idea" data-no="Fortell oss om<br>din idé">Tell us about<br>your idea</h2>
+
+    <div class="form-wrap" id="formWrap">
+      <div class="form-steps-nav">
+        <button class="form-step-tab active" id="tab1" data-en="1 · Contact" data-no="1 · Kontakt">1 · Contact</button>
+        <button class="form-step-tab" id="tab2" data-en="2 · The idea" data-no="2 · Ideen">2 · The idea</button>
+        <button class="form-step-tab" id="tab3" data-en="3 · NDA & Submit" data-no="3 · NDA & Send">3 · NDA & Submit</button>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:33%"></div></div>
+
+      <!-- Page 1: Contact -->
+      <div class="form-page active" id="page1">
+        <div class="field-row">
+          <div class="field">
+            <label data-en="First name *" data-no="Fornavn *">First name *</label>
+            <input type="text" id="fFirstName" placeholder="Leif" autocomplete="given-name">
+          </div>
+          <div class="field">
+            <label data-en="Last name *" data-no="Etternavn *">Last name *</label>
+            <input type="text" id="fLastName" placeholder="Sunde" autocomplete="family-name">
+          </div>
+        </div>
+        <div class="field">
+          <label data-en="Email address *" data-no="E-postadresse *">Email address *</label>
+          <input type="email" id="fEmail" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="field">
+          <label data-en="Phone" data-no="Telefon">Phone</label>
+          <input type="tel" id="fPhone" placeholder="+47 900 00 000" autocomplete="tel">
+        </div>
+        <div class="field">
+          <label data-en="Country of residence *" data-no="Bostedsland *">Country of residence *</label>
+          <select id="fCountry">
+            <option value="" data-en="— Select —" data-no="— Velg —">— Select —</option>
+            <option value="NO">Norway</option>
+            <option value="SE">Sweden</option>
+            <option value="DK">Denmark</option>
+            <option value="FI">Finland</option>
+            <option value="DE">Germany</option>
+            <option value="GB">United Kingdom</option>
+            <option value="US">United States</option>
+            <option value="OTHER" data-en="Other" data-no="Annet">Other</option>
+          </select>
+        </div>
+        <div class="btn-row">
+          <span></span>
+          <button class="btn-next" onclick="goPage(2)">
+            <span data-en="Next: The idea" data-no="Neste: Ideen">Next: The idea</span>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Page 2: The Idea -->
+      <div class="form-page" id="page2">
+        <div class="field">
+          <label data-en="Idea / company name *" data-no="Idé / selskapsnavn *">Idea / company name *</label>
+          <input type="text" id="fIdeaName" placeholder="e.g. AquaSort — automated waste sorting for fishing vessels">
+        </div>
+        <div class="field">
+          <label data-en="Industry / sector *" data-no="Bransje / sektor *">Industry / sector *</label>
+          <select id="fIndustry">
+            <option value="" data-en="— Select —" data-no="— Velg —">— Select —</option>
+            <option data-en="Maritime & Offshore" data-no="Maritim & Offshore">Maritime & Offshore</option>
+            <option data-en="Clean Energy & Sustainability" data-no="Ren energi & bærekraft">Clean Energy & Sustainability</option>
+            <option data-en="Health & Medical" data-no="Helse & medisin">Health & Medical</option>
+            <option data-en="Consumer Products" data-no="Forbrukerprodukter">Consumer Products</option>
+            <option data-en="Software & SaaS" data-no="Programvare & SaaS">Software & SaaS</option>
+            <option data-en="Hardware & Manufacturing" data-no="Hardware & produksjon">Hardware & Manufacturing</option>
+            <option data-en="Food & Agriculture" data-no="Mat & landbruk">Food & Agriculture</option>
+            <option data-en="Other" data-no="Annet">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-en="Describe the problem you solve *" data-no="Beskriv problemet du løser *">Describe the problem you solve *</label>
+          <textarea id="fProblem" rows="3" placeholder="What frustration, inefficiency or unmet need does your idea address?"></textarea>
+        </div>
+        <div class="field">
+          <label data-en="Your solution *" data-no="Din løsning *">Your solution *</label>
+          <textarea id="fSolution" rows="4" placeholder="Describe your product, service or technology. How does it work? What makes it different?"></textarea>
+        </div>
+        <div class="field">
+          <label data-en="Current status" data-no="Nåværende status">Current status</label>
+          <select id="fStatus">
+            <option value="" data-en="— Select —" data-no="— Velg —">— Select —</option>
+            <option data-en="Idea only" data-no="Kun idé">Idea only</option>
+            <option data-en="Research / validation" data-no="Forskning / validering">Research / validation</option>
+            <option data-en="Prototype / MVP" data-no="Prototype / MVP">Prototype / MVP</option>
+            <option data-en="Early revenue" data-no="Tidlig omsetning">Early revenue</option>
+            <option data-en="Scaling" data-no="Skalering">Scaling</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-en="Supporting documents (optional)" data-no="Støttedokumenter (valgfritt)">Supporting documents (optional)</label>
+          <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDrop(event)">
+            <div class="upload-icon">📎</div>
+            <div class="upload-text" data-en="Drag files here or <span>browse</span>" data-no="Dra filer hit eller <span>bla gjennom</span>">Drag files here or <span>browse</span></div>
+            <div style="font-size:.88rem;color:rgba(245,232,192,.3);margin-top:.4rem" data-en="PDF, PPTX, DOCX, images · Max 20 MB" data-no="PDF, PPTX, DOCX, bilder · Maks 20 MB">PDF, PPTX, DOCX, images · Max 20 MB</div>
+          </div>
+          <div class="file-list" id="fileList"></div>
+          <input type="file" id="fileInput" multiple accept=".pdf,.pptx,.docx,.png,.jpg,.jpeg" style="display:none" onchange="addFiles(this.files)">
+        </div>
+        <div class="btn-row">
+          <button class="btn-back" onclick="goPage(1)" data-en="← Back" data-no="← Tilbake">← Back</button>
+          <button class="btn-next" onclick="goPage(3)">
+            <span data-en="Next: NDA & Submit" data-no="Neste: NDA & Send">Next: NDA & Submit</span>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Page 3: NDA + Submit -->
+      <div class="form-page" id="page3">
+        <div style="background:rgba(200,160,48,.06);border:1px solid rgba(200,160,48,.2);border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:2rem">
+          <div style="font-family:var(--serif);font-size:1.05rem;color:var(--sand);margin-bottom:.5rem" data-en="Mutual Non-Disclosure Agreement" data-no="Gjensidig taushetserklæring">Mutual Non-Disclosure Agreement</div>
+          <p style="font-size:.95rem;color:rgba(245,232,192,.55);line-height:1.7" data-en="By submitting this application you enter into a binding NDA with Aton Group AS. The NDA protects your idea before, during and after the evaluation — regardless of the outcome." data-no="Ved å sende inn denne søknaden inngår du en bindende NDA med Aton Group AS. NDA-en beskytter ideen din før, under og etter evalueringen — uavhengig av utfallet.">By submitting this application you enter into a binding NDA with Aton Group AS. The NDA protects your idea before, during and after the evaluation — regardless of the outcome.</p>
+          <button onclick="openNDA()" style="background:none;border:none;color:var(--gold);font-size:.8rem;cursor:pointer;padding:0;margin-top:.5rem;font-family:var(--sans)" data-en="Read full agreement →" data-no="Les full avtale →">Read full agreement →</button>
+        </div>
+
+        <div style="font-family:var(--serif);font-size:1.1rem;color:var(--sand);margin-bottom:1.25rem" data-en="Digital signature" data-no="Digital signatur">Digital signature</div>
+
+        <div class="field">
+          <label data-en="Full legal name (as signature) *" data-no="Fullt juridisk navn (som signatur) *">Full legal name (as signature) *</label>
+          <input type="text" id="fSignature" placeholder="Your full name">
+          <div class="field-hint" data-en="Typing your name constitutes a legally binding electronic signature under Norwegian law (esignaturloven)." data-no="Å skrive ditt navn utgjør en juridisk bindende elektronisk signatur etter norsk lov (esignaturloven).">Typing your name constitutes a legally binding electronic signature under Norwegian law (esignaturloven).</div>
+        </div>
+
+        <label class="nda-agree" for="checkNDA">
+          <input type="checkbox" id="checkNDA">
+          <span class="nda-agree-text" data-en="I have read and accept the <a href='#' onclick='openNDA();return false'>Non-Disclosure Agreement</a>. I confirm that I have the authority to enter into this agreement and that the information I submit is true and accurate." data-no="Jeg har lest og aksepterer <a href='#' onclick='openNDA();return false'>taushetserklæringen</a>. Jeg bekrefter at jeg har fullmakt til å inngå denne avtalen, og at informasjonen jeg sender inn er sann og korrekt.">I have read and accept the <a href="#" onclick="openNDA();return false">Non-Disclosure Agreement</a>. I confirm that I have the authority to enter into this agreement and that the information I submit is true and accurate.</span>
+        </label>
+
+        <label class="nda-agree" for="checkGDPR">
+          <input type="checkbox" id="checkGDPR">
+          <span class="nda-agree-text" data-en="I consent to Aton Group AS processing my personal data for the purpose of evaluating my application, in accordance with GDPR. Data is stored securely and never shared with third parties." data-no="Jeg samtykker til at Aton Group AS behandler mine personopplysninger med det formål å vurdere søknaden min, i henhold til GDPR. Data lagres sikkert og deles aldri med tredjeparter.">I consent to Aton Group AS processing my personal data for the purpose of evaluating my application, in accordance with GDPR. Data is stored securely and never shared with third parties.</span>
+        </label>
+
+        <div class="btn-row">
+          <button class="btn-back" onclick="goPage(2)" data-en="← Back" data-no="← Tilbake">← Back</button>
+          <button class="btn-next" id="submitBtn" onclick="submitForm()">
+            <span data-en="Submit application" data-no="Send inn søknad">Submit application</span>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <div style="text-align:center;font-size:.75rem;color:rgba(245,232,192,.25);margin-top:1.5rem" data-en="Your idea is protected the moment you click Submit." data-no="Ideen din er beskyttet i det øyeblikket du klikker Send.">Your idea is protected the moment you click Submit.</div>
+      </div>
+
+      <!-- Success -->
+      <div class="success" id="successState">
+        <div class="success-ring">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h2 data-en="Application received" data-no="Søknad mottatt">Application received</h2>
+        <p data-en="Thank you for trusting us with your idea. A copy of the signed NDA has been sent to your email. We review all applications within 5 business days and will be in touch soon." data-no="Takk for at du deler ideen din med oss. En kopi av signert NDA er sendt til din e-post. Vi gjennomgår alle søknader innen 5 virkedager og tar kontakt snart.">Thank you for trusting us with your idea. A copy of the signed NDA has been sent to your email. We review all applications within 5 business days and will be in touch soon.</p>
+        <div class="success-ref" id="refNumber">REF-2026-0001</div>
+        <p style="font-size:.95rem;color:rgba(245,232,192,.4)" data-en="Keep this reference number for your records." data-no="Behold dette referansenummeret for din dokumentasjon.">Keep this reference number for your records.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">Aton Group AS</span>
+  <span class="footer-copy" data-en="© 2026 Aton Group AS · All rights reserved · Stavanger, Norway" data-no="© 2026 Aton Group AS · Alle rettigheter forbeholdt · Stavanger, Norge">© 2026 Aton Group AS · All rights reserved · Stavanger, Norway</span>
+</footer>
+
+<!-- NDA MODAL -->
+<div class="modal-overlay" id="ndaModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" data-en="Non-Disclosure Agreement" data-no="Taushetserklæring">Non-Disclosure Agreement</div>
+      <button class="modal-close" onclick="closeNDA()">×</button>
+    </div>
+    <div class="modal-body">
+      <p data-en="This Non-Disclosure Agreement (the <strong>«Agreement»</strong>) is entered into between <strong>Aton Group AS</strong>, organisation number under registration, domiciled in Stavanger, Norway (<strong>«Aton»</strong>), and the applicant submitting through this portal (<strong>«Founder»</strong>)." data-no="Denne taushetserklæringen (<strong>«Avtalen»</strong>) inngås mellom <strong>Aton Group AS</strong>, organisasjonsnummer under registrering, hjemmehørende i Stavanger, Norge (<strong>«Aton»</strong>), og søkeren som sender inn via denne portalen (<strong>«Gründer»</strong>).">This Non-Disclosure Agreement (the <strong>«Agreement»</strong>) is entered into between <strong>Aton Group AS</strong>, organisation number under registration, domiciled in Stavanger, Norway (<strong>«Aton»</strong>), and the applicant submitting through this portal (<strong>«Founder»</strong>).</p>
+
+      <h3 data-en="1. Purpose" data-no="1. Formål">1. Purpose</h3>
+      <p data-en="The purpose of this Agreement is to protect confidential information shared by the Founder with Aton during the evaluation of a potential business partnership. The Founder retains full ownership of all intellectual property at all times." data-no="Formålet med denne Avtalen er å beskytte konfidensiell informasjon som Gründer deler med Aton under vurderingen av et potensielt forretningspartnerskap. Gründer beholder fullt eierskap til all intellektuell eiendom til enhver tid.">The purpose of this Agreement is to protect confidential information shared by the Founder with Aton during the evaluation of a potential business partnership. The Founder retains full ownership of all intellectual property at all times.</p>
+
+      <h3 data-en="2. Definition of Confidential Information" data-no="2. Definisjon av konfidensiell informasjon">2. Definition of Confidential Information</h3>
+      <p data-en="«Confidential Information» means all information relating to the Founder's business idea, including but not limited to: business concepts, technical descriptions, market analyses, financial projections, prototypes, trade secrets and all documents uploaded through this portal." data-no="«Konfidensiell informasjon» betyr all informasjon knyttet til Gründers forretningsidé, herunder men ikke begrenset til: forretningskonsepter, tekniske beskrivelser, markedsanalyser, finansielle prognoser, prototyper, forretningshemmeligheter og alle dokumenter lastet opp gjennom denne portalen.">«Confidential Information» means all information relating to the Founder's business idea, including but not limited to: business concepts, technical descriptions, market analyses, financial projections, prototypes, trade secrets and all documents uploaded through this portal.</p>
+
+      <h3 data-en="3. Aton's Obligations" data-no="3. Atons forpliktelser">3. Aton's Obligations</h3>
+      <p data-en="Aton undertakes to: (a) keep all Confidential Information strictly confidential; (b) not disclose any Confidential Information to third parties without the Founder's prior written consent; (c) use the Confidential Information solely for the purpose of evaluating a potential partnership with the Founder; (d) take all reasonable measures to protect the Confidential Information against unauthorised access or disclosure." data-no="Aton forplikter seg til å: (a) holde all Konfidensiell informasjon strengt konfidensiell; (b) ikke videreformidle Konfidensiell informasjon til tredjeparter uten Gründers forhåndsskriftlige samtykke; (c) kun bruke Konfidensiell informasjon til formålet om å vurdere et potensielt partnerskap med Gründer; (d) treffe alle rimelige tiltak for å beskytte Konfidensiell informasjon mot uautorisert tilgang eller videreformidling.">Aton undertakes to: (a) keep all Confidential Information strictly confidential; (b) not disclose any Confidential Information to third parties without the Founder's prior written consent; (c) use the Confidential Information solely for the purpose of evaluating a potential partnership with the Founder; (d) take all reasonable measures to protect the Confidential Information against unauthorised access or disclosure.</p>
+
+      <h3 data-en="4. Intellectual Property" data-no="4. Intellektuell eiendom">4. Intellectual Property</h3>
+      <p data-en="Nothing in this Agreement transfers any intellectual property rights from the Founder to Aton. The Founder retains all rights, title and interest in and to the Confidential Information and any intellectual property contained therein. Aton acquires no licence or right to use the Founder's intellectual property except for the limited purpose of evaluation as set out in this Agreement." data-no="Ingenting i denne Avtalen overfører immaterialrettigheter fra Gründer til Aton. Gründer beholder alle rettigheter, tittel og interesse i og til den Konfidensielle informasjonen og eventuell intellektuell eiendom som er inneholdt i den. Aton erverver ingen lisens eller rett til å bruke Gründers intellektuelle eiendom utover det begrensede formålet om evaluering som angitt i denne Avtalen.">Nothing in this Agreement transfers any intellectual property rights from the Founder to Aton. The Founder retains all rights, title and interest in and to the Confidential Information and any intellectual property contained therein. Aton acquires no licence or right to use the Founder's intellectual property except for the limited purpose of evaluation as set out in this Agreement.</p>
+
+      <h3 data-en="5. Term" data-no="5. Varighet">5. Term</h3>
+      <p data-en="The confidentiality obligations in this Agreement shall remain in force for a period of five (5) years from the date of submission of the application." data-no="Konfidensialitetsforpliktelsene i denne Avtalen skal forbli i kraft i en periode på fem (5) år fra innsendingsdatoen for søknaden.">The confidentiality obligations in this Agreement shall remain in force for a period of five (5) years from the date of submission of the application.</p>
+
+      <h3 data-en="6. Breach and Remedies" data-no="6. Mislighold og rettsmidler">6. Breach and Remedies</h3>
+      <p data-en="In the event of a breach of this Agreement by Aton, Aton shall pay the Founder liquidated damages in the amount of NOK 500 000 (five hundred thousand Norwegian kroner). The Founder shall also be entitled to seek injunctive relief and any other remedies available under Norwegian law." data-no="Ved Atons mislighold av denne Avtalen skal Aton betale Gründer forhåndsbestemt erstatning på NOK 500 000 (fem hundre tusen norske kroner). Gründer skal også ha rett til å søke rettsforbud og alle andre rettsmidler tilgjengelig etter norsk lov.">In the event of a breach of this Agreement by Aton, Aton shall pay the Founder liquidated damages in the amount of NOK 500 000 (five hundred thousand Norwegian kroner). The Founder shall also be entitled to seek injunctive relief and any other remedies available under Norwegian law.</p>
+
+      <h3 data-en="7. Governing Law and Jurisdiction" data-no="7. Verneting og lovvalg">7. Governing Law and Jurisdiction</h3>
+      <p data-en="This Agreement shall be governed by and construed in accordance with the laws of Norway. Any disputes arising out of or in connection with this Agreement shall be subject to the exclusive jurisdiction of Stavanger District Court (Stavanger tingrett)." data-no="Denne Avtalen skal reguleres av og tolkes i samsvar med norsk lov. Eventuelle tvister som oppstår i forbindelse med denne Avtalen skal behandles av Stavanger tingrett som eksklusivt verneting.">This Agreement shall be governed by and construed in accordance with the laws of Norway. Any disputes arising out of or in connection with this Agreement shall be subject to the exclusive jurisdiction of Stavanger District Court (Stavanger tingrett).</p>
+
+      <h3 data-en="8. Electronic Signature" data-no="8. Elektronisk signatur">8. Electronic Signature</h3>
+      <p data-en="The Founder's typed name in the application form constitutes a valid and binding electronic signature in accordance with the Norwegian Electronic Signatures Act (esignaturloven). Submission of the form constitutes the Founder's acceptance of this Agreement." data-no="Gründers inntastede navn i søknadsskjemaet utgjør en gyldig og bindende elektronisk signatur i henhold til den norske esignaturloven. Innsending av skjemaet utgjør Gründers aksept av denne Avtalen.">The Founder's typed name in the application form constitutes a valid and binding electronic signature in accordance with the Norwegian Electronic Signatures Act (esignaturloven). Submission of the form constitutes the Founder's acceptance of this Agreement.</p>
+    </div>
+    <div class="modal-footer" style="text-align:right">
+      <button onclick="closeNDA()" style="background:var(--gold);color:var(--ink);border:none;padding:.7rem 1.75rem;border-radius:var(--r);font-family:var(--sans);font-weight:500;font-size:1rem;cursor:pointer" data-en="Close" data-no="Lukk">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── LANG ──────────────────────────────────────────────────────────
+let lang = 'en';
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.innerHTML = el.getAttribute('data-' + l) || el.getAttribute('data-en');
+  });
+  document.getElementById('btnEN').classList.toggle('active', l === 'en');
+  document.getElementById('btnNO').classList.toggle('active', l === 'no');
+}
+
+// ── FORM NAV ─────────────────────────────────────────────────────
+let currentPage = 1;
+function goPage(n) {
+  if (n > currentPage) {
+    if (!validatePage(currentPage)) return;
+  }
+  document.getElementById('page' + currentPage).classList.remove('active');
+  document.getElementById('tab' + currentPage).classList.remove('active');
+  document.getElementById('tab' + currentPage).classList.add('done');
+  currentPage = n;
+  document.getElementById('page' + n).classList.add('active');
+  document.getElementById('tab' + n).classList.add('active');
+  document.getElementById('progressFill').style.width = (n / 3 * 100) + '%';
+  document.getElementById('formWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function validatePage(p) {
+  if (p === 1) {
+    const fn = document.getElementById('fFirstName').value.trim();
+    const ln = document.getElementById('fLastName').value.trim();
+    const em = document.getElementById('fEmail').value.trim();
+    const co = document.getElementById('fCountry').value;
+    if (!fn || !ln || !em || !co) { shake('page1'); return false; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { shake('page1'); return false; }
+  }
+  if (p === 2) {
+    const name = document.getElementById('fIdeaName').value.trim();
+    const ind  = document.getElementById('fIndustry').value;
+    const prob = document.getElementById('fProblem').value.trim();
+    const sol  = document.getElementById('fSolution').value.trim();
+    if (!name || !ind || !prob || !sol) { shake('page2'); return false; }
+  }
+  return true;
+}
+
+function shake(id) {
+  const el = document.getElementById(id);
+  el.style.animation = 'none';
+  el.offsetHeight;
+  el.style.animation = 'shake .35s ease';
+  setTimeout(() => el.style.animation = '', 400);
+}
+
+// ── FILES ─────────────────────────────────────────────────────────
+let uploadedFiles = [];
+function addFiles(files) {
+  Array.from(files).forEach(f => {
+    if (!uploadedFiles.find(u => u.name === f.name)) uploadedFiles.push(f);
+  });
+  renderFileList();
+}
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('uploadArea').classList.remove('drag');
+  addFiles(e.dataTransfer.files);
+}
+function removeFile(name) {
+  uploadedFiles = uploadedFiles.filter(f => f.name !== name);
+  renderFileList();
+}
+function renderFileList() {
+  const list = document.getElementById('fileList');
+  list.innerHTML = uploadedFiles.map(f => `
+    <div class="file-item">
+      <span>📄 ${f.name} <span style="color:rgba(245,232,192,.3)">(${(f.size/1024).toFixed(0)} KB)</span></span>
+      <button class="file-remove" onclick="removeFile('${f.name}')">×</button>
+    </div>`).join('');
+}
+
+// ── SUBMIT ────────────────────────────────────────────────────────
+const FORMSPREE_ID = 'xzdwlzby';
+
+async function submitForm() {
+  const sig  = document.getElementById('fSignature').value.trim();
+  const nda  = document.getElementById('checkNDA').checked;
+  const gdpr = document.getElementById('checkGDPR').checked;
+  if (!sig || !nda || !gdpr) { shake('page3'); return; }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span>' + (lang === 'no' ? 'Sender...' : 'Submitting...') + '</span>';
+
+  const ref = 'REF-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 9000) + 1000);
+  const submittedAt = new Date().toISOString();
+
+  const ndaSummary = [
+    'NON-DISCLOSURE AGREEMENT',
+    'Reference: ' + ref,
+    'Date: ' + new Date().toLocaleDateString('no-NO'),
+    '',
+    'Parties:',
+    '- Aton Group AS (Receiving Party)',
+    '- ' + document.getElementById('fFirstName').value.trim() + ' ' + document.getElementById('fLastName').value.trim() + ' (Founder)',
+    '',
+    'Electronic signature: "' + sig + '"',
+    'Timestamp: ' + submittedAt,
+    '',
+    'Key terms:',
+    '- 5-year confidentiality obligation',
+    '- Founder retains all IP rights',
+    '- NOK 500,000 liquidated damages for breach',
+    '- Governed by Norwegian law / Stavanger tingrett',
+    '- Binding per Norwegian esignaturloven'
+  ].join('\n');
+
+  const payload = {
+    _subject: '[Venture Portal] ' + document.getElementById('fIdeaName').value.trim() + ' — ' + ref,
+    _replyto: document.getElementById('fEmail').value.trim(),
+    referanse: ref,
+    innsendingstidspunkt: submittedAt,
+    fornavn: document.getElementById('fFirstName').value.trim(),
+    etternavn: document.getElementById('fLastName').value.trim(),
+    epost: document.getElementById('fEmail').value.trim(),
+    telefon: document.getElementById('fPhone').value.trim() || '—',
+    land: document.getElementById('fCountry').value,
+    ide_navn: document.getElementById('fIdeaName').value.trim(),
+    bransje: document.getElementById('fIndustry').value,
+    status: document.getElementById('fStatus').value || '—',
+    problem: document.getElementById('fProblem').value.trim(),
+    losning: document.getElementById('fSolution').value.trim(),
+    filer: uploadedFiles.map(f => f.name).join(', ') || 'Ingen',
+    nda_signatur: sig,
+    nda_tidsstempel: submittedAt,
+    nda_akseptert: 'Ja',
+    gdpr_samtykke: 'Ja',
+    nda_sammendrag: ndaSummary,
+  };
+
+  try {
+    const res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error(res.status);
+    document.getElementById('refNumber').textContent = ref;
+    showSuccess();
+  } catch(err) {
+    btn.disabled = false;
+    btn.innerHTML = '<span>' + (lang === 'no' ? 'Prøv igjen' : 'Try again') + '</span>';
+    const errBox = document.createElement('div');
+    errBox.style.cssText = 'background:rgba(248,81,73,.1);border:1px solid rgba(248,81,73,.3);border-radius:6px;padding:.75rem 1rem;font-size:.95rem;color:#f85149;margin-top:1rem';
+    errBox.textContent = lang === 'no' ? 'Innsending feilet. Prøv igjen.' : 'Submission failed. Please try again.';
+    btn.parentNode.appendChild(errBox);
+  }
+}
+
+function showSuccess() {
+  ['page1','page2','page3'].forEach(id => { const el = document.getElementById(id); if(el) el.style.display='none'; });
+  ['tab1','tab2','tab3'].forEach(id => { const el = document.getElementById(id); if(el){el.classList.remove('active');el.classList.add('done');} });
+  const nav = document.querySelector('.form-steps-nav');
+  const prog = document.querySelector('.progress-bar');
+  if(nav) nav.style.display='none';
+  if(prog) prog.style.display='none';
+  const s = document.getElementById('successState');
+  s.classList.add('show');
+  setLang(lang);
+}
+
+// ── NDA MODAL ────────────────────────────────────────────────────
+function openNDA() { document.getElementById('ndaModal').classList.add('open'); }
+function closeNDA() { document.getElementById('ndaModal').classList.remove('open'); }
+document.getElementById('ndaModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('ndaModal')) closeNDA();
+});
+
+// ── SHAKE KEYFRAME ───────────────────────────────────────────────
+const style = document.createElement('style');
+style.textContent = '@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}';
+document.head.appendChild(style);
+</script>
+</body>
+</html>
