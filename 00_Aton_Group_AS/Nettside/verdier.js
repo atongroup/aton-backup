@@ -122,8 +122,8 @@ const ATON_VERDIER = {
       id: "grunnfelt",
       navn: "Grunnfelt",
       type: "launchpad",
-      eierandel: 70,
-      stadium: "Søker founder · 2026",
+      eierandel: 40,
+      stadium: "Pågår — Kim Skjæveland · 2026",
       her_naa: {
         verdi: 3,
         grunnlag: "Ferdig konseptpakke: kontrakter, maler, markedsanalyse, nettside. Ingen founder, ingen inntekter.",
