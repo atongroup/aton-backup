@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTAiIGZpbGw9IiMwYTBmMTQiLz48dGV4dCB4PSIzMiIgeT0iMzYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjMwIiBmb250LXdlaWdodD0iOTAwIiBmaWxsPSIjMDBiOGEwIj5UPC90ZXh0PjxwYXRoIGQ9Ik0xMCw1MCBRMTgsNDcgMjYsNTAgUTM0LDUzIDQyLDUwIFE1MCw0NyA1Niw1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDBiOGEwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC43Ii8+PC9zdmc+">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrashShip AS — Coming 2027 | An Aton Group Company</title>
+<meta name="description" content="TrashShip AS — the next chapter in Aton Group's ocean technology portfolio. A new vessel concept for the world's most persistent environmental crisis. Launching 2027.">
+<meta name="author" content="Leif Sunde, Aton Group AS">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.trashship.no">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.trashship.no">
+<meta property="og:title" content="TrashShip AS — Something is coming. 2027.">
+<meta property="og:description" content="The next vessel from Aton Group. Built for the ocean's most persistent problem. More soon.">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="TrashShip AS">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TrashShip AS — Coming 2027">
+<meta name="twitter:description" content="The next vessel from Aton Group. Built for the ocean's most persistent problem.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "TrashShip AS",
+  "url": "https://www.trashship.no",
+  "description": "TrashShip AS — next-generation ocean technology vessel, launching 2027. An Aton Group AS portfolio company.",
+  "foundingDate": "2027",
+  "founders": [{"@type": "Person", "name": "Leif Sunde"}],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Støperigata 25",
+    "addressLocality": "Stavanger",
+    "postalCode": "4014",
+    "addressCountry": "NO"
+  },
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "Aton Group AS",
+    "url": "https://www.atongroup.no"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,700&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink:    #020c0a;
+  --deep:   #010806;
+  --teal:   #00897b;
+  --foam:   #26a69a;
+  --mist:   #80cbc4;
+  --pale:   #b2dfdb;
+  --cream:  #f0faf8;
+  --gold:   #c8a030;
+  --serif:  'Cormorant Garamond', Georgia, serif;
+  --sans:   'Jost', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 18px; scroll-behavior: smooth; }
+body {
+  background: var(--ink);
+  color: var(--pale);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-thumb { background: var(--foam); }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5vw;
+  background: rgba(2, 12, 10, 0.92);
+  border-bottom: 1px solid rgba(38,166,154,.12);
+  backdrop-filter: blur(20px);
+}
+.nav-logo {
+  font-family: var(--serif); font-size: 1.5rem; font-weight: 700;
+  color: white; text-decoration: none; letter-spacing: -.5px;
+}
+.nav-logo em { font-style: italic; color: var(--foam); }
+.nav-right { display: flex; align-items: center; gap: 2rem; }
+.nav-badge {
+  font-family: var(--sans); font-size: .55rem; font-weight: 400;
+  letter-spacing: 3px; text-transform: uppercase;
+  background: rgba(38,166,154,.08); color: var(--foam);
+  border: 1px solid rgba(38,166,154,.2); padding: .3rem .9rem;
+}
+.nav-aton {
+  font-family: var(--sans); font-size: .58rem; font-weight: 300;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(200,160,48,.55); text-decoration: none;
+  border-left: 1px solid rgba(255,255,255,.08); padding-left: 1.5rem;
+  transition: color .2s;
+}
+.nav-aton:hover { color: var(--gold); }
+
+/* ── HERO ── */
+.hero {
+  flex: 1;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 6rem 5vw 4rem;
+  position: relative; overflow: hidden;
+}
+
+/* Animated ocean background */
+.ocean-bg {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+}
+.ocean-layer {
+  position: absolute; bottom: 0; left: -10%; right: -10%;
+  border-radius: 50% 50% 0 0 / 20% 20% 0 0;
+}
+.ocean-layer:nth-child(1) {
+  height: 35%; background: rgba(0,77,64,.18);
+  animation: swell 14s ease-in-out infinite;
+}
+.ocean-layer:nth-child(2) {
+  height: 28%; background: rgba(0,105,88,.12);
+  animation: swell 10s ease-in-out infinite reverse;
+  animation-delay: -3s;
+}
+.ocean-layer:nth-child(3) {
+  height: 20%; background: rgba(0,137,123,.08);
+  animation: swell 7s ease-in-out infinite;
+  animation-delay: -5s;
+}
+@keyframes swell {
+  0%, 100% { transform: translateX(-2%) scaleY(1); }
+  50%       { transform: translateX(2%) scaleY(1.08); }
+}
+
+/* Glow */
+.glow {
+  position: absolute; border-radius: 50%; pointer-events: none;
+  top: 40%; left: 50%; transform: translate(-50%, -50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(0,137,123,.07) 0%, transparent 65%);
+  animation: breathe 8s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%, 100% { opacity: .6; transform: translate(-50%,-50%) scale(1); }
+  50%       { opacity: 1;  transform: translate(-50%,-50%) scale(1.1); }
+}
+
+/* Particles */
+.particle {
+  position: absolute; border-radius: 50%;
+  background: rgba(38,166,154,.35);
+  animation: float-up linear infinite;
+  pointer-events: none;
+}
+@keyframes float-up {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: .4; }
+  100% { transform: translateY(-120vh) translateX(var(--dx,20px)); opacity: 0; }
+}
+
+/* Hero content */
+.hero-eyebrow {
+  font-family: var(--sans); font-size: .58rem; font-weight: 300;
+  letter-spacing: 5px; text-transform: uppercase;
+  color: rgba(38,166,154,.6); margin-bottom: 2.5rem;
+  display: flex; align-items: center; gap: 1.5rem;
+  position: relative; z-index: 1;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; display: block; width: 40px; height: 1px; background: rgba(38,166,154,.3);
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(5rem, 12vw, 14rem);
+  font-weight: 300; line-height: .85; letter-spacing: -4px;
+  color: white; margin-bottom: .4rem;
+  position: relative; z-index: 1;
+}
+.hero-title em {
+  font-style: italic; color: var(--foam); display: block;
+}
+
+.hero-divider {
+  width: 200px; height: 1px; margin: 1.2rem auto;
+  background: linear-gradient(90deg, transparent, var(--foam), transparent);
+  position: relative; z-index: 1;
+}
+
+.hero-year {
+  font-family: var(--serif); font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: 300; font-style: italic;
+  color: rgba(178,223,219,.4); letter-spacing: 4px;
+  margin-bottom: 3rem; position: relative; z-index: 1;
+}
+
+.hero-statement {
+  font-family: var(--serif); font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 300; line-height: 1.7;
+  color: rgba(178,223,219,.65); max-width: 680px;
+  margin: 0 auto 4rem; position: relative; z-index: 1;
+}
+.hero-statement em { font-style: italic; color: rgba(38,166,154,.9); }
+
+/* Stats row */
+.stats-row {
+  display: flex; gap: 0; margin: 3rem 0;
+  border: 1px solid rgba(38,166,154,.12);
+  position: relative; z-index: 1;
+}
+.stat-item {
+  padding: 2rem 3.5rem; border-right: 1px solid rgba(38,166,154,.1);
+  text-align: center;
+}
+.stat-item:last-child { border-right: none; }
+.stat-val {
+  font-family: var(--serif); font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 600; color: white; display: block; line-height: 1;
+}
+.stat-lbl {
+  font-family: var(--sans); font-size: .52rem; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(178,223,219,.35);
+  margin-top: .5rem; display: block;
+}
+
+/* CTA */
+.hero-cta {
+  display: flex; gap: 1.5rem; align-items: center; justify-content: center;
+  flex-wrap: wrap; position: relative; z-index: 1; margin-bottom: 4rem;
+}
+.btn-notify {
+  background: var(--teal); color: white;
+  font-family: var(--sans); font-size: .65rem; font-weight: 400;
+  letter-spacing: 3px; text-transform: uppercase;
+  padding: .9rem 2.8rem; text-decoration: none; border: none;
+  cursor: pointer; transition: all .25s; display: inline-block;
+}
+.btn-notify:hover { background: var(--foam); transform: translateY(-2px); }
+.btn-parent {
+  font-family: var(--sans); font-size: .62rem; font-weight: 300;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(200,160,48,.5); text-decoration: none;
+  border-bottom: 1px solid rgba(200,160,48,.2); padding-bottom: 2px;
+  transition: all .2s;
+}
+.btn-parent:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ── TEASER SECTION ── */
+.teaser {
+  padding: 8rem 5vw; border-top: 1px solid rgba(38,166,154,.08);
+  position: relative;
+}
+.teaser-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+
+.section-label {
+  font-family: var(--sans); font-size: .55rem; font-weight: 300;
+  letter-spacing: 5px; text-transform: uppercase;
+  color: rgba(38,166,154,.45); margin-bottom: 2rem;
+}
+
+.teaser-quote {
+  font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 300; font-style: italic; line-height: 1.35;
+  color: white; margin-bottom: 2rem;
+}
+.teaser-quote strong { font-weight: 600; color: var(--foam); font-style: normal; }
+
+.teaser-body {
+  font-family: var(--sans); font-size: .95rem; font-weight: 300;
+  line-height: 1.9; color: rgba(178,223,219,.55);
+  max-width: 620px; margin: 0 auto 4rem;
+}
+
+/* Problem numbers */
+.problem-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  margin: 4rem 0;
+}
+.prob-item {
+  background: rgba(255,255,255,.02); border: 1px solid rgba(38,166,154,.08);
+  padding: 3rem 2rem;
+}
+.prob-num {
+  font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 4.5rem);
+  font-weight: 600; color: rgba(38,166,154,.25); line-height: 1;
+  display: block; margin-bottom: .8rem;
+}
+.prob-label {
+  font-family: var(--sans); font-size: .75rem; font-weight: 300;
+  line-height: 1.7; color: rgba(178,223,219,.5);
+}
+
+/* ── TIMELINE ── */
+.timeline-section {
+  padding: 8rem 5vw;
+  background: rgba(0,77,64,.04);
+  border-top: 1px solid rgba(38,166,154,.08);
+}
+.timeline-inner { max-width: 760px; margin: 0 auto; }
+.tl-title-block { text-align: center; margin-bottom: 5rem; }
+.tl-title {
+  font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 4.5rem);
+  font-weight: 300; color: white; line-height: .9; margin-bottom: 1rem;
+}
+.tl-title em { font-style: italic; color: var(--foam); }
+
+.timeline { position: relative; padding-left: 2.5rem; }
+.timeline::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 1px; background: linear-gradient(to bottom, var(--foam), rgba(38,166,154,.1));
+}
+.tl-item {
+  position: relative; margin-bottom: 3.5rem;
+  padding-bottom: 3.5rem; border-bottom: 1px solid rgba(38,166,154,.07);
+}
+.tl-item:last-child { border-bottom: none; margin-bottom: 0; }
+.tl-dot {
+  position: absolute; left: -2.5rem; top: .4rem;
+  width: 9px; height: 9px;
+  background: var(--ink); border: 2px solid var(--foam); border-radius: 50%;
+}
+.tl-when {
+  font-family: var(--sans); font-size: .58rem; font-weight: 400;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--foam);
+  margin-bottom: .5rem;
+}
+.tl-name {
+  font-family: var(--serif); font-size: 1.35rem; font-weight: 600;
+  color: white; margin-bottom: .6rem;
+}
+.tl-body {
+  font-family: var(--sans); font-size: .88rem; font-weight: 300;
+  line-height: 1.8; color: rgba(178,223,219,.5);
+}
+
+/* ── CONTACT ── */
+.contact-section {
+  padding: 8rem 5vw;
+  border-top: 1px solid rgba(38,166,154,.1);
+  text-align: center;
+}
+.contact-inner { max-width: 560px; margin: 0 auto; }
+.contact-title {
+  font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 300; color: white; margin-bottom: 1.5rem; line-height: .95;
+}
+.contact-title em { font-style: italic; color: var(--foam); }
+.contact-body {
+  font-family: var(--sans); font-size: .9rem; font-weight: 300;
+  line-height: 1.9; color: rgba(178,223,219,.5); margin-bottom: 3rem;
+}
+.contact-card {
+  background: rgba(38,166,154,.04); border: 1px solid rgba(38,166,154,.12);
+  padding: 2.5rem; margin-bottom: 2rem; text-align: left;
+  position: relative;
+}
+.contact-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--foam), transparent);
+}
+.cc-name {
+  font-family: var(--serif); font-size: 1.3rem; font-weight: 600; color: white;
+}
+.cc-role {
+  font-family: var(--sans); font-size: .6rem; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(38,166,154,.5); margin-top: .2rem; margin-bottom: 1rem;
+}
+.cc-detail {
+  font-family: var(--sans); font-size: .88rem; font-weight: 300;
+  color: rgba(178,223,219,.55); line-height: 1.7;
+}
+.cc-detail a { color: var(--foam); text-decoration: none; }
+.cc-detail a:hover { text-decoration: underline; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--deep); border-top: 1px solid rgba(38,166,154,.07);
+  padding: 2.5rem 5vw;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.foot-copy {
+  font-family: var(--sans); font-size: .55rem; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(178,223,219,.2);
+}
+.foot-links { display: flex; gap: 2rem; }
+.foot-links a {
+  font-family: var(--sans); font-size: .55rem; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(178,223,219,.2); text-decoration: none;
+  transition: color .2s;
+}
+.foot-links a:hover { color: var(--foam); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:800px) {
+  .stats-row { flex-direction: column; }
+  .stat-item { border-right: none; border-bottom: 1px solid rgba(38,166,154,.1); }
+  .stat-item:last-child { border-bottom: none; }
+  .problem-row { grid-template-columns: 1fr; }
+  nav .nav-badge { display: none; }
+}
+@media(max-width:500px) {
+  html { font-size: 16px; }
+  .hero-title { letter-spacing: -2px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Trash<em>Ship</em></a>
+  <div class="nav-right">
+    <span class="nav-badge">Coming 2027</span>
+    <a href="https://www.atongroup.no" class="nav-aton" target="_blank">Aton Group →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="ocean-bg">
+    <div class="ocean-layer"></div>
+    <div class="ocean-layer"></div>
+    <div class="ocean-layer"></div>
+    <div class="glow"></div>
+  </div>
+
+  <div class="hero-eyebrow">An Aton Group Company · Stavanger, Norway</div>
+
+  <h1 class="hero-title">
+    Trash
+    <em class="gold-word">Ship</em>
+  </h1>
+
+  <div class="hero-divider"></div>
+
+  <p class="hero-year">2027 — 2028</p>
+
+  <p class="hero-statement">
+    The ocean has a problem that no one has solved at scale.<br>
+    We are building the vessel that changes that.<br>
+    <em>Something is coming.</em>
+  </p>
+
+  <div class="stats-row">
+    <div class="stat-item">
+      <span class="stat-val">150M</span>
+      <span class="stat-lbl">tonnes of plastic in the ocean</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val">0</span>
+      <span class="stat-lbl">industrial-scale solutions exist today</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val">2027</span>
+      <span class="stat-lbl">TrashShip AS — concept launch</span>
+    </div>
+  </div>
+
+  <div class="hero-cta">
+    <a href="#contact" class="btn-notify">Get notified</a>
+    <a href="https://www.atongroup.no" class="btn-parent" target="_blank">Aton Group portfolio →</a>
+  </div>
+
+</section>
+
+<!-- TEASER -->
+<section class="teaser">
+  <div class="teaser-inner">
+    <div class="section-label">The problem</div>
+
+    <blockquote class="teaser-quote">
+      "The ocean is not a dumping ground.<br>
+      <strong>We intend to prove it.</strong>"
+    </blockquote>
+
+    <p class="teaser-body">
+      Every minute of every day, the equivalent of a garbage truck of plastic enters the ocean.
+      It doesn't disappear — it breaks down, spreads, and works its way into the food chain.
+      Every solution so far has been too small, too slow, or too dependent on returning to shore.
+      TrashShip is being designed from the ground up to solve a problem at the scale it actually exists.
+    </p>
+
+    <div class="problem-row">
+      <div class="prob-item">
+        <span class="prob-num">150M<br>tonnes</span>
+        <span class="prob-label">plastic currently in the world's oceans — and accumulating</span>
+      </div>
+      <div class="prob-item">
+        <span class="prob-num">11M<br>tonnes</span>
+        <span class="prob-label">entering the ocean every single year, with no sign of slowing</span>
+      </div>
+      <div class="prob-item">
+        <span class="prob-num">$19B</span>
+        <span class="prob-label">in annual economic damage to fisheries, coastlines and ecosystems</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="timeline-inner">
+    <div class="tl-title-block">
+      <div class="section-label">What's coming</div>
+      <h2 class="tl-title">The road to <em>TrashShip</em></h2>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-when">Now — 2026</div>
+        <div class="tl-name">Concept & groundwork</div>
+        <p class="tl-body">Building on the Aton Group platform, technology research and the foundational IP work is already underway — quietly, carefully, and without rushing.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-when">2027</div>
+        <div class="tl-name">Company launch & public reveal</div>
+        <p class="tl-body">TrashShip AS will be formally established in 2027. Full concept disclosure, technology details, and the investment case will be released then.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-when">2028</div>
+        <div class="tl-name">Funding & development</div>
+        <p class="tl-body">First funding rounds and grant applications open. Partners, yards, and investors who want early access to the opportunity — this is the window.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-when">2030 →</div>
+        <div class="tl-name">Vessel in the water</div>
+        <p class="tl-body">The goal is simple: a vessel that works, at scale, where the problem actually is. Everything between now and then is preparation for that moment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-label">Early conversations</div>
+    <h2 class="contact-title">Interested in <em>what's next?</em></h2>
+    <p class="contact-body">
+      We are not yet accepting formal investment enquiries — but we are open to early conversations
+      with investors, research institutions, and strategic partners who see the opportunity
+      before the details are public.
+    </p>
+
+    <div class="contact-card">
+      <div class="cc-name">Leif Sunde</div>
+      <div class="cc-role">Founder · TrashShip AS & BladeShip AS · Aton Group</div>
+      <div class="cc-detail">
+        <a href="mailto:leif@bladeship.no">leif@bladeship.no</a><br>
+        <a href="tel:+4793614425">+47 936 14 425</a><br>
+        Stavanger, Norway
+      </div>
+    </div>
+
+    <a href="mailto:leif@bladeship.no" class="btn-notify" style="display:inline-block">Send a message</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="foot-copy">© 2026 TrashShip AS · c/o Aton Group AS · Stavanger, Norway</span>
+  <nav class="foot-links" aria-label="Footer navigation">
+    <a href="https://www.atongroup.no" target="_blank">Aton Group</a>
+    <a href="https://www.bladeship.no" target="_blank">BladeShip AS</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</footer>
+
+<script>
+// Generate floating particles
+const hero = document.querySelector('.ocean-bg');
+for (let i = 0; i < 18; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = 2 + Math.random() * 4;
+  p.style.cssText = `
+    width: ${size}px; height: ${size}px;
+    left: ${Math.random() * 100}%;
+    bottom: ${Math.random() * 40}%;
+    opacity: 0;
+    --dx: ${(Math.random() - .5) * 80}px;
+    animation-duration: ${10 + Math.random() * 20}s;
+    animation-delay: ${Math.random() * 15}s;
+  `;
+  hero.appendChild(p);
+}
+</script>
+
+</body>
+</html>
