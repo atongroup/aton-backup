@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aton Hub</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABwElEQVR4nO2XPSxDURTHf6/10Y8QH48aGEQkXZowMVgMlBiEhBoNNpvVbjSaJRILsZEIgwoi8RoW0kFEmvgImrzWk7b09RmENPIMvXjX4D+9e5N3zu+cnHtOjkKRDhc7LBxQ9+SJ8v6tOOnYDsQlw3GxFFnRv0t6Bv4BykR/XN1OsrxxT1N9OQuzbcIAwhmIaik8FS5uky/ELzPOApwnslzdPTM53Ii30kVUSzkLsBN7iz7U7qMz6Gf/5JG8KfaaS64Bs2Cxd5wm+1xgeu7i4z52ZtAVqvp9gOP4E2nDJBJWaWvxADC/dM1uLO0MQFRLoSgw2FNLtd8NQLDVi3Zm8JQx8XvdJdmT3oq/zMDoTHz9p52tzQeHPt/ZvoLfcP6VXVsAO9KfkJ1d6TUgfRhJBxCahpb1Ng2T+gt508LncTMxoOLzlB6PEMDWoU5zoIKxvnoAknqexE2OYKvXGYDEbY6pkQD6Y57NAx2ATK4gBPCtGqipKiMSVomEVbK5gpANIYCWQCVHp8bHeUdLEWr3CwEI9QHLgpWtB9KGCUBDbTnDvXVCAEI1oCgw3q8KOfws6X3AVbwoOq2/sRsWH2Ss569J/Zo9lNd2jAAAAABJRU5ErkJggg==">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAALOklEQVR4nO3de2xT1wHH8d91bBIncd4khAgC5dVCgAwIDWGFttPopI5JVFqHqgmxdVKnrdukVupf07pN07Q/pkpbqbZKU1WpE6Cuo5tUJlUrXcJ7kECyBQjvJDSEJBAWvx3n+u6PCDsQP859OHHO/X3+Skps38KXw/E5914rsMjp9xs1q56L7Kd5b6dixfOYehJGTNlgJm7dD2TENJP0xu3Q88OMmWaa3uaE6mfIlAtERuuMIzRjplwh0mLaoBkz5ZpMTaYMmjFTrkrXZtKgGTPlulSNTguaMdNckaxVXct2RLnuoaA5OtNc82izjlS/QDRXTG2XUw6SCoMmqTgATjdo7nvQMEdokgqDJqkonG6QTDhCk1QYNEmFQZNUGDRJhUGTVBg0SYVBk1QYNEmFQZNUGDRJhUGTVBg0SYVBk1QYNEmFQZNUGDRJhUGTVBg0SYVBk1QYNEnFOdsHIJPohIbv/OwqguGY8GN++YPFaFhemMWjsheO0BY60+3TFTMAtLaPZelo7IlBW6i13av7Mae6fBiP8k4SVmHQFvH6VXT2BHQ/LhSJ4Uy3LwtHZE8M2iLHznuhxoyNtEZGdkqOQVvEzFy463IAY37VwqOxLwZtgYHhcVy/FTb8eDWm4dg5jtJWYNAWsGKloq2Dqx1WYNAmaRpwtMP86Hr9VhgDw+MWHJG9MWiTLt4IYuR+1JLn4pq0eQzapDYLVyjaOrzQuCRtCoM2ITqh4WRX5qDzHApKi/My/tzd+1FcvBG04tBsi0GbcKbbL7TVvXZFIb78pRKh57RyxLcjBm1Cm+Cct2W9B1sbxYI+2eVFdILzDqMYtEFev4rzAlvdeQ4Fm9d6sGqJG5VlmU9uDIZjOHvBb8Uh2hKDNui44Fb3muWFKCnKg6IAW9Z5hJ5bdOSn6Ri0Qa2CGyEt6xMRtwhOO871BOANcCvcCAZtwMDwOK71Z97qdjiA5rWJoFfVu1FV5sr4OFXVcPw83xwawaANEJ0SNCwrQsmU5TpFAbas57Qjmxi0TpoGHBU8kailcXq8W5P8t2Su9odxe4Rb4XoxaJ0u3QhieDTzVrfDATy5dnq8K+vdqCrPPO0AOEobwaB1ahU8EWn1Y4UpdwdbBFc7jnIrXDcGrUN0QsOpLrHLpdKtaCSbiiQzNBpFT29I6GdpEoPWof2CH4FQ5uU0RQGa1xan/PWV9W5UV3DakQ0MWgfR0zvXLCtEmSf9rqDoaseJTh+3wnVg0IJ8ARXnBK/qbhGIdet6sU2WQEhF+0VuhYti0IKOn/dCVTOPlIoCNAu86Vu+uAA1nHZYjrcCE9QmuLqhacB337xm6Wt3XArAF1DhKcp8TrXdcYQWMDgyjit9s7faoKoaTgiurtgdgxYguvacTZx2iGHQGWgacDQHYrrcG8LgXW6FZ8KgM+jpDWFIYKt7JlhxuwTZMegMcumf+lw6llzFoNOITmg42Zk7b8bu3ONWeCYMOo32i374Bba6ZxJH6fS4Dp2GaDwup4L3frEcRW5j68SaBrzyq+u4K3AHphOdPry8qwbOPMXQa8mOI3QKvoCKjktiW90bVxcbjhmY3F3ctkFsK9wfVNHBrfCUGHQKJzrFtroBYPtGsRjTPscm8ecQ3bW0Iwadguhd9Yvdedi4OvWpoqIW1eRjaV2B0M+2X8i9uX2uYNBJDN4V3+puafRYNp8VHekn1NxafcklDDoJPfeX22bBdOOBpzaUQBH8u8Fb7ybHoJMQvZv+/HIXnlhq3Ydmlpc4sW5FkdDP9twMYehebuxg5hLl9PuNvByCpMERmqTCoEkqDJqkwqBJKrN2LscLr/Ucnq3Xpuw79Nbjz8/G6874KgdDtpeZDptTDpLKjAbN0dl+ZvrPnCM0SYVBk1RmNOjZeudLs4dvColMmLWTk/gGUW62WYcmyiZOOUgqDJqkwqBJKgyapMKgSSoMmqTCoEkqDJqkwqBJKgyapMKgSSoMmqTCoEkqDJqkwqBJKgyapMKgSSoMmqTCoEkqDJqkwqBJKgyapMLP+rbYwPA4znT7cO1WGP2DEXgDKoLhGFxOBUVuBypLXVi2qACr6t1oaiiGO59jipV4Xw4LaBpwssuLQ0dGcXMgLPy4eS4FW9Z58OKOKtTOn5fFI7QPBm1S7+0I3j4wmDTkwgIHqspdKMx3IDqhwR9UMXw/Cu2R3/E8h4KvbS3Dnp3VcDmt+VRau+KUw4TPTv8P7/516KEPuV9aV4BnmkqwaY0HNRWuaZ8MG47EcKUvhOPnfTh6bgzjUQ1qTMPhY/dx8UYIb+ytQ02la4b/T+TBEdqgjz67h/3/GIl/X13hwsu7atC0RvyD7EfHJvDBJ8No60h8FHNFqRO//lE9qisYtREM2oDPz45h34HB+PdPrvXgJy/VosDgG7zW9jG8c/AO1NjkH0VNpQu/fW0Jitx5lhyvnfAttk63hiJ49y934t8/taEEb+ytMxwzADy9qRSv71kYn54M3YviTx8Pmz1UW2LQOmga8M7BO4hOTI6kKxYX4NXdtdPmyUY0r/PghWcr49+3tY/hP1cC5p/YZhi0Dme6fbjSFwIA5OUpeHV3raWrEi8+V4X55Ym584f/vGfZc9sFVzl0+Nu/RuNff2VzKRYtyLf0+V1OBa/vWYibAxEAgKIA41EN81xcyhPFoAUNj0ZxuTcU/37n9oqsvM7KejdW1ruz8tx2wCmHoDPdvvjX9bX5qKvmzl4uYtCCrvYndgLXrSyaxSOhdBi0oP7BSPzr+lpr585kHQYt6L5vIv51VTnfeuQq/skICoZi8a/d+eI7eB98MoKPPze3/HborcdNPd5OOEKTVDhCCyp0O+D1qwCAUFgVflxNpQtrlhXqeq1wJIbrX0y+Cc1zcA1aDwYtqNzjjAc9PBoVftyOLWXYsaVM12tdvBHET/f1A5j8i0Ti+LslaPGUlY2+KSse2eALJP4FKC/hmKMHgxa0YnFi967zcnZPGuq9nfgL81hdQVZfSzYMWlBTQ+LE/YHhcdy6k71RumvKWXarl3EbXA8GLaimwvXQORZ/bx1N89PGDY6Mx88ZceZNXkRL4hi0DrueTZyQ1NbufWhqYJWDn96NX0S7fVMJr1rRiUHrsLnBEx+l1ZiGtw8MYjxq3RVsZy/4cezc5PWFLqeCb+2osuy57YJB66AowA93L4if1H9zIIzf7b+NWCzDAwX03o7g9/sT1yl++/n5qCrnhbJ6MWidFtXk45VvLoh/f6rLh9+89wVCEeNVd18L4ud/6EcgNLlc17SmGF/flp3zrWXHq74NOnTkHv58OHEbg6pyF763qwabG8RvYxAMx/Dhp3dx+Nj9+BXfTyx1483vL+ZVKgYxaBOO/HsMf/zozkM3mlmyMB/PNJVi0+piLKiaN+0C2uiEhsu9IZz+rw+tZ8cQDCdG9pb1Hvz4pYWM2QQGbVLf7Qj2HRyMn3sxlTvfgeoKF9wFDqiqBn8whqHR8Wlz7sICB/bsrMZXm8ssuYLczhi0BYzerLGwwIHnWsrxjacrUFrM5TkrMGiLxW+n2x9G32AEXr+KUCQGp1NBYYEDtVXzsKQuH+tXFqFxVRFvzmgxBk1S4bIdSYVBk1QYNEmFQZNUGDRJhUGTVBg0SYVBk1QYNEmFQZNUGDRJxdG8t5Nnx5AUmvd2KhyhSSoMmqTiACaH6tk+ECIzHjTMEZqkwqBJKvGgOe2guWpqu45Uv0A0FzzaLKccJJVpQXOUprkiWatJR2hGTbkuVaMppxyMmnJVujbTzqEZNeWaTE1mfFPIqClXiLSoK1beZYlmg55BVdeyHUdrmml6mzMVKEdsygYzA6dlIy7jJjOs+tf//wfFqTmOBA2bAAAAAElFTkSuQmCC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+:root{
+  --gold:#c8a030;--gold2:#e0b840;
+  --dark:#050d18;--dark2:#081520;--dark3:#0a1e30;
+  --surface:rgba(255,255,255,.04);--border:rgba(200,160,48,.15);
+  --tx1:#f0ead8;--tx2:#907860;--tx3:#506070;
+  --green:#3acd7a;--red:#e05050;--r:6px
+}
+body{background:var(--dark);color:var(--tx1);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+.view{display:none;min-height:100vh}
+.view.active{display:flex;flex-direction:column}
+
+/* LOGIN */
+#login-view{align-items:center;justify-content:center;padding:2rem;position:relative;overflow:hidden}
+#login-view::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(200,160,48,.06) 0%,transparent 65%),radial-gradient(ellipse 30% 30% at 20% 80%,rgba(58,154,238,.03) 0%,transparent 60%);pointer-events:none}
+.login-box{position:relative;z-index:1;width:100%;max-width:400px;text-align:center;animation:fadeUp .7s ease both}
+.login-logo{margin-bottom:1.8rem}
+.login-logo svg{width:54px;height:54px}
+.login-title{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;margin-bottom:.3rem;letter-spacing:.02em}
+.login-sub{font-size:.72rem;color:var(--tx3);letter-spacing:.15em;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:2.5rem}
+.google-btn-wrap{display:flex;justify-content:center;margin-bottom:.5rem}
+.login-note{font-size:.68rem;color:var(--tx3);font-family:'DM Mono',monospace;margin-top:1.5rem;line-height:1.7}
+#login-error{margin-top:1rem;padding:.7rem 1rem;background:rgba(224,80,80,.1);border:1px solid rgba(224,80,80,.3);color:var(--red);font-size:.78rem;border-radius:var(--r);display:none}
+
+/* HUB */
+#hub-view{flex-direction:column;height:100vh;overflow:hidden}
+.topbar{height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 1.2rem;border-bottom:1px solid var(--border);background:rgba(5,13,24,.95);backdrop-filter:blur(8px);flex-shrink:0;gap:1rem}
+.topbar-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;flex-shrink:0}
+.topbar-logo svg{width:24px;height:24px}
+.topbar-logo-text{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:600;color:var(--tx1);letter-spacing:.04em}
+.topbar-logo-text span{color:var(--gold)}
+.model-select{background:var(--surface);border:1px solid var(--border);color:var(--tx2);font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.05em;padding:.3rem .7rem;outline:none;cursor:pointer;border-radius:var(--r);flex-shrink:0}
+.topbar-right{display:flex;align-items:center;gap:.8rem;flex-shrink:0}
+.user-badge{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--tx3);font-family:'DM Mono',monospace}
+.user-avatar{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--gold);flex-shrink:0;overflow:hidden;background:var(--dark3)}
+.user-avatar img{width:100%;height:100%;object-fit:cover}
+.btn-icon{background:none;border:none;color:var(--tx3);cursor:pointer;padding:.3rem;border-radius:4px;transition:color .2s;display:flex;align-items:center}
+.btn-icon:hover{color:var(--gold)}
+.hub-body{display:flex;flex:1;overflow:hidden}
+.sidebar{width:220px;flex-shrink:0;border-right:1px solid var(--border);background:rgba(8,21,32,.6);display:flex;flex-direction:column;overflow-y:auto;padding:1rem 0}
+.sidebar-section{padding:0 .8rem;margin-bottom:1.5rem}
+.sidebar-label{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--tx3);letter-spacing:.15em;text-transform:uppercase;padding:0 .4rem;margin-bottom:.4rem}
+.new-chat-btn{width:100%;padding:.55rem .8rem;background:rgba(200,160,48,.1);border:1px solid rgba(200,160,48,.25);color:var(--gold);font-family:'Outfit',sans-serif;font-size:.78rem;cursor:pointer;border-radius:var(--r);transition:all .2s;display:flex;align-items:center;gap:.5rem;margin-bottom:1rem}
+.new-chat-btn:hover{background:rgba(200,160,48,.18);border-color:rgba(200,160,48,.5)}
+.preset-btn{width:100%;padding:.45rem .8rem;background:none;border:none;color:var(--tx2);font-size:.78rem;cursor:pointer;border-radius:var(--r);transition:all .15s;text-align:left;display:flex;align-items:center;gap:.5rem}
+.preset-btn:hover{background:var(--surface);color:var(--tx1)}
+.preset-btn.active{background:rgba(200,160,48,.08);color:var(--gold)}
+.chat-area{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.messages{flex:1;overflow-y:auto;padding:1.5rem;display:flex;flex-direction:column;gap:1rem;scroll-behavior:smooth}
+.messages::-webkit-scrollbar{width:4px}
+.messages::-webkit-scrollbar-track{background:transparent}
+.messages::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;text-align:center;padding:3rem 2rem;gap:1rem;opacity:.7}
+.welcome-icon{font-size:2.5rem;margin-bottom:.5rem}
+.welcome h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--tx1)}
+.welcome p{font-size:.82rem;color:var(--tx3);max-width:320px;line-height:1.7}
+.msg{display:flex;gap:.8rem;animation:fadeUp .3s ease both;max-width:820px}
+.msg.user{flex-direction:row-reverse;align-self:flex-end}
+.msg-avatar{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:500;margin-top:.15rem}
+.msg.assistant .msg-avatar{background:rgba(200,160,48,.15);border:1px solid rgba(200,160,48,.25);color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:.9rem}
+.msg.user .msg-avatar{background:rgba(255,255,255,.06);border:1px solid var(--border);overflow:hidden}
+.msg.user .msg-avatar img{width:100%;height:100%;object-fit:cover}
+.msg-bubble{padding:.75rem 1rem;border-radius:var(--r);font-size:.88rem;line-height:1.75;max-width:calc(100% - 42px)}
+.msg.assistant .msg-bubble{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--tx1)}
+.msg.user .msg-bubble{background:rgba(200,160,48,.12);border:1px solid rgba(200,160,48,.2);color:var(--tx1)}
+.msg-bubble p{margin-bottom:.6rem}
+.msg-bubble p:last-child{margin-bottom:0}
+.msg-bubble code{font-family:'DM Mono',monospace;font-size:.8em;background:rgba(255,255,255,.07);padding:.1em .4em;border-radius:3px}
+.msg-bubble pre{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:var(--r);padding:.8rem 1rem;overflow-x:auto;margin:.5rem 0}
+.msg-bubble pre code{background:none;padding:0;font-size:.8rem;line-height:1.6}
+.msg-bubble strong{color:var(--tx1);font-weight:500}
+.msg-bubble ul,.msg-bubble ol{padding-left:1.4rem;margin:.4rem 0}
+.msg-bubble li{margin:.25rem 0}
+.typing-indicator{display:flex;gap:4px;align-items:center;padding:.6rem .8rem}
+.typing-indicator span{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.4;animation:typingBounce 1.2s infinite}
+.typing-indicator span:nth-child(2){animation-delay:.2s}
+.typing-indicator span:nth-child(3){animation-delay:.4s}
+@keyframes typingBounce{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-5px);opacity:1}}
+.input-area{padding:1rem 1.5rem 1.2rem;border-top:1px solid var(--border);background:rgba(5,13,24,.8);backdrop-filter:blur(8px);flex-shrink:0}
+.input-wrap{display:flex;gap:.6rem;align-items:flex-end;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:var(--r);padding:.5rem .5rem .5rem .8rem;transition:border-color .2s}
+.input-wrap:focus-within{border-color:rgba(200,160,48,.4)}
+#msg-input{flex:1;background:none;border:none;outline:none;color:var(--tx1);font-family:'Outfit',sans-serif;font-size:.88rem;line-height:1.5;resize:none;min-height:22px;max-height:140px;padding:.15rem 0}
+#msg-input::placeholder{color:var(--tx3)}
+.send-btn{width:34px;height:34px;background:var(--gold);border:none;border-radius:4px;color:var(--dark);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.send-btn:hover{background:var(--gold2);transform:scale(1.05)}
+.send-btn:disabled{background:var(--border);color:var(--tx3);transform:none;cursor:default}
+.input-hint{font-size:.65rem;color:var(--tx3);font-family:'DM Mono',monospace;margin-top:.5rem;text-align:center}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){.sidebar{display:none}.messages{padding:1rem}.input-area{padding:.8rem 1rem 1rem}}
+</style>
+</head>
+<body>
+
+<div id="login-view" class="view active">
+  <div class="login-box">
+    <div class="login-logo">
+      <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="26" cy="26" r="24" fill="none" stroke="#c8a030" stroke-width=".8"/>
+        <path d="M26 5 L47 47 L5 47 Z" fill="none" stroke="#c8a030" stroke-width="1.1"/>
+        <circle cx="26" cy="26" r="5" fill="#c8a030" opacity=".9"/>
+        <circle cx="26" cy="11" r="2.5" fill="#c8a030"/>
+      </svg>
+    </div>
+    <h1 class="login-title">Aton Hub</h1>
+    <p class="login-sub">Gründer- og teamportal</p>
+    <div class="google-btn-wrap">
+      <div id="g_id_onload"
+        data-client_id="155233765122-fcji10bhiqdo66gv2kiq41cr8qe.apps.googleusercontent.com"
+        data-context="signin"
+        data-callback="handleGoogleLogin"
+        data-auto_select="false"
+        data-itp_support="true">
+      </div>
+      <div class="g_id_signin"
+        data-type="standard"
+        data-shape="rectangular"
+        data-theme="filled_black"
+        data-text="signin_with"
+        data-size="large"
+        data-logo_alignment="left"
+        data-width="280">
+      </div>
+    </div>
+    <div id="login-error"></div>
+    <p class="login-note">Tilgang: leif@, lone@, alexandra@ atongroup.no · leifsunde@gmail.com</p>
+  </div>
+</div>
+
+<div id="hub-view" class="view">
+  <div class="topbar">
+    <a href="/" class="topbar-logo">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="11" fill="none" stroke="#c8a030" stroke-width=".7"/>
+        <path d="M12 2 L22 22 L2 22 Z" fill="none" stroke="#c8a030" stroke-width=".9"/>
+        <circle cx="12" cy="12" r="2.5" fill="#c8a030"/>
+      </svg>
+      <span class="topbar-logo-text">Aton <span>Hub</span></span>
+    </a>
+    <select class="model-select" id="model-select">
+      <option value="claude-sonnet-4-20250514">Sonnet 4</option>
+      <option value="claude-opus-4-20250514">Opus 4</option>
+      <option value="claude-haiku-4-5-20251001">Haiku 4.5</option>
+    </select>
+    <div class="topbar-right">
+      <div class="user-badge">
+        <div class="user-avatar" id="user-avatar-top">L</div>
+        <span id="user-name-top" style="display:none"></span>
+      </div>
+      <button class="btn-icon" onclick="logout()" title="Logg ut">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="hub-body">
+    <div class="sidebar">
+      <div class="sidebar-section">
+        <button class="new-chat-btn" onclick="newChat()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          Ny samtale
+        </button>
+        <div class="sidebar-label">Forhåndsinnstillinger</div>
+        <button class="preset-btn active" onclick="setPreset(this,'general')">💬 Generell assistent</button>
+        <button class="preset-btn" onclick="setPreset(this,'bladeship')">⚓ BladeShip</button>
+        <button class="preset-btn" onclick="setPreset(this,'investor')">📊 Investor pitch</button>
+        <button class="preset-btn" onclick="setPreset(this,'email')">✉️ E-postutkast</button>
+        <button class="preset-btn" onclick="setPreset(this,'legal')">⚖️ Juridisk</button>
+        <button class="preset-btn" onclick="setPreset(this,'strategy')">🎯 Strategi</button>
+      </div>
+    </div>
+    <div class="chat-area">
+      <div class="messages" id="messages">
+        <div class="welcome" id="welcome-msg">
+          <div class="welcome-icon">✦</div>
+          <h2>God dag, <span id="welcome-name"></span></h2>
+          <p>Hva kan jeg hjelpe deg med i dag?</p>
+        </div>
+      </div>
+      <div class="input-area">
+        <div class="input-wrap">
+          <textarea id="msg-input" placeholder="Skriv en melding..." rows="1"
+            onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+          <button class="send-btn" id="send-btn" onclick="sendMessage()" disabled>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="19" x2="12" y2="5"/>
+              <polyline points="5 12 12 5 19 12"/>
+            </svg>
+          </button>
+        </div>
+        <div class="input-hint">Enter for sende · Shift+Enter ny linje</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const PROXY_URL = 'https://script.google.com/macros/s/AKfycbyot6j9kWSTvzhkGlr_8HnQ2HhcAQptw2a8Adza_X4ZacmvvqDq0edKD0-AprWqFuR4/exec';
+const SECRET    = 'AtonGroup2026!GmailSender#Leif';
+const ALLOWED   = ["leifsunde@gmail.com", "leif@atongroup.no", "lone@atongroup.no", "alexandra@atongroup.no", "leif@bladeship.no"];
+
+const SYSTEMS = {
+  general:   'Du er Leifs personlige AI-assistent for Aton Group AS. Svar alltid på norsk med mindre brukeren skriver på et annet språk. Vær presis, profesjonell og praktisk.',
+  bladeship: 'Du er ekspert på BladeShip AS – verdens første havgående resirkuleringsanlegg for vindmøller (GRP-blader til glassfibergranulat). Hjelp med pitch, EIC-søknad (€17,5M, ID 101354477), 2 patenter (20260735+20260736), og strategi. Svar på norsk.',
+  investor:  'Du er investor relations-rådgiver for Aton Group AS og BladeShip AS. Hjelp med pitch-decks, term sheets og presentasjoner. Svar på norsk.',
+  email:     'Du er profesjonell forretningsskribent. Skriv klare, vennlige og profesjonelle e-postutkast på norsk tilpasset konteksten Leif gir deg.',
+  legal:     'Du er juridisk rådgiver for Aton Group AS. Hjelp med kontrakter, aksjonæravtaler og norsk selskapsrett. Påminn alltid om å konsultere advokat. Svar på norsk.',
+  strategy:  'Du er strategisk rådgiver for Aton Group AS. Analyser situasjoner, gi klare anbefalinger og praktiske neste steg. Svar på norsk.'
+};
+
+let currentUser = null;
+let messages    = [];
+let activePreset = 'general';
+let isLoading   = false;
+
+function handleGoogleLogin(response) {
+  try {
+    const payload = JSON.parse(atob(response.credential.split('.')[1]));
+    const email   = payload.email ? payload.email.toLowerCase() : '';
+    if (!ALLOWED.includes(email)) {
+      showLoginError('Ingen tilgang for ' + email);
+      return;
+    }
+    currentUser = { email, name: payload.name || email.split('@')[0], picture: payload.picture || '' };
+    enterHub();
+  } catch(e) {
+    showLoginError('Pålogging feilet — prøv igjen.');
+  }
+}
+
+function showLoginError(msg) {
+  const el = document.getElementById('login-error');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function enterHub() {
+  document.getElementById('login-view').classList.remove('active');
+  document.getElementById('hub-view').classList.add('active');
+  const first = currentUser.name.split(' ')[0];
+  document.getElementById('welcome-name').textContent = first;
+  const av = document.getElementById('user-avatar-top');
+  if (currentUser.picture) {
+    av.innerHTML = '<img src="' + currentUser.picture + '" alt="">';
+  } else {
+    av.textContent = first[0].toUpperCase();
+  }
+  document.getElementById('msg-input').focus();
+}
+
+function logout() {
+  currentUser = null; messages = [];
+  document.getElementById('hub-view').classList.remove('active');
+  document.getElementById('login-view').classList.add('active');
+  document.getElementById('messages').innerHTML = '<div class="welcome" id="welcome-msg"><div class="welcome-icon">✦</div><h2>God dag, <span id="welcome-name"></span></h2><p>Hva kan jeg hjelpe deg med i dag?</p></div>';
+  document.getElementById('login-error').style.display = 'none';
+}
+
+function setPreset(btn, id) {
+  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activePreset = id;
+  newChat();
+}
+
+function newChat() {
+  messages = [];
+  const first = currentUser ? currentUser.name.split(' ')[0] : '';
+  const label = document.querySelector('.preset-btn.active')?.textContent?.trim() || '';
+  document.getElementById('messages').innerHTML =
+    '<div class="welcome"><div class="welcome-icon">✦</div><h2>Klar — ' + label + '</h2><p>Skriv en melding for å begynne.</p></div>';
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 140) + 'px';
+  document.getElementById('send-btn').disabled = !el.value.trim();
+}
+
+async function sendMessage() {
+  const input = document.getElementById('msg-input');
+  const text  = input.value.trim();
+  if (!text || isLoading) return;
+
+  document.getElementById('messages').querySelector('.welcome')?.remove();
+
+  messages.push({ role: 'user', content: text });
+  appendMsg('user', text);
+  input.value = ''; input.style.height = 'auto';
+  document.getElementById('send-btn').disabled = true;
+  isLoading = true;
+
+  const tid = 'typing-' + Date.now();
+  appendTyping(tid);
+
+  try {
+    const model = document.getElementById('model-select').value;
+    const res   = await fetch(PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        secret: SECRET, model, max_tokens: 2000,
+        system: SYSTEMS[activePreset], messages
+      })
+    });
+    const data = await res.json();
+    removeTyping(tid);
+    if (data.error) throw new Error(data.error);
+    const reply = data.content && data.content[0] ? data.content[0].text : 'Ingen respons.';
+    messages.push({ role: 'assistant', content: reply });
+    appendMsg('assistant', reply);
+  } catch(err) {
+    removeTyping(tid);
+    appendMsg('assistant', '⚠️ ' + err.message);
+  }
+
+  isLoading = false;
+  input.focus();
+}
+
+function appendMsg(role, text) {
+  const el  = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg ' + role;
+  const avHtml = role === 'assistant'
+    ? '<div class="msg-avatar">A</div>'
+    : '<div class="msg-avatar">' + (currentUser && currentUser.picture ? '<img src="' + currentUser.picture + '" alt="">' : (currentUser ? currentUser.name[0].toUpperCase() : 'L')) + '</div>';
+  div.innerHTML = avHtml + '<div class="msg-bubble">' + fmt(text) + '</div>';
+  el.appendChild(div);
+  el.scrollTop = el.scrollHeight;
+}
+
+function appendTyping(id) {
+  const el = document.getElementById('messages');
+  const d  = document.createElement('div');
+  d.className = 'msg assistant'; d.id = id;
+  d.innerHTML = '<div class="msg-avatar">A</div><div class="msg-bubble"><div class="typing-indicator"><span></span><span></span><span></span></div></div>';
+  el.appendChild(d); el.scrollTop = el.scrollHeight;
+}
+
+function removeTyping(id) { document.getElementById(id)?.remove(); }
+
+function fmt(t) {
+  t = t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  t = t.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+  t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
+  t = t.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  t = t.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  t = t.replace(/^###\s(.+)$/gm, '<strong>$1</strong>');
+  t = t.replace(/^##\s(.+)$/gm, '<strong>$1</strong>');
+  t = t.split('
+
+').map(p => p.trim() ? '<p>' + p.replace(/
+/g,'<br>') + '</p>' : '').join('');
+  return t;
+}
+</script>
+</body>
+</html>
