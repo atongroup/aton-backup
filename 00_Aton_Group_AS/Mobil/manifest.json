@@ -1,0 +1,38 @@
+{
+  "name": "Aton Group",
+  "short_name": "Aton",
+  "description": "Aton Group — Venture Builder · Stavanger",
+  "start_url": "/app.html",
+  "display": "standalone",
+  "background_color": "#060501",
+  "theme_color": "#060501",
+  "orientation": "portrait",
+  "lang": "no",
+  "categories": ["business", "finance"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Slagplan",
+      "url": "/mobil/app.html#hjem",
+      "description": "Dagens status og oppgaver"
+    },
+    {
+      "name": "Portefølje",
+      "url": "/mobil/app.html#port",
+      "description": "Selskaper og pipeline"
+    }
+  ]
+}
