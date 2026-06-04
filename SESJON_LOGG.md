@@ -47,3 +47,12 @@
 - **GitHub repo:** atongroup/aton-backup (privat) ✅
 - **SESJONSSTARTER.md:** Oppdatert 3. juni 2026 — e-post kvalitetssjekkiste (8 punkter), nettside-ZIP-regel
 - **hub.html:** OAuth client_id fikset, manuell GSI-init — gjenstår Google Cloud Console-steg
+
+## Sesjon 4. juni 2026 — del 3 (Aton app)
+- HeyMom → ATON rebrand komplett
+- Solgud-logo i alle nettsider, DOCX og app
+- Morgenbrief, Brief-tab, hurtigkommandoer, ElevenLabs TTS
+- Stemmebibliotek i Settings (Astrid norsk default)
+- Public assets-repo: github.com/atongroup/aton-assets
+- GJENSTÅR: sol-bilde URL-fix, expo-audio mic, APK-bygg
+- Statusfil: ATON_STATUS_4juni2026.md (last ned fra chat)
