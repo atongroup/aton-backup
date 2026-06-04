@@ -60,9 +60,14 @@ Aldri skriv tall eller statuser fra hukommelsen — sjekk alltid her.
 **Regel:** Kun tre gyldige statuser: «Kontaktet» / «Dialog pågår» / «Bekreftet (skriftlig)»
 Aldri skriv «partner», «samarbeider» eller «avtale» uten skriftlig bekreftelse.
 
-| Partner | Status | Hva som har skjedd | Dato |
-|---------|--------|--------------------|------|
-| [Navn] | Kontaktet | [Hva ble sendt] | [Dato] |
+| Partner | Kontakt | Status | Hva som har skjedd | Dato |
+|---------|---------|--------|--------------------|------|
+| DNV | Kjetil Moi Østbø + Ole Johan Harnes | Dialog pågår | Møte bekreftet 10. juni kl. 11:30, Veritasveien 25. Dokumentpakke + NDA sendt 3. juni. | 2026-06-03 |
+| Green Yard Kleven (Greenyard) | Karl Johan Barstad, CCO | Dialog pågår | Sendte konseptmail 3. juni. Karl Johan svarte positivt — ønsker konseptnotat, tilbyr NDA. Svar sendt 4. juni. | 2026-06-04 |
+| VARD | Håvard Vollset Lien, VP R&I (Ålesund) | Dialog pågår | Sendte konseptmail. Håvard inviterte til Teams-møte. Svar sendt 4. juni med forslag om 11. juni. | 2026-06-04 |
+| Ulstein Group | post@ulstein.com | Kontaktet | Konseptmail sendt 3. juni. Ingen svar ennå. | 2026-06-03 |
+| Aker ASA | contact@akerasa.com | Kontaktet | Konseptmail sendt 3. juni. Ingen svar ennå. | 2026-06-03 |
+| Kleven AS | post@kleven.no | Kontaktet — FEILET | Delivery failure — adressen finnes ikke. | 2026-06-03 |
 
 ## Tilskuddspipeline
 
