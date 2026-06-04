@@ -68,10 +68,14 @@
 
 | # | Oppgave | Frist | Status |
 |---|---------|-------|--------|
-| HM1 | Fiks mute-knapp synlig + SafeArea Android | v0.8 | ⏳ |
-| HM2 | Bygg Innstillinger-skjerm | v0.8 | ⏳ |
+| HM1 | Fiks mute-knapp synlig + SafeArea Android | v0.8 | ✅ Løst |
+| HM2 | Bygg Innstillinger-skjerm | v0.8 | ✅ Løst |
 | HM3 | Implementer mikrofon / tale-til-tekst | v0.9 | ⏳ |
 | HM4 | SkatteFUNN-søknad for HeyMom FoU | 1. sep 2026 | ⏳ |
+| HM5 | messages-tabell i Supabase | v0.8 | ✅ Løst |
+| HM6 | Google Apps Script proxy med riktig API-nøkkel | v0.8 | ✅ Løst |
+| HM7 | HeyMom persona (systemmelding) | v0.8 | ✅ Løst |
+| HM8 | Samtalehistorikk lagres i Supabase | v0.8 | ✅ Løst |
 
 Repo: `github.com/atongroup/atonapp` | Docs: `08_Aton_Teknologi_AS/HeyMom/`
 

@@ -21,6 +21,7 @@
 ---
 
 ## Siste e-poster sendt
+| 2026-06-04 | HeyMom v0.8 LIVE — proxy, messages-tabell, persona, innstillinger | logs/2026-06-04.md |
 | Dato | Til | Emne | Status |
 |------|-----|------|--------|
 | 03.06.2026 | kjetil.ostbo@dnv.com + ole.johan.harnes@dnv.com | BladeShip AS — Dokumentasjon og NDA til møtet 10. juni | ✅ Sendt med vedlegg |
