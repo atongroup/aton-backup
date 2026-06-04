@@ -483,6 +483,19 @@ button{cursor:pointer;font-family:var(--sans)}
         Sunde-familien &amp; @atongroup.no-teamet
       </div>
       <div id="gsi-btn"></div>
+      <div id="gsi-fallback" style="display:none;margin-top:8px;">
+        <button onclick="location.reload(true)" style="width:100%;padding:10px;background:#f8f4ec;border:1px solid #d4a843;border-radius:8px;color:#8a6820;font-size:13px;cursor:pointer;">
+          🔄 Oppdater siden (fix innlogging)
+        </button>
+      </div>
+      <script>
+        setTimeout(function(){
+          var btn = document.getElementById('gsi-btn');
+          if(btn && btn.children.length === 0){
+            document.getElementById('gsi-fallback').style.display = 'block';
+          }
+        }, 2500);
+      </script>
       <div class="login-divider"><span>Ny gründer?</span></div>
       <button class="login-founder-btn" onclick="alert('Kontakt leif@atongroup.no for å registrere deg som gründer i Aton-nettverket.')">Registrer deg som gründer →</button>
       <div class="login-privacy">🔒 Din idé er beskyttet av NDA fra første øyeblikk</div>
