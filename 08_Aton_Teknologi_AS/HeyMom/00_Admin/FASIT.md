@@ -12,7 +12,7 @@
 | Eier | Aton Teknologi AS (100%) |
 | Morselskap | Aton Group AS |
 | Founder | Leif E. Sunde |
-| Status | 🔨 Aktiv utvikling — v0.7 |
+| Status | 🔨 Aktiv utvikling — v0.8 |
 | Startdato | 4. juni 2026 (navneendring fra AtonApp) |
 
 ---
@@ -27,7 +27,7 @@
 | Framework | React Native + Expo SDK 54 |
 | Språk | TypeScript |
 | Platform | Windows + Android (iOS ikke testet ennå) |
-| Versjon | v0.7 |
+| Versjon | v0.8 |
 
 ### Supabase
 | Parameter | Verdi |
@@ -72,14 +72,36 @@
 
 ---
 
-## Åpne problemer (v0.7)
+## Løst i v0.8
+
+| # | Fix | Status |
+|---|-----|--------|
+| F1 | Samtalehistorikk sendt til Claude (husker kontekst) | ✅ Løst |
+| F2 | HeyMom-persona (systemmelding med Leifs profil) | ✅ Løst |
+| F3 | Samtalehistorikk lagres og hentes fra Supabase | ✅ Løst |
+| F4 | Slagplan-mål lagres i Supabase (ikke hardkodet) | ✅ Løst |
+| F5 | Brukervennlige feilmeldinger ved nettverksproblemer | ✅ Løst |
+| F6 | Innstillinger-skjerm bygget (TTS-toggle, app-info) | ✅ Løst |
+| F7 | Loading-state med spinner og tekst ved oppstart | ✅ Løst |
+| F8 | Mute-knapp synlig i chat-inputfeltet | ✅ Løst |
+| F9 | Prioritetsfarger og sortering på huskeliste | ✅ Løst |
+| F10 | Klikkbare slagplan-kort med +/− fremdrift og slett | ✅ Løst |
+
+## Åpne problemer (v0.8)
 
 | # | Problem | Alvorlighet | Status |
 |---|---------|-------------|--------|
-| P1 | Mute-knapp (🔊/🔇) finnes i header, men lite synlig | Lav | ⏳ Fikses |
-| P2 | Mikrofon / tale-til-tekst ikke implementert | Middels | ⏳ Planlegges |
-| P3 | SafeArea overlapper litt på Android | Lav | ⏳ Fikses |
-| P4 | Innstillinger-skjerm ikke bygget | Middels | ⏳ Planlegges |
+| P1 | SafeArea Android — fortsatt litt variasjon mellom enheter | Lav | ⏳ |
+| P2 | Mikrofon / tale-til-tekst ikke implementert | Middels | ⏳ v0.9 |
+| P3 | Proxy må oppdateres for å støtte `system` + `messages` array | Kritisk | ⚠️ Se under |
+
+## ⚠️ VIKTIG: Proxy-oppdatering kreves
+
+App.tsx v0.8 sender nå `{system, messages}` til claude-proxy.
+Den eksisterende proxyen forventer `{message}` (enkelt streng).
+
+**Proxyen MÅ oppdateres** i Supabase Edge Functions for at v0.8 skal fungere fullt ut.
+Se `03_Backend/PROXY_V2.md` for ny proxy-kode.
 
 ---
 
