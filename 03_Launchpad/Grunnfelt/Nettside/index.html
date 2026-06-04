@@ -3,387 +3,449 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grunnfelt AS — Eiendomsutvikling i Norge</title>
-<meta name="description" content="Grunnfelt AS er et norsk eiendomsutviklingsselskap. Vi kjøper og utvikler arealer for bolig- og næringsformål i samarbeid med grunneiere over hele Norge.">
+<title>Grunnfelt AS — Tomteidentifikasjon i Norge</title>
+<meta name="description" content="Grunnfelt AS identifiserer uutviklede tomter i Norge og realiserer verdier for grunneiere — uten kostnad og uten risiko for deg.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --jord: #1c2b1a;
-    --mold: #2e4a2b;
-    --gress: #4a7a45;
-    --lys: #8ab885;
-    --sand: #e8e0d0;
-    --krem: #f5f0e8;
-    --hvit: #fafaf7;
-    --gull: #c8a84b;
-    --tekst: #1c2b1a;
-    --dempet: #5a6e58;
-  }
+:root {
+  --jord: #1a2718;
+  --mold: #243622;
+  --gress: #3d6b38;
+  --lys: #7aad74;
+  --sol: #c8a84b;
+  --sol-lys: #e8cb7a;
+  --krem: #f2ece0;
+  --sand: #e4dccf;
+  --hvit: #faf8f4;
+  --dempet: #506048;
+  --svak: #8a9e84;
+}
 
-  html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--hvit);
-    color: var(--tekst);
-    font-size: 16px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--hvit);
+  color: var(--jord);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 4rem;
-    background: rgba(250,250,247,0.95);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(74,122,69,0.12);
-  }
-  .logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--jord);
-    text-decoration: none;
-    letter-spacing: -0.02em;
-  }
-  .logo em { color: var(--gress); font-style: italic; }
-  nav ul { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
-  nav ul a {
-    color: var(--dempet); text-decoration: none;
-    font-size: 0.9rem; font-weight: 400; letter-spacing: 0.01em;
-    transition: color 0.2s;
-  }
-  nav ul a:hover { color: var(--jord); }
-  .nav-cta {
-    background: var(--jord); color: var(--hvit) !important;
-    padding: 0.6rem 1.4rem; border-radius: 2px;
-    font-weight: 500 !important; transition: background 0.2s !important;
-  }
-  .nav-cta:hover { background: var(--gress) !important; }
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5vw; height: 68px;
+  background: rgba(26,39,24,0.97);
+  border-bottom: 1px solid rgba(200,168,75,0.15);
+}
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem; font-weight: 700;
+  color: var(--hvit); text-decoration: none;
+  letter-spacing: 0.01em;
+}
+.logo em { color: var(--sol); font-style: italic; }
+nav ul { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+nav a {
+  color: rgba(250,248,244,0.6); text-decoration: none;
+  font-size: 0.875rem; font-weight: 400; letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+nav a:hover { color: var(--hvit); }
+.nav-cta {
+  background: var(--sol) !important; color: var(--jord) !important;
+  padding: 0.55rem 1.4rem; border-radius: 2px;
+  font-weight: 500 !important;
+}
+.nav-cta:hover { background: var(--sol-lys) !important; }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(160deg, var(--jord) 0%, #253824 60%, #1a3018 100%);
-    position: relative; overflow: hidden; padding-top: 80px;
-    text-align: center;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 60% 40%, rgba(74,122,69,0.15) 0%, transparent 60%);
-  }
-  .hero::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(200,168,75,0.4), transparent);
-  }
-  .hero-inner { position: relative; max-width: 860px; margin: 0 auto; padding: 0 2rem; }
-  .hero-kicker {
-    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--gull); margin-bottom: 1.5rem; font-weight: 500;
-  }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 6vw, 5.2rem);
-    font-weight: 700; line-height: 1.1;
-    color: var(--hvit); margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
-  }
-  .hero h1 em { color: var(--gull); font-style: italic; }
-  .hero-sub {
-    font-size: 1.1rem; color: rgba(250,250,247,0.65);
-    max-width: 560px; margin: 0 auto 2.5rem;
-    line-height: 1.75; font-weight: 300;
-  }
-  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--gull); color: var(--jord);
-    padding: 0.9rem 2rem; border-radius: 2px;
-    text-decoration: none; font-weight: 500; font-size: 0.95rem;
-    transition: all 0.2s; display: inline-block;
-  }
-  .btn-primary:hover { background: #d4b860; transform: translateY(-1px); }
-  .btn-outline {
-    border: 1px solid rgba(250,250,247,0.3); color: rgba(250,250,247,0.8);
-    padding: 0.9rem 2rem; border-radius: 2px;
-    text-decoration: none; font-size: 0.95rem;
-    transition: all 0.2s; display: inline-block;
-  }
-  .btn-outline:hover { border-color: rgba(250,250,247,0.6); color: var(--hvit); }
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid; place-items: center;
+  background: var(--jord);
+  position: relative; overflow: hidden;
+  padding: 120px 5vw 80px;
+}
+.hero-grid-bg {
+  position: absolute; inset: 0; opacity: 0.04;
+  background-image:
+    linear-gradient(rgba(200,168,75,1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,168,75,1) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-circle {
+  position: absolute; right: -8vw; top: 50%; transform: translateY(-50%);
+  width: 55vw; height: 55vw; max-width: 700px; max-height: 700px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,168,75,0.08);
+  background: radial-gradient(ellipse at center, rgba(61,107,56,0.12) 0%, transparent 70%);
+}
+.hero-circle::after {
+  content: '';
+  position: absolute; inset: 12%;
+  border-radius: 50%;
+  border: 1px solid rgba(200,168,75,0.06);
+}
+.hero-inner {
+  position: relative; max-width: 780px;
+  margin: 0 auto;
+}
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--sol); margin-bottom: 2rem; font-weight: 500;
+}
+.hero-kicker::before {
+  content: ''; display: block;
+  width: 32px; height: 1px; background: var(--sol); opacity: 0.6;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 6.5vw, 5.5rem);
+  font-weight: 600; line-height: 1.05;
+  color: var(--hvit); margin-bottom: 1.75rem;
+  letter-spacing: -0.01em;
+}
+.hero h1 em { color: var(--sol); font-style: italic; }
+.hero-sub {
+  font-size: 1.05rem; color: rgba(250,248,244,0.55);
+  max-width: 520px; margin-bottom: 3rem;
+  line-height: 1.8; font-weight: 300;
+}
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-sol {
+  background: var(--sol); color: var(--jord);
+  padding: 1rem 2.2rem; border-radius: 2px;
+  text-decoration: none; font-weight: 500; font-size: 0.95rem;
+  transition: all 0.2s; display: inline-block;
+  letter-spacing: 0.01em;
+}
+.btn-sol:hover { background: var(--sol-lys); transform: translateY(-1px); }
+.btn-ghost {
+  border: 1px solid rgba(250,248,244,0.2); color: rgba(250,248,244,0.65);
+  padding: 1rem 2.2rem; border-radius: 2px;
+  text-decoration: none; font-size: 0.95rem;
+  transition: all 0.2s; display: inline-block;
+}
+.btn-ghost:hover { border-color: rgba(250,248,244,0.5); color: var(--hvit); }
 
-  /* TALLREKKE */
-  .tall-rekke {
-    background: var(--krem);
-    border-top: 1px solid var(--sand);
-    border-bottom: 1px solid var(--sand);
-    padding: 3.5rem 4rem;
-  }
-  .tall-grid {
-    max-width: 900px; margin: 0 auto;
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 2rem; text-align: center;
-  }
-  .tall-item { padding: 1rem; }
-  .tall-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem; font-weight: 700;
-    color: var(--jord); line-height: 1; margin-bottom: 0.5rem;
-  }
-  .tall-num span { color: var(--gull); }
-  .tall-lbl { font-size: 0.85rem; color: var(--dempet); font-weight: 400; }
+/* ── TALLREKKE ── */
+.tall-stripe {
+  background: var(--mold);
+  border-top: 1px solid rgba(200,168,75,0.2);
+  border-bottom: 1px solid rgba(200,168,75,0.2);
+  padding: 3rem 5vw;
+}
+.tall-grid {
+  max-width: 900px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 0; text-align: center;
+}
+.tall-item {
+  padding: 1.5rem 1rem;
+  border-right: 1px solid rgba(200,168,75,0.12);
+}
+.tall-item:last-child { border-right: none; }
+.tall-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.2rem; font-weight: 700; line-height: 1;
+  color: var(--sol); margin-bottom: 0.5rem;
+}
+.tall-num sub { font-size: 1.2rem; vertical-align: middle; }
+.tall-lbl { font-size: 0.82rem; color: rgba(250,248,244,0.45); font-weight: 300; letter-spacing: 0.04em; }
 
-  /* SEKSJON */
-  section { padding: 6rem 4rem; }
-  .section-kicker {
-    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--gress); margin-bottom: 0.75rem; font-weight: 500;
-  }
-  h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700; line-height: 1.2;
-    color: var(--jord); margin-bottom: 1rem;
-    letter-spacing: -0.02em;
-  }
-  .lead {
-    font-size: 1.1rem; color: var(--dempet);
-    max-width: 580px; margin-bottom: 2.5rem;
-    font-weight: 300;
-  }
-  .inner { max-width: 1100px; margin: 0 auto; }
-  .to-kol {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 5rem; align-items: center;
-  }
+/* ── SEKSJONER ── */
+section { padding: 7rem 5vw; }
+.inner { max-width: 1100px; margin: 0 auto; }
+.kicker {
+  font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gress); margin-bottom: 0.8rem; font-weight: 500;
+  display: flex; align-items: center; gap: 10px;
+}
+.kicker::before {
+  content: ''; display: block; width: 24px; height: 1px; background: var(--gress);
+}
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 600; line-height: 1.15;
+  color: var(--jord); margin-bottom: 1.2rem;
+  letter-spacing: -0.01em;
+}
+.lead {
+  font-size: 1.05rem; color: var(--dempet);
+  max-width: 560px; margin-bottom: 3rem;
+  font-weight: 300; line-height: 1.8;
+}
+.to-kol {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6rem; align-items: center;
+}
 
-  /* VERDI */
-  .verdi-liste { list-style: none; margin-top: 1rem; }
-  .verdi-liste li {
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--sand);
-    display: flex; align-items: flex-start; gap: 1rem;
-    font-size: 0.95rem; color: var(--dempet);
-  }
-  .verdi-liste li:last-child { border-bottom: none; }
-  .verdi-ikon {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: rgba(74,122,69,0.1);
-    border: 1px solid rgba(74,122,69,0.2);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; font-size: 0.85rem;
-  }
-  .verdi-txt strong { color: var(--jord); display: block; margin-bottom: 0.2rem; }
+/* ── PROSESS ── */
+.prosess-liste { list-style: none; margin-top: 1rem; }
+.prosess-item {
+  display: grid; grid-template-columns: 48px 1fr;
+  gap: 1.25rem; padding: 1.5rem 0;
+  border-bottom: 1px solid var(--sand);
+  align-items: start;
+}
+.prosess-item:last-child { border-bottom: none; }
+.prosess-nr {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 600; color: var(--sol);
+  line-height: 1; margin-top: 2px;
+}
+.prosess-txt strong {
+  display: block; font-weight: 500; color: var(--jord);
+  font-size: 1rem; margin-bottom: 0.3rem;
+}
+.prosess-txt span { font-size: 0.9rem; color: var(--dempet); font-weight: 300; }
 
-  /* BILDE-BOKS */
-  .bilde-boks {
-    border-radius: 4px; overflow: hidden;
-    background: linear-gradient(135deg, var(--mold), var(--jord));
-    aspect-ratio: 4/3;
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-  }
-  .bilde-boks-inner {
-    text-align: center; padding: 3rem;
-  }
-  .bilde-boks svg { opacity: 0.3; margin-bottom: 1rem; }
-  .bilde-siffer {
-    font-family: 'Playfair Display', serif;
-    font-size: 5rem; font-weight: 900;
-    color: rgba(200,168,75,0.25);
-    position: absolute; bottom: 1.5rem; right: 2rem;
-    line-height: 1;
-  }
+/* ── BILDE-BOKS ── */
+.visual-boks {
+  background: linear-gradient(145deg, var(--mold) 0%, var(--jord) 100%);
+  border-radius: 4px; aspect-ratio: 4/3;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.visual-boks::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(200,168,75,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,168,75,0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.visual-boks-inner { position: relative; text-align: center; padding: 2.5rem; }
+.visual-stor {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 7rem; font-weight: 700;
+  color: rgba(200,168,75,0.12); line-height: 1;
+  position: absolute; bottom: 1rem; right: 2rem;
+}
 
-  /* OM SELSKAP */
-  .om-wrap {
-    background: var(--jord);
-    color: var(--hvit);
-  }
-  .om-wrap h2 { color: var(--hvit); }
-  .om-wrap .section-kicker { color: var(--gull); }
-  .om-lede {
-    font-size: 1.05rem; color: rgba(250,250,247,0.7);
-    line-height: 1.8; margin-bottom: 1.5rem; font-weight: 300;
-  }
-  .om-aton {
-    display: flex; align-items: center; gap: 1rem;
-    padding: 1rem 1.3rem;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 3px; margin-top: 2rem;
-  }
-  .om-aton-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.85rem; font-weight: 700;
-    color: var(--gull); white-space: nowrap;
-  }
-  .om-aton-txt { font-size: 0.82rem; color: rgba(250,250,247,0.5); }
-  .om-aton a { color: var(--gull); text-decoration: none; font-size: 0.82rem; }
+/* ── OM SELSKAP ── */
+.om-seksjon { background: var(--jord); }
+.om-seksjon h2 { color: var(--hvit); }
+.om-seksjon .kicker { color: var(--sol); }
+.om-seksjon .kicker::before { background: var(--sol); }
+.om-lede {
+  font-size: 1rem; color: rgba(250,248,244,0.6);
+  line-height: 1.85; margin-bottom: 1.2rem; font-weight: 300;
+}
+.aton-badge {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 1rem 1.4rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(200,168,75,0.2);
+  border-radius: 3px; margin-top: 2rem;
+}
+.aton-navn {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; font-weight: 600; color: var(--sol);
+}
+.aton-sub { font-size: 0.8rem; color: rgba(250,248,244,0.4); margin-top: 1px; }
+.aton-sub a { color: var(--sol); text-decoration: none; }
 
-  /* TEAM */
-  .team-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 1.5rem; margin-top: 2.5rem;
-  }
-  .team-kort {
-    background: var(--hvit);
-    border: 1px solid rgba(74,122,69,0.15);
-    border-radius: 4px; padding: 2rem;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .team-kort:hover {
-    border-color: rgba(74,122,69,0.3);
-    transform: translateY(-2px);
-  }
-  .team-avatar {
-    width: 52px; height: 52px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif; font-weight: 700;
-    font-size: 1.1rem; margin-bottom: 1rem;
-  }
-  .team-avatar.gress { background: rgba(74,122,69,0.12); color: var(--gress); }
-  .team-avatar.jord { background: rgba(28,43,26,0.1); color: var(--jord); }
-  .team-navn { font-size: 1rem; font-weight: 500; color: var(--jord); margin-bottom: 0.2rem; }
-  .team-tittel { font-size: 0.8rem; color: var(--gress); margin-bottom: 0.8rem; }
-  .team-bio { font-size: 0.88rem; color: var(--dempet); line-height: 1.65; margin-bottom: 1rem; }
-  .team-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-  .tag {
-    font-size: 0.72rem; padding: 0.2rem 0.65rem; border-radius: 20px;
-    background: rgba(74,122,69,0.08); color: var(--gress);
-    border: 1px solid rgba(74,122,69,0.15);
-  }
-  .tag.jord-tag {
-    background: rgba(28,43,26,0.06); color: var(--jord);
-    border-color: rgba(28,43,26,0.12);
-  }
-  .team-link { font-size: 0.8rem; color: var(--gress); text-decoration: none; display: inline-block; margin-top: 0.8rem; }
-  .team-link:hover { text-decoration: underline; }
+/* ── TEAM ── */
+.team-seksjon { background: var(--krem); }
+.team-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.5rem; margin-top: 3rem;
+}
+.team-kort {
+  background: var(--hvit);
+  border: 1px solid var(--sand);
+  border-radius: 4px; padding: 2.2rem;
+  transition: border-color 0.2s, transform 0.2s;
+  position: relative; overflow: hidden;
+}
+.team-kort::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--gress), var(--sol));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.team-kort:hover::before { transform: scaleX(1); }
+.team-kort:hover { transform: translateY(-3px); border-color: rgba(61,107,56,0.25); }
+.team-initial {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: 1.2rem; margin-bottom: 1.2rem;
+}
+.ti-gress { background: rgba(61,107,56,0.1); color: var(--gress); }
+.ti-jord { background: rgba(26,39,24,0.08); color: var(--jord); }
+.team-navn { font-size: 1.05rem; font-weight: 500; color: var(--jord); margin-bottom: 2px; }
+.team-tittel { font-size: 0.8rem; color: var(--gress); margin-bottom: 1rem; font-weight: 400; }
+.team-bio { font-size: 0.88rem; color: var(--dempet); line-height: 1.7; margin-bottom: 1.2rem; font-weight: 300; }
+.tag-liste { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: 0.7rem; padding: 0.2rem 0.7rem; border-radius: 20px;
+  background: rgba(61,107,56,0.07); color: var(--gress);
+  border: 1px solid rgba(61,107,56,0.15);
+}
+.tag.mork {
+  background: rgba(26,39,24,0.05); color: var(--jord);
+  border-color: rgba(26,39,24,0.12);
+}
+.team-lenke {
+  font-size: 0.8rem; color: var(--gress); text-decoration: none;
+  display: inline-block; margin-top: 1rem;
+  border-bottom: 1px solid transparent; transition: border-color 0.2s;
+}
+.team-lenke:hover { border-color: var(--gress); }
 
-  /* GRUNNEIERseksjon */
-  .grunneier-wrap { background: var(--krem); }
-  .g-kort {
-    background: var(--hvit); border: 1px solid var(--sand);
-    border-radius: 4px; padding: 2.5rem;
-    border-left: 3px solid var(--gress);
-  }
-  .g-kort h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem; color: var(--jord); margin-bottom: 0.75rem;
-  }
-  .g-kort p { font-size: 0.95rem; color: var(--dempet); margin-bottom: 1.5rem; }
-  .g-btn {
-    display: inline-block; background: var(--jord);
-    color: var(--hvit); padding: 0.75rem 1.5rem;
-    text-decoration: none; border-radius: 2px; font-size: 0.9rem;
-    font-weight: 500; transition: background 0.2s;
-  }
-  .g-btn:hover { background: var(--gress); }
+/* ── GRUNNEIER ── */
+.grunneier-seksjon { background: var(--hvit); }
+.g-ramme {
+  border: 1px solid var(--sand);
+  border-left: 4px solid var(--gress);
+  border-radius: 4px; padding: 2.5rem;
+  background: var(--krem); max-width: 640px;
+}
+.g-ramme h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; color: var(--jord); margin-bottom: 0.75rem;
+}
+.g-ramme p { font-size: 0.95rem; color: var(--dempet); margin-bottom: 1.5rem; font-weight: 300; }
+.g-liste { list-style: none; margin-bottom: 2rem; }
+.g-liste li {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0.55rem 0; border-bottom: 1px solid var(--sand);
+  font-size: 0.92rem; color: var(--dempet);
+}
+.g-liste li:last-child { border-bottom: none; }
+.g-hake {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(61,107,56,0.1); color: var(--gress);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 0.75rem;
+}
 
-  /* SITAT */
-  .sitat-wrap {
-    background: var(--mold);
-    padding: 5rem 4rem;
-    text-align: center;
-  }
-  .sitat-mark {
-    font-family: 'Playfair Display', serif;
-    font-size: 5rem; line-height: 0.5;
-    color: var(--gull); opacity: 0.4;
-    margin-bottom: 1rem; display: block;
-  }
-  .sitat-tekst {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.3rem, 3vw, 1.8rem);
-    font-style: italic; color: rgba(250,250,247,0.9);
-    max-width: 740px; margin: 0 auto 2rem;
-    line-height: 1.5;
-  }
-  .sitat-avatar {
-    width: 48px; height: 48px; border-radius: 50%;
-    background: var(--gull); display: flex; align-items: center;
-    justify-content: center; margin: 0 auto 0.5rem;
-    font-family: 'Playfair Display', serif; font-weight: 700;
-    color: var(--jord); font-size: 1rem;
-  }
-  .sitat-navn { font-size: 0.85rem; color: rgba(250,250,247,0.5); }
+/* ── SITAT ── */
+.sitat-seksjon {
+  background: var(--mold);
+  padding: 6rem 5vw; text-align: center;
+}
+.sitat-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 6rem; line-height: 0.4; color: var(--sol);
+  opacity: 0.35; display: block; margin-bottom: 1.5rem;
+}
+.sitat-tekst {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-style: italic; color: rgba(250,248,244,0.88);
+  max-width: 720px; margin: 0 auto 2.5rem; line-height: 1.55;
+}
+.sitat-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--sol); margin: 0 auto 0.6rem;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  color: var(--jord); font-size: 1rem;
+}
+.sitat-navn { font-size: 0.8rem; color: rgba(250,248,244,0.4); letter-spacing: 0.04em; }
 
-  /* KONTAKT */
-  .kontakt-wrap { background: var(--hvit); }
-  .kontakt-grid {
-    display: grid; grid-template-columns: 1fr 1.4fr;
-    gap: 5rem; align-items: start;
-  }
-  .kontakt-info h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem; color: var(--jord); margin-bottom: 1rem;
-  }
-  .kontakt-info p { font-size: 0.92rem; color: var(--dempet); margin-bottom: 1.5rem; line-height: 1.7; }
-  .kontakt-linje {
-    display: flex; align-items: center; gap: 0.75rem;
-    font-size: 0.88rem; color: var(--dempet); margin-bottom: 0.6rem;
-  }
-  .kontakt-linje a { color: var(--gress); text-decoration: none; }
-  .kontakt-linje a:hover { text-decoration: underline; }
-  .skjema-felt {
-    margin-bottom: 1rem;
-  }
-  .skjema-felt label {
-    display: block; font-size: 0.78rem; color: var(--dempet);
-    margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.06em;
-  }
-  .skjema-felt input,
-  .skjema-felt textarea,
-  .skjema-felt select {
-    width: 100%; padding: 0.75rem 1rem;
-    border: 1px solid rgba(74,122,69,0.2);
-    border-radius: 2px; font-family: inherit; font-size: 0.95rem;
-    color: var(--jord); background: var(--hvit);
-    transition: border-color 0.2s; outline: none;
-  }
-  .skjema-felt input:focus,
-  .skjema-felt textarea:focus,
-  .skjema-felt select:focus { border-color: var(--gress); }
-  .skjema-felt textarea { min-height: 110px; resize: vertical; }
-  .skjema-to { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .skjema-send {
-    background: var(--jord); color: var(--hvit);
-    padding: 0.9rem 2rem; border: none; border-radius: 2px;
-    font-family: inherit; font-size: 0.95rem; font-weight: 500;
-    cursor: pointer; transition: background 0.2s; width: 100%;
-    margin-top: 0.5rem;
-  }
-  .skjema-send:hover { background: var(--gress); }
+/* ── KONTAKT ── */
+.kontakt-seksjon { background: var(--hvit); }
+.kontakt-grid {
+  display: grid; grid-template-columns: 1fr 1.5fr;
+  gap: 6rem; align-items: start;
+}
+.kontakt-info h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; color: var(--jord); margin-bottom: 1rem;
+}
+.kontakt-info p { font-size: 0.95rem; color: var(--dempet); margin-bottom: 2rem; font-weight: 300; line-height: 1.8; }
+.kontakt-rad {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.9rem; color: var(--dempet); margin-bottom: 0.7rem;
+}
+.kontakt-rad a { color: var(--gress); text-decoration: none; }
+.kontakt-ikon {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(61,107,56,0.08); color: var(--gress);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 0.85rem;
+}
+label {
+  display: block; font-size: 0.72rem; color: var(--svak);
+  margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.08em;
+}
+input, textarea, select {
+  width: 100%; padding: 0.8rem 1rem;
+  border: 1px solid var(--sand); border-radius: 2px;
+  font-family: inherit; font-size: 0.95rem;
+  color: var(--jord); background: var(--hvit);
+  transition: border-color 0.2s; outline: none; margin-bottom: 1rem;
+}
+input:focus, textarea:focus, select:focus { border-color: var(--gress); }
+textarea { min-height: 120px; resize: vertical; }
+.felt-rad { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.send-btn {
+  width: 100%; background: var(--jord); color: var(--hvit);
+  padding: 1rem; border: none; border-radius: 2px;
+  font-family: inherit; font-size: 0.95rem; font-weight: 500;
+  cursor: pointer; transition: background 0.2s; letter-spacing: 0.02em;
+  margin-top: 0.25rem;
+}
+.send-btn:hover { background: var(--gress); }
 
-  /* FOOTER */
-  footer {
-    background: var(--jord); color: rgba(250,250,247,0.4);
-    padding: 2rem 4rem; text-align: center; font-size: 0.8rem;
-  }
-  footer a { color: var(--gull); text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
+/* ── FOOTER ── */
+footer {
+  background: var(--jord);
+  border-top: 1px solid rgba(200,168,75,0.15);
+  padding: 2rem 5vw; text-align: center;
+  font-size: 0.8rem; color: rgba(250,248,244,0.3);
+}
+footer a { color: var(--sol); text-decoration: none; }
+footer .f-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; font-weight: 700; color: rgba(250,248,244,0.2);
+  margin-bottom: 0.5rem; display: block;
+}
+footer em { color: var(--sol); font-style: italic; }
 
-  /* MOBIL */
-  @media(max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    nav ul { display: none; }
-    section { padding: 4rem 1.5rem; }
-    .to-kol { grid-template-columns: 1fr; gap: 2.5rem; }
-    .tall-grid { grid-template-columns: 1fr; gap: 1rem; }
-    .team-grid { grid-template-columns: 1fr; }
-    .kontakt-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .sitat-wrap { padding: 4rem 1.5rem; }
-    .tall-rekke { padding: 3rem 1.5rem; }
-    footer { padding: 2rem 1.5rem; }
-    .hero h1 { font-size: 2.6rem; }
-  }
+/* ── MOBIL ── */
+@media (max-width: 860px) {
+  nav ul { display: none; }
+  nav { padding: 0 1.5rem; }
+  section { padding: 5rem 1.5rem; }
+  .to-kol { grid-template-columns: 1fr; gap: 3rem; }
+  .tall-grid { grid-template-columns: 1fr; }
+  .tall-item { border-right: none; border-bottom: 1px solid rgba(200,168,75,0.1); }
+  .tall-item:last-child { border-bottom: none; }
+  .team-grid { grid-template-columns: 1fr; }
+  .kontakt-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .felt-rad { grid-template-columns: 1fr; }
+  .sitat-seksjon { padding: 5rem 1.5rem; }
+  .tall-stripe { padding: 3rem 1.5rem; }
+  footer { padding: 2rem 1.5rem; }
+}
+
+/* ── ANIMATE ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-inner > * {
+  animation: fadeUp 0.7s ease both;
+}
+.hero-inner > *:nth-child(1) { animation-delay: 0.1s; }
+.hero-inner > *:nth-child(2) { animation-delay: 0.22s; }
+.hero-inner > *:nth-child(3) { animation-delay: 0.36s; }
+.hero-inner > *:nth-child(4) { animation-delay: 0.48s; }
 </style>
 </head>
 <body>
@@ -402,31 +464,33 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-circle"></div>
   <div class="hero-inner">
-    <div class="hero-kicker">Grunnfelt AS — Eiendomsutvikling · Norge</div>
-    <h1>Vi skaper verdier<br>av <em>norsk jord</em></h1>
-    <p class="hero-sub">Grunnfelt AS identifiserer og utvikler eiendomspotensialet i norske arealer — i nært samarbeid med grunneiere fra første dag til endelig oppgjør.</p>
+    <div class="hero-kicker">Grunnfelt AS — Tomteidentifikasjon · Norge</div>
+    <h1>Vi finner tomtene<br>ingen andre <em>ser</em></h1>
+    <p class="hero-sub">Tusenvis av regulerte tomter i Norge eies av privatpersoner som ikke klarer å realisere dem. Grunnfelt identifiserer dem, inngår avtale med grunneier — og selger til landets ledende utbyggere.</p>
     <div class="hero-btns">
-      <a href="#grunneier" class="btn-primary">Jeg er grunneier →</a>
-      <a href="#kontakt" class="btn-outline">Ta kontakt</a>
+      <a href="#grunneier" class="btn-sol">Jeg er grunneier →</a>
+      <a href="#kontakt" class="btn-ghost">Ta kontakt</a>
     </div>
   </div>
 </section>
 
-<!-- TALLREKKE -->
-<div class="tall-rekke">
+<!-- TALL -->
+<div class="tall-stripe">
   <div class="tall-grid">
     <div class="tall-item">
-      <div class="tall-num">0<span> kr</span></div>
+      <div class="tall-num">0<sub> kr</sub></div>
       <div class="tall-lbl">Kostnad for grunneier</div>
     </div>
     <div class="tall-item">
-      <div class="tall-num">20<span>+</span></div>
-      <div class="tall-lbl">År med bransjeerfaring</div>
+      <div class="tall-num">25<sub>+</sub></div>
+      <div class="tall-lbl">Utbyggere i nettverket</div>
     </div>
     <div class="tall-item">
-      <div class="tall-num">Norge</div>
-      <div class="tall-lbl">Nasjonal rekkevidde</div>
+      <div class="tall-num">3–8<sub>%</sub></div>
+      <div class="tall-lbl">Provisjon av tomtepris</div>
     </div>
   </div>
 </div>
@@ -436,50 +500,52 @@
   <div class="inner">
     <div class="to-kol">
       <div>
-        <div class="section-kicker">Hva vi gjør</div>
-        <h2>Fra uutnyttet areal til realisert verdi</h2>
-        <p class="lead">Vi inngår samarbeid med grunneiere, håndterer all nødvendig prosess og sikrer et rettferdig oppgjør ved realisering.</p>
-        <ul class="verdi-liste">
-          <li>
-            <div class="verdi-ikon">🤝</div>
-            <div class="verdi-txt">
-              <strong>Samarbeid fra dag én</strong>
-              Vi inngår en klar rettighetsavtale med grunneier — ingen risiko, ingen skjulte kostnader.
+        <div class="kicker">Hva vi gjør</div>
+        <h2>Fra oversett areal til realisert verdi</h2>
+        <p class="lead">Vi tar all risiko og alle kostnader. Grunneier sitter stille — og mottar sin avtalte andel når tomten selges.</p>
+        <ul class="prosess-liste">
+          <li class="prosess-item">
+            <div class="prosess-nr">01</div>
+            <div class="prosess-txt">
+              <strong>Vi identifiserer potensialet</strong>
+              <span>Grunnfelt kartlegger regulerte, uutviklede tomter i hele Norge ved hjelp av offentlige datakilder og lokal kunnskap.</span>
             </div>
           </li>
-          <li>
-            <div class="verdi-ikon">📋</div>
-            <div class="verdi-txt">
-              <strong>Vi tar ansvar for prosessen</strong>
-              Grunnfelt bærer alle kostnader og alt arbeid knyttet til realisering av eiendommens potensial.
+          <li class="prosess-item">
+            <div class="prosess-nr">02</div>
+            <div class="prosess-txt">
+              <strong>Vi inngår avtale med grunneier</strong>
+              <span>En klar rettighetsavtale sikrer grunneiers interesser — ingen kostnad, ingen risiko, eiendommen forblir i grunneiers navn.</span>
             </div>
           </li>
-          <li>
-            <div class="verdi-ikon">💰</div>
-            <div class="verdi-txt">
-              <strong>Trygt og forutsigbart oppgjør</strong>
-              Grunneier mottar sin avtalte andel av salgsprisen. Vi tar vår del kun ved suksess.
+          <li class="prosess-item">
+            <div class="prosess-nr">03</div>
+            <div class="prosess-txt">
+              <strong>Vi kobler deg med rette utbygger</strong>
+              <span>Grunnfelt har kontakt med Norges ledende bolig- og næringsutbyggere og presenterer de beste tilbudene.</span>
             </div>
           </li>
-          <li>
-            <div class="verdi-ikon">🏙</div>
-            <div class="verdi-txt">
-              <strong>Veletablerte kjøpere</strong>
-              Vi har kontakt med Norges ledende bolig- og næringsutbyggere — og vet hva markedet etterspør.
+          <li class="prosess-item">
+            <div class="prosess-nr">04</div>
+            <div class="prosess-txt">
+              <strong>Alle parter mottar sitt oppgjør</strong>
+              <span>Ved suksessfullt salg mottar grunneier sin avtalte andel. Grunnfelt tar sin del — kun ved suksess.</span>
             </div>
           </li>
         </ul>
       </div>
       <div>
-        <div class="bilde-boks">
-          <div class="bilde-boks-inner">
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M32 6L58 22V58H42V42H22V58H6V22L32 6Z" stroke="#8ab885" stroke-width="2" fill="none"/>
-              <circle cx="32" cy="32" r="6" stroke="#c8a84b" stroke-width="2" fill="none"/>
+        <div class="visual-boks">
+          <div class="visual-boks-inner">
+            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="36" width="16" height="30" stroke="#7aad74" stroke-width="1.5" fill="none" rx="1"/>
+              <rect x="28" y="22" width="16" height="44" stroke="#7aad74" stroke-width="1.5" fill="none" rx="1"/>
+              <rect x="50" y="8" width="16" height="58" stroke="#c8a84b" stroke-width="1.5" fill="none" rx="1"/>
+              <path d="M6 52 Q20 40 36 36 Q52 32 66 16" stroke="rgba(200,168,75,0.4)" stroke-width="1" fill="none" stroke-dasharray="4 4"/>
             </svg>
-            <div style="color:rgba(250,250,247,0.4);font-size:0.82rem;margin-top:0.5rem">Grunnfelt · Eiendomsutvikling</div>
+            <div style="color:rgba(250,248,244,0.3);font-size:0.8rem;margin-top:1rem;letter-spacing:0.08em">VERDISKAPNING</div>
           </div>
-          <div class="bilde-siffer">G</div>
+          <div class="visual-stor">G</div>
         </div>
       </div>
     </div>
@@ -487,33 +553,33 @@
 </section>
 
 <!-- OM SELSKAPET -->
-<section class="om-wrap" id="om">
+<section class="om-seksjon" id="om">
   <div class="inner">
     <div class="to-kol">
       <div>
-        <div class="section-kicker">Om selskapet</div>
-        <h2>Bygget av folk som kan bransjen</h2>
-        <p class="om-lede">Grunnfelt AS er grunnlagt og ledet av Kim Skjæveland — en entrepenør med dyp bakgrunn fra byggebransjen, eiendom og salg, forankret i Stavanger-regionen.</p>
-        <p class="om-lede">Med over 20 år som selvstendig næringsdrivende og faglig bakgrunn som snekker og bas kombinerer Kim praktisk byggforståelse med kommersiell teft. Han vet hva en tomt er verdt — og hva som skal til for å realisere den.</p>
-        <p class="om-lede">Selskapet er lokalisert i Stavanger med Aton Group AS som strategisk partner.</p>
-        <div class="om-aton">
+        <div class="kicker">Om selskapet</div>
+        <h2>Bygget av folk som kjenner bransjen</h2>
+        <p class="om-lede">Grunnfelt AS er grunnlagt og ledet av Kim Skjæveland — en entrepenør med dyp bakgrunn fra byggebransjen, eiendom og salg. Forankret i Stavanger-regionen med nasjonal rekkevidde.</p>
+        <p class="om-lede">Med over 20 år som selvstendig næringsdrivende kombinerer Kim praktisk byggforståelse med kommersiell teft. Han vet hva en tomt er verdt — og hva som kreves for å realisere den.</p>
+        <p class="om-lede">Forretningsmodellen er inspirert av A/S Consult sin fremgangsmåte fra 1979–2004, modernisert og tilpasset dagens eiendomsmarked.</p>
+        <div class="aton-badge">
           <div>
-            <div class="om-aton-logo">Aton Group AS</div>
-            <div class="om-aton-txt">Strategisk partner · 40% eierandel · <a href="https://atongroup.no" target="_blank">atongroup.no ↗</a></div>
+            <div class="aton-navn">Aton Group AS</div>
+            <div class="aton-sub">Strategisk partner · 40% eierandel · <a href="https://atongroup.no" target="_blank">atongroup.no ↗</a></div>
           </div>
         </div>
       </div>
       <div>
-        <div class="bilde-boks" style="background:linear-gradient(135deg,#253824,#1a3018)">
-          <div class="bilde-boks-inner">
-            <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-              <rect x="4" y="28" width="12" height="24" stroke="#8ab885" stroke-width="1.5" fill="none"/>
-              <rect x="22" y="18" width="12" height="34" stroke="#8ab885" stroke-width="1.5" fill="none"/>
-              <rect x="40" y="8" width="12" height="44" stroke="#c8a84b" stroke-width="1.5" fill="none"/>
+        <div class="visual-boks" style="background:linear-gradient(145deg,#243622,#1a2718)">
+          <div class="visual-boks-inner">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <path d="M32 8 L56 24 L56 56 L8 56 L8 24 Z" stroke="#7aad74" stroke-width="1.5" fill="none"/>
+              <path d="M24 56 L24 38 L40 38 L40 56" stroke="#c8a84b" stroke-width="1.5" fill="none"/>
+              <circle cx="32" cy="20" r="4" stroke="rgba(200,168,75,0.5)" stroke-width="1.2" fill="none"/>
             </svg>
-            <div style="color:rgba(250,250,247,0.3);font-size:0.78rem;margin-top:0.75rem">Stavanger · Etablert 2026</div>
+            <div style="color:rgba(250,248,244,0.3);font-size:0.78rem;margin-top:1rem;letter-spacing:0.08em">STAVANGER · ETABLERT 2026</div>
           </div>
-          <div class="bilde-siffer">AS</div>
+          <div class="visual-stor">AS</div>
         </div>
       </div>
     </div>
@@ -521,63 +587,70 @@
 </section>
 
 <!-- TEAM -->
-<section id="team" style="background:var(--krem)">
+<section class="team-seksjon" id="team">
   <div class="inner">
-    <div class="section-kicker" style="text-align:center">Teamet</div>
+    <div class="kicker" style="justify-content:center">Teamet</div>
     <h2 style="text-align:center;margin-bottom:0.5rem">Menneskene bak Grunnfelt</h2>
     <p class="lead" style="text-align:center;margin:0 auto 0">Erfaring fra byggebransjen, eiendom og strategisk næringsutvikling.</p>
     <div class="team-grid">
       <div class="team-kort">
-        <div class="team-avatar gress">KS</div>
+        <div class="team-initial ti-gress">KS</div>
         <div class="team-navn">Kim Skjæveland</div>
         <div class="team-tittel">CEO &amp; Founder</div>
         <p class="team-bio">Entrepenør med bakgrunn fra byggebransjen, eiendom og salg. Selvstendig næringsdrivende siden 2005. Fagbrev snekker, erfaring som bas og daglig leder. Partner i Rodinia Sport og eiendom.</p>
-        <div class="team-tags">
+        <div class="tag-liste">
           <span class="tag">Byggebransjen</span>
           <span class="tag">Eiendom</span>
           <span class="tag">Salg</span>
           <span class="tag">Stavanger</span>
         </div>
-        <a href="https://www.linkedin.com/in/kim-skj%C3%A6veland-77a75293/" target="_blank" class="team-link">LinkedIn ↗</a>
+        <a href="https://www.linkedin.com/in/kim-skj%C3%A6veland-77a75293/" target="_blank" class="team-lenke">LinkedIn ↗</a>
       </div>
       <div class="team-kort">
-        <div class="team-avatar jord">LS</div>
+        <div class="team-initial ti-jord">LS</div>
         <div class="team-navn">Leif E. Sunde</div>
         <div class="team-tittel">Styreleder · Aton Group AS</div>
-        <p class="team-bio">CEO og Founder av Aton Group AS — venture builder med portefølje innen maritime og industrielle sektorer. Strategisk partner i Grunnfelt med 40% eierandel. Basert i Stavanger.</p>
-        <div class="team-tags">
-          <span class="tag jord-tag">Venture builder</span>
-          <span class="tag jord-tag">Strategi</span>
-          <span class="tag jord-tag">Stavanger</span>
+        <p class="team-bio">Founder av Aton Group AS — venture builder med portefølje innen maritime og industrielle sektorer. Styreleder og strategisk partner i Grunnfelt med 40% eierandel gjennom Aton Group AS.</p>
+        <div class="tag-liste">
+          <span class="tag mork">Venture builder</span>
+          <span class="tag mork">Strategi</span>
+          <span class="tag mork">Stavanger</span>
         </div>
-        <a href="https://atongroup.no" target="_blank" class="team-link">atongroup.no ↗</a>
+        <a href="https://atongroup.no" target="_blank" class="team-lenke">atongroup.no ↗</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- GRUNNEIER -->
-<section class="grunneier-wrap" id="grunneier">
+<section class="grunneier-seksjon" id="grunneier">
   <div class="inner">
-    <div class="section-kicker">For grunneiere</div>
-    <h2>Har du eiendom med potensial?</h2>
-    <p class="lead">Vi er alltid interessert i en dialog om eiendommer som kan egne seg til utvikling. Samtalen er uforpliktende og helt uten kostnad for deg.</p>
-    <div class="g-kort" style="max-width:620px">
-      <h3>Hva vi tilbyr deg som grunneier</h3>
-      <p>Du beholder eiendomsretten gjennom hele prosessen. Vi tar all risiko og alle kostnader — du mottar din avtalte andel ved et vellykket salg.</p>
-      <ul style="list-style:none;margin-bottom:1.5rem">
-        <li style="padding:0.5rem 0;border-bottom:1px solid var(--sand);font-size:0.92rem;color:var(--dempet)">✓ &nbsp;Ingen kostnad for deg uansett utfall</li>
-        <li style="padding:0.5rem 0;border-bottom:1px solid var(--sand);font-size:0.92rem;color:var(--dempet)">✓ &nbsp;Du beholder eiendomsretten frem til oppgjør</li>
-        <li style="padding:0.5rem 0;border-bottom:1px solid var(--sand);font-size:0.92rem;color:var(--dempet)">✓ &nbsp;Klar og forutsigbar avtale fra start</li>
-        <li style="padding:0.5rem 0;font-size:0.92rem;color:var(--dempet)">✓ &nbsp;Diskret og profesjonell prosess</li>
-      </ul>
-      <a href="#kontakt" class="g-btn">Ta kontakt for en uforpliktende prat →</a>
+    <div class="to-kol">
+      <div>
+        <div class="kicker">For grunneiere</div>
+        <h2>Har du en eiendom med potensial?</h2>
+        <p class="lead">Vi er alltid interessert i dialog om eiendommer som kan egne seg til utvikling. Samtalen er uforpliktende og helt uten kostnad for deg.</p>
+        <a href="#kontakt" class="btn-sol" style="display:inline-block">Ta en uforpliktende prat →</a>
+      </div>
+      <div>
+        <div class="g-ramme">
+          <h3>Hva du får som grunneier</h3>
+          <p>Du beholder eiendomsretten gjennom hele prosessen. Vi tar all risiko og alle kostnader — du mottar din avtalte andel kun ved et vellykket salg.</p>
+          <ul class="g-liste">
+            <li><div class="g-hake">✓</div>Ingen kostnad for deg uansett utfall</li>
+            <li><div class="g-hake">✓</div>Du beholder eiendomsretten frem til oppgjør</li>
+            <li><div class="g-hake">✓</div>Klar og forutsigbar avtale fra start</li>
+            <li><div class="g-hake">✓</div>Direkte tilgang til Norges beste utbyggere</li>
+            <li><div class="g-hake">✓</div>Diskret og profesjonell prosess</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- SITAT -->
-<div class="sitat-wrap">
+<div class="sitat-seksjon">
   <span class="sitat-mark">"</span>
   <p class="sitat-tekst">Vi vet hva en eiendom er verdt — og vi vet hva som skal til for å realisere den. Det er det vi er her for.</p>
   <div class="sitat-avatar">KS</div>
@@ -585,74 +658,61 @@
 </div>
 
 <!-- KONTAKT -->
-<section class="kontakt-wrap" id="kontakt">
+<section class="kontakt-seksjon" id="kontakt">
   <div class="inner">
     <div class="kontakt-grid">
       <div class="kontakt-info">
-        <div class="section-kicker">Kontakt</div>
+        <div class="kicker">Kontakt</div>
         <h3>La oss ta en prat</h3>
-        <p>Enten du eier en eiendom du ønsker å realisere, eller vil vite mer om hva Grunnfelt gjør — ta gjerne kontakt for en uforpliktende samtale.</p>
-        <div class="kontakt-linje">
-          <span>📍</span>
+        <p>Enten du eier en eiendom du ønsker å realisere, eller vil vite mer om Grunnfelt — ta gjerne kontakt for en uforpliktende samtale.</p>
+        <div class="kontakt-rad">
+          <div class="kontakt-ikon">📍</div>
           <span>Stavanger, Rogaland</span>
         </div>
-        <div class="kontakt-linje">
-          <span>✉</span>
+        <div class="kontakt-rad">
+          <div class="kontakt-ikon">✉</div>
           <a href="mailto:post@grunnfelt.no">post@grunnfelt.no</a>
         </div>
-        <div class="kontakt-linje">
-          <span>📞</span>
+        <div class="kontakt-rad">
+          <div class="kontakt-ikon">📞</div>
           <a href="tel:+4793614425">+47 936 14 425</a>
         </div>
       </div>
-      <div>
-        <form onsubmit="sendSkjema(event)">
-          <div class="skjema-to">
-            <div class="skjema-felt">
-              <label>Fornavn</label>
-              <input type="text" placeholder="Ola" required>
-            </div>
-            <div class="skjema-felt">
-              <label>Etternavn</label>
-              <input type="text" placeholder="Nordmann" required>
-            </div>
-          </div>
-          <div class="skjema-felt">
-            <label>E-post</label>
-            <input type="email" placeholder="din@epost.no" required>
-          </div>
-          <div class="skjema-felt">
-            <label>Telefon (valgfritt)</label>
-            <input type="tel" placeholder="+47 000 00 000">
-          </div>
-          <div class="skjema-felt">
-            <label>Henvendelse gjelder</label>
-            <select>
-              <option value="">— Velg —</option>
-              <option value="grunneier">Jeg har en eiendom jeg ønsker å diskutere</option>
-              <option value="annet">Annet</option>
-            </select>
-          </div>
-          <div class="skjema-felt">
-            <label>Melding</label>
-            <textarea placeholder="Skriv gjerne litt om din eiendom eller henvendelse..."></textarea>
-          </div>
-          <button type="submit" class="skjema-send">Send henvendelse →</button>
-        </form>
-      </div>
+      <form onsubmit="sendSkjema(event)">
+        <div class="felt-rad">
+          <div><label>Fornavn</label><input type="text" placeholder="Ola" required></div>
+          <div><label>Etternavn</label><input type="text" placeholder="Nordmann" required></div>
+        </div>
+        <label>E-post</label>
+        <input type="email" placeholder="din@epost.no" required>
+        <label>Telefon (valgfritt)</label>
+        <input type="tel" placeholder="+47 000 00 000">
+        <label>Henvendelse gjelder</label>
+        <select>
+          <option value="">— Velg —</option>
+          <option value="grunneier">Jeg har en eiendom jeg ønsker å diskutere</option>
+          <option value="utbygger">Jeg er utbygger og ønsker tilgang til pipeline</option>
+          <option value="annet">Annet</option>
+        </select>
+        <label>Melding</label>
+        <textarea placeholder="Skriv gjerne litt om din eiendom eller henvendelse..."></textarea>
+        <button type="submit" class="send-btn">Send henvendelse →</button>
+      </form>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 Grunnfelt AS — Org.nr. under registrering — CEO: Kim Skjæveland · Strategisk partner: <a href="https://atongroup.no">Aton Group AS</a></p>
+  <span class="f-logo">Grunn<em>felt</em></span>
+  <p>© 2026 Grunnfelt AS — Org.nr. under registrering — CEO: Kim Skjæveland<br>
+  Strategisk partner: <a href="https://atongroup.no">Aton Group AS</a> · Adresse: Støperigata 25, 4014 Stavanger</p>
 </footer>
 
 <script>
 function sendSkjema(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('.skjema-send');
+  const btn = e.target.querySelector('.send-btn');
   btn.textContent = 'Sendt! Vi tar kontakt snart.';
   btn.style.background = 'var(--gress)';
   btn.disabled = true;
