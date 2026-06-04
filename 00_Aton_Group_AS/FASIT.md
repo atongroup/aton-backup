@@ -103,7 +103,7 @@ Lone + Alexandra — B-aksjer (økonomirett, 1x stemme)
 | BladeShip IP AS | 100% | 📋 Planlagt 2027 | — |
 | Grunnfelt AS | 100% | 🆕 Stiftes 2026 — eiendomsutvikling | 07_Grunnfelt_AS/ |
 | Sunde Familielegat | — | 📋 Planlagt 2028 | — |
-| Aton Teknologi AS | 100% | 🆕 Idéfase — besluttet startet 3. juni 2026 | 08_Aton_Teknologi_AS/ |
+| Aton Teknologi AS | 100% | 🔨 Aktiv utvikling — HeyMom app v0.7 (React Native + Supabase + Claude) | 08_Aton_Teknologi_AS/HeyMom/ |
 
 ## Porteføljeselskaper — nøkkelinfo
 

@@ -64,6 +64,19 @@
 
 ---
 
+## 📱 HEYMOM — Aton Teknologi AS
+
+| # | Oppgave | Frist | Status |
+|---|---------|-------|--------|
+| HM1 | Fiks mute-knapp synlig + SafeArea Android | v0.8 | ⏳ |
+| HM2 | Bygg Innstillinger-skjerm | v0.8 | ⏳ |
+| HM3 | Implementer mikrofon / tale-til-tekst | v0.9 | ⏳ |
+| HM4 | SkatteFUNN-søknad for HeyMom FoU | 1. sep 2026 | ⏳ |
+
+Repo: `github.com/atongroup/atonapp` | Docs: `08_Aton_Teknologi_AS/HeyMom/`
+
+---
+
 ## 🐙 GITHUB BACKUP
 | # | Hva | URL |
 |---|-----|-----|
