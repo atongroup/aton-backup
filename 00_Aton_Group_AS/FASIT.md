@@ -643,3 +643,12 @@ Claude gjør da:
 - `/00_Aton_Group_AS/Nettside/index.html` — atongroup.no porteføljekort
 - `logs/YYYY-MM-DD.md` — endringslogg
 
+
+---
+## Aton Teknologi AS — Aton App (lagt til 4. juni 2026)
+- **Status:** Under aktiv utvikling — Expo Go fungerer, APK-bygg pågår
+- **Repo:** github.com/atongroup/atonapp
+- **Økonomimodell:** Freemium — Gratis (Haiku) + Premium 99 kr/mnd (Opus)
+- **Eierskap:** Aton Group AS 100% — Aton Teknologi AS stiftes ved markedslanser
+- **Neste steg:** Fikse APK-bygg, RevenueCat, Premium-skjerm
+- **Slagplan:** 08_Aton_Teknologi_AS/AtonApp/SLAGPLAN_ATON_APP.md
