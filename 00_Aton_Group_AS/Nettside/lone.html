@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Aton Hub — Lone</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="aton-hub.css">
+</head>
+<body>
+<div id="app">
+  <header id="hdr">
+    <div class="hdr-logo">Aton<em>Hub</em></div>
+    <div class="hdr-sep"></div>
+    <div class="hdr-title" id="hdrTitle">Hjem</div>
+    <div class="hdr-right">
+      <button class="hdr-claude" onclick="toggleCl()" style="background:linear-gradient(135deg,var(--lone),#9b7ee8)">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 1 0 20A10 10 0 0 1 12 2z"/><path d="M8 12h8M12 8v8" stroke-linecap="round"/></svg>
+        Claude AI
+      </button>
+      <div class="hdr-badge" style="background:var(--lone-bg);color:var(--lone);border:1px solid var(--lone-bd)">Country Director España</div>
+      <div class="hdr-av" style="background:var(--lone-bg);color:var(--lone);border:2px solid var(--lone-bd)">Lo</div>
+    </div>
+  </header>
+
+  <div id="body">
+    <nav id="sidebar">
+      <div class="nav-lbl">Navigasjon</div>
+      <div id="navItems"></div>
+      <div class="nav-div"></div>
+      <div class="nav-footer">
+        <div class="nav-user">
+          <div class="nav-user-av" style="background:var(--lone-bg);color:var(--lone);border:2px solid var(--lone-bd)">Lo</div>
+          <div>
+            <div class="nav-user-name" id="userName">Lone Sunde</div>
+            <div class="nav-user-role">Country Director España</div>
+          </div>
+        </div>
+        <button class="nav-out" onclick="logout()">Logg ut</button>
+      </div>
+    </nav>
+
+    <main id="main"><div id="pages"></div></main>
+
+    <div id="clPanel">
+      <div class="cl-hdr">
+        <div class="cl-title"><div class="cl-dot" style="background:var(--lone)"></div>Claude AI</div>
+        <button class="cl-close" onclick="toggleCl()">✕</button>
+      </div>
+      <div class="cl-modes" id="clModes"></div>
+      <div class="cl-msgs" id="clMsgs"></div>
+      <div class="cl-foot">
+        <div class="cl-row">
+          <textarea class="cl-ta" id="clIn" rows="1" placeholder="Spør Claude..."
+            onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendCl(NAME)}"
+            oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px'"></textarea>
+          <button class="cl-send" id="clSend" onclick="sendCl(NAME)" style="background:var(--lone)">
+            <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav id="mob"></nav>
+</div>
+
+<script src="aton-hub.js"></script>
+<script>
+const NAME='Lone';
+const ROLE='lone';
+const ITEMS=[
+  {i:'hjem',    ic:'home', l:'Hjem'},
+  {i:'slagplan',ic:'list', l:'Slagplan'},
+  {i:'port',    ic:'grid', l:'Portefølje'},
+  {i:'kal',     ic:'cal',  l:'Kalender'},
+  {i:'ws',      ic:'ws',   l:'Workspace'},
+  {i:'familie', ic:'team', l:'Familie'},
+  {i:'app',     ic:'phone',l:'Aton App'},
+];
+const IC={
+  home:`<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>`,
+  list:`<line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="3" cy="6" r=".5" fill="currentColor"/><circle cx="3" cy="12" r=".5" fill="currentColor"/><circle cx="3" cy="18" r=".5" fill="currentColor"/>`,
+  grid:`<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>`,
+  cal:`<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>`,
+  ws:`<rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>`,
+  team:`<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>`,
+  phone:`<rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>`,
+};
+
+const email=checkAuth(ROLE);
+if(!email)throw new Error('redirect');
+const name=sessionStorage.getItem('aton_name')||NAME;
+document.getElementById('userName').textContent=name;
+
+let h='',m='';
+ITEMS.forEach((n,i)=>{
+  const ic=`<svg viewBox="0 0 24 24">${IC[n.ic]}</svg>`;
+  h+=`<button class="nav-btn${i===0?' active':''}" data-id="${n.i}" onclick="goto('${n.i}')">${ic}${n.l}</button>`;
+  m+=`<button class="mob-b${i===0?' on':''}" data-id="${n.i}" onclick="goto('${n.i}')">${ic}${n.l}</button>`;
+});
+document.getElementById('navItems').innerHTML=h;
+document.getElementById('mob').innerHTML=m;
+
+function goto(id){
+  showPage(id,ITEMS);
+  if(id==='app')loadAppUsers();
+}
+
+function eierBar(){
+  const R=18,cx=23,cy=23,circ=2*Math.PI*R;
+  const segs=[{p:80,c:'var(--gold)'},{p:10,c:'var(--lone)'},{p:10,c:'var(--alex)'}];
+  let off=0,s='';
+  segs.forEach(d=>{const len=circ*d.p/100;s+=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="${d.c}" stroke-width="8" stroke-dasharray="${len} ${circ-len}" stroke-dashoffset="${-off}" opacity=".9"/>`;off+=len;});
+  return`<div class="eier-bar">
+  <div class="eier-donut">
+    <svg viewBox="0 0 46 46"><circle cx="23" cy="23" r="18" fill="none" stroke="var(--bg3)" stroke-width="8"/>${s}</svg>
+    <div class="eier-donut-lbl"><div class="eier-pst" style="color:var(--lone)">10%</div><div class="eier-sub">Din andel</div></div>
+  </div>
+  <div class="eier-info">
+    <div class="eier-title">Din eierandel — Aton Group AS</div>
+    <div class="eier-meta">10% B-aksjer · 1× stemmerett</div>
+    <div class="eier-vals"><div class="eier-val">Her &amp; nå: <strong style="color:var(--lone)">NOK 6,8M</strong></div></div>
+  </div>
+</div>`;
+}
+
+document.getElementById('pages').innerHTML=`
+<div class="page" id="pg-hjem">
+<div class="hero hero-lone">
+  <div class="hero-lbl">${greet()}, Lone 🌸</div>
+  <div class="hero-name">Hei, <em>Lone</em></div>
+  <div class="hero-role">Country Director España · B-aksjer 10%</div>
+  <div class="hero-quote">«Aton vokser gjennom de som tror på det tidlig. Du er blant dem.»</div>
+</div>
+${eierBar()}
+<div class="stats">
+  <div class="stat"><div class="stat-n" style="color:var(--lone)">10%</div><div class="stat-l">B-aksjer Aton</div></div>
+  <div class="stat"><div class="stat-n nk">2027</div><div class="stat-l">Aton España SL</div></div>
+  <div class="stat"><div class="stat-n gr">€37M+</div><div class="stat-l">Familie pipeline</div></div>
+</div>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Siste fra Aton</div><div class="sec-line"></div></div>
+<div class="alert ok"><div class="alert-dot"></div><div class="alert-date">✓ 30. mai</div><div class="alert-text">Gavebrev signert — du eier B-aksjer i Aton Group AS</div></div>
+<div class="alert ok"><div class="alert-dot"></div><div class="alert-date">✓ Juni</div><div class="alert-text">EIC Accelerator €17,5M innlevert for BladeShip AS</div></div>
+<div class="alert ok"><div class="alert-dot"></div><div class="alert-date">✓ Klart</div><div class="alert-text">2 norske patenter registrert (20260735 + 20260736)</div></div>
+<div class="alert warn"><div class="alert-dot"></div><div class="alert-date">~20. juni</div><div class="alert-text">Aton Group AS org.nr. forventet — neste steg: GF + styrevalg</div></div>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Din rolle fremover</div><div class="sec-line"></div></div>
+<div class="card">
+  <div class="pipe-row"><div><div class="pipe-name">Business Development</div><div class="pipe-sub">Første kontakt med innkommende gründersøknader</div></div><span class="badge bb">Aktiv</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">Aton España SL</div><div class="pipe-sub">Planlagt 2027 · Marbella, Spania</div></div><span class="badge bx">2027</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">Venture Portal</div><div class="pipe-sub">Besvare søknader via portal mens pappa er på jobb</div></div><span class="badge by">Snart</span></div>
+</div>
+</div>
+
+<div class="page" id="pg-slagplan">
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Hva skjer nå</div><div class="sec-line"></div></div>
+<div class="card">
+  <div class="pipe-row"><div><div class="pipe-name">✅ Gavebrev signert — du er aksjonær</div></div></div>
+  <div class="pipe-row"><div><div class="pipe-name">✅ EIC Accelerator €17,5M innlevert</div></div></div>
+  <div class="pipe-row"><div><div class="pipe-name">→ Org.nr. Aton Group AS (~20. juni)</div></div><span class="badge by">Pågår</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">→ Generalforsamling — du inn i styret</div><div class="pipe-sub">Etter org.nr.</div></div><span class="badge bx">Planlagt</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">→ EIC Accelerator intervju</div><div class="pipe-sub">Estimert august 2026</div></div><span class="badge bx">Planlagt</span></div>
+</div>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Din vei</div><div class="sec-line"></div></div>
+<div class="card">
+  <div class="pipe-row"><div><div class="pipe-name">Aton España SL</div><div class="pipe-sub">Du leder den · Marbella · planlagt 2027</div></div><span class="badge bx">2027</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">Sunde Familielegat</div><div class="pipe-sub">Dynastiets fremtid · 2028</div></div><span class="badge bx">2028</span></div>
+</div>
+</div>
+
+<div class="page" id="pg-port">
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Aktive selskaper</div><div class="sec-line"></div></div>
+<div class="port"><div class="port-top"><div class="port-icon bs">BS</div><div class="port-head"><div class="port-title">BladeShip AS</div><div class="port-sub">Verdens første havgående resirkulering av vindmølleblader</div></div><span class="badge bg">Aktiv</span></div>
+<div class="port-badges"><span class="badge bb">100% Aton</span><span class="badge bx">Stiftet 1. juni 2026</span><span class="badge bx">2 Patenter</span></div>
+<div class="port-desc">EIC Accelerator €17,5M innlevert. Ingen konkurrenter med offshore-kapasitet globalt.</div>
+<div class="val-grid"><div class="val-item"><span class="val-n">€17,5M</span><span class="val-l">EIC søknad</span></div><div class="val-item"><span class="val-n nk">$159B</span><span class="val-l">Marked 2030</span></div></div></div>
+<div class="port"><div class="port-top"><div class="port-icon ve">Ve</div><div class="port-head"><div class="port-title">Velumen AS</div><div class="port-sub">Neste generasjons gravminner i norske materialer</div></div><span class="badge by">Stiftes</span></div>
+<div class="port-badges"><span class="badge bb">30% Aton</span></div>
+<div class="port-desc">Corten-stål, resirkulert glass og lokal stein. Leif i styret.</div></div>
+<div class="port"><div class="port-top"><div class="port-icon ts">TS</div><div class="port-head"><div class="port-title">TrashShip AS</div><div class="port-sub">Havgående gjenvinning av marint plastavfall</div></div><span class="badge bx">2027</span></div>
+<div class="port-desc">Bygget på BladeShip-plattformen. 8 millioner tonn plast dumpes i havet hvert år.</div></div>
+</div>
+
+<div class="page" id="pg-kal">
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Kommende</div><div class="sec-line"></div></div>
+<div class="card">
+  <div class="cal-row urg"><div class="cal-date">10. juni</div><div class="cal-text">DNV møte — viktig milepæl for BladeShip</div></div>
+  <div class="cal-row"><div class="cal-date">~20. juni</div><div class="cal-text">Aton Group AS org.nr. forventet — din styreplass aktiveres</div></div>
+  <div class="cal-row"><div class="cal-date">2. juli</div><div class="cal-text">Vard-møte — verft-dialog for BladeShip</div></div>
+  <div class="cal-row urg"><div class="cal-date">August 2026</div><div class="cal-text">EIC Accelerator intervju (estimert)</div></div>
+  <div class="cal-row fam"><div class="cal-date">2027</div><div class="cal-text">Aton España SL — din satsing</div></div>
+  <div class="cal-row fam"><div class="cal-date">2028</div><div class="cal-text">Sunde Familielegat — stiftelse</div></div>
+</div>
+</div>
+
+<div class="page" id="pg-ws">
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Hurtiglenker</div><div class="sec-line"></div></div>
+<div class="ws-grid">
+  <a class="ws-card" href="https://mail.google.com/mail/u/0/#inbox" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="ws-label">Gmail</div><div class="ws-sub">lone@atongroup.no</div></div></a>
+  <a class="ws-card" href="https://drive.google.com/drive/u/0/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><div><div class="ws-label">Google Drive</div><div class="ws-sub">Filer</div></div></a>
+  <a class="ws-card" href="https://calendar.google.com/calendar/u/0/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="ws-label">Kalender</div><div class="ws-sub">Frister og møter</div></div></a>
+  <a class="ws-card" href="https://www.atongroup.no/arkiv/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5" rx="1"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div><div><div class="ws-label">Mitt arkiv</div><div class="ws-sub">Dokumenter</div></div></a>
+  <a class="ws-card" href="https://meet.google.com/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><div><div class="ws-label">Google Meet</div><div class="ws-sub">Videomøter</div></div></a>
+  <a class="ws-card" href="https://docs.google.com/document/u/0/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="ws-label">Google Docs</div><div class="ws-sub">Dokumenter</div></div></a>
+</div>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Claude AI</div><div class="sec-line"></div></div>
+<div class="card" style="text-align:center;padding:22px;background:linear-gradient(135deg,var(--lone-bg),rgba(124,92,191,.03))">
+  <div style="font-family:var(--serif);font-size:1.3rem;color:var(--lone);margin-bottom:6px">Claude AI</div>
+  <div style="font-size:.76rem;color:var(--ink3);margin-bottom:14px;max-width:280px;margin-left:auto;margin-right:auto;line-height:1.7">Din personlige assistent for Aton-relaterte spørsmål.</div>
+  <button onclick="toggleCl()" style="padding:9px 22px;background:var(--lone);color:#fff;border:none;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer">Åpne Claude →</button>
+</div>
+</div>
+
+<div class="page" id="pg-familie">
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Sunde-familien</div><div class="sec-line"></div></div>
+<div class="member"><div class="mem-top"><div class="mem-av ls">LS</div><div><div class="mem-name">Leif E. Sunde</div><div class="mem-role">Far · CEO & Founder · A-aksjer 80%</div></div></div>
+<div class="mrow"><span class="mrow-l">E-post</span><span class="mrow-v"><a href="mailto:leif@atongroup.no">leif@atongroup.no</a></span></div>
+<div class="mrow"><span class="mrow-l">Tlf</span><span class="mrow-v"><a href="tel:+4793614425">+47 936 14 425</a></span></div></div>
+<div class="member"><div class="mem-top"><div class="mem-av al">Al</div><div><div class="mem-name">Alexandra Sunde Lindum</div><div class="mem-role">Søster · Country Director Denmark · B-aksjer 10%</div></div></div>
+<div class="mrow"><span class="mrow-l">E-post</span><span class="mrow-v"><a href="mailto:alexandra@atongroup.no">alexandra@atongroup.no</a></span></div>
+<div class="mrow"><span class="mrow-l">Tlf</span><span class="mrow-v"><a href="tel:+4522775024">+45 22 77 50 24</a></span></div>
+<div class="mrow"><span class="mrow-l">Sted</span><span class="mrow-v">Villavej 18, 8870 Langå, Danmark</span></div>
+<div class="mrow"><span class="mrow-l">Barnebarn</span><span class="mrow-v">Elias og Isabella 💙</span></div></div>
+</div>
+
+<div class="page" id="pg-app">
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Aton App</div><div class="sec-line"></div></div>
+<div class="card">
+  <div class="pipe-row"><div><div class="pipe-name">Stack</div><div class="pipe-sub">React Native · Expo · Supabase · Claude API</div></div></div>
+  <div class="pipe-row"><div><div class="pipe-name">Økonomimodell</div><div class="pipe-sub">Freemium — Gratis (Haiku) + Premium 99 kr/mnd (Opus)</div></div><span class="badge bx">Planlagt</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">Status</div><div class="pipe-sub">Under utvikling · Beta</div></div><span class="badge by">Beta</span></div>
+</div>
+<div class="app-stat-grid">
+  <div class="app-stat"><div class="app-stat-n" id="appStatUsers">—</div><div class="app-stat-l">Brukere totalt</div></div>
+  <div class="app-stat"><div class="app-stat-n" id="appStatNew">—</div><div class="app-stat-l">Siste 7 dager</div></div>
+</div>
+<div class="card">
+  <div id="appUserList"><div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Trykk Oppdater for å laste</div></div>
+  <button onclick="loadAppUsers()" style="margin-top:8px;font-size:.72rem;color:var(--lone);font-weight:500;text-decoration:underline;background:none;border:none;cursor:pointer">↻ Oppdater</button>
+</div>
+</div>`;
+
+buildModes(NAME);
+addMsg('a','Hei, Lone! 🌸 Klar til å hjelpe. Velg modus eller still meg et spørsmål.');
+showPage('hjem',ITEMS);
+</script>
+</body>
+</html>
