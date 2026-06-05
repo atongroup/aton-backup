@@ -1,11 +1,11 @@
 # Slagplan — Aton App | Aton Teknologi AS
-**Versjon:** 1.0 | **Dato:** 4. juni 2026 | **Status:** 🚀 I aktiv utvikling
+**Versjon:** 2.0 | **Dato:** 5. juni 2026 | **Status:** 🚀 I aktiv utvikling
 
 ---
 
 ## Oversikt
 
-Aton-appen er Aton Teknologi AS sitt forbrukerproduktet — en personlig AI-assistent for privatpersoner og gründere. Utviklet av Aton Teknologi AS, eid 100% av Aton Group AS.
+Aton-appen er Aton Teknologi AS sitt forbrukerprodukt — en personlig AI-assistent for privatpersoner og gründere. Utviklet av Aton Teknologi AS, eid 100% av Aton Group AS.
 
 ```
 Aton Group AS (100% eier)
@@ -16,31 +16,66 @@ Aton Group AS (100% eier)
 
 ---
 
+## Strategisk posisjonering (oppdatert 5. juni 2026)
+
+**Aton er bygget på Claude (Anthropic) — verdens beste AI-modell for resonnering og lange kontekster.**
+
+Konkurranseanalyse viser at ingen personlig AI-assistent-app som ligner Aton er bygget på Claude. Alle nærmeste konkurrenter bruker GPT-4/GPT-4o eller egne modeller.
+
+Dette gir Aton en automatisk fordel: når Anthropic lanserer nye modeller (Opus 5, Opus 6 osv.) oppgraderes Aton automatisk — uten ekstra utviklingskostnader.
+
+### Konkurrenter 2026
+| Konkurrent | AI-modell | Pris | Svakhet vs Aton |
+|-----------|-----------|------|-----------------|
+| alfred_ | Ukjent (ikke Claude) | $24.99/mnd | Ikke norsk, ingen Aton-identitet |
+| ChatGPT Plus | GPT-4o/GPT-5 | $20/mnd | Ikke norsk, ingen brief, ingen stemme på norsk |
+| Claude Pro | Claude | $20/mnd | Kun chat, ingen app-wrapper, ingen brief |
+| Google Gemini | Gemini | $19.99/mnd | Krever Google-ecosystem |
+| Meta AI | Muse Spark | Gratis | Ingen personlig minneprofil |
+| Microsoft Copilot | GPT-4o | $18/mnd | Krever M365, enterprise-fokus |
+| Siri (Apple Intelligence) | Eget | Gratis | Generisk, ingen norsk AI-dybde |
+| **Aton Premium** | **Claude Opus** | **99 kr/mnd** | Norsk, personlig, brief, stemme, bilder, minneprofil |
+
+**Aton er 3–5× billigere enn konkurrentene og den eneste norskspråklige personlige AI-assistenten bygget på Claude.**
+
+---
+
 ## Produktbeskrivelse
 
 | Egenskap | Verdi |
 |----------|-------|
 | Plattform | Android (APK) → Google Play → App Store |
-| Tech-stack | React Native / Expo SDK 54, Supabase, Claude API, ElevenLabs |
+| Tech-stack | React Native / Expo SDK 52, Supabase, Claude API (Anthropic), ElevenLabs |
 | Repo | github.com/atongroup/atonapp |
-| Nåværende versjon | v1.2.1 (under bygg) |
+| Nåværende versjon | v1.5.0 (under bygg) |
 | Utgiver (fremtidig) | Aton Teknologi AS (org.nr. TBD) |
 
-### Kjernefunksjoner
-- 🌅 Personlig morgenbrief (AI-generert, daglig)
+### Kjernefunksjoner (implementert 5. juni 2026)
+- 🌅 Personlig morgenbrief (AI-generert, daglig, med kalender og e-post)
 - 💬 Chat med AI — tekst, tale og bilde/kamera
-- 🧠 Hukommelse — Aton lærer og husker brukeren
-- ✅ Oppgavehåndtering med prioritet
+- 🧠 3-lags minnesystem (profil + episoder + korttid)
+- ✅ Oppgavehåndtering med AI-prioritering
 - 🎯 Målsporing med progresjonsbar
 - 🎙️ ElevenLabs stemme (norsk/engelsk)
 - 📷 Bildeanalyse — dokumenter, kvitteringer, whiteboards
+- 📅 Kalender-integrasjon (lokalt + Google Calendar)
+- 📧 E-post oppsummering på HomeScreen
+- 👥 Kontakthukommelse
+- 🔐 Permissions-flyt (kamera, mikrofon, sted, varsler, bilder)
+- 🌐 Google Sign-In + email/passord
+- ✦ Aton-identitet gjennomgående (solguden, pulserende sol, Aton-tone)
+
+### Sekretær-funksjoner
+- Intent-deteksjon i chat (kalender, e-post, oppgaver, påminnelse)
+- Proaktiv daglig brief med dagens agenda
+- AI-prioritering av oppgaver basert på minneprofil
+- Kontakthukommelse per person
 
 ---
 
 ## Økonomimodell
 
 ### Inntektsstruktur
-
 | Nivå | Pris | Modell |
 |------|------|--------|
 | **Gratis** | 0 kr | Haiku-modell, 5 meldinger/dag, ingen stemme |
@@ -48,167 +83,70 @@ Aton Group AS (100% eier)
 | **Aton Business** | 299 kr/mnd (fremtidig) | Team-funksjoner, API-tilgang, admin-panel |
 
 ### Kostnadsstruktur per bruker/mnd
-
-| Brukertype | Claude API | ElevenLabs | Supabase | Total kostnad |
-|------------|-----------|------------|----------|---------------|
+| Brukertype | Claude API | ElevenLabs | Supabase | Total |
+|------------|-----------|------------|----------|-------|
 | Gratis (Haiku) | ~kr 5 | kr 0 | kr 0 | **~kr 5** |
 | Premium (Opus) | ~kr 60 | ~kr 10 | kr 0 | **~kr 70** |
 
-**Margin Premium:** 99 kr − 70 kr = **29 kr (~29%)** — øker med skala via volum-rabatter.
-
-### Break-even analyse
-
-| Scenario | Antall Premium | MRR |
-|----------|---------------|-----|
-| Break-even drift | ~20 brukere | 1 980 kr |
-| Lønnsom drift | ~100 brukere | 9 900 kr |
-| Bærekraftig | ~500 brukere | 49 500 kr |
-| Ambisjon år 2 | ~2 000 brukere | 198 000 kr/mnd |
-
-### Teknisk prisoptimalisering
-- Gratis → Claude Haiku 4.5 ($1/$5 per MTok) ✅
-- Premium → Claude Opus 4-6 ($5/$25 per MTok) ✅
-- Prompt caching: -90% på gjentatte system-prompter (implementeres Q3)
-- Batch-prosessering for morgenbrief: -50% kostnad (implementeres Q3)
-
----
-
-## Strategisk begrunnelse — Hvorfor gratis?
-
-1. **Viral vekst** — ingen betalingsmur = brukere deler appen
-2. **Markedsdata** — gratis brukere gir innsikt i faktisk bruk
-3. **Norsk nisjekontroll** — ingen store aktører tilbyr norsk personalisering
-4. **Feeder inn i SMB** — forbrukerbrukere blir fremtidige Aton Starter Pack-kunder
-5. **Konkurransen** — ChatGPT/Claude/Gemini har alle gratis-nivåer; vi MÅ ha det
+**Margin Premium:** 99 kr − 70 kr = **29 kr (~29%)**
 
 ---
 
 ## Lanserings-roadmap
 
 ### Fase 0 — Nå (juni 2026)
-- [x] App bygget (React Native + Expo)
-- [x] Supabase database oppe
-- [x] Claude API via proxy
+- [x] App bygget (React Native + Expo SDK 52)
+- [x] Supabase database + RLS
+- [x] Claude API via Supabase Edge Function proxy (JWT-auth)
 - [x] ElevenLabs stemme
 - [x] Kamera og bildeanalyse
 - [x] Onboarding + velkomstskjerm
-- [x] Egypt-tema design
-- [ ] APK-bygg fungerende ← **pågår**
-- [ ] Google Play konto → publiser APK
+- [x] Aton-identitet gjennomgående (pulserende sol, Aton-tone)
+- [x] 3-lags minnesystem (profil, episoder, korttid)
+- [x] Sekretær-funksjoner (kalender, e-post, oppgaver, kontakter)
+- [x] Permissions-flyt etter innlogging
+- [x] Google Sign-In
+- [x] Tilgangsoversikt i Innstillinger
+- [x] AI-oppgaveprioritering i TasksScreen
+- [x] E-post + kalender på HomeScreen
+- [x] Kontakthukommelse
+- [ ] APK-bygg fungerende ← **pågår (Gradle-feil under utbedring)**
+- [ ] Google Play identitetsbekreftelse (pass nødvendig)
 - [ ] RevenueCat integrert for abonnement
 
 ### Fase 1 — Soft launch (juli–august 2026)
-- [ ] APK tilgjengelig på atongroup.no/app/
+- [ ] APK tilgjengelig via direkte nedlasting
 - [ ] Første 10–50 brukere (Leifs nettverk)
 - [ ] Freemium-modell live
 - [ ] Feedback og iterering
-- [ ] Grunnleggende analytics (Supabase + user_meta)
+- [ ] Google Play offentlig lansering
 
 ### Fase 2 — Premium launch (september–oktober 2026)
 - [ ] RevenueCat + Stripe for betaling
-- [ ] Haiku vs Opus basert på plan
 - [ ] Premium-skjerm i appen
-- [ ] Google Play offentlig lansering
 - [ ] Mål: 50 betalende brukere
 
 ### Fase 3 — Vekst (2027)
-- [ ] App Store (iOS) — krever Apple Developer $99/år
+- [ ] App Store (iOS)
 - [ ] Aton Business-plan
-- [ ] SkatteFUNN-søknad for apputvikling
-- [ ] Ansette/partner CTO/utvikler
 - [ ] Mål: 500+ betalende brukere
 
 ---
 
-## Strukturelt oppsett — Aton Teknologi AS
-
-### Selskapsstruktur (når stiftet)
-```
-Aton Group AS
-└── Aton Teknologi AS (100%)
-    ├── Stiftes: Etter Aton Group org.nr. (~august 2026)
-    ├── Aksjekapital: NOK 30 000
-    ├── Daglig leder: Leif E. Sunde
-    ├── Eier IP: Aton-appen, kode, design, algoritmer
-    └── Inntekter: Premium-abonnement, Business-plan
-```
-
-### IP og lisensering
-- **Kildekode** eies av Aton Teknologi AS (overføres fra privat eierskap ved stiftelse)
-- **Domener:** atonapp.no registreres ved stiftelse
-- **Varemerkesøknad:** «Aton» som app-navn — sjekkes mot Patentstyret
-- **Management fee:** NOK 3 000/mnd til Aton Group fra mnd 6
-
-### Nødvendige tiltak FØR markedslanser
-1. Stifte Aton Teknologi AS i Altinn
-2. Åpne bankkonto for selskapet
-3. Registrere som utgiver på Google Play Console ($25 engangsbeløp)
-4. RevenueCat-konto kobles til Google Play
-5. Personvernerklæring og vilkår publiseres på atongroup.no/app/personvern
-
----
-
-## Teknisk gjøremålsliste
-
-### Umiddelbart (appen)
-- [ ] Fikse APK Gradle-byggfeil
-- [ ] Implementere Haiku for gratis/Opus for premium
-- [ ] RevenueCat SDK inn i App.tsx
-- [ ] Betalingsskjerm (upgrade to Premium)
-- [ ] Google Login fungerende i APK
-
-### Infrastruktur
-- [ ] user_meta tabell ✅ (opprettet 4. juni 2026)
-- [ ] Supabase RLS på alle tabeller
-- [ ] Analytics dashboard (hvem bruker hva)
-- [ ] Push-varsler for morgenbrief ✅
-
-### Landingsside
-- [ ] atongroup.no/app/ med nedlastingsknapp ✅ (HTML laget 4. juni)
-- [ ] Laste opp APK når ferdig
-- [ ] Personvernerklæring
-
----
-
-## Konkurrenter og posisjonering
-
-| Konkurrent | Pris | Svakhet vs Aton |
-|-----------|------|----------------|
-| ChatGPT Plus | $20/mnd | Ikke norsk, ingen brief, ingen stemme på norsk |
-| Claude Pro | $20/mnd | Kun chat, ingen app, ingen brief |
-| Saner.AI | $15/mnd | Ikke norsk, komplisert |
-| Microsoft Copilot | $18/mnd | Krever M365, enterprise-fokus |
-| **Aton Premium** | **99 kr/mnd** | Norsk, personlig, brief, stemme, bilder |
-
-**Aton er 3–5× billigere enn konkurrentene og den eneste norskspråklige personlige AI-assistenten.**
-
----
-
-## KPIer å følge
-
-| Metrikk | Mål Fase 1 | Mål Fase 2 | Mål 2027 |
-|---------|-----------|-----------|---------|
-| Totale brukere | 50 | 500 | 5 000 |
-| Premium-andel | 5% | 10% | 15% |
-| Premium MRR | 250 kr | 5 000 kr | 75 000 kr |
-| Churn/mnd | <20% | <10% | <5% |
-| API-kostnad/MRR | <80% | <60% | <40% |
-
----
-
-## Siste status (4. juni 2026)
+## Siste status (5. juni 2026)
 
 - ✅ Appen fungerer i Expo Go
-- ✅ Kamera, stemme, chat, oppgaver, mål, profil — alt operativt
-- ✅ Egypt-design implementert
-- ✅ Velkomstskjerm + onboarding (5 spørsmål)
-- ✅ Provider-logging (user_meta i Supabase)
-- ✅ Landingsside HTML klar
-- 🔄 APK-bygg pågår (Gradle-feil under utbedring)
+- ✅ Alle skjermer operative med Aton-identitet
+- ✅ JWT-auth fikset i proxy — chat skal nå fungere i APK
+- ✅ 3-lags minnesystem implementert og i Supabase
+- ✅ Sekretær-funksjoner implementert
+- ✅ Google Sign-In + Permissions-flyt
+- ✅ Supabase Edge Function claude-proxy deployet med ny kode
+- 🔄 APK-bygg pågår (bygge #13+, Gradle-sti-feil under utbedring)
 - ⏳ RevenueCat — ikke startet
-- ⏳ Premium/Haiku-split — ikke startet
+- ⏳ Google Play identitetsbekreftelse — venter på pass
 
 ---
 
 *Aton Teknologi AS — under Aton Group AS (100%)*
-*Dokument opprettet: 4. juni 2026 | Neste revisjon: 1. august 2026*
+*Dokument opprettet: 4. juni 2026 | Sist oppdatert: 5. juni 2026*
