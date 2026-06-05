@@ -342,8 +342,8 @@ Aldri skriv «partner», «samarbeider» eller «avtale» uten skriftlig bekreft
 | ECCA / EuCIA | ✅ Bekreftet | Roberto Frassine bekreftet skriftlig 29. mai |
 | SINTEF Ocean | ❌ Avslått | Anders Valland 1. juni: ønsker ikke mer kontakt — mangler grunnlag for søknad |
 | Vard Group | Kontaktet | Oppfølgingsbrev sendt mai 2026 — ikke svart |
-| Ulstein Group | Kontaktet | Oppfølgingsbrev sendt 28. mai — ikke svart |
-| Green Yard Kleven | Kontaktet | Oppfølgingsbrev sendt 28. mai — ikke svart |
+| Ulstein Group | ❌ Avslått | Gunvor Ulstein svarte 5. juni 2026 — faller utenfor strategi og satsingsområde. Ingen videre kontakt. |
+| Green Yard Kleven | ✅ Dialog pågår | Karl Johan Barstad (CEO) i aktiv dialog. Konseptnotat sendt 4. juni 2026. NDA-tilbud mottatt. Venter svar. |
 | PALFINGER Marine | Kontaktet | Webskjema sendt 30. mai — ikke svart |
 | Kongsberg Maritime | Kontaktet | Webskjema sendt 30. mai — ikke svart |
 | DNV | Kontaktet | Webskjema sendt 30. mai (korrekt kanal). E-post til kundeservice@dnv.no feilet — kun webskjema er sendt. Telefonprat med Kjetil Ostbo — oppfølging sendt via LinkedIn. |
