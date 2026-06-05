@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mitt arkiv — Aton</title>
+<meta name="robots" content="noindex">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+:root{
+  --gold:#b8922a;--gold-bg:#fdf8ee;--gold-bd:rgba(184,146,42,.25);
+  --ink:#1a1a1a;--ink2:#444;--ink3:#777;--ink4:#aaa;
+  --bg:#f9f7f3;--bg2:#fff;--bg3:#f3f0eb;
+  --r:12px;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --shadow:0 1px 4px rgba(0,0,0,.07),0 2px 8px rgba(0,0,0,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:100vh}
+
+/* ── LOGIN ── */
+#login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;gap:20px}
+.login-box{background:var(--bg2);border-radius:var(--r);padding:36px 32px;max-width:380px;width:100%;text-align:center;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.06)}
+.login-logo{font-size:2rem;margin-bottom:4px}
+.login-title{font-size:1.3rem;font-weight:600;color:var(--ink);margin-bottom:6px}
+.login-sub{font-size:.85rem;color:var(--ink3);margin-bottom:24px;line-height:1.6}
+.login-note{font-size:.78rem;color:var(--ink4);margin-top:16px;line-height:1.5}
+
+/* ── APP ── */
+#app{display:none;max-width:720px;margin:0 auto;padding:20px 16px 60px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:12px}
+.topbar-title{font-size:1.1rem;font-weight:600;color:var(--ink)}
+.topbar-user{font-size:.8rem;color:var(--ink3)}
+.btn-signout{font-size:.78rem;color:var(--ink3);background:none;border:1px solid rgba(0,0,0,.12);border-radius:6px;padding:4px 10px;cursor:pointer}
+.btn-signout:hover{background:var(--bg3)}
+
+/* Kvote-bar */
+.kvote-bar-wrap{height:3px;background:rgba(0,0,0,.08);border-radius:2px;margin-bottom:16px}
+.kvote-bar{height:3px;border-radius:2px;background:var(--gold);transition:width .4s}
+.kvote-lbl{font-size:.75rem;color:var(--ink4);text-align:right;margin-top:4px;margin-bottom:16px}
+
+/* Søk + filter */
+.search-row{display:flex;gap:8px;margin-bottom:12px}
+.search-input{flex:1;padding:9px 14px;border:1px solid rgba(0,0,0,.12);border-radius:8px;font-size:.88rem;background:var(--bg2);color:var(--ink)}
+.search-input:focus{outline:none;border-color:var(--gold)}
+.btn-upload{padding:9px 16px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .15s}
+.btn-upload:hover{opacity:.88}
+.btn-upload:disabled{opacity:.5;cursor:not-allowed}
+.cat-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px;scrollbar-width:none}
+.cat-scroll::-webkit-scrollbar{display:none}
+.cat-btn{padding:5px 14px;border-radius:20px;border:1px solid rgba(0,0,0,.12);background:var(--bg2);font-size:.8rem;color:var(--ink3);cursor:pointer;white-space:nowrap;transition:all .15s}
+.cat-btn.active{background:var(--gold);border-color:var(--gold);color:#fff}
+
+/* Status tekst */
+.status-txt{font-size:.82rem;color:var(--gold);text-align:center;padding:8px;min-height:28px}
+
+/* Dokumentliste */
+.doc-list{display:flex;flex-direction:column;gap:10px}
+.doc-card{background:var(--bg2);border:1px solid rgba(0,0,0,.07);border-radius:var(--r);padding:14px 16px;display:flex;gap:14px;align-items:center;cursor:pointer;transition:all .15s}
+.doc-card:hover{box-shadow:var(--shadow);border-color:var(--gold-bd)}
+.doc-icon{width:42px;height:42px;border-radius:8px;background:var(--gold-bg);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.doc-info{flex:1;min-width:0}
+.doc-tittel{font-size:.9rem;font-weight:500;color:var(--ink);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc-meta{font-size:.76rem;color:var(--ink3);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.status-pill{padding:2px 8px;border-radius:10px;font-size:.72rem;font-weight:500}
+.pill-Aktiv{background:#e8f5e9;color:#2e7d32}
+.pill-Venter{background:#fff8e1;color:#f57f17}
+.pill-Arkivert{background:#f5f5f5;color:#757575}
+.pill-Utløpt{background:#ffebee;color:#c62828}
+.doc-arrow{color:var(--ink4);font-size:1.1rem;flex-shrink:0}
+.fil-dot{width:7px;height:7px;border-radius:50%;background:#4caf50;flex-shrink:0}
+
+/* Tom state */
+.empty{text-align:center;padding:60px 20px;color:var(--ink3)}
+.empty-icon{font-size:2.5rem;margin-bottom:12px}
+
+/* Detail overlay */
+#detail{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:100;align-items:flex-end;justify-content:center}
+#detail.open{display:flex}
+.detail-box{background:var(--bg2);border-radius:var(--r) var(--r) 0 0;width:100%;max-width:720px;max-height:85vh;overflow-y:auto;padding:20px}
+.detail-hdr{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(0,0,0,.08)}
+.detail-hdr h2{flex:1;font-size:1rem;font-weight:600;color:var(--ink)}
+.btn-back{background:none;border:none;font-size:.85rem;color:var(--gold);cursor:pointer;padding:4px 0}
+.meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.meta-item{background:var(--bg3);border-radius:8px;padding:10px 12px}
+.meta-lbl{font-size:.72rem;color:var(--ink4);margin-bottom:3px}
+.meta-val{font-size:.88rem;color:var(--ink);font-weight:500}
+.notat-box{background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:8px;padding:12px;margin-bottom:16px;font-size:.85rem;color:var(--ink2);line-height:1.6}
+.btn-open{display:block;width:100%;padding:12px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;margin-top:4px}
+.btn-open:hover{opacity:.88}
+
+/* Filvelger (skjult) */
+#file-input{display:none}
+
+@media(max-width:480px){.meta-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">🗄️</div>
+    <div class="login-title">Mitt arkiv</div>
+    <div class="login-sub">Logg inn med din Aton-konto for å få tilgang til dine private dokumenter.</div>
+    <div id="gsi-btn"></div>
+    <div class="login-note">Arkivet er privat — kun du ser dine egne dokumenter.</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">🗄️ Mitt arkiv</div>
+      <div class="topbar-user" id="user-lbl"></div>
+    </div>
+    <button class="btn-signout" onclick="loggUt()">Logg ut</button>
+  </div>
+
+  <div class="kvote-bar-wrap"><div class="kvote-bar" id="kvote-bar" style="width:0%"></div></div>
+  <div class="kvote-lbl" id="kvote-lbl"></div>
+
+  <div class="search-row">
+    <input class="search-input" id="sok-input" placeholder="Søk tittel, person, selskap..." oninput="onSok(this.value)">
+    <button class="btn-upload" id="upload-btn" onclick="document.getElementById('file-input').click()">+ Arkiver</button>
+  </div>
+  <input type="file" id="file-input" accept=".pdf,.doc,.docx,.xls,.xlsx,.ods,image/*" onchange="onFilValgt(this)">
+
+  <div class="cat-scroll" id="cat-scroll"></div>
+  <div class="status-txt" id="status-txt"></div>
+  <div class="doc-list" id="doc-list"></div>
+</div>
+
+<!-- DETALJ -->
+<div id="detail" onclick="lukkDetalj(event)">
+  <div class="detail-box" id="detail-box">
+    <div class="detail-hdr">
+      <button class="btn-back" onclick="lukkDetalj()">← Tilbake</button>
+      <h2 id="d-tittel"></h2>
+    </div>
+    <div class="meta-grid" id="d-meta"></div>
+    <div class="notat-box" id="d-notat" style="display:none"></div>
+    <a class="btn-open" id="d-open" style="display:none" target="_blank">Åpne fil</a>
+  </div>
+</div>
+
+<script>
+const SB   = 'https://wbwpobojxighhnmrabmj.supabase.co';
+const KEY  = 'sb_publishable_nt1mKoLX7QwR920CzWHogg_hhrLVYuQ';
+const GSID = '155233765122-fcji10bhiqdo66gv2kiq41cr8qe3kvc3.apps.googleusercontent.com';
+const SEKRETAER = SB + '/functions/v1/document-secretary';
+const TILLATTE = ['application/pdf','application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'application/vnd.oasis.opendocument.spreadsheet',
+  'image/jpeg','image/jpg','image/png','image/heic','image/heif','image/webp'];
+const MAX_BYTES = 20*1024*1024;
+const KATTER = ['','Leiekontrakt','Patent','Gavebrev','NDA','Tilskudd','Økonomi','Annet'];
+const KAT_ICON = {Leiekontrakt:'🏠',Patent:'🔬',Gavebrev:'🎁',NDA:'🔒',Tilskudd:'💶','Økonomi':'📊',Annet:'📎'};
+
+let token = null, aktKat = '', sokQ = '', docs = [];
+
+// ── Google Sign-In ──
+function initGSI(){
+  if(typeof google==='undefined'){setTimeout(initGSI,100);return;}
+  google.accounts.id.initialize({client_id:GSID,callback:handleCredential,auto_select:false});
+  google.accounts.id.renderButton(document.getElementById('gsi-btn'),{theme:'outline',size:'large',text:'signin_with',width:280});
+}
+initGSI();
+
+const TILLATTE_MAIL = ['leifsunde@gmail.com','leif@atongroup.no','lone@atongroup.no','alexandra@atongroup.no','leif@bladeship.no'];
+
+async function handleCredential(resp){
+  const payload = JSON.parse(atob(resp.credential.split('.')[1]));
+  if(!TILLATTE_MAIL.includes(payload.email)){
+    alert('Denne kontoen har ikke tilgang til Aton-arkivet.\n\n' + payload.email);
+    return;
+  }
+  // Bytt Google-token mot Supabase-token
+  const r = await fetch(SB+'/auth/v1/token?grant_type=id_token', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','apikey':KEY},
+    body:JSON.stringify({id_token:resp.credential,provider:'google'})
+  });
+  const data = await r.json();
+  if(data.access_token){
+    token = data.access_token;
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.getElementById('user-lbl').textContent = payload.name || payload.email;
+    byggKatFilter();
+    hentKvote();
+    lastDocs();
+  } else {
+    alert('Innlogging feilet: ' + (data.error_description || JSON.stringify(data)));
+  }
+}
+
+function loggUt(){
+  token = null;
+  document.getElementById('app').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  google.accounts.id.disableAutoSelect();
+}
+
+// ── Kategori-filter ──
+function byggKatFilter(){
+  const labels = {'':"Alle 📁",Leiekontrakt:"Leiekontrakt 🏠",Patent:"Patent 🔬",Gavebrev:"Gavebrev 🎁",NDA:"NDA 🔒",Tilskudd:"Tilskudd 💶","Økonomi":"Økonomi 📊",Annet:"Annet 📎"};
+  document.getElementById('cat-scroll').innerHTML = KATTER.map(k=>
+    `<button class="cat-btn${aktKat===k?' active':''}" onclick="setKat('${k}')">${labels[k]||k}</button>`
+  ).join('');
+}
+
+function setKat(k){ aktKat=k; byggKatFilter(); lastDocs(); }
+function onSok(q){ sokQ=q; lastDocs(); }
+
+// ── Kvote ──
+async function hentKvote(){
+  try {
+    const r = await fetch(SEKRETAER+'?action=quota',{headers:{Authorization:'Bearer '+token}});
+    const k = await r.json();
+    const pst = k.prosent_bytes||0;
+    document.getElementById('kvote-bar').style.width=Math.min(pst,100)+'%';
+    document.getElementById('kvote-bar').style.background = pst>80?'#e53935':pst>60?'#f9a825':'var(--gold)';
+    const mb = v=>Math.round((v||0)/1024/1024);
+    const g = k.grenser||{};
+    document.getElementById('kvote-lbl').textContent =
+      `${mb(k.total_bytes)}/${mb(g.max_total_bytes||209715200)} MB · ${k.uploads_today||0}/${g.max_per_dag||10} opplastinger i dag · ${k.plan||'free'}`;
+  } catch(e){ console.error('kvote:',e); }
+}
+
+// ── Hent dokumenter ──
+async function lastDocs(){
+  setStatus('Henter...');
+  try {
+    const p = new URLSearchParams({action:'search'});
+    if(sokQ) p.set('q',sokQ);
+    if(aktKat) p.set('kategori',aktKat);
+    const r = await fetch(SEKRETAER+'?'+p,{headers:{Authorization:'Bearer '+token}});
+    const data = await r.json();
+    docs = data.documents||[];
+    visDocs();
+    setStatus('');
+  } catch(e){ setStatus('Feil ved henting'); }
+}
+
+function visDocs(){
+  const el = document.getElementById('doc-list');
+  if(!docs.length){
+    el.innerHTML = `<div class="empty"><div class="empty-icon">📁</div><p>${sokQ?'Ingen treff på "'+sokQ+'"':'Ingen dokumenter ennå. Klikk «+ Arkiver» for å laste opp.'}</p></div>`;
+    return;
+  }
+  el.innerHTML = docs.map((d,i)=>`
+    <div class="doc-card" onclick="visDetalj(${i})">
+      <div class="doc-icon">${KAT_ICON[d.kategori]||'📎'}</div>
+      <div class="doc-info">
+        <div class="doc-tittel">${d.tittel}</div>
+        <div class="doc-meta">
+          <span class="status-pill pill-${d.status||'Aktiv'}">${d.status||'Aktiv'}</span>
+          ${d.person?`<span>${d.person}</span>`:''}
+          ${d.dato?`<span>${formatDato(d.dato)}</span>`:''}
+        </div>
+      </div>
+      ${d.storage_path?'<div class="fil-dot"></div>':''}
+      <div class="doc-arrow">›</div>
+    </div>`).join('');
+}
+
+// ── Detalj ──
+function visDetalj(i){
+  const d = docs[i];
+  document.getElementById('d-tittel').textContent = d.tittel;
+  const meta = [
+    ['Kategori', (KAT_ICON[d.kategori]||'')+'  '+d.kategori],
+    ['Status',   d.status||'—'],
+    d.person?['Person',d.person]:null,
+    d.selskap?['Selskap',d.selskap]:null,
+    d.dato?['Dato',formatDato(d.dato)]:null,
+    d.utlop?['Utløper',formatDato(d.utlop)]:null,
+    ['Kilde',d.kilde||'—'],
+  ].filter(Boolean);
+  document.getElementById('d-meta').innerHTML = meta.map(([l,v])=>
+    `<div class="meta-item"><div class="meta-lbl">${l}</div><div class="meta-val">${v}</div></div>`
+  ).join('');
+  const notat = document.getElementById('d-notat');
+  if(d.notat){ notat.style.display='block'; notat.textContent=d.notat; }
+  else notat.style.display='none';
+  const apne = document.getElementById('d-open');
+  if(d.download_url){ apne.style.display='block'; apne.href=d.download_url; }
+  else apne.style.display='none';
+  document.getElementById('detail').classList.add('open');
+}
+
+function lukkDetalj(e){
+  if(e&&e.target!==document.getElementById('detail'))return;
+  document.getElementById('detail').classList.remove('open');
+}
+
+// ── Opplasting ──
+async function onFilValgt(input){
+  const file = input.files?.[0];
+  if(!file) return;
+  input.value='';
+
+  // Klientvalidering
+  const type = (file.type||'').toLowerCase();
+  if(!TILLATTE.some(t=>type.includes(t.split('/')[1]))){
+    alert('Filtype ikke støttet.\n\nTillatte formater: PDF, Word, Excel, JPEG, PNG, HEIC, WebP.');
+    return;
+  }
+  if(file.size>MAX_BYTES){
+    alert(`Filen er ${(file.size/1024/1024).toFixed(1)} MB. Maks 20 MB.`);
+    return;
+  }
+
+  const btn = document.getElementById('upload-btn');
+  btn.disabled=true; btn.textContent='Laster opp...';
+  setStatus('Claude leser dokumentet...');
+
+  try {
+    const base64 = await filTilBase64(file);
+    const r = await fetch(SEKRETAER+'?action=upload',{
+      method:'POST',
+      headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
+      body:JSON.stringify({file_base64:base64,file_name:file.name,mime_type:type})
+    });
+    const data = await r.json();
+    if(!data.success) throw new Error(data.error||'Opplasting feilet');
+    setStatus('✅ '+data.message);
+    setTimeout(()=>setStatus(''),3000);
+    hentKvote(); lastDocs();
+  } catch(e){
+    setStatus('');
+    alert('Feil: '+(e.message||'Ukjent feil'));
+  } finally {
+    btn.disabled=false; btn.textContent='+ Arkiver';
+  }
+}
+
+function filTilBase64(file){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=()=>res(r.result.split(',')[1]);
+    r.onerror=rej;
+    r.readAsDataURL(file);
+  });
+}
+
+// ── Hjelpefunksjoner ──
+function formatDato(iso){
+  if(!iso) return '';
+  return new Date(iso).toLocaleDateString('nb-NO',{day:'2-digit',month:'short',year:'numeric'});
+}
+function setStatus(txt){ document.getElementById('status-txt').textContent=txt; }
+</script>
+</body>
+</html>
