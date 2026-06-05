@@ -177,6 +177,15 @@ button{cursor:pointer;font-family:var(--sans)}
   color:var(--ink3);font-size:.8rem;font-weight:500;
   transition:all .2s;
 }
+.nav-admin{
+  width:100%;padding:8px;border-radius:var(--r-sm);
+  background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.07);
+  color:var(--ink3);font-size:.8rem;font-weight:500;
+  transition:all .2s;margin-bottom:6px;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  cursor:pointer;
+}
+.nav-admin:hover{background:rgba(0,0,0,.08);color:var(--ink1);}
 .nav-out:hover{background:var(--red-bg);color:var(--red);border-color:rgba(200,53,42,.2)}
 
 /* MAIN */
@@ -532,6 +541,10 @@ button{cursor:pointer;font-family:var(--sans)}
             <div class="nav-user-role" id="navRole"></div>
           </div>
         </div>
+        <button class="nav-admin" onclick="openAdmin()" id="adminBtn" style="display:none">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Admin-panel
+        </button>
         <button class="nav-out" onclick="logout()">Logg ut</button>
       </div>
     </nav>
@@ -638,10 +651,24 @@ function boot(){
   document.getElementById('navRole').textContent=c.d;
   const navAv=document.getElementById('navAv');
   navAv.textContent=av;navAv.className='nav-user-av mem-av '+avCls;
-  buildNav();buildPages();
+  buildNav();buildPages();showAdminBtn();
   showPage(NAV[CR][0].i);
   buildClPills();
   addClMsg('a','Hei, '+c.n+'! 👋 Jeg er klar til å hjelpe. Velg et modus over eller still meg et spørsmål direkte.');
+}
+
+function openAdmin(){
+  // Åpner admin-panel i ny fane — siden Claude ikke er tilgjengelig direkte
+  window.open('https://claude.ai/new?q=hent+admin', '_blank');
+}
+
+function showAdminBtn(){
+  const btn = document.getElementById('adminBtn');
+  if(!btn) return;
+  const adminEmails = ['leifsunde@gmail.com','leif@atongroup.no'];
+  if(CU && adminEmails.includes(CU.email)){
+    btn.style.display = 'flex';
+  }
 }
 
 function logout(){
