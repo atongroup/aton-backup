@@ -1,0 +1,36 @@
+name: Supabase Nightly Backup
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.BACKUP_TOKEN }}
+
+      - name: Backup Supabase tables
+        env:
+          SUPA_URL: https://wbwpobojxighhnmrabmj.supabase.co
+          SUPA_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          mkdir -p backups/supabase
+          DATE=$(date +%Y-%m-%d)
+          for TABLE in aton_tools claude_memory messages tasks goals contacts memories rules profiles; do
+            curl -s "${SUPA_URL}/rest/v1/${TABLE}?select=*" \
+              -H "apikey: ${SUPA_KEY}" \
+              -H "Authorization: Bearer ${SUPA_KEY}" \
+              > "backups/supabase/${TABLE}_${DATE}.json"
+            echo "Backed up ${TABLE}"
+          done
+
+      - name: Commit backup
+        run: |
+          git config user.name "Aton Backup Bot"
+          git config user.email "backup@atongroup.no"
+          git add backups/supabase/
+          git diff --staged --quiet || git commit -m "backup: supabase nightly $(date +%Y-%m-%d)"
+          git push
