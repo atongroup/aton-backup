@@ -567,6 +567,7 @@ function showPage(id){
   const lbl=NAV[CR].find(n=>n.i===id);
   document.getElementById('hdrTitle').textContent=lbl?lbl.l:'';
   document.getElementById('main').scrollTo(0,0);
+  if(id==='app'&&CU)loadAppUsers();
 }
 
 function buildPages(){
@@ -945,12 +946,7 @@ async function sendCl(){
   document.getElementById('clIn').focus();
 }
 
-// Last app-brukere når app-siden vises
-const _origShowPage=showPage;
-function showPage(id){
-  _origShowPage(id);
-  if(id==='app'&&CU)loadAppUsers();
-}
+// App-lasting håndteres i showPage direkte (se under)
 
 // Gjenopprett notater
 setTimeout(()=>{
