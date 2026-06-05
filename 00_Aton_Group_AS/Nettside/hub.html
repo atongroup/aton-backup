@@ -463,6 +463,22 @@ button{cursor:pointer;font-family:var(--sans)}
   body{padding-bottom:64px}
 }
 @media(min-width:681px) and (max-width:1100px){#clPanel.open{width:340px;min-width:340px}}
+
+.eier-wrap{display:flex;align-items:center;gap:28px;padding:20px 0 4px;flex-wrap:wrap}
+.eier-donut{position:relative;width:140px;height:140px;flex-shrink:0}
+.eier-donut svg{width:140px;height:140px;transform:rotate(-90deg)}
+.eier-donut-lbl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transform:rotate(0deg)}
+.eier-donut-pst{font-family:var(--serif);font-size:1.9rem;line-height:1;color:var(--gold)}
+.eier-donut-sub{font-size:.7rem;color:var(--ink4);margin-top:2px}
+.eier-legend{flex:1;display:flex;flex-direction:column;gap:10px;min-width:180px}
+.eier-rad{display:flex;align-items:center;gap:10px}
+.eier-dot{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+.eier-rad-info{flex:1}
+.eier-rad-navn{font-size:.82rem;font-weight:500;color:var(--ink)}
+.eier-rad-sub{font-size:.72rem;color:var(--ink3)}
+.eier-rad-bar{flex:1;height:5px;background:var(--bg3);border-radius:3px;margin-top:4px;overflow:hidden}
+.eier-rad-fill{height:100%;border-radius:3px}
+.eier-rad-pst{font-size:.78rem;font-weight:600;min-width:36px;text-align:right}
 </style>
 </head>
 <body>
@@ -609,8 +625,8 @@ const SYS={
 
 const NAV={
   leif:[{i:'hjem',ic:'home',l:'Hjem'},{i:'slagplan',ic:'list',l:'Slagplan'},{i:'port',ic:'grid',l:'Portefølje'},{i:'kal',ic:'cal',l:'Kalender'},{i:'ws',ic:'ws',l:'Workspace'},{i:'team',ic:'team',l:'Team'}],
-  lone:[{i:'hjem',ic:'home',l:'Hjem'},{i:'port',ic:'grid',l:'Portefølje'},{i:'ws',ic:'ws',l:'Workspace'},{i:'team',ic:'team',l:'Familie'}],
-  alex:[{i:'hjem',ic:'home',l:'Hjem'},{i:'port',ic:'grid',l:'Portefølje'},{i:'ws',ic:'ws',l:'Workspace'},{i:'team',ic:'team',l:'Familie'}],
+  lone:[{i:'hjem',ic:'home',l:'Hjem'},{i:'slagplan',ic:'list',l:'Slagplan'},{i:'port',ic:'grid',l:'Portefølje'},{i:'kal',ic:'cal',l:'Kalender'},{i:'ws',ic:'ws',l:'Workspace'},{i:'team',ic:'team',l:'Familie'}],
+  alex:[{i:'hjem',ic:'home',l:'Hjem'},{i:'slagplan',ic:'list',l:'Slagplan'},{i:'port',ic:'grid',l:'Portefølje'},{i:'kal',ic:'cal',l:'Kalender'},{i:'ws',ic:'ws',l:'Workspace'},{i:'team',ic:'team',l:'Familie'}],
 };
 
 const IC={
@@ -705,9 +721,9 @@ function showPage(id){
 function buildPages(){
   document.getElementById('pages').innerHTML=
     pageHjem()+
-    (CR==='leif'?pageSlagplan():'')+
+    (CR==='leif'||CR==='lone'||CR==='alex'?pageSlagplan():'')+
     pagePort()+
-    (CR==='leif'?pageKal():'')+
+    (CR==='leif'||CR==='lone'||CR==='alex'?pageKal():'')+
     pageWs()+
     pageTeam();
 }
@@ -808,6 +824,7 @@ function pageHjem(){
   <div style="display:none">
   </div>
 </div></div>
+`+pageEierGraf()+`
 <div class="sec"><div class="sec-line"></div><div class="sec-lbl">Haster nå</div><div class="sec-line"></div></div>
 <div class="alert urg"><div class="alert-dot"></div><div class="alert-date">9. juni</div><div class="alert-text">SBN KYC — Sparebanken Norge · sett inn NOK 30k</div></div>
 <div class="alert urg"><div class="alert-dot"></div><div class="alert-date">10. juni</div><div class="alert-text">DNV møte kl. 11:30 — Veritasveien 25, Stavanger</div></div>
@@ -840,6 +857,7 @@ function pageHjem(){
 <div class="pipe-row"><div><div class="pipe-name">Business Development</div><div class="pipe-sub">Første kontakt med innkommende gründersøknader</div></div><span class="badge bb">Aktiv</span></div>
 <div class="pipe-row"><div><div class="pipe-name">Aton España SL</div><div class="pipe-sub">Planlagt 2027 · Marbella, Spania</div></div><span class="badge bx">2027</span></div>
 <div class="pipe-row"><div><div class="pipe-name">Venture Portal</div><div class="pipe-sub">Besvare søknader via portal mens pappa er på jobb</div></div><span class="badge by">Snart</span></div>
+`+pageEierGraf()+`
 </div></div>`;
 
   return`<div class="page" id="pg-hjem">
@@ -858,6 +876,7 @@ function pageHjem(){
 <div class="pipe-row"><div><div class="pipe-name">Styremedlem</div><div class="pipe-sub">Aton Group AS · aktiveres etter GF</div></div><span class="badge by">Snart</span></div>
 <div class="pipe-row"><div><div class="pipe-name">Aton Danmark ApS</div><div class="pipe-sub">Du leder den · planlagt 2027</div></div><span class="badge bx">2027</span></div>
 <div class="pipe-row"><div><div class="pipe-name">Sunde Familielegat</div><div class="pipe-sub">Dynastiets fremtid · 2028</div></div><span class="badge bx">2028</span></div>
+`+pageEierGraf()+`
 </div></div>`;
 }
 
@@ -1057,6 +1076,78 @@ function pageKal(){return`<div class="page" id="pg-kal">
 <div class="cal-row fam"><div class="cal-date">2027–28</div><div class="cal-text">Aton España SL — Lone Sunde · Marbella</div></div>
 <div class="cal-row fam"><div class="cal-date">2028</div><div class="cal-text">Sunde Familielegat — stiftelse</div></div>
 </div></div>`;}
+
+
+function pageEierGraf(){
+  // Eiere: navn, prosent, farge, stemme-info, nok-verdi
+  const data = CR==='leif' ? [
+    {n:'Leif Sunde',     p:80, c:'var(--gold)',  s:'A-aksjer · 10× stemme', v:'NOK 54,4M her'},
+    {n:'Lone Sunde',     p:10, c:'var(--lone)',  s:'B-aksjer · 1× stemme',  v:'NOK 6,8M her'},
+    {n:'Alexandra S.L.', p:10, c:'var(--alex)',  s:'B-aksjer · 1× stemme',  v:'NOK 6,8M her'},
+  ] : CR==='lone' ? [
+    {n:'Leif Sunde',     p:80, c:'var(--gold)',  s:'A-aksjer · 10× stemme', v:'Majoritetsandel'},
+    {n:'Lone Sunde',     p:10, c:'var(--lone)',  s:'B-aksjer · 1× stemme',  v:'NOK 6,8M her'},
+    {n:'Alexandra S.L.', p:10, c:'var(--alex)',  s:'B-aksjer · 1× stemme',  v:'NOK 6,8M her'},
+  ] : [
+    {n:'Leif Sunde',     p:80, c:'var(--gold)',  s:'A-aksjer · 10× stemme', v:'Majoritetsandel'},
+    {n:'Lone Sunde',     p:10, c:'var(--lone)',  s:'B-aksjer · 1× stemme',  v:'NOK 6,8M her'},
+    {n:'Alexandra S.L.', p:10, c:'var(--alex)',  s:'B-aksjer · 1× stemme',  v:'NOK 6,8M her'},
+  ];
+
+  const R=54, cx=70, cy=70, circ=2*Math.PI*R;
+  let offset=0;
+  const segments = data.map(d=>{
+    const len = circ * d.p/100;
+    const seg = `<circle cx="${cx}" cy="${cy}" r="${R}" fill="none"
+      stroke="${d.c}" stroke-width="20"
+      stroke-dasharray="${len} ${circ-len}"
+      stroke-dashoffset="${-offset}"
+      style="opacity:.92"/>`;
+    offset += len;
+    return seg;
+  });
+
+  const minSeg = data.find(d=>d.n.startsWith(CR==='leif'?'Leif':CR==='lone'?'Lone':'Alexandra'));
+  const myPst  = minSeg ? minSeg.p : data[0].p;
+  const myFarge= minSeg ? minSeg.c : data[0].c;
+
+  const legend = data.map(d=>`
+    <div class="eier-rad">
+      <div class="eier-dot" style="background:${d.c}"></div>
+      <div class="eier-rad-info">
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="eier-rad-navn">${d.n}</span>
+          <span class="eier-rad-pst" style="color:${d.c}">${d.p}%</span>
+        </div>
+        <div class="eier-rad-sub">${d.s} · ${d.v}</div>
+        <div class="eier-rad-bar"><div class="eier-rad-fill" style="width:${d.p}%;background:${d.c}"></div></div>
+      </div>
+    </div>`).join('');
+
+  const myLabel = CR==='leif'?'Din andel':CR==='lone'?'Din andel':'Din andel';
+
+  return`
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Eierstruktur — Aton Group AS</div><div class="sec-line"></div></div>
+<div class="card" style="padding:20px">
+  <div class="eier-wrap">
+    <div class="eier-donut">
+      <svg viewBox="0 0 140 140">
+        <circle cx="70" cy="70" r="54" fill="none" stroke="var(--bg3)" stroke-width="20"/>
+        ${segments.join('')}
+      </svg>
+      <div class="eier-donut-lbl">
+        <div class="eier-donut-pst" style="color:${myFarge}">${myPst}%</div>
+        <div class="eier-donut-sub">${myLabel}</div>
+      </div>
+    </div>
+    <div class="eier-legend">${legend}</div>
+  </div>
+  <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--bg3);font-size:.7rem;color:var(--ink4);line-height:1.6">
+    A-aksjer: 10× stemmerett · B-aksjer: 1× stemmerett · Gyllen aksje (Sunde Familielegat, 2028): vetorett.
+    Tallene er illustrative — fastsettes endelig på generalforsamling etter org.nr.
+  </div>
+</div>`;
+}
 
 // ── WORKSPACE ──
 function pageWs(){
