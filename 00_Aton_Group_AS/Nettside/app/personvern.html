@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personvernerklæring — Aton AI</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #09080D; color: #EDE0C8; line-height: 1.7; }
+  .container { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+  .logo { font-size: 13px; letter-spacing: 4px; color: #C9A84C; text-transform: uppercase; margin-bottom: 48px; }
+  h1 { font-size: 28px; font-weight: 300; letter-spacing: 2px; color: #F5E0A0; margin-bottom: 8px; }
+  .updated { font-size: 13px; color: #5A5270; margin-bottom: 48px; }
+  h2 { font-size: 16px; font-weight: 500; color: #C9A84C; letter-spacing: 2px; text-transform: uppercase; margin: 40px 0 16px; }
+  p { font-size: 15px; color: #A09070; margin-bottom: 16px; }
+  ul { padding-left: 20px; margin-bottom: 16px; }
+  li { font-size: 15px; color: #A09070; margin-bottom: 8px; }
+  a { color: #C9A84C; text-decoration: none; }
+  .divider { border: none; border-top: 1px solid #2C2840; margin: 48px 0; }
+  .lang-toggle { display: flex; gap: 12px; margin-bottom: 40px; }
+  .lang-btn { padding: 8px 20px; border: 1px solid #2C2840; background: transparent; color: #A09070; cursor: pointer; border-radius: 2px; font-size: 13px; letter-spacing: 1px; }
+  .lang-btn.active { border-color: #C9A84C; color: #C9A84C; }
+  .lang-section { display: none; }
+  .lang-section.active { display: block; }
+  .contact-box { background: #111018; border: 1px solid #2C2840; padding: 24px; border-radius: 4px; margin-top: 16px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">Aton Group AS</div>
+  
+  <h1>Personvernerklæring</h1>
+  <p class="updated">Sist oppdatert: 5. juni 2026</p>
+
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('no')">Norsk</button>
+    <button class="lang-btn" onclick="setLang('en')">English</button>
+  </div>
+
+  <div id="no" class="lang-section active">
+    <h2>1. Hvem er vi</h2>
+    <p>Aton-appen er utviklet og driftet av Aton Group AS, Støperigata 25, 4014 Stavanger, Norge. Organisasjonsnummer tildeles ved registrering i Brønnøysundregistrene.</p>
+    <p>Vi kan kontaktes på <a href="mailto:leif@atongroup.no">leif@atongroup.no</a></p>
+
+    <h2>2. Hvilke data samler vi inn</h2>
+    <p>Aton-appen samler inn følgende data for å levere tjenesten:</p>
+    <ul>
+      <li><strong>Kontoinformasjon:</strong> E-postadresse ved registrering via Google Sign-In</li>
+      <li><strong>Meldinger:</strong> Samtaler du har med AI-assistenten lagres for å gi kontekstuell hjelp</li>
+      <li><strong>Oppgaver og mål:</strong> Oppgaver og mål du oppretter i appen</li>
+      <li><strong>Profil:</strong> Informasjon du oppgir i onboarding (navn, interesser, mål)</li>
+      <li><strong>Hukommelse:</strong> Fakta og preferanser du deler, som AI-en husker mellom samtaler</li>
+      <li><strong>Lydopptak:</strong> Kortvarige lydopptak ved bruk av tale-til-tekst — slettes umiddelbart etter transkripsjon</li>
+      <li><strong>Bilder:</strong> Bilder du sender for analyse — behandles ikke lagret permanent</li>
+      <li><strong>Stedsinformasjon:</strong> Omtrentlig sted (by/region) for personalisert morgenbrief — kun ved aktiv bruk</li>
+    </ul>
+
+    <h2>3. Hvordan bruker vi dataene</h2>
+    <ul>
+      <li>Levere og forbedre AI-assistenttjenesten</li>
+      <li>Generere personalisert morgenbrief</li>
+      <li>Huske dine preferanser og kontekst mellom samtaler</li>
+      <li>Autentisering og kontosikkerhet</li>
+    </ul>
+    <p>Vi selger ikke dine data til tredjeparter. Vi deler ikke data med annonsører.</p>
+
+    <h2>4. Tredjepartstjenester</h2>
+    <p>Appen bruker følgende tredjepartstjenester:</p>
+    <ul>
+      <li><strong>Anthropic Claude API</strong> — AI-behandling av meldinger. <a href="https://www.anthropic.com/privacy">Anthropics personvernregler</a></li>
+      <li><strong>Supabase</strong> — Databaselagring (EU-region). <a href="https://supabase.com/privacy">Supabase personvernregler</a></li>
+      <li><strong>ElevenLabs</strong> — Talesyntese. <a href="https://elevenlabs.io/privacy">ElevenLabs personvernregler</a></li>
+      <li><strong>Google Sign-In</strong> — Autentisering. <a href="https://policies.google.com/privacy">Googles personvernregler</a></li>
+    </ul>
+
+    <h2>5. Datalagring og sikkerhet</h2>
+    <p>Data lagres på Supabase sine servere i EU. Vi bruker kryptering i overføring (HTTPS/TLS) og tilgangskontroll (Row Level Security) for å beskytte dataene dine.</p>
+    <p>Vi beholder data så lenge kontoen din er aktiv. Du kan slette kontoen og alle data ved å kontakte oss.</p>
+
+    <h2>6. Dine rettigheter</h2>
+    <p>Under GDPR har du rett til å:</p>
+    <ul>
+      <li>Få innsyn i hvilke data vi har om deg</li>
+      <li>Korrigere feilaktige data</li>
+      <li>Slette dine data («retten til å bli glemt»)</li>
+      <li>Eksportere dine data</li>
+      <li>Trekke tilbake samtykke</li>
+    </ul>
+    <p>Send forespørsler til <a href="mailto:leif@atongroup.no">leif@atongroup.no</a></p>
+
+    <h2>7. Barn</h2>
+    <p>Aton-appen er ikke rettet mot barn under 13 år. Vi samler ikke bevisst inn data fra barn under 13 år.</p>
+
+    <h2>8. Endringer</h2>
+    <p>Vi varsler om vesentlige endringer i denne erklæringen via e-post til registrerte brukere.</p>
+
+    <h2>9. Kontakt</h2>
+    <div class="contact-box">
+      <p><strong>Aton Group AS</strong><br>
+      Støperigata 25, 4014 Stavanger<br>
+      <a href="mailto:leif@atongroup.no">leif@atongroup.no</a><br>
+      +47 936 14 425</p>
+    </div>
+  </div>
+
+  <div id="en" class="lang-section">
+    <h2>1. Who We Are</h2>
+    <p>The Aton app is developed and operated by Aton Group AS, Støperigata 25, 4014 Stavanger, Norway. Organisation number pending registration in the Norwegian Register of Business Enterprises.</p>
+    <p>Contact us at <a href="mailto:leif@atongroup.no">leif@atongroup.no</a></p>
+
+    <h2>2. Data We Collect</h2>
+    <ul>
+      <li><strong>Account information:</strong> Email address via Google Sign-In</li>
+      <li><strong>Messages:</strong> Conversations with the AI assistant, stored for contextual assistance</li>
+      <li><strong>Tasks and goals:</strong> Items you create in the app</li>
+      <li><strong>Profile:</strong> Information provided during onboarding</li>
+      <li><strong>Memory:</strong> Facts and preferences shared with the AI</li>
+      <li><strong>Audio:</strong> Brief recordings for speech-to-text — deleted immediately after transcription</li>
+      <li><strong>Images:</strong> Images sent for analysis — not stored permanently</li>
+      <li><strong>Location:</strong> Approximate location (city/region) for personalised morning brief — only during active use</li>
+    </ul>
+
+    <h2>3. How We Use Your Data</h2>
+    <ul>
+      <li>Deliver and improve the AI assistant service</li>
+      <li>Generate personalised morning briefs</li>
+      <li>Remember preferences and context between sessions</li>
+      <li>Authentication and account security</li>
+    </ul>
+    <p>We do not sell your data to third parties or share it with advertisers.</p>
+
+    <h2>4. Third-Party Services</h2>
+    <ul>
+      <li><strong>Anthropic Claude API</strong> — AI message processing. <a href="https://www.anthropic.com/privacy">Privacy policy</a></li>
+      <li><strong>Supabase</strong> — Database storage (EU region). <a href="https://supabase.com/privacy">Privacy policy</a></li>
+      <li><strong>ElevenLabs</strong> — Voice synthesis. <a href="https://elevenlabs.io/privacy">Privacy policy</a></li>
+      <li><strong>Google Sign-In</strong> — Authentication. <a href="https://policies.google.com/privacy">Privacy policy</a></li>
+    </ul>
+
+    <h2>5. Data Storage and Security</h2>
+    <p>Data is stored on Supabase servers in the EU. We use encryption in transit (HTTPS/TLS) and Row Level Security to protect your data. Data is retained while your account is active.</p>
+
+    <h2>6. Your Rights</h2>
+    <p>Under GDPR you have the right to access, correct, delete, and export your data, and to withdraw consent. Contact <a href="mailto:leif@atongroup.no">leif@atongroup.no</a></p>
+
+    <h2>7. Children</h2>
+    <p>The Aton app is not directed at children under 13. We do not knowingly collect data from children under 13.</p>
+
+    <h2>8. Changes</h2>
+    <p>We will notify registered users of material changes to this policy via email.</p>
+
+    <h2>9. Contact</h2>
+    <div class="contact-box">
+      <p><strong>Aton Group AS</strong><br>
+      Støperigata 25, 4014 Stavanger, Norway<br>
+      <a href="mailto:leif@atongroup.no">leif@atongroup.no</a><br>
+      +47 936 14 425</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function setLang(lang) {
+  document.querySelectorAll('.lang-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(lang).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
