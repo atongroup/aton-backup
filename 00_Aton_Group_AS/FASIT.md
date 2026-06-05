@@ -341,12 +341,14 @@ Aldri skriv «partner», «samarbeider» eller «avtale» uten skriftlig bekreft
 |---------|-------------|-------------------|
 | ECCA / EuCIA | ✅ Bekreftet | Roberto Frassine bekreftet skriftlig 29. mai |
 | SINTEF Ocean | ❌ Avslått | Anders Valland 1. juni: ønsker ikke mer kontakt — mangler grunnlag for søknad |
-| Vard Group | Kontaktet | Oppfølgingsbrev sendt mai 2026 — ikke svart |
+| Vard Group | ✅ Dialog pågår | Håvard Vollset Lien (VP R&I) — Teams-møte bekreftet 2. juli 2026 kl. 15:00 |
+| RWE Offshore Wind | Kontaktet | Teaser sendt 5. juni 2026 til thomas.michel@rwe.com (COO) — fra leifsunde@gmail.com, venter svar |
+| Siemens Gamesa | Kontaktet | Teaser sendt 5. juni 2026 til darren.davidson@siemensgamesa.com (VP UK&I) — fra leif@bladeship.no, venter svar |
 | Ulstein Group | ❌ Avslått | Gunvor Ulstein svarte 5. juni 2026 — faller utenfor strategi og satsingsområde. Ingen videre kontakt. |
 | Green Yard Kleven | ✅ Dialog pågår | Karl Johan Barstad (CEO) i aktiv dialog. Konseptnotat sendt 4. juni 2026. NDA-tilbud mottatt. Venter svar. |
 | PALFINGER Marine | Kontaktet | Webskjema sendt 30. mai — ikke svart |
 | Kongsberg Maritime | Kontaktet | Webskjema sendt 30. mai — ikke svart |
-| DNV | Kontaktet | Webskjema sendt 30. mai (korrekt kanal). E-post til kundeservice@dnv.no feilet — kun webskjema er sendt. Telefonprat med Kjetil Ostbo — oppfølging sendt via LinkedIn. |
+| DNV | ✅ Dialog pågår | Møte bekreftet 10. juni 2026 kl. 11:30, Veritasveien 25, Stavanger. Deltakere: Kjetil Moi Østbø + Ole Johan Harnes (Stavanger), Andrew Gordon Fraser-Smith + Christine Adal (Høvik, video) |
 | Anders Valland (SINTEF Ocean) | ❌ Avslått | Avsluttet 1. juni — ønsker ikke mer kontakt. IKKE kontakt igjen. |
 | Corvus Energy | Kontaktet | E-post sendt 29. mai (ahebib@ + info@) — ikke svart |
 | Vestas | Kontaktet | E-post sendt 29. mai (KRHJA@ + sustainability@) — ikke svart |
@@ -654,3 +656,10 @@ Claude gjør da:
 - **Eierskap:** Aton Group AS 100% — Aton Teknologi AS stiftes ved markedslansering
 - **Neste steg:** Bekreft at APK-bygg lander, RevenueCat, Premium-skjerm, UX-forbedringer (TabBar, HomeScreen)
 - **Slagplan:** 08_Aton_Teknologi_AS/AtonApp/SLAGPLAN_ATON_APP.md
+
+---
+## Privat — DNB Rammelån (oppdatert 5. juni 2026)
+- **Kontakt:** Birgitte Berentsen, Autorisert Finansrådgiver DNB (Birgitte.Berentsen@dnb.no)
+- **Status:** ✅ Leiekontrakt godkjent av Birgitte 5. juni 2026 kl. 16:12
+- **Neste steg:** Birgitte sender rammelån til elektronisk signering i løpet av helgen (5–8 juni 2026)
+- **Lån som innfris:** SR-Boligkr. Flexilån (NOK 2 400 000, kto 32502676740) + Refinansiering (NOK 47 241, kto oppgitt)
