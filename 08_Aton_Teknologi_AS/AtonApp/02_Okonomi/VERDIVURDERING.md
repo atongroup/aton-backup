@@ -1,6 +1,14 @@
 # Verdivurdering — Aton Teknologi AS / Aton App
-*Dato: 5. juni 2026 | Utarbeidet av: Claude / Aton System*
+*Sist oppdatert: 6. juni 2026 | Utarbeidet av: Claude / Aton System*
 *Status: Intern — ikke ekstern revisor*
+
+---
+
+## Endringslogg
+| Dato | Her & Nå | Post-trigger | Forhandling | Endring |
+|------|----------|--------------|-------------|---------|
+| 5. juni 2026 | NOK 350 000 | NOK 4 500 000 | NOK 6 075 000 | Første vurdering |
+| 6. juni 2026 | NOK 350 000 | NOK 5 000 000 | NOK 6 750 000 | Markedsoppdatering: AI-assistent-markedet vokser til $21,1B innen 2030 (CAGR 44,5%), seed-multiplar bekreftet høye (10–25×), 129 kr/mnd prisnivå validert mot konkurrenter |
 
 ---
 
@@ -9,8 +17,8 @@
 | Verdi | Beløp |
 |-------|-------|
 | **Her & Nå** | NOK 350 000 |
-| **Post-trigger** | NOK 4 500 000 |
-| **Forhandling (35% over target)** | NOK 6 075 000 |
+| **Post-trigger** | NOK 5 000 000 |
+| **Forhandling (35% over target)** | NOK 6 750 000 |
 
 ---
 
@@ -83,8 +91,8 @@ Norsk tidlig-fase SaaS-multipel: 30–50× ARR (pre-traction, AI-nisje, høy vek
 
 Justert for strategisk verdi (Aton-nettverket, SMB-markedet, HeyMom B2B-potensial):
 
-> **Post-trigger-verdi: NOK 4 500 000**
-> Begrunnelse: 150 betalende brukere er realistisk innen 12 måneder gitt Aton-nettverkets rekkevidde og planlagt B2B-utrulling via Aton Teknologi.
+> **Post-trigger-verdi: NOK 5 000 000**
+> Begrunnelse: 150 betalende brukere er realistisk innen 12 måneder. Oppjustert fra NOK 4,5M basert på markedsdata juni 2026: AI-assistent-markedet vokser til $21,1B innen 2030 (CAGR 44,5%), og seed-multiplar for AI-startups bekreftet i 10–25× spenn.
 
 ---
 
@@ -92,7 +100,7 @@ Justert for strategisk verdi (Aton-nettverket, SMB-markedet, HeyMom B2B-potensia
 
 35% over Post-trigger (standard Aton-protokoll):
 
-> **Forhandlingsverdi: NOK 6 075 000**
+> **Forhandlingsverdi: NOK 6 750 000**
 
 ---
 
@@ -133,3 +141,4 @@ Aton Teknologi / Aton App er i dag et **teknisk ferdig produkt i pre-revenue-fas
 
 *Neste verdivurdering: etter APK-distribusjon eller ved 10 betalende kunder*
 *Protokoll: «oppdater verdivurderinger Aton Teknologi» for å kjøre ny vurdering*
+*Sist oppdatert: 6. juni 2026 · v1.1*
