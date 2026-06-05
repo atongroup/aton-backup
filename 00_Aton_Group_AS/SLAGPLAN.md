@@ -34,7 +34,7 @@
 | # | Oppgave | Frist | Verktøy |
 |---|---------|-------|---------|
 | 1 | Sett inn NOK 30k Folio Aton Group AS | ~9. juni | Leif gjør selv |
-| 2 | Fiks leif@bladeship.no alias i Gmail | ASAP | Chrome MCP |
+| 2 | ~~Fiks leif@bladeship.no alias i Gmail~~ | ✅ Fullført 6. juni | — |
 | 3 | Slett spraymask.no + velumen.info | Snarest | Chrome → one.com |
 | 4 | Sjekk Creditsafe i Digipost | Snarest | Chrome → digipost.no |
 | 5 | Signer stiftelsesdokument Aton Group AS | ASAP | Chrome → fiken.no |
