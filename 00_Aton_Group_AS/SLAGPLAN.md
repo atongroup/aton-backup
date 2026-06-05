@@ -37,7 +37,7 @@
 | 2 | ~~Fiks leif@bladeship.no alias i Gmail~~ | ✅ Fullført 6. juni | — |
 | 3 | Slett spraymask.no + velumen.info | Snarest | Chrome → one.com |
 | 4 | Sjekk Creditsafe i Digipost | Snarest | Chrome → digipost.no |
-| 5 | Signer stiftelsesdokument Aton Group AS | ASAP | Chrome → fiken.no |
+| 5 | Registrer Aton Group AS i Fiken etter org.nr. | ~20. juni | Chrome → fiken.no |
 | 6 | NDA + VB-avtale Sprayvisir (Esther) | Snarest | Scrive |
 
 ---
