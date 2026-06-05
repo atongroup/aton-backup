@@ -2,256 +2,196 @@
 <html lang="no">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/icon-16.png">
-<link rel="apple-touch-icon" href="/icon-180.png">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Aton Hub</title>
 <meta name="robots" content="noindex,nofollow">
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/icon-16.png">
+<link rel="apple-touch-icon" href="/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-<script>function initGSI(){if(typeof handleCredential==='undefined'){setTimeout(initGSI,50);return;}google.accounts.id.initialize({client_id:CLIENT_ID,callback:handleCredential,auto_select:false});google.accounts.id.renderButton(document.getElementById('gsi-btn'),{theme:'outline',size:'large',text:'signin_with',shape:'rectangular',width:280});}</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<script>
+function initGSI(){
+  if(typeof handleCredential==='undefined'){setTimeout(initGSI,50);return;}
+  google.accounts.id.initialize({client_id:CLIENT_ID,callback:handleCredential,auto_select:false});
+  google.accounts.id.renderButton(document.getElementById('gsi-btn'),{theme:'outline',size:'large',text:'signin_with',shape:'rectangular',width:280});
+}
+</script>
 <script src="https://accounts.google.com/gsi/client" onload="initGSI()"></script>
 <style>
 :root{
-  --bg:#f8f6f0;--bg2:#ffffff;--bg3:#f2efe8;
-  --ink:#1a1610;--ink2:#4a4540;--ink3:#8a8278;--ink4:#b8b0a8;
-  --gold:#b8922a;--gold-l:#d4aa45;--gold-bg:rgba(184,146,42,.1);--gold-bd:rgba(184,146,42,.2);
-  --lone:#7c5cbf;--lone-bg:rgba(124,92,191,.08);--lone-bd:rgba(124,92,191,.2);
-  --alex:#2874c8;--alex-bg:rgba(40,116,200,.08);--alex-bd:rgba(40,116,200,.2);
-  --green:#1a8a4a;--green-bg:rgba(26,138,74,.08);
-  --red:#c8352a;--red-bg:rgba(200,53,42,.08);
-  --orange:#c87020;--orange-bg:rgba(200,112,32,.08);
-  --serif:'Playfair Display',serif;--sans:'Inter',sans-serif;--mono:'DM Mono',monospace;
-  --r:12px;--r-sm:8px;--r-lg:20px;
-  --shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.06);
-  --shadow-lg:0 4px 24px rgba(0,0,0,.1),0 1px 4px rgba(0,0,0,.06);
-  --nav-w:228px;--hdr:60px;
+  --gold:#b8922a;--gold-l:#d4aa45;--gold-bg:rgba(184,146,42,.1);--gold-bd:rgba(184,146,42,.25);
+  --lone:#7c5cbf;--lone-bg:rgba(124,92,191,.1);--lone-bd:rgba(124,92,191,.25);
+  --alex:#2874c8;--alex-bg:rgba(40,116,200,.1);--alex-bd:rgba(40,116,200,.25);
+  --green:#1a8a4a;--green-bg:rgba(26,138,74,.1);
+  --red:#c8352a;--red-bg:rgba(200,53,42,.1);
+  --orange:#c87020;--orange-bg:rgba(200,112,32,.1);
+  --bg:#f9f7f2;--bg2:#ffffff;--bg3:#f0ece3;--bg4:#e8e2d8;
+  --ink:#1a1610;--ink2:#3a3530;--ink3:#7a7268;--ink4:#b0a898;
+  --serif:'DM Serif Display',serif;
+  --sans:'DM Sans',sans-serif;
+  --mono:'DM Mono',monospace;
+  --r:10px;--r-sm:6px;--r-lg:16px;
+  --nav-w:220px;--hdr:56px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5}
 a{color:inherit;text-decoration:none}
-button{cursor:pointer;font-family:var(--sans)}
+button{cursor:pointer;font-family:var(--sans);border:none;background:none}
 
-/* ══════════════ LOGIN ══════════════ */
-#loginScreen{
+/* ── LOGIN ── */
+#login{
   position:fixed;inset:0;z-index:999;
   display:flex;align-items:center;justify-content:center;
   background:linear-gradient(145deg,#faf8f2 0%,#f0ece0 50%,#faf8f2 100%);
-  overflow:hidden;
 }
-.login-bg-circle{
-  position:absolute;border-radius:50%;pointer-events:none;
-}
-.login-bg-circle:nth-child(1){width:600px;height:600px;top:-200px;right:-200px;background:radial-gradient(circle,rgba(184,146,42,.06) 0%,transparent 70%)}
-.login-bg-circle:nth-child(2){width:400px;height:400px;bottom:-100px;left:-100px;background:radial-gradient(circle,rgba(124,92,191,.04) 0%,transparent 70%)}
-.login-wrap{
-  position:relative;z-index:1;
-  width:440px;padding:0 20px;
-  animation:loginIn .7s cubic-bezier(.4,0,.2,1) both;
-}
-@keyframes loginIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-.login-brand{display:flex;flex-direction:column;align-items:center;margin-bottom:40px}
-.login-emblem{
-  width:80px;height:80px;border-radius:50%;margin-bottom:20px;
-  background:linear-gradient(145deg,#fff,#f5f0e0);
-  box-shadow:0 4px 24px rgba(184,146,42,.15),0 1px 4px rgba(0,0,0,.08);
-  display:flex;align-items:center;justify-content:center;
-  border:1px solid rgba(184,146,42,.15);
-}
-.login-emblem svg{width:38px;height:38px}
-.login-name{font-family:var(--serif);font-size:2.6rem;color:var(--ink);font-weight:400;letter-spacing:.02em}
-.login-tagline{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);margin-top:6px}
 .login-card{
-  background:#fff;border-radius:24px;padding:36px 32px;
-  box-shadow:0 8px 40px rgba(0,0,0,.08),0 1px 4px rgba(0,0,0,.04);
-  border:1px solid rgba(0,0,0,.04);
+  background:#fff;border-radius:20px;padding:40px 36px;
+  box-shadow:0 8px 48px rgba(0,0,0,.08);
+  border:1px solid rgba(0,0,0,.06);
   display:flex;flex-direction:column;align-items:center;gap:20px;
+  animation:slideUp .5s cubic-bezier(.4,0,.2,1) both;
+  width:360px;max-width:calc(100vw - 32px);
 }
-.login-members{
-  display:flex;align-items:center;gap:8px;
-  font-size:.8rem;color:var(--ink3);
-}
-.login-avatars{display:flex;margin-right:4px}
-.login-av{
-  width:28px;height:28px;border-radius:50%;border:2px solid #fff;
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.login-logo{
+  width:64px;height:64px;border-radius:50%;
+  background:linear-gradient(145deg,#fff,#f5f0e0);
+  border:1px solid var(--gold-bd);
   display:flex;align-items:center;justify-content:center;
-  font-size:.62rem;font-weight:600;margin-left:-8px;
+  box-shadow:0 4px 20px var(--gold-bg);
 }
+.login-logo svg{width:32px;height:32px}
+.login-name{font-family:var(--serif);font-size:2rem;color:var(--ink);letter-spacing:.02em}
+.login-name span{color:var(--gold)}
+.login-tag{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4)}
+.login-avs{display:flex;gap:-4px;margin:4px 0}
+.login-av{width:26px;height:26px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:600;margin-left:-6px}
 .login-av:first-child{margin-left:0}
-.login-av.l{background:var(--gold-bg);color:var(--gold);border-color:#fff}
-.login-av.lo{background:var(--lone-bg);color:var(--lone);border-color:#fff}
-.login-av.al{background:var(--alex-bg);color:var(--alex);border-color:#fff}
-.login-divider{
-  width:100%;display:grid;grid-template-columns:1fr auto 1fr;
-  align-items:center;gap:12px;
-}
-.login-divider::before,.login-divider::after{content:'';height:1px;background:var(--bg3)}
-.login-divider span{font-size:.72rem;color:var(--ink4);white-space:nowrap}
-.login-founder-btn{
-  width:100%;padding:12px;border-radius:var(--r);
-  background:var(--bg);border:1px solid var(--gold-bd);
-  color:var(--gold);font-size:.82rem;font-weight:500;letter-spacing:.02em;
-  transition:all .2s;
-}
-.login-founder-btn:hover{background:var(--gold-bg);border-color:var(--gold)}
-.login-privacy{font-size:.72rem;color:var(--ink4)}
+.login-members{display:flex;align-items:center;gap:10px;font-size:.8rem;color:var(--ink3)}
+.login-div{width:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px}
+.login-div::before,.login-div::after{content:'';height:1px;background:var(--bg4)}
+.login-div span{font-size:.7rem;color:var(--ink4);white-space:nowrap}
+.login-founder{width:100%;padding:11px;border-radius:var(--r);background:var(--bg);border:1px solid var(--gold-bd);color:var(--gold);font-size:.82rem;font-weight:500;transition:all .2s}
+.login-founder:hover{background:var(--gold-bg)}
 
-/* ══════════════ APP ══════════════ */
+/* ── APP ── */
 #app{display:none;height:100%;flex-direction:column}
 #app.on{display:flex}
 
-/* HEADER */
+/* ── HEADER ── */
 #hdr{
   height:var(--hdr);min-height:var(--hdr);
   background:#fff;border-bottom:1px solid rgba(0,0,0,.07);
-  display:flex;align-items:center;padding:0 20px;gap:12px;
-  position:relative;z-index:100;flex-shrink:0;
+  display:flex;align-items:center;padding:0 18px;gap:10px;flex-shrink:0;z-index:100;
 }
-.hdr-logo{
-  font-family:var(--serif);font-size:1.35rem;color:var(--ink);
-  font-weight:400;letter-spacing:.03em;flex-shrink:0;
-}
-.hdr-logo span{color:var(--gold)}
-.hdr-sep{width:1px;height:20px;background:var(--bg3);flex-shrink:0}
-.hdr-title{flex:1;font-size:.88rem;font-weight:500;color:var(--ink2)}
+.hdr-logo{font-family:var(--serif);font-size:1.25rem;color:var(--ink);flex-shrink:0;letter-spacing:.02em}
+.hdr-logo em{color:var(--gold);font-style:italic}
+.hdr-sep{width:1px;height:18px;background:var(--bg4);flex-shrink:0}
+.hdr-title{flex:1;font-size:.82rem;font-weight:500;color:var(--ink3)}
 .hdr-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.hdr-badge{
-  font-size:.7rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
-  padding:4px 12px;border-radius:20px;white-space:nowrap;
-}
+.hdr-badge{font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.hdr-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;cursor:pointer;border:2px solid transparent}
 .hdr-claude{
-  display:flex;align-items:center;gap:6px;
-  padding:7px 14px;border-radius:8px;
+  display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:8px;
   background:linear-gradient(135deg,var(--gold),var(--gold-l));
-  color:#fff;font-size:.78rem;font-weight:600;letter-spacing:.02em;
-  border:none;box-shadow:0 2px 8px rgba(184,146,42,.3);
-  transition:all .2s;
+  color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.02em;
+  box-shadow:0 2px 8px var(--gold-bg);transition:all .2s;
 }
 .hdr-claude:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(184,146,42,.4)}
-.hdr-claude svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2}
-.hdr-av{
-  width:34px;height:34px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:.72rem;font-weight:600;border:2px solid var(--bg3);
-  transition:all .2s;flex-shrink:0;cursor:pointer;
-}
-.hdr-av:hover{border-color:var(--gold-bd)}
+.hdr-claude svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2.2}
 
-/* BODY */
+/* ── BODY ── */
 #body{flex:1;display:flex;overflow:hidden}
 
-/* SIDEBAR */
+/* ── SIDEBAR ── */
 #sidebar{
   width:var(--nav-w);min-width:var(--nav-w);
   background:#fff;border-right:1px solid rgba(0,0,0,.06);
-  display:flex;flex-direction:column;padding:16px 0;
-  overflow-y:auto;flex-shrink:0;
+  display:flex;flex-direction:column;padding:12px 0;overflow-y:auto;flex-shrink:0;
 }
-.nav-grp-lbl{
-  font-size:.64rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink4);padding:14px 16px 6px;
-}
+.nav-lbl{font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink4);padding:12px 16px 4px}
 .nav-btn{
-  display:flex;align-items:center;gap:10px;
-  padding:9px 16px;background:transparent;border:none;color:var(--ink3);
-  font-size:.88rem;font-weight:400;text-align:left;width:100%;
-  border-radius:0;transition:all .15s;position:relative;
+  display:flex;align-items:center;gap:9px;padding:8px 16px;
+  background:transparent;color:var(--ink3);font-size:.83rem;font-weight:400;
+  text-align:left;width:100%;border-radius:0;transition:all .15s;position:relative;
 }
-.nav-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.7;flex-shrink:0;transition:all .15s}
+.nav-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.7;flex-shrink:0}
 .nav-btn:hover{color:var(--ink);background:var(--bg)}
 .nav-btn.active{color:var(--gold);font-weight:500;background:var(--gold-bg)}
+.nav-btn.active::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:3px;background:var(--gold);border-radius:0 3px 3px 0}
 .nav-btn.active svg{stroke:var(--gold)}
-.nav-btn.active::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:3px;background:var(--gold);border-radius:0 3px 3px 0}
-.nav-divider{height:1px;background:var(--bg3);margin:8px 16px}
-.nav-footer{margin-top:auto;padding:12px 16px}
-.nav-user{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.nav-user-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:600;flex-shrink:0}
-.nav-user-name{font-size:.88rem;font-weight:500;color:var(--ink)}
-.nav-user-role{font-size:.78rem;color:var(--ink3)}
-.nav-out{
-  width:100%;padding:8px;border-radius:var(--r-sm);
-  background:var(--bg);border:1px solid rgba(0,0,0,.07);
-  color:var(--ink3);font-size:.8rem;font-weight:500;
-  transition:all .2s;
-}
-.nav-admin{
-  width:100%;padding:8px;border-radius:var(--r-sm);
-  background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.07);
-  color:var(--ink3);font-size:.8rem;font-weight:500;
-  transition:all .2s;margin-bottom:6px;
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  cursor:pointer;
-}
-.nav-admin:hover{background:rgba(0,0,0,.08);color:var(--ink1);}
+.nav-div{height:1px;background:var(--bg3);margin:8px 14px}
+.nav-footer{margin-top:auto;padding:10px 14px}
+.nav-user{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.nav-user-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;flex-shrink:0}
+.nav-user-name{font-size:.82rem;font-weight:500;color:var(--ink)}
+.nav-user-role{font-size:.7rem;color:var(--ink4)}
+.nav-out{width:100%;padding:7px;border-radius:var(--r-sm);background:var(--bg);border:1px solid rgba(0,0,0,.07);color:var(--ink3);font-size:.76rem;font-weight:500;transition:all .2s}
 .nav-out:hover{background:var(--red-bg);color:var(--red);border-color:rgba(200,53,42,.2)}
 
-/* MAIN */
-#main{flex:1;overflow-y:auto;background:var(--bg);padding:28px}
-.page{display:none;max-width:860px;margin:0 auto;animation:fadeUp .2s ease both}
+/* ── MAIN ── */
+#main{flex:1;overflow-y:auto;background:var(--bg);padding:24px}
+.page{display:none;max-width:820px;margin:0 auto;animation:fadeIn .18s ease both}
 .page.on{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
-/* SECTION HEADERS */
-.sec{display:flex;align-items:center;gap:10px;margin:28px 0 16px}
+/* ── CARDS & SECTIONS ── */
+.sec{display:flex;align-items:center;gap:10px;margin:24px 0 14px}
 .sec:first-child{margin-top:0}
 .sec-line{flex:1;height:1px;background:rgba(0,0,0,.07)}
-.sec-lbl{font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4);white-space:nowrap}
+.sec-lbl{font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink4);white-space:nowrap}
+.card{background:#fff;border-radius:var(--r-lg);padding:18px;margin-bottom:12px;border:1px solid rgba(0,0,0,.06);box-shadow:0 1px 8px rgba(0,0,0,.04)}
 
-/* CARDS */
-.card{background:#fff;border-radius:var(--r);padding:20px;margin-bottom:14px;border:1px solid rgba(0,0,0,.06);box-shadow:var(--shadow)}
-.card:hover{box-shadow:var(--shadow-lg);border-color:rgba(0,0,0,.09)}
-
-/* WELCOME HERO */
-.hero{
-  border-radius:var(--r-lg);padding:32px;margin-bottom:20px;
-  position:relative;overflow:hidden;
-}
+/* ── HERO ── */
+.hero{border-radius:var(--r-lg);padding:28px;margin-bottom:16px;position:relative;overflow:hidden}
 .hero-leif{background:linear-gradient(135deg,#1a1610 0%,#2d2418 60%,#1a1610 100%)}
-.hero-lone{background:linear-gradient(135deg,#1e1428 0%,#2d1f44 60%,#1a1020 100%)}
-.hero-alex{background:linear-gradient(135deg,#0e1f3a 0%,#162d52 60%,#0e1a30 100%)}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 80% 20%,rgba(255,255,255,.04) 0%,transparent 60%);
-  pointer-events:none;
-}
-.hero-label{font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px;opacity:.6}
-.hero-leif .hero-label{color:var(--gold)}
-.hero-lone .hero-label{color:#a888e8}
-.hero-alex .hero-label{color:#6aaaf0}
-.hero-name{font-family:var(--serif);font-size:2.8rem;font-weight:400;color:#fff;line-height:1;margin-bottom:6px}
-.hero-name em{font-style:italic}
-.hero-leif .hero-name em{color:var(--gold-l)}
-.hero-lone .hero-name em{color:#c0a0f8}
-.hero-alex .hero-name em{color:#8ac0f8}
-.hero-role{font-size:.8rem;opacity:.55;color:#fff;margin-bottom:20px;letter-spacing:.04em}
-.hero-quote{
-  font-size:.9rem;color:rgba(255,255,255,.7);line-height:1.7;
-  border-left:2px solid;padding-left:14px;font-style:italic;
-}
+.hero-lone{background:linear-gradient(135deg,#1a1025 0%,#2a1840 60%,#1a1025 100%)}
+.hero-alex{background:linear-gradient(135deg,#0e1f3a 0%,#162d50 60%,#0e1830 100%)}
+.hero-lbl{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-bottom:8px}
+.hero-leif .hero-lbl{color:var(--gold)}
+.hero-lone .hero-lbl{color:#b09ae8}
+.hero-alex .hero-lbl{color:#70aaee}
+.hero-name{font-family:var(--serif);font-size:2.4rem;color:#fff;line-height:1;margin-bottom:4px}
+.hero-leif .hero-name em{color:var(--gold-l);font-style:italic}
+.hero-lone .hero-name em{color:#c0a0f8;font-style:italic}
+.hero-alex .hero-name em{color:#90c0f8;font-style:italic}
+.hero-role{font-size:.76rem;opacity:.5;color:#fff;margin-bottom:18px;letter-spacing:.04em}
+.hero-quote{font-size:.85rem;color:rgba(255,255,255,.65);line-height:1.7;border-left:2px solid;padding-left:12px;font-style:italic}
 .hero-leif .hero-quote{border-color:rgba(184,146,42,.5)}
 .hero-lone .hero-quote{border-color:rgba(160,128,248,.4)}
 .hero-alex .hero-quote{border-color:rgba(100,160,240,.4)}
 
-/* STATS */
-.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:16px}
-.stat{background:#fff;border-radius:var(--r);padding:16px;border:1px solid rgba(0,0,0,.06);box-shadow:var(--shadow);text-align:center}
-.stat-n{font-family:var(--serif);font-size:1.9rem;font-weight:400;color:var(--gold);line-height:1;margin-bottom:4px}
-.stat-n.ink{color:var(--ink)}
-.stat-n.gr{color:var(--green)}
-.stat-l{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4)}
+/* ── EIER-RAD ── */
+.eier-bar{display:flex;align-items:center;gap:14px;padding:12px 16px;background:#fff;border-radius:var(--r);border:1px solid rgba(0,0,0,.07);margin-bottom:14px}
+.eier-donut{position:relative;width:48px;height:48px;flex-shrink:0}
+.eier-donut svg{width:48px;height:48px;transform:rotate(-90deg)}
+.eier-donut-lbl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.eier-pst{font-size:.72rem;font-weight:700;line-height:1}
+.eier-sub{font-size:.54rem;color:var(--ink4);margin-top:1px}
+.eier-info{flex:1}
+.eier-title{font-size:.82rem;font-weight:600;color:var(--ink);margin-bottom:1px}
+.eier-meta{font-size:.72rem;color:var(--ink3)}
+.eier-vals{display:flex;gap:14px;margin-top:4px}
+.eier-val{font-size:.7rem;color:var(--ink4)}
+.eier-val strong{color:var(--gold)}
+.eier-val.green strong{color:var(--green)}
 
-/* ALERTS */
-.alert{
-  display:flex;align-items:center;gap:14px;
-  padding:14px 16px;border-radius:var(--r-sm);margin-bottom:10px;
-  border:1px solid;font-size:.85rem;
-}
-.alert-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.alert-date{font-family:var(--mono);font-size:.75rem;white-space:nowrap;min-width:70px;font-weight:500}
-.alert-text{color:var(--ink2);flex:1;font-size:.9rem}
+/* ── STATS ── */
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:14px}
+.stat{background:#fff;border-radius:var(--r);padding:14px;border:1px solid rgba(0,0,0,.06);text-align:center}
+.stat-n{font-family:var(--serif);font-size:1.7rem;color:var(--gold);line-height:1;margin-bottom:2px}
+.stat-n.gr{color:var(--green)}
+.stat-n.nk{color:var(--ink)}
+.stat-l{font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)}
+
+/* ── ALERTS ── */
+.alert{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:var(--r-sm);margin-bottom:8px;border:1px solid;font-size:.82rem}
+.alert-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.alert-date{font-family:var(--mono);font-size:.7rem;white-space:nowrap;min-width:72px;font-weight:500}
+.alert-text{color:var(--ink2);flex:1}
 .alert.urg{background:var(--red-bg);border-color:rgba(200,53,42,.15)}
 .alert.urg .alert-dot{background:var(--red)}
 .alert.urg .alert-date{color:var(--red)}
@@ -262,281 +202,181 @@ button{cursor:pointer;font-family:var(--sans)}
 .alert.ok .alert-dot{background:var(--green)}
 .alert.ok .alert-date{color:var(--green)}
 
-/* BADGES */
-.badge{display:inline-flex;align-items:center;font-size:.67rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:20px;white-space:nowrap;border:1px solid}
+/* ── BADGES ── */
+.badge{display:inline-flex;align-items:center;font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:20px;white-space:nowrap;border:1px solid}
 .bg{background:var(--green-bg);color:var(--green);border-color:rgba(26,138,74,.2)}
 .by{background:var(--orange-bg);color:var(--orange);border-color:rgba(200,112,32,.2)}
 .bx{background:var(--bg3);color:var(--ink3);border-color:rgba(0,0,0,.08)}
 .bb{background:var(--gold-bg);color:var(--gold);border-color:var(--gold-bd)}
 .br{background:var(--red-bg);color:var(--red);border-color:rgba(200,53,42,.2)}
-.bv{background:var(--lone-bg);color:var(--lone);border-color:var(--lone-bd)}
-.ba{background:var(--alex-bg);color:var(--alex);border-color:var(--alex-bd)}
 
-/* PIPELINE */
-.pipe-row{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 0;border-bottom:1px solid var(--bg3);gap:12px;
-}
+/* ── PIPELINE ── */
+.pipe-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--bg3);gap:10px}
 .pipe-row:last-child{border-bottom:none}
-.pipe-name{font-size:.92rem;font-weight:500;color:var(--ink);margin-bottom:3px}
-.pipe-sub{font-size:.8rem;color:var(--ink3)}
-.pipe-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.pipe-val{font-family:var(--serif);font-size:1.15rem;color:var(--gold);white-space:nowrap}
-.pipe-total{
-  padding-top:14px;margin-top:4px;border-top:2px solid var(--bg3);
-  display:flex;justify-content:space-between;align-items:center;
-}
-.pipe-total-lbl{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4)}
-.pipe-total-val{font-family:var(--serif);font-size:2rem;color:var(--gold)}
+.pipe-name{font-size:.85rem;font-weight:500;color:var(--ink);margin-bottom:2px}
+.pipe-sub{font-size:.74rem;color:var(--ink4)}
+.pipe-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.pipe-val{font-family:var(--serif);font-size:1.05rem;color:var(--gold);white-space:nowrap}
+.pipe-total{padding-top:12px;margin-top:4px;border-top:2px solid var(--bg3);display:flex;justify-content:space-between;align-items:center}
+.pipe-total-lbl{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4)}
+.pipe-total-val{font-family:var(--serif);font-size:1.8rem;color:var(--gold)}
 
-/* SLAGPLAN */
-.phase{background:#fff;border-radius:var(--r);border:1px solid rgba(0,0,0,.06);margin-bottom:12px;overflow:hidden;box-shadow:var(--shadow)}
-.phase-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--bg3)}
-.phase-title{font-size:.88rem;font-weight:600;color:var(--ink)}
-.phase-body{padding:4px 18px 12px}
-.pi{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--bg3);font-size:.88rem}
-.pi:last-child{border-bottom:none}
-.pi::before{content:'○';color:var(--ink4);font-size:.7rem;padding-top:3px;flex-shrink:0}
-.pi.done{color:var(--ink2)}
-.pi.done::before{content:'✓';color:var(--green);font-weight:700}
-.pi.active::before{content:'→';color:var(--orange)}
-
-/* PORT CARDS */
-.port{background:#fff;border-radius:var(--r-lg);border:1px solid rgba(0,0,0,.06);padding:22px;margin-bottom:14px;box-shadow:var(--shadow);transition:all .2s}
-.port:hover{box-shadow:var(--shadow-lg);transform:translateY(-1px)}
-.port-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
-.port-icon{
-  width:48px;height:48px;border-radius:12px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--serif);font-size:1.1rem;font-weight:600;
-}
-.port-icon.bs{background:linear-gradient(135deg,rgba(184,146,42,.15),rgba(184,146,42,.05));color:var(--gold);border:1px solid var(--gold-bd)}
-.port-icon.ve{background:linear-gradient(135deg,var(--lone-bg),rgba(124,92,191,.03));color:var(--lone);border:1px solid var(--lone-bd)}
-.port-icon.ts{background:linear-gradient(135deg,var(--alex-bg),rgba(40,116,200,.03));color:var(--alex);border:1px solid var(--alex-bd)}
-.port-icon.co{background:var(--bg3);color:var(--ink3);border:1px solid rgba(0,0,0,.08)}
+/* ── PORTEFØLJE ── */
+.port{background:#fff;border-radius:var(--r-lg);padding:20px;margin-bottom:12px;border:1px solid rgba(0,0,0,.06);transition:all .2s}
+.port:hover{box-shadow:0 4px 20px rgba(0,0,0,.07);transform:translateY(-1px)}
+.port-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.port-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1rem;font-weight:600;flex-shrink:0}
+.port-icon.bs{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-bd)}
+.port-icon.ve{background:var(--lone-bg);color:var(--lone);border:1px solid var(--lone-bd)}
+.port-icon.ts{background:var(--alex-bg);color:var(--alex);border:1px solid var(--alex-bd)}
+.port-icon.co{background:var(--bg3);color:var(--ink3);border:1px solid var(--bg4)}
 .port-head{flex:1}
-.port-title{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:3px}
-.port-sub{font-size:.78rem;color:var(--ink3)}
-.port-badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.port-desc{font-size:.88rem;color:var(--ink2);line-height:1.7;margin-bottom:14px}
-.val-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-bottom:14px}
-.val-item{background:var(--bg);border-radius:var(--r-sm);padding:10px 12px;border:1px solid rgba(0,0,0,.06)}
-.val-n{display:block;font-family:var(--serif);font-size:1.15rem;color:var(--gold);margin-bottom:2px}
-.val-n.ink{color:var(--ink)}
+.port-title{font-size:.92rem;font-weight:600;color:var(--ink);margin-bottom:2px}
+.port-sub{font-size:.74rem;color:var(--ink4)}
+.port-badges{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.port-desc{font-size:.8rem;color:var(--ink3);line-height:1.65;margin-bottom:10px}
+.val-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:7px}
+.val-item{background:var(--bg);border-radius:var(--r-sm);padding:8px 10px;border:1px solid rgba(0,0,0,.05)}
+.val-n{display:block;font-family:var(--serif);font-size:1.05rem;color:var(--gold);margin-bottom:1px}
+.val-n.nk{color:var(--ink)}
 .val-n.gr{color:var(--green)}
-.val-l{display:block;font-size:.64rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)}
-.port-link{font-size:.78rem;font-weight:500;color:var(--gold);display:inline-flex;align-items:center;gap:4px}
-.port-link:hover{text-decoration:underline}
+.val-l{display:block;font-size:.6rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4)}
 
-/* CAL */
-.cal-row{display:flex;align-items:flex-start;gap:16px;padding:13px 0;border-bottom:1px solid var(--bg3)}
+/* ── KALENDER ── */
+.cal-row{display:flex;align-items:flex-start;gap:14px;padding:10px 0;border-bottom:1px solid var(--bg3);font-size:.82rem}
 .cal-row:last-child{border-bottom:none}
-.cal-date{font-family:var(--mono);font-size:.75rem;font-weight:500;min-width:80px;padding-top:1px;color:var(--ink3)}
-.cal-text{font-size:.9rem;color:var(--ink2);line-height:1.5;flex:1}
+.cal-date{font-family:var(--mono);font-size:.7rem;font-weight:500;min-width:78px;color:var(--ink3);padding-top:1px}
+.cal-text{color:var(--ink2);flex:1;line-height:1.5}
 .cal-row.urg .cal-date{color:var(--red)}
 .cal-row.urg .cal-text{font-weight:500;color:var(--ink)}
 .cal-row.fam .cal-date{color:var(--alex)}
 
-/* WORKSPACE */
-.ws-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-bottom:20px}
-.ws-card{
-  background:#fff;border-radius:var(--r);border:1px solid rgba(0,0,0,.07);
-  padding:14px 16px;display:flex;align-items:center;gap:12px;
-  text-decoration:none;transition:all .2s;box-shadow:var(--shadow);
-}
-.ws-card:hover{box-shadow:var(--shadow-lg);border-color:var(--gold-bd);transform:translateY(-1px)}
-.ws-ic{width:36px;height:36px;border-radius:9px;background:var(--bg);border:1px solid rgba(0,0,0,.07);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ws-ic svg{width:17px;height:17px;stroke:var(--gold);fill:none;stroke-width:1.7}
-.ws-label{font-size:.82rem;font-weight:500;color:var(--ink)}
-.ws-sub{font-size:.7rem;color:var(--ink4);margin-top:2px}
+/* ── WORKSPACE ── */
+.ws-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-bottom:18px}
+.ws-card{background:#fff;border-radius:var(--r);border:1px solid rgba(0,0,0,.07);padding:12px 14px;display:flex;align-items:center;gap:10px;text-decoration:none;transition:all .2s}
+.ws-card:hover{border-color:var(--gold-bd);box-shadow:0 2px 10px rgba(0,0,0,.06);transform:translateY(-1px)}
+.ws-ic{width:32px;height:32px;border-radius:8px;background:var(--bg);border:1px solid rgba(0,0,0,.07);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ws-ic svg{width:15px;height:15px;stroke:var(--gold);fill:none;stroke-width:1.7}
+.ws-label{font-size:.78rem;font-weight:500;color:var(--ink)}
+.ws-sub{font-size:.67rem;color:var(--ink4);margin-top:1px}
 
-.note-wrap{background:#fff;border-radius:var(--r);border:1px solid rgba(0,0,0,.07);padding:18px;box-shadow:var(--shadow)}
-.note-lbl{font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4);margin-bottom:10px}
-.note-ta{
-  width:100%;border:none;background:transparent;
-  font-family:var(--sans);font-size:.84rem;color:var(--ink2);
-  resize:vertical;min-height:130px;outline:none;line-height:1.8;
-}
-
-/* TEAM */
-.member{background:#fff;border-radius:var(--r-lg);border:1px solid rgba(0,0,0,.06);padding:20px;margin-bottom:12px;box-shadow:var(--shadow)}
-.mem-top{display:flex;align-items:center;gap:14px;margin-bottom:14px}
-.mem-av{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;flex-shrink:0;letter-spacing:.04em}
+/* ── TEAM ── */
+.member{background:#fff;border-radius:var(--r-lg);padding:18px;margin-bottom:10px;border:1px solid rgba(0,0,0,.06)}
+.mem-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.mem-av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0}
 .mem-av.ls{background:var(--gold-bg);color:var(--gold);border:2px solid var(--gold-bd)}
 .mem-av.lo{background:var(--lone-bg);color:var(--lone);border:2px solid var(--lone-bd)}
 .mem-av.al{background:var(--alex-bg);color:var(--alex);border:2px solid var(--alex-bd)}
 .mem-av.ex{background:var(--green-bg);color:var(--green);border:2px solid rgba(26,138,74,.2)}
-.mem-name{font-size:.95rem;font-weight:600;color:var(--ink)}
-.mem-role{font-size:.75rem;color:var(--ink3);margin-top:3px}
-.mrow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--bg3);font-size:.88rem}
+.mem-name{font-size:.88rem;font-weight:600;color:var(--ink)}
+.mem-role{font-size:.72rem;color:var(--ink4);margin-top:2px}
+.mrow{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--bg3);font-size:.8rem}
 .mrow:last-child{border-bottom:none}
-.mrow-l{color:var(--ink4);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.mrow-l{color:var(--ink4);font-size:.66rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
 .mrow-v{color:var(--ink2)}
 .mrow-v a{color:var(--gold);font-weight:500}
-.mrow-v a:hover{text-decoration:underline}
 
-/* ══════════════ CLAUDE PANEL ══════════════ */
+/* ── ATON APP ── */
+.app-stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-bottom:16px}
+.app-stat{background:#fff;border-radius:var(--r);padding:12px;border:1px solid rgba(0,0,0,.06);text-align:center}
+.app-stat-n{font-family:var(--serif);font-size:1.5rem;color:var(--gold);line-height:1}
+.app-stat-l{font-size:.62rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-top:2px}
+.user-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bg3);font-size:.82rem}
+.user-row:last-child{border-bottom:none}
+.user-info{display:flex;align-items:center;gap:8px}
+.user-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.user-email{color:var(--ink2)}
+.user-date{font-family:var(--mono);font-size:.68rem;color:var(--ink4)}
+#refreshUsers{font-size:.72rem;color:var(--gold);font-weight:500;text-decoration:underline;background:none;border:none;cursor:pointer;margin-top:8px}
+
+/* ── CLAUDE PANEL ── */
 #clPanel{
   width:0;min-width:0;overflow:hidden;
   border-left:1px solid rgba(0,0,0,.07);
   background:#fff;display:flex;flex-direction:column;
-  transition:width .3s cubic-bezier(.4,0,.2,1),min-width .3s;
-  flex-shrink:0;
+  transition:width .3s cubic-bezier(.4,0,.2,1),min-width .3s;flex-shrink:0;
 }
-#clPanel.open{width:380px;min-width:380px}
-.cl-hdr{
-  height:var(--hdr);display:flex;align-items:center;
-  justify-content:space-between;padding:0 18px;
-  border-bottom:1px solid rgba(0,0,0,.07);flex-shrink:0;
-}
-.cl-title{display:flex;align-items:center;gap:8px;font-size:.88rem;font-weight:600;color:var(--ink)}
-.cl-title-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;animation:pulse 2s ease infinite}
+#clPanel.open{width:360px;min-width:360px}
+.cl-hdr{height:var(--hdr);display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid rgba(0,0,0,.07);flex-shrink:0}
+.cl-title{display:flex;align-items:center;gap:7px;font-size:.82rem;font-weight:600;color:var(--ink)}
+.cl-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulse 2s ease infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.cl-close{background:none;border:none;color:var(--ink3);font-size:1.1rem;line-height:1;padding:6px;border-radius:6px;transition:all .15s}
+.cl-close{color:var(--ink3);font-size:1rem;padding:5px;border-radius:5px;transition:all .15s}
 .cl-close:hover{background:var(--bg);color:var(--ink)}
-.cl-mode{padding:12px 16px;border-bottom:1px solid rgba(0,0,0,.06);flex-shrink:0}
-.cl-mode-lbl{font-size:.64rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px}
-.cl-mode-pills{display:flex;flex-wrap:wrap;gap:5px}
-.cl-pill{
-  padding:4px 10px;border-radius:20px;border:1px solid rgba(0,0,0,.1);
-  background:var(--bg);color:var(--ink3);font-size:.72rem;font-weight:500;
-  transition:all .15s;white-space:nowrap;
-}
-.cl-pill:hover{border-color:var(--gold-bd);color:var(--gold);background:var(--gold-bg)}
-.cl-pill.act{background:var(--gold-bg);color:var(--gold);border-color:var(--gold-bd);font-weight:600}
-.cl-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
-.cl-msg{max-width:90%;padding:10px 14px;border-radius:12px;font-size:.88rem;line-height:1.6}
-.cl-msg.u{align-self:flex-end;background:var(--gold);color:#fff;border-radius:12px 12px 4px 12px}
-.cl-msg.a{align-self:flex-start;background:var(--bg);border:1px solid rgba(0,0,0,.08);color:var(--ink2);border-radius:12px 12px 12px 4px}
-.cl-msg.a strong{color:var(--ink);font-weight:600}
-.cl-msg.a code{background:rgba(0,0,0,.06);padding:1px 5px;border-radius:4px;font-family:var(--mono);font-size:.78em;color:var(--ink)}
-.cl-msg.a pre{background:var(--bg3);border-radius:8px;padding:10px;overflow-x:auto;font-family:var(--mono);font-size:.76rem;margin:6px 0;border:1px solid rgba(0,0,0,.06)}
-.cl-msg.a p{margin-bottom:6px}
-.cl-msg.a p:last-child{margin-bottom:0}
-.cl-typing{align-self:flex-start;padding:10px 14px;background:var(--bg);border:1px solid rgba(0,0,0,.08);border-radius:12px 12px 12px 4px;display:flex;gap:4px;align-items:center}
-.cl-typing span{width:6px;height:6px;border-radius:50%;background:var(--ink4);animation:blink 1.2s ease infinite}
+.cl-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.cl-msg{max-width:88%;padding:9px 12px;border-radius:10px;font-size:.82rem;line-height:1.55}
+.cl-msg.u{align-self:flex-end;background:var(--gold);color:#fff;border-radius:10px 10px 3px 10px}
+.cl-msg.a{align-self:flex-start;background:var(--bg);border:1px solid rgba(0,0,0,.07);color:var(--ink2);border-radius:10px 10px 10px 3px}
+.cl-msg.a strong{color:var(--ink)}
+.cl-msg.a code{background:rgba(0,0,0,.06);padding:1px 4px;border-radius:3px;font-family:var(--mono);font-size:.76em}
+.cl-typing{align-self:flex-start;padding:9px 12px;background:var(--bg);border:1px solid rgba(0,0,0,.07);border-radius:10px 10px 10px 3px;display:flex;gap:4px}
+.cl-typing span{width:5px;height:5px;border-radius:50%;background:var(--ink4);animation:blink 1.2s ease infinite}
 .cl-typing span:nth-child(2){animation-delay:.2s}
 .cl-typing span:nth-child(3){animation-delay:.4s}
-@keyframes blink{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-4px);opacity:1}}
-.cl-footer{padding:12px 14px;border-top:1px solid rgba(0,0,0,.07);flex-shrink:0}
-.cl-row{display:flex;gap:8px;align-items:flex-end}
-.cl-ta{
-  flex:1;background:var(--bg);border:1.5px solid rgba(0,0,0,.1);
-  border-radius:10px;color:var(--ink);font-family:var(--sans);font-size:.88rem;
-  padding:9px 12px;resize:none;outline:none;min-height:40px;max-height:120px;
-  line-height:1.5;transition:border-color .15s;
-}
+@keyframes blink{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-3px);opacity:1}}
+.cl-modes{padding:10px 14px;border-bottom:1px solid rgba(0,0,0,.06);display:flex;flex-wrap:wrap;gap:4px;flex-shrink:0}
+.cl-pill{padding:3px 9px;border-radius:20px;border:1px solid rgba(0,0,0,.1);background:var(--bg);color:var(--ink3);font-size:.68rem;font-weight:500;transition:all .15s}
+.cl-pill:hover,.cl-pill.act{border-color:var(--gold-bd);color:var(--gold);background:var(--gold-bg)}
+.cl-foot{padding:10px 12px;border-top:1px solid rgba(0,0,0,.07);flex-shrink:0}
+.cl-row{display:flex;gap:7px;align-items:flex-end}
+.cl-ta{flex:1;background:var(--bg);border:1.5px solid rgba(0,0,0,.1);border-radius:8px;color:var(--ink);font-family:var(--sans);font-size:.82rem;padding:8px 10px;resize:none;outline:none;min-height:36px;max-height:100px;line-height:1.5;transition:border-color .15s}
 .cl-ta:focus{border-color:var(--gold)}
-.cl-send{
-  width:38px;height:38px;border-radius:10px;border:none;flex-shrink:0;
-  background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;
-  transition:all .15s;
-}
+.cl-send{width:34px;height:34px;border-radius:8px;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
 .cl-send:hover{background:var(--gold-l);transform:scale(1.05)}
-.cl-send:disabled{background:var(--bg3);cursor:not-allowed;transform:none}
-.cl-send svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2.2}
+.cl-send:disabled{background:var(--bg4);cursor:not-allowed;transform:none}
+.cl-send svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2.2}
 
-/* MOBILE */
+/* ── MOBILE ── */
 #mob{display:none}
 @media(max-width:680px){
   :root{--nav-w:0px}
   #sidebar{display:none}
-  #clPanel.open{width:100%;min-width:100%;position:fixed;inset:0;top:var(--hdr);z-index:200}
-  #main{padding:16px}
-  .stats{grid-template-columns:1fr 1fr}
-  .ws-grid{grid-template-columns:1fr 1fr}
-  .hero{padding:22px}
-  .hero-name{font-size:2.2rem}
-  #mob{
-    display:flex;position:fixed;bottom:0;left:0;right:0;
-    background:#fff;border-top:1px solid rgba(0,0,0,.08);z-index:150;
-    padding:6px 0 max(8px,env(safe-area-inset-bottom));
-  }
-  .mob-b{
-    flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
-    background:none;border:none;color:var(--ink4);font-size:.58rem;
-    font-family:var(--sans);font-weight:500;letter-spacing:.06em;text-transform:uppercase;
-    padding:4px 2px;transition:color .15s;
-  }
-  .mob-b svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.7}
+  #main{padding:14px}
+  #mob{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid rgba(0,0,0,.08);z-index:150;padding:5px 0 max(6px,env(safe-area-inset-bottom))}
+  .mob-b{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;color:var(--ink4);font-size:.54rem;font-family:var(--sans);font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:3px 2px;transition:color .15s}
+  .mob-b svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.7}
   .mob-b.on{color:var(--gold)}
-  body{padding-bottom:64px}
+  body{padding-bottom:60px}
+  #clPanel.open{width:100%;min-width:100%;position:fixed;inset:0;top:var(--hdr);z-index:200}
 }
-@media(min-width:681px) and (max-width:1100px){#clPanel.open{width:340px;min-width:340px}}
-
-.eier-wrap{display:flex;align-items:center;gap:28px;padding:20px 0 4px;flex-wrap:wrap}
-.eier-donut{position:relative;width:140px;height:140px;flex-shrink:0}
-.eier-donut svg{width:140px;height:140px;transform:rotate(-90deg)}
-.eier-donut-lbl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transform:rotate(0deg)}
-.eier-donut-pst{font-family:var(--serif);font-size:1.9rem;line-height:1;color:var(--gold)}
-.eier-donut-sub{font-size:.7rem;color:var(--ink4);margin-top:2px}
-.eier-legend{flex:1;display:flex;flex-direction:column;gap:10px;min-width:180px}
-.eier-rad{display:flex;align-items:center;gap:10px}
-.eier-dot{width:11px;height:11px;border-radius:3px;flex-shrink:0}
-.eier-rad-info{flex:1}
-.eier-rad-navn{font-size:.82rem;font-weight:500;color:var(--ink)}
-.eier-rad-sub{font-size:.72rem;color:var(--ink3)}
-.eier-rad-bar{flex:1;height:5px;background:var(--bg3);border-radius:3px;margin-top:4px;overflow:hidden}
-.eier-rad-fill{height:100%;border-radius:3px}
-.eier-rad-pst{font-size:.78rem;font-weight:600;min-width:36px;text-align:right}
 </style>
 </head>
 <body>
 
-<!-- ══════════ LOGIN ══════════ -->
-<div id="loginScreen">
-  <div class="login-bg-circle"></div>
-  <div class="login-bg-circle"></div>
-  <div class="login-wrap">
-    <div class="login-brand">
-      <div class="login-emblem">
-        <svg viewBox="0 0 48 48" fill="none">
-          <polygon points="24,6 6,38 42,38" stroke="#b8922a" stroke-width="1.8" stroke-linejoin="round" fill="rgba(184,146,42,.06)"/>
-          <circle cx="24" cy="29" r="3.5" fill="#b8922a"/>
-        </svg>
-      </div>
-      <div class="login-name">Aton<span> Hub</span></div>
-      <div class="login-tagline">Gründer- og teamportal</div>
+<!-- LOGIN -->
+<div id="login">
+  <div class="login-card">
+    <div class="login-logo">
+      <svg viewBox="0 0 48 48" fill="none">
+        <polygon points="24,6 6,38 42,38" stroke="#b8922a" stroke-width="1.8" stroke-linejoin="round" fill="rgba(184,146,42,.06)"/>
+        <circle cx="24" cy="29" r="3.5" fill="#b8922a"/>
+      </svg>
     </div>
-    <div class="login-card">
-      <div class="login-members">
-        <div class="login-avatars">
-          <div class="login-av l">LS</div>
-          <div class="login-av lo">Lo</div>
-          <div class="login-av al">Al</div>
-        </div>
-        Sunde-familien &amp; @atongroup.no-teamet
+    <div class="login-name">Aton<span> Hub</span></div>
+    <div class="login-tag">Gründer- og teamportal</div>
+    <div class="login-members">
+      <div class="login-avs">
+        <div class="login-av" style="background:var(--gold-bg);color:var(--gold)">LS</div>
+        <div class="login-av" style="background:var(--lone-bg);color:var(--lone)">Lo</div>
+        <div class="login-av" style="background:var(--alex-bg);color:var(--alex)">Al</div>
       </div>
-      <div id="gsi-btn"></div>
-      <div id="gsi-fallback" style="display:none;margin-top:8px;">
-        <button onclick="location.reload(true)" style="width:100%;padding:10px;background:#f8f4ec;border:1px solid #d4a843;border-radius:8px;color:#8a6820;font-size:13px;cursor:pointer;">
-          🔄 Oppdater siden (fix innlogging)
-        </button>
-      </div>
-      <script>
-        setTimeout(function(){
-          var btn = document.getElementById('gsi-btn');
-          if(btn && btn.children.length === 0){
-            document.getElementById('gsi-fallback').style.display = 'block';
-          }
-        }, 2500);
-      </script>
-      <div class="login-divider"><span>Ny gründer?</span></div>
-      <button class="login-founder-btn" onclick="alert('Kontakt leif@atongroup.no for å registrere deg som gründer i Aton-nettverket.')">Registrer deg som gründer →</button>
-      <div class="login-privacy">🔒 Din idé er beskyttet av NDA fra første øyeblikk</div>
+      Sunde-familien &amp; team
     </div>
+    <div id="gsi-btn"></div>
+    <div class="login-div"><span>Ny gründer?</span></div>
+    <button class="login-founder" onclick="alert('Kontakt leif@atongroup.no for å registrere deg som gründer.')">Registrer deg som gründer →</button>
   </div>
 </div>
 
-<!-- ══════════ APP ══════════ -->
+<!-- APP -->
 <div id="app">
   <header id="hdr">
-    <div class="hdr-logo">Aton<span>Hub</span></div>
+    <div class="hdr-logo">Aton<em>Hub</em></div>
     <div class="hdr-sep"></div>
     <div class="hdr-title" id="hdrTitle"></div>
     <div class="hdr-right">
-      <button class="hdr-claude" onclick="toggleCl()" id="clBtn">
-        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 110 20A10 10 0 0112 2z"/><path d="M8 12h8M12 8v8" stroke-linecap="round"/></svg>
+      <button class="hdr-claude" onclick="toggleCl()">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 1 0 20A10 10 0 0 1 12 2z"/><path d="M8 12h8M12 8v8" stroke-linecap="round"/></svg>
         Claude AI
       </button>
       <div class="hdr-badge" id="hdrBadge"></div>
@@ -546,9 +386,9 @@ button{cursor:pointer;font-family:var(--sans)}
 
   <div id="body">
     <nav id="sidebar">
-      <div class="nav-grp-lbl" id="navLbl">Navigasjon</div>
+      <div class="nav-lbl" id="navLbl">Navigasjon</div>
       <div id="navItems"></div>
-      <div class="nav-divider"></div>
+      <div class="nav-div"></div>
       <div class="nav-footer">
         <div class="nav-user">
           <div class="nav-user-av" id="navAv"></div>
@@ -557,10 +397,6 @@ button{cursor:pointer;font-family:var(--sans)}
             <div class="nav-user-role" id="navRole"></div>
           </div>
         </div>
-        <button class="nav-admin" onclick="openAdmin()" id="adminBtn" style="display:none">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-          Admin-panel
-        </button>
         <button class="nav-out" onclick="logout()">Logg ut</button>
       </div>
     </nav>
@@ -569,20 +405,17 @@ button{cursor:pointer;font-family:var(--sans)}
 
     <div id="clPanel">
       <div class="cl-hdr">
-        <div class="cl-title"><div class="cl-title-dot"></div>Claude AI</div>
+        <div class="cl-title"><div class="cl-dot"></div>Claude AI</div>
         <button class="cl-close" onclick="toggleCl()">✕</button>
       </div>
-      <div class="cl-mode">
-        <div class="cl-mode-lbl">Modus</div>
-        <div class="cl-mode-pills" id="clPills"></div>
-      </div>
+      <div class="cl-modes" id="clModes"></div>
       <div class="cl-msgs" id="clMsgs"></div>
-      <div class="cl-footer">
+      <div class="cl-foot">
         <div class="cl-row">
           <textarea class="cl-ta" id="clIn" rows="1" placeholder="Spør Claude..."
             onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendCl()}"
-            oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px'"></textarea>
-          <button class="cl-send" id="clSendBtn" onclick="sendCl()">
+            oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px'"></textarea>
+          <button class="cl-send" id="clSend" onclick="sendCl()">
             <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           </button>
         </div>
@@ -596,21 +429,22 @@ button{cursor:pointer;font-family:var(--sans)}
 <script>
 const CLIENT_ID='155233765122-fcji10bhiqdo66gv2kiq41cr8qe3kvc3.apps.googleusercontent.com';
 const PROXY_URL='https://script.google.com/macros/s/AKfycbyot6j9kWSTvzhkGlr_8HnQ2HhcAQptw2a8Adza_X4ZacmvvqDq0edKD0-AprWqFuR4/exec';
+const SB_URL='https://wbwpobojxighhnmrabmj.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indid3BvYm9qeGlnaGhubXJhYm1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgyNzA1NzcsImV4cCI6MjA2Mzg0NjU3N30.GNwLRF5CUxl0ql_hgQexEPMFgDJEEOxqJA-4LJdW2BI';
 
 const USERS={
   'leifsunde@gmail.com':{r:'leif',n:'Leif',d:'CEO & Founder'},
   'leif@atongroup.no':{r:'leif',n:'Leif',d:'CEO & Founder'},
   'leif@bladeship.no':{r:'leif',n:'Leif',d:'CEO & Founder'},
-  'lone@atongroup.no':{r:'lone',n:'Lone',d:'Country Director España · B-aksjer 10%'},
-  'alexandra@atongroup.no':{r:'alex',n:'Alexandra',d:'Country Director Denmark · B-aksjer 10%'},
+  'lone@atongroup.no':{r:'lone',n:'Lone',d:'Country Director España'},
+  'alexandra@atongroup.no':{r:'alex',n:'Alexandra',d:'Country Director Denmark'},
 };
 
 const MODES=[
-  {k:'general',l:'🧠 Generell'},
-  {k:'bladeship',l:'⚙️ BladeShip'},
-  {k:'investor',l:'📊 Investor'},
+  {k:'general',l:'🌐 Generell'},
+  {k:'bladeship',l:'⚓ BladeShip'},
+  {k:'investor',l:'📈 Investor'},
   {k:'email',l:'✉️ E-post'},
-  {k:'legal',l:'⚖️ Juridisk'},
   {k:'strategy',l:'🎯 Strategi'},
 ];
 
@@ -619,14 +453,37 @@ const SYS={
   bladeship:n=>`Du er ekspert på BladeShip AS — verdens første havgående resirkuleringsanlegg for vindmølleblader (GRP til glassfibergranulat/GFG). EIC €17,5M (ID 101354477), patenter 20260735+20260736. Assist ${n}. Norsk.`,
   investor:n=>`Du er investor relations-rådgiver for Aton Group AS og BladeShip AS. Hjelp ${n} med pitch, term sheets og presentasjoner. Svar på norsk.`,
   email:n=>`Du er profesjonell forretningsskribent for Aton Group. Skriv klare e-postutkast for ${n}. Norsk.`,
-  legal:n=>`Du er juridisk rådgiver for Aton Group AS. Hjelp ${n} — påminn alltid om å konsultere advokat. Norsk.`,
   strategy:n=>`Du er strategisk rådgiver for Aton Group AS. Gi ${n} konkrete anbefalinger og neste steg. Norsk.`,
 };
 
 const NAV={
-  leif:[{i:'hjem',ic:'home',l:'Hjem'},{i:'slagplan',ic:'list',l:'Slagplan'},{i:'port',ic:'grid',l:'Portefølje'},{i:'kal',ic:'cal',l:'Kalender'},{i:'ws',ic:'ws',l:'Workspace'},{i:'team',ic:'team',l:'Team'}],
-  lone:[{i:'hjem',ic:'home',l:'Hjem'},{i:'slagplan',ic:'list',l:'Slagplan'},{i:'port',ic:'grid',l:'Portefølje'},{i:'kal',ic:'cal',l:'Kalender'},{i:'ws',ic:'ws',l:'Workspace'},{i:'team',ic:'team',l:'Familie'}],
-  alex:[{i:'hjem',ic:'home',l:'Hjem'},{i:'slagplan',ic:'list',l:'Slagplan'},{i:'port',ic:'grid',l:'Portefølje'},{i:'kal',ic:'cal',l:'Kalender'},{i:'ws',ic:'ws',l:'Workspace'},{i:'team',ic:'team',l:'Familie'}],
+  leif:[
+    {i:'hjem',ic:'home',l:'Hjem'},
+    {i:'slagplan',ic:'list',l:'Slagplan'},
+    {i:'port',ic:'grid',l:'Portefølje'},
+    {i:'kal',ic:'cal',l:'Kalender'},
+    {i:'ws',ic:'ws',l:'Workspace'},
+    {i:'team',ic:'team',l:'Team'},
+    {i:'app',ic:'app',l:'Aton App'},
+  ],
+  lone:[
+    {i:'hjem',ic:'home',l:'Hjem'},
+    {i:'slagplan',ic:'list',l:'Slagplan'},
+    {i:'port',ic:'grid',l:'Portefølje'},
+    {i:'kal',ic:'cal',l:'Kalender'},
+    {i:'ws',ic:'ws',l:'Workspace'},
+    {i:'team',ic:'team',l:'Familie'},
+    {i:'app',ic:'app',l:'Aton App'},
+  ],
+  alex:[
+    {i:'hjem',ic:'home',l:'Hjem'},
+    {i:'slagplan',ic:'list',l:'Slagplan'},
+    {i:'port',ic:'grid',l:'Portefølje'},
+    {i:'kal',ic:'cal',l:'Kalender'},
+    {i:'ws',ic:'ws',l:'Workspace'},
+    {i:'team',ic:'team',l:'Familie'},
+    {i:'app',ic:'app',l:'Aton App'},
+  ],
 };
 
 const IC={
@@ -636,6 +493,7 @@ const IC={
   cal:`<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>`,
   ws:`<rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>`,
   team:`<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>`,
+  app:`<rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>`,
 };
 
 let CU=null,CR=null,clHist=[],clMode='general',clOpen=false;
@@ -653,44 +511,34 @@ function handleCredential(r){
 }
 
 function boot(){
-  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('login').style.display='none';
   document.getElementById('app').classList.add('on');
   const c=USERS[CU.email];
   const av=c.n.substring(0,2).toUpperCase();
-  const avCls=CR==='leif'?'ls':CR==='lone'?'lo':'al';
-  const badgeStyle=CR==='leif'?'background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-bd)':CR==='lone'?'background:var(--lone-bg);color:var(--lone);border:1px solid var(--lone-bd)':'background:var(--alex-bg);color:var(--alex);border:1px solid var(--alex-bd)';
+  const cls=CR==='leif'?'ls':CR==='lone'?'lo':'al';
+  const col=CR==='leif'?'var(--gold)':CR==='lone'?'var(--lone)':'var(--alex)';
+  const bg=CR==='leif'?'var(--gold-bg)':CR==='lone'?'var(--lone-bg)':'var(--alex-bg)';
+  const bd=CR==='leif'?'var(--gold-bd)':CR==='lone'?'var(--lone-bd)':'var(--alex-bd)';
   document.getElementById('hdrBadge').textContent=c.d;
-  document.getElementById('hdrBadge').style.cssText=badgeStyle;
+  document.getElementById('hdrBadge').style.cssText=`background:${bg};color:${col};border:1px solid ${bd}`;
   document.getElementById('hdrAv').textContent=av;
-  document.getElementById('hdrAv').style.cssText=avCls==='ls'?'background:var(--gold-bg);color:var(--gold);border:2px solid var(--gold-bd)':avCls==='lo'?'background:var(--lone-bg);color:var(--lone);border:2px solid var(--lone-bd)':'background:var(--alex-bg);color:var(--alex);border:2px solid var(--alex-bd)';
+  document.getElementById('hdrAv').style.cssText=`background:${bg};color:${col};border:2px solid ${bd}`;
+  document.getElementById('navAv').textContent=av;
+  document.getElementById('navAv').className='nav-user-av mem-av '+cls;
+  document.getElementById('navAv').style.cssText=`background:${bg};color:${col};border:2px solid ${bd}`;
   document.getElementById('navName').textContent=CU.name;
   document.getElementById('navRole').textContent=c.d;
-  const navAv=document.getElementById('navAv');
-  navAv.textContent=av;navAv.className='nav-user-av mem-av '+avCls;
-  buildNav();buildPages();showAdminBtn();
+  buildNav();
+  buildPages();
   showPage(NAV[CR][0].i);
-  buildClPills();
-  addClMsg('a','Hei, '+c.n+'! 👋 Jeg er klar til å hjelpe. Velg et modus over eller still meg et spørsmål direkte.');
-}
-
-function openAdmin(){
-  // Åpner admin-panel i ny fane — siden Claude ikke er tilgjengelig direkte
-  window.open('https://claude.ai/new?q=hent+admin', '_blank');
-}
-
-function showAdminBtn(){
-  const btn = document.getElementById('adminBtn');
-  if(!btn) return;
-  const adminEmails = ['leifsunde@gmail.com','leif@atongroup.no'];
-  if(CU && adminEmails.includes(CU.email)){
-    btn.style.display = 'flex';
-  }
+  buildModes();
+  addMsg('a','Hei, '+c.n+'! 👋 Klar til å hjelpe. Velg modus eller still meg et spørsmål.');
 }
 
 function logout(){
   CU=null;CR=null;clHist=[];clOpen=false;
   document.getElementById('app').classList.remove('on');
-  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('login').style.display='flex';
   document.getElementById('pages').innerHTML='';
   document.getElementById('clMsgs').innerHTML='';
   document.getElementById('clPanel').classList.remove('open');
@@ -712,8 +560,10 @@ function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   const pg=document.getElementById('pg-'+id);
   if(pg)pg.classList.add('on');
-  document.querySelectorAll('.nav-btn,.mob-b').forEach(b=>b.classList.toggle('active',b.dataset.id===id));
-  document.querySelectorAll('.mob-b').forEach(b=>b.classList.toggle('on',b.dataset.id===id));
+  document.querySelectorAll('.nav-btn,.mob-b').forEach(b=>{
+    b.classList.toggle('active',b.dataset.id===id);
+    b.classList.toggle('on',b.dataset.id===id);
+  });
   const lbl=NAV[CR].find(n=>n.i===id);
   document.getElementById('hdrTitle').textContent=lbl?lbl.l:'';
   document.getElementById('main').scrollTo(0,0);
@@ -721,129 +571,66 @@ function showPage(id){
 
 function buildPages(){
   document.getElementById('pages').innerHTML=
-    pageHjem()+
-    (CR==='leif'||CR==='lone'||CR==='alex'?pageSlagplan():'')+
-    pagePort()+
-    (CR==='leif'||CR==='lone'||CR==='alex'?pageKal():'')+
-    pageWs()+
-    pageTeam();
+    pageHjem()+pageSlagplan()+pagePort()+pageKal()+pageWs()+pageTeam()+pageApp();
 }
 
 function greet(){const h=new Date().getHours();return h<5?'God natt':h<12?'God morgen':h<17?'God ettermiddag':'God kveld';}
 
+// ── EIER DONUT SNIPPET ──
+function eierDonut(){
+  const data=CR==='leif'?[
+    {p:80,c:'var(--gold)',n:'Leif',v:'NOK 54,4M'},
+    {p:10,c:'var(--lone)',n:'Lone',v:'NOK 6,8M'},
+    {p:10,c:'var(--alex)',n:'Alexandra',v:'NOK 6,8M'},
+  ]:[
+    {p:80,c:'var(--gold)',n:'Leif',v:'Majoritetsandel'},
+    {p:10,c:'var(--lone)',n:'Lone',v:CR==='lone'?'NOK 6,8M':'NOK 6,8M'},
+    {p:10,c:'var(--alex)',n:'Alexandra',v:CR==='alex'?'NOK 6,8M':'NOK 6,8M'},
+  ];
+  const mine=data.find(d=>d.n===(CR==='leif'?'Leif':CR==='lone'?'Lone':'Alexandra'));
+  const R=19,cx=24,cy=24,circ=2*Math.PI*R;
+  let off=0;
+  const segs=data.map(d=>{
+    const len=circ*d.p/100;
+    const s=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="${d.c}" stroke-width="8" stroke-dasharray="${len} ${circ-len}" stroke-dashoffset="${-off}" opacity=".9"/>`;
+    off+=len;return s;
+  }).join('');
+  return`<div class="eier-bar">
+  <div class="eier-donut">
+    <svg viewBox="0 0 48 48" transform="rotate(-90 0 0)"><circle cx="24" cy="24" r="19" fill="none" stroke="var(--bg3)" stroke-width="8"/>${segs}</svg>
+    <div class="eier-donut-lbl"><div class="eier-pst" style="color:${mine.c}">${mine.p}%</div><div class="eier-sub">Din andel</div></div>
+  </div>
+  <div class="eier-info">
+    <div class="eier-title">Din eierandel — Aton Group AS</div>
+    <div class="eier-meta">${mine.p}% ${CR==='leif'?'A-aksjer · 10× stemmerett':'B-aksjer · 1× stemmerett'}</div>
+    <div class="eier-vals">
+      <div class="eier-val">Her &amp; nå: <strong>${mine.v}</strong></div>
+      ${CR==='leif'?'<div class="eier-val green">Post-trigger: <strong>NOK 194M</strong></div>':''}
+    </div>
+  </div>
+</div>`;
+}
+
 // ── HJEM ──
 function pageHjem(){
-  if(CR==='leif')return`<div class="page" id="pg-hjem">
-<div class="hero hero-leif"><div class="hero-label">${greet()}</div><div class="hero-name">Hei, <em>Leif</em></div><div class="hero-role">CEO & Founder · Aton Group AS · Stavanger</div><div class="hero-quote">«Vi identifiserer problemene verden har lært seg å ignorere — og bygger selskapene som løser dem.»</div></div>
-<div style="display:flex;align-items:center;gap:16px;padding:14px 18px;background:var(--bg2);border-radius:var(--r);margin-bottom:4px;border:1px solid var(--bg3)">
-  <div style="position:relative;width:56px;height:56px;flex-shrink:0">
-    <svg viewBox="0 0 56 56" style="width:56px;height:56px;transform:rotate(-90deg)">
-      <circle cx="28" cy="28" r="22" fill="none" stroke="var(--bg3)" stroke-width="7"/>
-      <circle cx="28" cy="28" r="22" fill="none" stroke="var(--gold)" stroke-width="7"
-        stroke-dasharray="${(2*Math.PI*22*80/100).toFixed(1)} ${(2*Math.PI*22).toFixed(1)}"
-        stroke-dashoffset="0" stroke-linecap="round"/>
-    </svg>
-    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:var(--gold)">80%</div>
-  </div>
-  <div style="flex:1;min-width:0">
-    <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink4);margin-bottom:2px">Din eierandel — Aton Group AS</div>
-    <div style="font-size:1.05rem;font-weight:600;color:var(--ink)">80% A-aksjer <span style="font-size:.75rem;font-weight:400;color:var(--ink3)">· 10× stemmerett</span></div>
-    <div style="display:flex;gap:12px;margin-top:4px">
-      <span style="font-size:.72rem;color:var(--ink3)">Her &amp; nå: <strong style="color:var(--gold)">NOK 54,4M</strong></span>
-      <span style="font-size:.72rem;color:var(--ink3)">Post-trigger: <strong style="color:var(--green)">NOK 194M</strong></span>
-    </div>
-  </div>
+  const heroClass=`hero hero-${CR}`;
+  const name=CR==='leif'?'<em>Leif</em>':CR==='lone'?'<em>Lone</em>':'<em>Alexandra</em>';
+  const role=CR==='leif'?'CEO & Founder · Aton Group AS · Stavanger':CR==='lone'?'Country Director España · B-aksjer 10%':'Country Director Denmark · B-aksjer 10%';
+  const quote=CR==='leif'?'«Vi identifiserer problemene verden har lært seg å ignorere — og bygger selskapene som løser dem.»':CR==='lone'?'«Aton vokser gjennom de som tror på det tidlig. Du er blant dem.»':'«Fremtidens Aton Danmark ApS begynner med deg.»';
+  return`<div class="page" id="pg-hjem">
+<div class="${heroClass}">
+  <div class="hero-lbl">${greet()}</div>
+  <div class="hero-name">Hei, ${name}</div>
+  <div class="hero-role">${role}</div>
+  <div class="hero-quote">${quote}</div>
 </div>
+${eierDonut()}
 <div class="stats">
-<div class="stat"><div class="stat-n">€17,5M</div><div class="stat-l">EIC søknad</div></div>
-<div class="stat"><div class="stat-n ink">€37M+</div><div class="stat-l">Total pipeline</div></div>
-<div class="stat"><div class="stat-n gr">3</div><div class="stat-l">Aktive selskaper</div></div>
-<div class="stat"><div class="stat-n ink">2</div><div class="stat-l">Patenter</div></div>
+  <div class="stat"><div class="stat-n">€17,5M</div><div class="stat-l">EIC søknad</div></div>
+  <div class="stat"><div class="stat-n nk">€37M+</div><div class="stat-l">Total pipeline</div></div>
+  <div class="stat"><div class="stat-n gr">3</div><div class="stat-l">Aktive selskaper</div></div>
+  <div class="stat"><div class="stat-n nk">2</div><div class="stat-l">Patenter</div></div>
 </div>
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Porteføljeverdi — Aton Group</div><div class="sec-line"></div></div>
-<div class="card" style="padding:24px 20px">
-  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:12px">
-    <div>
-      <div style="font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px">Her &amp; Nå (dokumentert)</div>
-      <div style="font-family:var(--serif);font-size:2.4rem;color:var(--gold);line-height:1">NOK 68M</div>
-    </div>
-    <div>
-      <div style="font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px">Post-trigger (EIC + launch)</div>
-      <div style="font-family:var(--serif);font-size:2.4rem;color:var(--green);line-height:1">NOK 243M</div>
-    </div>
-    <div>
-      <div style="font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px">Forhandlingsposisjon</div>
-      <div style="font-family:var(--serif);font-size:2.4rem;line-height:1" style="color:#9b59b6">NOK 340M</div>
-    </div>
-  </div>
-  <div style="display:flex;flex-direction:column;gap:8px">
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:90px;font-size:.75rem;font-weight:600;color:var(--ink);flex-shrink:0">Aton Group</div>
-      <div style="flex:1;background:var(--bg3);border-radius:4px;height:28px;position:relative;overflow:hidden">
-        <div style="height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-l));border-radius:4px;width:47.1%;display:flex;align-items:center;padding-left:8px">
-          <span style="font-size:.72rem;font-weight:600;color:var(--ink);white-space:nowrap">Her: NOK 32M</span>
-        </div>
-      </div>
-      <div style="width:80px;text-align:right;font-size:.72rem;color:var(--ink3)">Max: NOK 140M</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:90px;font-size:.75rem;font-weight:600;color:var(--ink);flex-shrink:0">BladeShip AS</div>
-      <div style="flex:1;background:var(--bg3);border-radius:4px;height:28px;position:relative;overflow:hidden">
-        <div style="height:100%;background:linear-gradient(90deg,#2874c8,#5a9ee8);border-radius:4px;width:30.9%;display:flex;align-items:center;padding-left:8px">
-          <span style="font-size:.72rem;font-weight:600;color:#fff;white-space:nowrap">Her: NOK 21M</span>
-        </div>
-      </div>
-      <div style="width:80px;text-align:right;font-size:.72rem;color:var(--ink3)">Post: NOK 85M</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:90px;font-size:.75rem;font-weight:600;color:var(--ink);flex-shrink:0">Velumen AS</div>
-      <div style="flex:1;background:var(--bg3);border-radius:4px;height:28px;position:relative;overflow:hidden">
-        <div style="height:100%;background:linear-gradient(90deg,var(--lone),#a882e8);border-radius:4px;width:8.2%;display:flex;align-items:center;padding-left:8px">
-          <span style="font-size:.68rem;font-weight:600;color:#fff;white-space:nowrap">4M</span>
-        </div>
-      </div>
-      <div style="width:80px;text-align:right;font-size:.72rem;color:var(--ink3)">Post: NOK 7M</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:90px;font-size:.75rem;font-weight:600;color:var(--ink);flex-shrink:0">TrashShip</div>
-      <div style="flex:1;background:var(--bg3);border-radius:4px;height:28px;position:relative;overflow:hidden">
-        <div style="height:100%;background:linear-gradient(90deg,#1a8a4a,#3ab870);border-radius:4px;width:8.8%;display:flex;align-items:center;padding-left:8px">
-          <span style="font-size:.68rem;font-weight:600;color:#fff;white-space:nowrap">6M</span>
-        </div>
-      </div>
-      <div style="width:80px;text-align:right;font-size:.72rem;color:var(--ink3)">Post: NOK 22M</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:90px;font-size:.75rem;font-weight:600;color:var(--ink);flex-shrink:0">Grunnfelt</div>
-      <div style="flex:1;background:var(--bg3);border-radius:4px;height:28px;position:relative;overflow:hidden">
-        <div style="height:100%;background:linear-gradient(90deg,#c87020,#e89a40);border-radius:4px;width:6.1%;display:flex;align-items:center;padding-left:8px">
-          <span style="font-size:.68rem;font-weight:600;color:#fff;white-space:nowrap">3M</span>
-        </div>
-      </div>
-      <div style="width:80px;text-align:right;font-size:.72rem;color:var(--ink3)">Post: NOK 17M</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:90px;font-size:.75rem;font-weight:600;color:var(--ink);flex-shrink:0">Sprayvisir</div>
-      <div style="flex:1;background:var(--bg3);border-radius:4px;height:28px;position:relative;overflow:hidden">
-        <div style="height:100%;background:linear-gradient(90deg,#c8352a,#e87070);border-radius:4px;width:4.1%;display:flex;align-items:center;padding-left:8px">
-          <span style="font-size:.68rem;font-weight:600;color:#fff;white-space:nowrap">2M</span>
-        </div>
-      </div>
-      <div style="width:80px;text-align:right;font-size:.72rem;color:var(--ink3)">Post: NOK 13M</div>
-    </div>
-  </div>
-  <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--bg3);display:flex;gap:20px;flex-wrap:wrap">
-    <div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:2px;background:var(--gold)"></div><span style="font-size:.72rem;color:var(--ink3)">Her &amp; Nå</span></div>
-    <div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:2px;background:var(--green)"></div><span style="font-size:.72rem;color:var(--ink3)">Post-trigger</span></div>
-    <div style="text-align:right;margin-left:auto;font-size:.7rem;color:var(--ink4)">Kilde: Equidam Q1 2025 · oppdatert 3. juni 2026 · markedsdata: BCC Research mai 2026</div>
-  </div>
-  <div style="margin-top:12px;padding:10px 14px;background:rgba(26,138,74,.06);border:1px solid rgba(26,138,74,.15);border-radius:var(--r-sm)">
-    <span style="font-size:.72rem;font-weight:600;color:var(--green)">📈 Markedsoppdatering 3. juni 2026 — </span>
-    <span style="font-size:.72rem;color:var(--ink3)">EU landfill-ban for vindmølleblader trådte i kraft 1. jan 2026. Global marked: $158,9B innen 2030 (CAGR 16,6%). Offshore logistikk bekreftet som uløst problem. BladeShip Her&Nå løftet NOK 18M → 21M.</span>
-  </div>
-  <div style="display:none">
-  </div>
-</div></div>
 <div class="sec"><div class="sec-line"></div><div class="sec-lbl">Haster nå</div><div class="sec-line"></div></div>
 <div class="alert urg"><div class="alert-dot"></div><div class="alert-date">9. juni</div><div class="alert-text">SBN KYC — Sparebanken Norge · sett inn NOK 30k</div></div>
 <div class="alert urg"><div class="alert-dot"></div><div class="alert-date">10. juni</div><div class="alert-text">DNV møte kl. 11:30 — Veritasveien 25, Stavanger</div></div>
@@ -851,430 +638,134 @@ function pageHjem(){
 <div class="alert ok"><div class="alert-dot"></div><div class="alert-date">✓ Innlevert</div><div class="alert-text">EIC Accelerator €17,5M · ID 101354477</div></div>
 <div class="sec"><div class="sec-line"></div><div class="sec-lbl">Tilskuddspipeline</div><div class="sec-line"></div></div>
 <div class="card">
-<div class="pipe-row"><div><div class="pipe-name">EIC Accelerator 2026</div><div class="pipe-sub">BladeShip AS · ID 101354477</div></div><div class="pipe-right"><div class="pipe-val">€17,5M</div><span class="badge bg">Innlevert</span></div></div>
-<div class="pipe-row"><div><div class="pipe-name">IN Miljøteknologi</div><div class="pipe-sub">Klar · venter org.nr.</div></div><div class="pipe-right"><div class="pipe-val">NOK 2M</div><span class="badge by">Klar</span></div></div>
-<div class="pipe-row"><div><div class="pipe-name">EU LIFE Climate Action</div><div class="pipe-sub">Frist 22. september 2026</div></div><div class="pipe-right"><div class="pipe-val">€2–10M</div><span class="badge bx">Sept.</span></div></div>
-<div class="pipe-row"><div><div class="pipe-name">Grønn Plattform</div><div class="pipe-sub">2027</div></div><div class="pipe-right"><div class="pipe-val">NOK 30–80M</div><span class="badge bx">2027</span></div></div>
-<div class="pipe-total"><div class="pipe-total-lbl">Total pipeline</div><div class="pipe-total-val">€37M+</div></div>
+  <div class="pipe-row"><div><div class="pipe-name">EIC Accelerator 2026</div><div class="pipe-sub">BladeShip AS · ID 101354477</div></div><div class="pipe-right"><div class="pipe-val">€17,5M</div><span class="badge bg">Innlevert</span></div></div>
+  <div class="pipe-row"><div><div class="pipe-name">IN Miljøteknologi</div><div class="pipe-sub">Klar · venter org.nr.</div></div><div class="pipe-right"><div class="pipe-val">NOK 2M</div><span class="badge by">Klar</span></div></div>
+  <div class="pipe-row"><div><div class="pipe-name">EU LIFE Climate Action</div><div class="pipe-sub">Frist 22. september 2026</div></div><div class="pipe-right"><div class="pipe-val">€2–10M</div><span class="badge bx">Sept.</span></div></div>
+  <div class="pipe-row"><div><div class="pipe-name">Grønn Plattform</div><div class="pipe-sub">2027</div></div><div class="pipe-right"><div class="pipe-val">NOK 30–80M</div><span class="badge bx">2027</span></div></div>
+  <div class="pipe-total"><div class="pipe-total-lbl">Total pipeline</div><div class="pipe-total-val">€37M+</div></div>
 </div>
-`;
-
-  if(CR==='lone')return`<div class="page" id="pg-hjem">
-<div class="hero hero-lone"><div class="hero-label">${greet()}, Lone 🌸</div><div class="hero-name">Hei, <em>Lone</em></div><div class="hero-role">Country Director España · B-aksjer 10%</div><div class="hero-quote">«Aton vokser gjennom de som tror på det tidlig. Du er blant dem.»</div></div>
-<div class="stats">
-<div class="stat"><div class="stat-n" style="color:var(--lone)">10%</div><div class="stat-l">B-aksjer Aton</div></div>
-<div class="stat"><div class="stat-n ink">2027</div><div class="stat-l">Aton España SL</div></div>
-<div class="stat"><div class="stat-n gr">€37M+</div><div class="stat-l">Familie pipeline</div></div>
-</div>
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Siste fra Aton</div><div class="sec-line"></div></div>
-<div class="alert ok"><div class="alert-dot"></div><div class="alert-date">✓ 30. mai</div><div class="alert-text">Gavebrev signert — du eier B-aksjer i Aton Group AS</div></div>
-<div class="alert ok"><div class="alert-dot"></div><div class="alert-date">✓ Juni</div><div class="alert-text">EIC Accelerator €17,5M innlevert for BladeShip AS</div></div>
-<div class="alert ok"><div class="alert-dot"></div><div class="alert-date">✓ Klart</div><div class="alert-text">2 norske patenter registrert (nr. 20260735 + 20260736)</div></div>
-<div class="alert warn"><div class="alert-dot"></div><div class="alert-date">~20. juni</div><div class="alert-text">Aton Group AS org.nr. forventet — neste steg: GF + styrevalg</div></div>
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Din rolle fremover</div><div class="sec-line"></div></div>
-<div class="card">
-<div class="pipe-row"><div><div class="pipe-name">Business Development</div><div class="pipe-sub">Første kontakt med innkommende gründersøknader</div></div><span class="badge bb">Aktiv</span></div>
-<div class="pipe-row"><div><div class="pipe-name">Aton España SL</div><div class="pipe-sub">Planlagt 2027 · Marbella, Spania</div></div><span class="badge bx">2027</span></div>
-<div class="pipe-row"><div><div class="pipe-name">Venture Portal</div><div class="pipe-sub">Besvare søknader via portal mens pappa er på jobb</div></div><span class="badge by">Snart</span></div>
-`+pageEierGraf()+`
-</div></div>`;
-
-  return`<div class="page" id="pg-hjem">
-<div class="hero hero-alex"><div class="hero-label">${greet()}, Alexandra 💙</div><div class="hero-name">Hei, <em>Alexandra</em></div><div class="hero-role">Country Director Denmark · B-aksjer 10%</div><div class="hero-quote">«Fremtidens Aton Danmark ApS begynner med deg.»</div></div>
-<div class="stats">
-<div class="stat"><div class="stat-n" style="color:var(--alex)">10%</div><div class="stat-l">B-aksjer Aton</div></div>
-<div class="stat"><div class="stat-n ink">2027</div><div class="stat-l">Aton Danmark ApS</div></div>
-<div class="stat" style="grid-column:span 2"><div class="stat-n ink" style="font-size:1.1rem">Elias &amp; Isabella</div><div class="stat-l">G3 — Sunde-dynastiet</div></div>
-</div>
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Nyheter fra Aton</div><div class="sec-line"></div></div>
-<div class="alert ok"><div class="alert-dot"></div><div class="alert-date">✓ 30. mai</div><div class="alert-text">Gavebrev signert — du eier B-aksjer i Aton Group AS</div></div>
-<div class="alert ok"><div class="alert-dot"></div><div class="alert-date">✓ Juni</div><div class="alert-text">EIC Accelerator €17,5M innlevert for BladeShip AS</div></div>
-<div class="alert warn"><div class="alert-dot"></div><div class="alert-date">~20. juni</div><div class="alert-text">Org.nr. forventet — da aktiveres din styreplass offisielt</div></div>
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Din vei</div><div class="sec-line"></div></div>
-<div class="card">
-<div class="pipe-row"><div><div class="pipe-name">Styremedlem</div><div class="pipe-sub">Aton Group AS · aktiveres etter GF</div></div><span class="badge by">Snart</span></div>
-<div class="pipe-row"><div><div class="pipe-name">Aton Danmark ApS</div><div class="pipe-sub">Du leder den · planlagt 2027</div></div><span class="badge bx">2027</span></div>
-<div class="pipe-row"><div><div class="pipe-name">Sunde Familielegat</div><div class="pipe-sub">Dynastiets fremtid · 2028</div></div><span class="badge bx">2028</span></div>
-`+pageEierGraf()+`
-</div></div>`;
+</div>`;
 }
 
 // ── SLAGPLAN ──
 function pageSlagplan(){return`<div class="page" id="pg-slagplan">
 <div class="sec"><div class="sec-line"></div><div class="sec-lbl">Fase 1 — Stiftelse (mai–juni 2026)</div><div class="sec-line"></div></div>
-<div class="phase"><div class="phase-hdr"><span class="phase-title">Fundament</span><span class="badge bg">Fullført ✓</span></div><div class="phase-body">
-<div class="pi done">BladeShip AS stiftet 1. juni 2026</div>
-<div class="pi done">2 norske patenter innlevert (20260735 + 20260736)</div>
-<div class="pi done">EIC Accelerator søknad innlevert — €17,5M (ID 101354477)</div>
-<div class="pi done">ECCA / EuCIA bekreftet — Roberto Frassine</div>
-<div class="pi done">Google Workspace atongroup.no aktivert</div>
-<div class="pi done">Gavebrev Lone + Alexandra signert 30. mai 2026</div>
-<div class="pi done">@bladeshipas opprettet på X · 30. mai 2026</div>
-</div></div>
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Fase 2 — Konsolidering (juni–august 2026)</div><div class="sec-line"></div></div>
-<div class="phase"><div class="phase-hdr"><span class="phase-title">Org.nr. og kapital</span><span class="badge by">Pågår</span></div><div class="phase-body">
-<div class="pi active">Aton Group AS org.nr. — ~19–20. juni</div>
-<div class="pi active">BladeShip AS org.nr. — ~19–20. juni</div>
-<div class="pi">Innbetaling NOK 30k Aton · NOK 30k BladeShip (etter konto)</div>
-<div class="pi active">SBN KYC godkjent — Sparebanken Norge (9. juni)</div>
-<div class="pi">IN Miljøteknologi søknad — NOK 2M (etter org.nr.)</div>
-<div class="pi">SkatteFUNN BladeShip etter org.nr.</div>
-<div class="pi">Velumen AS SkatteFUNN v1.1 (frist 1. august)</div>
-<div class="pi">PCT-patentsøknad — planlegging starter</div>
-</div></div>
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Fase 3 — Vekst (høst 2026)</div><div class="sec-line"></div></div>
-<div class="phase"><div class="phase-hdr"><span class="phase-title">Investorer og konsepter</span><span class="badge bx">Planlagt</span></div><div class="phase-body">
-<div class="pi">EU LIFE Climate Action — €2–10M (frist 22. sept)</div>
-<div class="pi">Concept A — Sprayvisir · gründer rekrutteres</div>
-<div class="pi">Concept B — Grunnfelt · Kim Skjæveland pågår</div>
-<div class="pi">BladeShip investordialog — Equinor, DNV, Statkraft</div>
-<div class="pi">Aker Horizons ASA — target partner (ikke kontaktet) · fabrikktrål-analogi</div>
-<div class="pi">EIC Accelerator intervju (estimert august 2026)</div>
-<div class="pi">TrashShip AS — konseptarbeid igangsettes</div>
-</div></div>
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Fase 4 — Ekspansjon (2027+)</div><div class="sec-line"></div></div>
-<div class="phase"><div class="phase-hdr"><span class="phase-title">Dynastisk struktur</span><span class="badge bx">Fremtid</span></div><div class="phase-body">
-<div class="pi">Aton Danmark ApS — Alexandra Sunde Lindum, Danmark</div>
-<div class="pi">Aton España SL — Lone Sunde, Marbella</div>
-<div class="pi">Grønn Plattform søknad — NOK 30–80M (mars 2027)</div>
-<div class="pi">PCT-patent absolutt frist — 28. mai 2027</div>
-<div class="pi">BladeShip fartøy — kontrakt og byggestart</div>
-<div class="pi">Sunde Familielegat — stiftelse 2028</div>
-</div></div>
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Tilskuddspipeline totalt</div><div class="sec-line"></div></div>
 <div class="card">
-<div class="pipe-row"><div><div class="pipe-name">EIC Accelerator 2026</div><div class="pipe-sub">Innlevert · BladeShip AS</div></div><div class="pipe-right"><div class="pipe-val">€17,5M</div><span class="badge bg">Innlevert</span></div></div>
-<div class="pipe-row"><div><div class="pipe-name">IN Miljøteknologi</div><div class="pipe-sub">Klar · venter org.nr.</div></div><div class="pipe-right"><div class="pipe-val">NOK 2M</div><span class="badge by">Klar</span></div></div>
-<div class="pipe-row"><div><div class="pipe-name">EU LIFE Climate Action</div><div class="pipe-sub">Frist 22. september 2026</div></div><div class="pipe-right"><div class="pipe-val">€2–10M</div><span class="badge bx">Sept.</span></div></div>
-<div class="pipe-row"><div><div class="pipe-name">Grønn Plattform</div><div class="pipe-sub">2027</div></div><div class="pipe-right"><div class="pipe-val">NOK 30–80M</div><span class="badge bx">2027</span></div></div>
-<div class="pipe-total"><div class="pipe-total-lbl">Total pipeline</div><div class="pipe-total-val">€37M+</div></div>
+  <div class="pipe-row"><div><div class="pipe-name">✅ BladeShip AS stiftet 1. juni 2026</div></div></div>
+  <div class="pipe-row"><div><div class="pipe-name">✅ 2 norske patenter innlevert (20260735 + 20260736)</div></div></div>
+  <div class="pipe-row"><div><div class="pipe-name">✅ EIC Accelerator €17,5M innlevert (ID 101354477)</div></div></div>
+  <div class="pipe-row"><div><div class="pipe-name">✅ ECCA / EuCIA bekreftet — Roberto Frassine</div></div></div>
+  <div class="pipe-row"><div><div class="pipe-name">✅ Google Workspace atongroup.no aktivert</div></div></div>
+  <div class="pipe-row"><div><div class="pipe-name">✅ Gavebrev Lone + Alexandra signert 30. mai 2026</div></div></div>
 </div>
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Porteføljeverdi — Aton Group</div><div class="sec-line"></div></div>
-<div class="card" style="padding:24px 20px">
-  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:12px">
-    <div>
-      <div style="font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px">Her &amp; Nå (dokumentert)</div>
-      <div style="font-family:var(--serif);font-size:2.4rem;color:var(--gold);line-height:1">NOK 68M</div>
-    </div>
-    <div>
-      <div style="font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px">Post-trigger (EIC + launch)</div>
-      <div style="font-family:var(--serif);font-size:2.4rem;color:var(--green);line-height:1">NOK 243M</div>
-    </div>
-    <div>
-      <div style="font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px">Forhandlingsposisjon</div>
-      <div style="font-family:var(--serif);font-size:2.4rem;line-height:1" style="color:#9b59b6">NOK 340M</div>
-    </div>
-  </div>
-  <div style="display:flex;flex-direction:column;gap:8px">
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:90px;font-size:.75rem;font-weight:600;color:var(--ink);flex-shrink:0">Aton Group</div>
-      <div style="flex:1;background:var(--bg3);border-radius:4px;height:28px;position:relative;overflow:hidden">
-        <div style="height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-l));border-radius:4px;width:47.1%;display:flex;align-items:center;padding-left:8px">
-          <span style="font-size:.72rem;font-weight:600;color:var(--ink);white-space:nowrap">Her: NOK 32M</span>
-        </div>
-      </div>
-      <div style="width:80px;text-align:right;font-size:.72rem;color:var(--ink3)">Max: NOK 140M</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:90px;font-size:.75rem;font-weight:600;color:var(--ink);flex-shrink:0">BladeShip AS</div>
-      <div style="flex:1;background:var(--bg3);border-radius:4px;height:28px;position:relative;overflow:hidden">
-        <div style="height:100%;background:linear-gradient(90deg,#2874c8,#5a9ee8);border-radius:4px;width:30.9%;display:flex;align-items:center;padding-left:8px">
-          <span style="font-size:.72rem;font-weight:600;color:#fff;white-space:nowrap">Her: NOK 21M</span>
-        </div>
-      </div>
-      <div style="width:80px;text-align:right;font-size:.72rem;color:var(--ink3)">Post: NOK 85M</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:90px;font-size:.75rem;font-weight:600;color:var(--ink);flex-shrink:0">Velumen AS</div>
-      <div style="flex:1;background:var(--bg3);border-radius:4px;height:28px;position:relative;overflow:hidden">
-        <div style="height:100%;background:linear-gradient(90deg,var(--lone),#a882e8);border-radius:4px;width:8.2%;display:flex;align-items:center;padding-left:8px">
-          <span style="font-size:.68rem;font-weight:600;color:#fff;white-space:nowrap">4M</span>
-        </div>
-      </div>
-      <div style="width:80px;text-align:right;font-size:.72rem;color:var(--ink3)">Post: NOK 7M</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:90px;font-size:.75rem;font-weight:600;color:var(--ink);flex-shrink:0">TrashShip</div>
-      <div style="flex:1;background:var(--bg3);border-radius:4px;height:28px;position:relative;overflow:hidden">
-        <div style="height:100%;background:linear-gradient(90deg,#1a8a4a,#3ab870);border-radius:4px;width:8.8%;display:flex;align-items:center;padding-left:8px">
-          <span style="font-size:.68rem;font-weight:600;color:#fff;white-space:nowrap">6M</span>
-        </div>
-      </div>
-      <div style="width:80px;text-align:right;font-size:.72rem;color:var(--ink3)">Post: NOK 22M</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:90px;font-size:.75rem;font-weight:600;color:var(--ink);flex-shrink:0">Grunnfelt</div>
-      <div style="flex:1;background:var(--bg3);border-radius:4px;height:28px;position:relative;overflow:hidden">
-        <div style="height:100%;background:linear-gradient(90deg,#c87020,#e89a40);border-radius:4px;width:6.1%;display:flex;align-items:center;padding-left:8px">
-          <span style="font-size:.68rem;font-weight:600;color:#fff;white-space:nowrap">3M</span>
-        </div>
-      </div>
-      <div style="width:80px;text-align:right;font-size:.72rem;color:var(--ink3)">Post: NOK 17M</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:90px;font-size:.75rem;font-weight:600;color:var(--ink);flex-shrink:0">Sprayvisir</div>
-      <div style="flex:1;background:var(--bg3);border-radius:4px;height:28px;position:relative;overflow:hidden">
-        <div style="height:100%;background:linear-gradient(90deg,#c8352a,#e87070);border-radius:4px;width:4.1%;display:flex;align-items:center;padding-left:8px">
-          <span style="font-size:.68rem;font-weight:600;color:#fff;white-space:nowrap">2M</span>
-        </div>
-      </div>
-      <div style="width:80px;text-align:right;font-size:.72rem;color:var(--ink3)">Post: NOK 13M</div>
-    </div>
-  </div>
-  <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--bg3);display:flex;gap:20px;flex-wrap:wrap">
-    <div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:2px;background:var(--gold)"></div><span style="font-size:.72rem;color:var(--ink3)">Her &amp; Nå</span></div>
-    <div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:2px;background:var(--green)"></div><span style="font-size:.72rem;color:var(--ink3)">Post-trigger</span></div>
-    <div style="text-align:right;margin-left:auto;font-size:.7rem;color:var(--ink4)">Kilde: Equidam Q1 2025 · oppdatert 3. juni 2026 · markedsdata: BCC Research mai 2026</div>
-  </div>
-  <div style="margin-top:12px;padding:10px 14px;background:rgba(26,138,74,.06);border:1px solid rgba(26,138,74,.15);border-radius:var(--r-sm)">
-    <span style="font-size:.72rem;font-weight:600;color:var(--green)">📈 Markedsoppdatering 3. juni 2026 — </span>
-    <span style="font-size:.72rem;color:var(--ink3)">EU landfill-ban for vindmølleblader trådte i kraft 1. jan 2026. Global marked: $158,9B innen 2030 (CAGR 16,6%). Offshore logistikk bekreftet som uløst problem. BladeShip Her&Nå løftet NOK 18M → 21M.</span>
-  </div>
-  <div style="display:none">
-  </div>
-</div></div>`;}
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Fase 2 — Konsolidering (juni–august 2026)</div><div class="sec-line"></div></div>
+<div class="card">
+  <div class="pipe-row"><div><div class="pipe-name">→ Org.nr. begge selskaper</div><div class="pipe-sub">Forventet ~19–20. juni</div></div><span class="badge by">Pågår</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">→ SBN KYC — Sparebanken Norge</div><div class="pipe-sub">9. juni · sett inn NOK 30k</div></div><span class="badge br">Haster</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">→ IN Miljøteknologi NOK 2M</div><div class="pipe-sub">Etter org.nr.</div></div><span class="badge by">Klar</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">→ SkatteFUNN BladeShip</div><div class="pipe-sub">Etter org.nr.</div></div><span class="badge bx">Planlagt</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">→ EIC Accelerator intervju</div><div class="pipe-sub">Estimert august 2026</div></div><span class="badge bx">Planlagt</span></div>
+</div>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Fase 3 — Vekst (høst 2026)</div><div class="sec-line"></div></div>
+<div class="card">
+  <div class="pipe-row"><div><div class="pipe-name">EU LIFE Climate Action</div><div class="pipe-sub">Frist 22. september 2026 · €2–10M</div></div><span class="badge bx">Planlagt</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">Equinor — kontakt etter org.nr.</div><div class="pipe-sub">Åpen dør · ikke kontaktet ennå</div></div><span class="badge bx">Prioritert</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">Vard-møte</div><div class="pipe-sub">2. juli 2026 kl. 15:00 · Håvard Vollset Lien</div></div><span class="badge bg">Bekreftet</span></div>
+</div>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Fase 4 — Ekspansjon (2027+)</div><div class="sec-line"></div></div>
+<div class="card">
+  <div class="pipe-row"><div><div class="pipe-name">Grønn Plattform</div><div class="pipe-sub">Mars 2027 · NOK 30–80M</div></div><span class="badge bx">Fremtid</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">PCT-patentsøknad</div><div class="pipe-sub">Absolutt frist 28. mai 2027</div></div><span class="badge br">Kritisk frist</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">Aton Danmark ApS</div><div class="pipe-sub">Alexandra Sunde Lindum · 2027</div></div><span class="badge bx">Fremtid</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">Aton España SL</div><div class="pipe-sub">Lone Sunde · Marbella · 2027–2028</div></div><span class="badge bx">Fremtid</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">Sunde Familielegat</div><div class="pipe-sub">Stiftelse 2028</div></div><span class="badge bx">Fremtid</span></div>
+</div>
+</div>`;}
 
 // ── PORTEFØLJE ──
 function pagePort(){
-  const concepts=CR!=='leif'?'':`
+  const concepts=CR==='leif'?`
 <div class="sec"><div class="sec-line"></div><div class="sec-lbl">Konsepter — søker gründer</div><div class="sec-line"></div></div>
 <div class="port"><div class="port-top"><div class="port-icon co">A</div><div class="port-head"><div class="port-title">Concept A — Sprayvisir</div><div class="port-sub">Beskyttelsesvisir for frisørkunder · Beauty & Health</div></div><span class="badge by">Søker gründer</span></div>
-<div class="port-badges"><span class="badge bb">20% Aton</span><span class="badge bx">Aton-Certified</span><span class="badge bx">NDA + VB-avtale klar</span></div>
-<div class="port-desc">5 produktlinjer NOK 2–999. EU allergenforordning juli 2026 gir sterk medvind. 50% av norske frisører utvikler yrkeseksem. 10 000+ salonger i Norge. Markedsanalyse v4.0, pitchdeck v3, nettside live.</div>
-<div class="val-grid"><div class="val-item"><span class="val-n">NOK 30–150k</span><span class="val-l">Konseptverdi</span></div><div class="val-item"><span class="val-n gr">500k–2M</span><span class="val-l">År 1 mål</span></div><div class="val-item"><span class="val-n ink">70–82%</span><span class="val-l">Bruttomargin</span></div></div></div>
-<div class="port"><div class="port-top"><div class="port-icon co">B</div><div class="port-head"><div class="port-title">Concept B — Grunnfelt</div><div class="port-sub">Tomteutvikling · nasjonal rekkevidde</div></div><span class="badge by">Pågår — Kim Skjæveland</span></div>
-<div class="port-badges"><span class="badge bb">Aton 40%</span><span class="badge bx">3 kontraktsmodeller</span><span class="badge bx">Juridisk pakke klar</span></div>
-<div class="port-desc">Norges spesialist på tomteidentifikasjon og utvikling. Skaffer rettigheter uten kostnad for grunneier. Alle juridiske maler klare. Aksjonæravtale signeres 4. juni.</div>
-<div class="val-grid"><div class="val-item"><span class="val-n">NOK 100–500k</span><span class="val-l">Konseptverdi</span></div><div class="val-item"><span class="val-n ink">Norge</span><span class="val-l">Rekkevidde</span></div></div></div>`;
-
+<div class="port-badges"><span class="badge bb">20% Aton</span><span class="badge bx">Aton-Certified</span></div>
+<div class="port-desc">5 produktlinjer NOK 2–999. EU allergenforordning juli 2026 gir sterk medvind. Markedsanalyse v4.0, pitchdeck v3, nettside live.</div>
+<div class="val-grid"><div class="val-item"><span class="val-n">NOK 30–150k</span><span class="val-l">Konseptverdi</span></div><div class="val-item"><span class="val-n gr">500k–2M</span><span class="val-l">År 1 mål</span></div></div></div>
+<div class="port"><div class="port-top"><div class="port-icon co">B</div><div class="port-head"><div class="port-title">Concept B — Grunnfelt</div><div class="port-sub">Tomteutvikling · nasjonal rekkevidde</div></div><span class="badge by">Kim Skjæveland</span></div>
+<div class="port-badges"><span class="badge bb">Aton 40%</span><span class="badge bx">Juridisk pakke klar</span></div>
+<div class="port-desc">Norges spesialist på tomteidentifikasjon og utvikling. Alle juridiske maler klare.</div>
+<div class="val-grid"><div class="val-item"><span class="val-n">NOK 100–500k</span><span class="val-l">Konseptverdi</span></div><div class="val-item"><span class="val-n nk">Norge</span><span class="val-l">Rekkevidde</span></div></div></div>`:'';
   return`<div class="page" id="pg-port">
 <div class="sec"><div class="sec-line"></div><div class="sec-lbl">Aktive selskaper</div><div class="sec-line"></div></div>
 <div class="port"><div class="port-top"><div class="port-icon bs">BS</div><div class="port-head"><div class="port-title">BladeShip AS</div><div class="port-sub">Verdens første havgående resirkulering av vindmølleblader</div></div><span class="badge bg">Aktiv</span></div>
-<div class="port-badges"><span class="badge bb">100% Aton</span><span class="badge bx">Stiftet 1. juni 2026</span><span class="badge bx">2 Patenter</span><span class="badge bx">Folio SUS148088</span></div>
-<div class="port-desc">180-meter spesialfartøy med robotkuttarmer og 4-trinns GRP-prosesslinje. Produserer glassfibergranulat (GFG) til betongindustrien. EIC Accelerator €17,5M innlevert. Ingen konkurrenter med offshore-kapasitet globalt. <em style="color:var(--ink3)">Konseptuell parallell: Røkke flyttet fiskeprosessering fra land til hav (fabrikktråleren) — BladeShip gjør det samme for bladgjenvinning.</em></div>
-<div class="val-grid"><div class="val-item"><span class="val-n">€17,5M</span><span class="val-l">EIC søknad</span></div><div class="val-item"><span class="val-n ink">$159B</span><span class="val-l">Marked 2030</span></div><div class="val-item"><span class="val-n ink">2</span><span class="val-l">Patenter</span></div><div class="val-item"><span class="val-n gr">0</span><span class="val-l">Konkurrenter offshore</span></div></div>
-<a class="port-link" href="https://bladeship.no" target="_blank">bladeship.no ↗</a></div>
-
+<div class="port-badges"><span class="badge bb">100% Aton</span><span class="badge bx">Stiftet 1. juni 2026</span><span class="badge bx">2 Patenter</span></div>
+<div class="port-desc">180-meter spesialfartøy med robotkuttarmer og 4-trinns GRP-prosesslinje. Produserer glassfibergranulat (GFG) til betongindustrien. EIC Accelerator €17,5M innlevert. Ingen konkurrenter med offshore-kapasitet globalt.</div>
+<div class="val-grid"><div class="val-item"><span class="val-n">€17,5M</span><span class="val-l">EIC søknad</span></div><div class="val-item"><span class="val-n nk">$159B</span><span class="val-l">Marked 2030</span></div><div class="val-item"><span class="val-n gr">0</span><span class="val-l">Konkurrenter offshore</span></div></div></div>
 <div class="port"><div class="port-top"><div class="port-icon ve">Ve</div><div class="port-head"><div class="port-title">Velumen AS</div><div class="port-sub">Neste generasjons gravminner i norske materialer</div></div><span class="badge by">Stiftes</span></div>
-<div class="port-badges"><span class="badge bb">30% Aton</span><span class="badge bv">Viking Løvneseth 70%</span><span class="badge bx">Klientselskap</span></div>
-<div class="port-desc">Produktutviklingsselskap for gravminner i corten-stål, resirkulert glass og lokal stein med NFC-integrasjon. Leif i styret. 46 000 dødsfall per år i Norge.</div>
-<div class="val-grid"><div class="val-item"><span class="val-n ink">30%</span><span class="val-l">Aton andel</span></div><div class="val-item"><span class="val-n ink">46 000</span><span class="val-l">Dødsfall/år</span></div><div class="val-item"><span class="val-n ink">15</span><span class="val-l">Produktkonsepter</span></div></div></div>
-
+<div class="port-badges"><span class="badge bb">30% Aton</span><span class="badge bx">Viking Løvneseth 70%</span></div>
+<div class="port-desc">Produktutviklingsselskap for gravminner i corten-stål, resirkulert glass og lokal stein med NFC-integrasjon. Leif i styret.</div>
+<div class="val-grid"><div class="val-item"><span class="val-n nk">30%</span><span class="val-l">Aton andel</span></div><div class="val-item"><span class="val-n nk">46 000</span><span class="val-l">Dødsfall/år</span></div></div></div>
 <div class="port"><div class="port-top"><div class="port-icon ts">TS</div><div class="port-head"><div class="port-title">TrashShip AS</div><div class="port-sub">Havgående gjenvinning av marint plastavfall</div></div><span class="badge bx">2027</span></div>
 <div class="port-badges"><span class="badge bb">100% Aton</span><span class="badge bx">Konseptfase</span></div>
-<div class="port-desc">Bygget på BladeShip-plattformen. Dedikert offshore-system for plastavfallsgjenvinning. 8 millioner tonn plast dumpes i havet hvert år.</div>
-<div class="val-grid"><div class="val-item"><span class="val-n ink">8M t</span><span class="val-l">Plast i hav/år</span></div><div class="val-item"><span class="val-n ink">100%</span><span class="val-l">Aton andel</span></div></div></div>
-${concepts}</div>`;}
+<div class="port-desc">Bygget på BladeShip-plattformen. 8 millioner tonn plast dumpes i havet hvert år.</div>
+<div class="val-grid"><div class="val-item"><span class="val-n nk">8M t</span><span class="val-l">Plast i hav/år</span></div><div class="val-item"><span class="val-n nk">100%</span><span class="val-l">Aton andel</span></div></div></div>
+${concepts}
+</div>`;}
 
 // ── KALENDER ──
 function pageKal(){return`<div class="page" id="pg-kal">
 <div class="sec"><div class="sec-line"></div><div class="sec-lbl">Kritiske frister</div><div class="sec-line"></div></div>
 <div class="card">
-<div class="cal-row urg"><div class="cal-date">9. juni</div><div class="cal-text">⚠ SBN KYC — Sparebanken Norge · Aton-konto</div></div>
-<div class="cal-row urg"><div class="cal-date">10. juni</div><div class="cal-text">⚠ DNV møte kl. 11:30 — Veritasveien 25, Stavanger · Kjetil Moi Østbø</div></div>
+  <div class="cal-row urg"><div class="cal-date">9. juni</div><div class="cal-text">⚠ SBN KYC — Sparebanken Norge · sett inn NOK 30k</div></div>
+  <div class="cal-row urg"><div class="cal-date">10. juni</div><div class="cal-text">⚠ DNV møte kl. 11:30 — Veritasveien 25, Stavanger · Kjetil Moi Østbø</div></div>
 </div>
 <div class="sec"><div class="sec-line"></div><div class="sec-lbl">Juni 2026</div><div class="sec-line"></div></div>
 <div class="card">
-<div class="cal-row"><div class="cal-date">4. juni</div><div class="cal-text">Grunnfelt aksjonæravtale signeres — Kim Skjæveland</div></div>
-<div class="cal-row"><div class="cal-date">16. juni</div><div class="cal-text">Mobilisering Stord · NSE Gruppen / Hugin A · Aker Solutions</div></div>
-<div class="cal-row"><div class="cal-date">~19–20. juni</div><div class="cal-text">Aton Group AS + BladeShip AS — org.nr. forventet fra Brønnøysund</div></div>
-<div class="cal-row"><div class="cal-date">1. juli</div><div class="cal-text">Leif fri — 3 uker permisjon</div></div>
+  <div class="cal-row"><div class="cal-date">16. juni</div><div class="cal-text">Mobilisering Stord · NSE Gruppen / Hugin A · Aker Solutions</div></div>
+  <div class="cal-row"><div class="cal-date">~20. juni</div><div class="cal-text">Aton Group AS + BladeShip AS — org.nr. forventet fra Brønnøysund</div></div>
+  <div class="cal-row"><div class="cal-date">30. juni</div><div class="cal-text">Hjemkomst fra Stord</div></div>
 </div>
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Høst 2026</div><div class="sec-line"></div></div>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Juli–August 2026</div><div class="sec-line"></div></div>
 <div class="card">
-<div class="cal-row"><div class="cal-date">August 2026</div><div class="cal-text">EIC Accelerator intervju (estimert)</div></div>
-<div class="cal-row"><div class="cal-date">1. august</div><div class="cal-text">Velumen SkatteFUNN — anbefalt frist</div></div>
-<div class="cal-row"><div class="cal-date">1. sept</div><div class="cal-text">SkatteFUNN absolutt frist</div></div>
-<div class="cal-row"><div class="cal-date">22. sept</div><div class="cal-text">EU LIFE Climate Action søknad — €2–10M</div></div>
+  <div class="cal-row fam"><div class="cal-date">1.–21. juli</div><div class="cal-text">Fri — 3 uker av</div></div>
+  <div class="cal-row"><div class="cal-date">2. juli</div><div class="cal-text">Vard-møte · Håvard Vollset Lien (Teams, kl. 15:00)</div></div>
+  <div class="cal-row urg"><div class="cal-date">August</div><div class="cal-text">EIC Accelerator intervju (estimert)</div></div>
 </div>
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">2027 og fremover</div><div class="sec-line"></div></div>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Fremover</div><div class="sec-line"></div></div>
 <div class="card">
-<div class="cal-row"><div class="cal-date">Mars 2027</div><div class="cal-text">Grønn Plattform søknad — NOK 30–80M</div></div>
-<div class="cal-row urg"><div class="cal-date">28. mai 2027</div><div class="cal-text">⚠ PCT-patent absolutt frist — kan ikke utsettes</div></div>
-<div class="cal-row fam"><div class="cal-date">2027</div><div class="cal-text">Aton Danmark ApS — Alexandra Sunde Lindum</div></div>
-<div class="cal-row fam"><div class="cal-date">2027–28</div><div class="cal-text">Aton España SL — Lone Sunde · Marbella</div></div>
-<div class="cal-row fam"><div class="cal-date">2028</div><div class="cal-text">Sunde Familielegat — stiftelse</div></div>
-</div></div>`;}
-
-
-function pageEierGraf(){
-  // Eiere: navn, prosent, farge, stemme-info, nok-verdi
-  const data = CR==='leif' ? [
-    {n:'Leif Sunde',     p:80, c:'var(--gold)',  s:'A-aksjer · 10× stemme', v:'NOK 54,4M her'},
-    {n:'Lone Sunde',     p:10, c:'var(--lone)',  s:'B-aksjer · 1× stemme',  v:'NOK 6,8M her'},
-    {n:'Alexandra S.L.', p:10, c:'var(--alex)',  s:'B-aksjer · 1× stemme',  v:'NOK 6,8M her'},
-  ] : CR==='lone' ? [
-    {n:'Leif Sunde',     p:80, c:'var(--gold)',  s:'A-aksjer · 10× stemme', v:'Majoritetsandel'},
-    {n:'Lone Sunde',     p:10, c:'var(--lone)',  s:'B-aksjer · 1× stemme',  v:'NOK 6,8M her'},
-    {n:'Alexandra S.L.', p:10, c:'var(--alex)',  s:'B-aksjer · 1× stemme',  v:'NOK 6,8M her'},
-  ] : [
-    {n:'Leif Sunde',     p:80, c:'var(--gold)',  s:'A-aksjer · 10× stemme', v:'Majoritetsandel'},
-    {n:'Lone Sunde',     p:10, c:'var(--lone)',  s:'B-aksjer · 1× stemme',  v:'NOK 6,8M her'},
-    {n:'Alexandra S.L.', p:10, c:'var(--alex)',  s:'B-aksjer · 1× stemme',  v:'NOK 6,8M her'},
-  ];
-
-  const R=54, cx=70, cy=70, circ=2*Math.PI*R;
-  let offset=0;
-  const segments = data.map(d=>{
-    const len = circ * d.p/100;
-    const seg = `<circle cx="${cx}" cy="${cy}" r="${R}" fill="none"
-      stroke="${d.c}" stroke-width="20"
-      stroke-dasharray="${len} ${circ-len}"
-      stroke-dashoffset="${-offset}"
-      style="opacity:.92"/>`;
-    offset += len;
-    return seg;
-  });
-
-  const minSeg = data.find(d=>d.n.startsWith(CR==='leif'?'Leif':CR==='lone'?'Lone':'Alexandra'));
-  const myPst  = minSeg ? minSeg.p : data[0].p;
-  const myFarge= minSeg ? minSeg.c : data[0].c;
-
-  const legend = data.map(d=>`
-    <div class="eier-rad">
-      <div class="eier-dot" style="background:${d.c}"></div>
-      <div class="eier-rad-info">
-        <div style="display:flex;align-items:center;gap:6px">
-          <span class="eier-rad-navn">${d.n}</span>
-          <span class="eier-rad-pst" style="color:${d.c}">${d.p}%</span>
-        </div>
-        <div class="eier-rad-sub">${d.s} · ${d.v}</div>
-        <div class="eier-rad-bar"><div class="eier-rad-fill" style="width:${d.p}%;background:${d.c}"></div></div>
-      </div>
-    </div>`).join('');
-
-  const myLabel = CR==='leif'?'Din andel':CR==='lone'?'Din andel':'Din andel';
-
-  return`
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Eierstruktur — Aton Group AS</div><div class="sec-line"></div></div>
-<div class="card" style="padding:20px">
-  <div class="eier-wrap">
-    <div class="eier-donut">
-      <svg viewBox="0 0 140 140">
-        <circle cx="70" cy="70" r="54" fill="none" stroke="var(--bg3)" stroke-width="20"/>
-        ${segments.join('')}
-      </svg>
-      <div class="eier-donut-lbl">
-        <div class="eier-donut-pst" style="color:${myFarge}">${myPst}%</div>
-        <div class="eier-donut-sub">${myLabel}</div>
-      </div>
-    </div>
-    <div class="eier-legend">${legend}</div>
-  </div>
-  <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--bg3);font-size:.7rem;color:var(--ink4);line-height:1.6">
-    A-aksjer: 10× stemmerett · B-aksjer: 1× stemmerett · Gyllen aksje (Sunde Familielegat, 2028): vetorett.
-    Tallene er illustrative — fastsettes endelig på generalforsamling etter org.nr.
-  </div>
-</div>`;
-}
+  <div class="cal-row urg"><div class="cal-date">22. sept</div><div class="cal-text">EU LIFE Climate Action søknad — frist</div></div>
+  <div class="cal-row"><div class="cal-date">Mars 2027</div><div class="cal-text">Grønn Plattform skissefrist — NOK 30–80M</div></div>
+  <div class="cal-row urg"><div class="cal-date">28. mai 2027</div><div class="cal-text">⚠ PCT-patent absolutt frist — kan ikke utsettes</div></div>
+  <div class="cal-row fam"><div class="cal-date">2028</div><div class="cal-text">Sunde Familielegat — stiftelse</div></div>
+</div>
+</div>`;}
 
 // ── WORKSPACE ──
 function pageWs(){
   const leifLinks=CR==='leif'?`
 <a class="ws-card" href="https://mail.google.com/mail/u/0/#inbox" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="ws-label">Gmail</div><div class="ws-sub">leif@atongroup.no</div></div></a>
 <a class="ws-card" href="https://drive.google.com/drive/u/0/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><div><div class="ws-label">Google Drive</div><div class="ws-sub">Alle filer</div></div></a>
-<a class="ws-card" href="https://calendar.google.com/calendar/u/0/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="ws-label">Google Kalender</div><div class="ws-sub">Frister og møter</div></div></a>
-<a class="ws-card" href="https://docs.google.com/document/u/0/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div><div class="ws-label">Google Docs</div><div class="ws-sub">Dokumenter</div></div></a>
-<a class="ws-card" href="https://meet.google.com/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div><div><div class="ws-label">Google Meet</div><div class="ws-sub">Videomøter</div></div></a>
-<a class="ws-card" href="https://contacts.google.com/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div><div class="ws-label">Google Kontakter</div><div class="ws-sub">Adressebok</div></div></a>
-
 <a class="ws-card" href="https://fiken.no" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="ws-label">Fiken</div><div class="ws-sub">Regnskap</div></div></a>
 <a class="ws-card" href="https://altinn.no" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div><div class="ws-label">Altinn</div><div class="ws-sub">Stiftelse / GF</div></div></a>
-<a class="ws-card" href="https://www.atongroup.no/arkiv/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5" rx="1"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div><div><div class="ws-label">Mitt arkiv</div><div class="ws-sub">Dokumenter &amp; kontrakter</div></div></a>
+<a class="ws-card" href="https://www.atongroup.no/arkiv/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5" rx="1"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div><div><div class="ws-label">Mitt arkiv</div><div class="ws-sub">Dokumenter</div></div></a>`:
+`<a class="ws-card" href="https://mail.google.com/mail/u/0/#inbox" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="ws-label">Gmail</div><div class="ws-sub">@atongroup.no</div></div></a>
+<a class="ws-card" href="https://drive.google.com/drive/u/0/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><div><div class="ws-label">Google Drive</div><div class="ws-sub">Filer</div></div></a>
+<a class="ws-card" href="https://www.atongroup.no/arkiv/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5" rx="1"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div><div><div class="ws-label">Mitt arkiv</div><div class="ws-sub">Dokumenter</div></div></a>`;
 
-<a class="ws-card" href="https://www.atongroup.no" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85"/></svg></div><div><div class="ws-label">Nettside</div><div class="ws-sub">atongroup.no</div></div></a>`:`
-<a class="ws-card" href="https://mail.google.com/mail/u/0/#inbox" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="ws-label">Gmail</div><div class="ws-sub">@atongroup.no</div></div></a>
-<a class="ws-card" href="https://drive.google.com/drive/u/0/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><div><div class="ws-label">Google Drive</div><div class="ws-sub">Felles filer</div></div></a>
-<a class="ws-card" href="https://calendar.google.com/calendar/u/0/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="ws-label">Google Kalender</div><div class="ws-sub">Kalender</div></div></a>
-<a class="ws-card" href="https://docs.google.com/document/u/0/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div><div class="ws-label">Google Docs</div><div class="ws-sub">Dokumenter</div></div></a>
-<a class="ws-card" href="https://meet.google.com/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div><div><div class="ws-label">Google Meet</div><div class="ws-sub">Videomøter</div></div></a>
-<a class="ws-card" href="https://www.atongroup.no/arkiv/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5" rx="1"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div><div><div class="ws-label">Mitt arkiv</div><div class="ws-sub">Private dokumenter</div></div></a>
-<a class="ws-card" href="mailto:leif@atongroup.no"><div class="ws-ic"><svg viewBox="0 0 24 24"><path d="M20 14.66V20a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2h5.34"/><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"/></svg></div><div><div class="ws-label">Kontakt Leif</div><div class="ws-sub">leif@atongroup.no</div></div></a>`;
-
-  const key='atonNote_'+CR;
   return`<div class="page" id="pg-ws">
 <div class="sec"><div class="sec-line"></div><div class="sec-lbl">Hurtiglenker</div><div class="sec-line"></div></div>
-<div class="ws-grid">${leifLinks}</div>
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Claude AI — din personlige assistent</div><div class="sec-line"></div></div>
-<div class="card" style="text-align:center;padding:28px;background:linear-gradient(135deg,var(--gold-bg),rgba(184,146,42,.04))">
-<div style="font-family:var(--serif);font-size:1.5rem;color:var(--gold);margin-bottom:8px">Claude AI</div>
-<div style="font-size:.84rem;color:var(--ink3);margin-bottom:20px;max-width:360px;margin-left:auto;margin-right:auto;line-height:1.7">En intelligent assistent som kjenner Aton Group, BladeShip-teknologien og deg. Klikk for å åpne panelet.</div>
-<button onclick="toggleCl()" style="padding:11px 28px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-size:.88rem;font-weight:600;box-shadow:0 2px 8px rgba(184,146,42,.3);transition:all .2s" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 4px 12px rgba(184,146,42,.4)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(184,146,42,.3)'">Åpne Claude →</button>
+<div class="ws-grid">
+${leifLinks}
+<a class="ws-card" href="https://calendar.google.com/calendar/u/0/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="ws-label">Google Kalender</div><div class="ws-sub">Frister og møter</div></div></a>
+<a class="ws-card" href="https://docs.google.com/document/u/0/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="ws-label">Google Docs</div><div class="ws-sub">Dokumenter</div></div></a>
+<a class="ws-card" href="https://meet.google.com/" target="_blank"><div class="ws-ic"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><div><div class="ws-label">Google Meet</div><div class="ws-sub">Videomøter</div></div></a>
 </div>
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Nøkkelkontakter &amp; Target Partners</div><div class="sec-line"></div></div>
-<div class="card" style="padding:0;overflow:hidden">
-  <table style="width:100%;border-collapse:collapse;font-size:.83rem">
-    <thead>
-      <tr style="background:var(--bg3)">
-        <th style="padding:10px 16px;text-align:left;font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink4)">Selskap / Person</th>
-        <th style="padding:10px 16px;text-align:left;font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink4)">Rolle</th>
-        <th style="padding:10px 16px;text-align:left;font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink4)">Status</th>
-        <th style="padding:10px 16px;text-align:left;font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink4)">Merknad</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr style="border-top:1px solid var(--bg3)">
-        <td style="padding:12px 16px"><div style="font-weight:600;color:var(--ink)">DNV</div><div style="font-size:.75rem;color:var(--ink3)">Kjetil Moi Østbø · Ole Johan Harnes</div></td>
-        <td style="padding:12px 16px;color:var(--ink2)">Klassifisering &amp; validering</td>
-        <td style="padding:12px 16px"><span class="badge by">Møte 10. juni</span></td>
-        <td style="padding:12px 16px;color:var(--ink3);font-size:.78rem">NDA sendt · konseptbeskrivelse delt</td>
-      </tr>
-      <tr style="border-top:1px solid var(--bg3);background:rgba(184,146,42,.02)">
-        <td style="padding:12px 16px"><div style="font-weight:600;color:var(--ink)">Aker Horizons ASA</div><div style="font-size:.75rem;color:var(--ink3)">Kjell Inge Røkke (eier) · norsk grønn energi</div></td>
-        <td style="padding:12px 16px;color:var(--ink2)">Strategisk partner / investor</td>
-        <td style="padding:12px 16px"><span class="badge by">E-post sendt 3. juni</span></td>
-        <td style="padding:12px 16px;color:var(--ink3);font-size:.78rem">Fabrikktrål-analogi: Røkke flyttet fiskeprosessering til havs — BladeShip gjør det samme for bladgjenvinning. Oppfølging 17. juni.</td>
-      </tr>
-      <tr style="border-top:1px solid var(--bg3)">
-        <td style="padding:12px 16px"><div style="font-weight:600;color:var(--ink)">Equinor Ventures</div><div style="font-size:.75rem;color:var(--ink3)">Søknad sendt</div></td>
-        <td style="padding:12px 16px;color:var(--ink2)">Investor / partner</td>
-        <td style="padding:12px 16px"><span class="badge by">Venter svar</span></td>
-        <td style="padding:12px 16px;color:var(--ink3);font-size:.78rem">Søknad innlevert</td>
-      </tr>
-      <tr style="border-top:1px solid var(--bg3)">
-        <td style="padding:12px 16px"><div style="font-weight:600;color:var(--ink)">Vard Group AS</div><div style="font-size:.75rem;color:var(--ink3)">Håvard Vollset Lien · VP R&amp;I</div></td>
-        <td style="padding:12px 16px;color:var(--ink2)">Verft — konseptsamarbeid / LOI</td>
-        <td style="padding:12px 16px"><span class="badge by">E-post sendt 4. juni</span></td>
-        <td style="padding:12px 16px;color:var(--ink3);font-size:.78rem">Oppfølging 18. juni. Oppdaterte spesifikasjoner sendt (190m, 18–20 MW, CAPEX USD 285M)</td>
-      </tr>
-      <tr style="border-top:1px solid var(--bg3);background:rgba(184,146,42,.02)">
-        <td style="padding:12px 16px"><div style="font-weight:600;color:var(--ink)">Ulstein Group</div><div style="font-size:.75rem;color:var(--ink3)">post@ulstein.com · Ulsteinvik</div></td>
-        <td style="padding:12px 16px;color:var(--ink2)">Verft — konseptsamarbeid / LOI</td>
-        <td style="padding:12px 16px"><span class="badge by">E-post sendt 4. juni</span></td>
-        <td style="padding:12px 16px;color:var(--ink3);font-size:.78rem">Første kontakt. Oppfølging 18. juni</td>
-      </tr>
-      <tr style="border-top:1px solid var(--bg3)">
-        <td style="padding:12px 16px"><div style="font-weight:600;color:var(--ink)">Green Yard Kleven AS</div><div style="font-size:.75rem;color:var(--ink3)">post.kleven@greenyard.no · Ulsteinvik</div></td>
-        <td style="padding:12px 16px;color:var(--ink2)">Verft — konseptsamarbeid / LOI</td>
-        <td style="padding:12px 16px"><span class="badge by">E-post sendt 4. juni</span></td>
-        <td style="padding:12px 16px;color:var(--ink3);font-size:.78rem">EU-godkjent resirkuleringsverft — eneste livssyklus-verft i verden. Oppfølging 18. juni</td>
-      </tr>
-      <tr style="border-top:1px solid var(--bg3)">
-        <td style="padding:12px 16px"><div style="font-weight:600;color:var(--ink)">Sparebanken Norge</div><div style="font-size:.75rem;color:var(--ink3)">KYC-prosess</div></td>
-        <td style="padding:12px 16px;color:var(--ink2)">Folio-bank</td>
-        <td style="padding:12px 16px"><span class="badge br">KYC 9. juni</span></td>
-        <td style="padding:12px 16px;color:var(--ink3);font-size:.78rem">Folio SUS148088 · NOK 30k innbetales</td>
-      </tr>
-      <tr style="border-top:1px solid var(--bg3)">
-        <td style="padding:12px 16px"><div style="font-weight:600;color:var(--ink)">Tom Trones</div><div style="font-size:.75rem;color:var(--ink3)">Stavanger Regnskap</div></td>
-        <td style="padding:12px 16px;color:var(--ink2)">Regnskapsfører</td>
-        <td style="padding:12px 16px"><span class="badge bg">Aktiv</span></td>
-        <td style="padding:12px 16px;color:var(--ink3);font-size:.78rem">tt@stavangerregnskap.no</td>
-      </tr>
-      <tr style="border-top:1px solid var(--bg3)">
-        <td style="padding:12px 16px"><div style="font-weight:600;color:var(--ink)">Roberto Frassine</div><div style="font-size:.75rem;color:var(--ink3)">ECCA / EuCIA</div></td>
-        <td style="padding:12px 16px;color:var(--ink2)">Industrikontakt · vindmølleindustri</td>
-        <td style="padding:12px 16px"><span class="badge bg">Bekreftet</span></td>
-        <td style="padding:12px 16px;color:var(--ink3);font-size:.78rem">ECCA-bekreftelse innhentet</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Claude AI — din assistent</div><div class="sec-line"></div></div>
+<div class="card" style="text-align:center;padding:24px;background:linear-gradient(135deg,var(--gold-bg),rgba(184,146,42,.04))">
+  <div style="font-family:var(--serif);font-size:1.4rem;color:var(--gold);margin-bottom:6px">Claude AI</div>
+  <div style="font-size:.78rem;color:var(--ink3);margin-bottom:16px;max-width:300px;margin-left:auto;margin-right:auto;line-height:1.7">En intelligent assistent som kjenner Aton Group, BladeShip-teknologien og deg.</div>
+  <button onclick="toggleCl()" style="padding:10px 24px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">Åpne Claude →</button>
 </div>
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Notater</div><div class="sec-line"></div></div>
-<div class="note-wrap">
-<div class="note-lbl">Privat notatblokk</div>
-<textarea class="note-ta" id="wsNote" placeholder="Skriv dine tanker, ideer og notater her..." oninput="try{localStorage.setItem('${key}',this.value)}catch(e){}"></textarea>
-</div></div>`;}
+</div>`;}
 
 // ── TEAM ──
 function pageTeam(){
@@ -1285,32 +776,19 @@ function pageTeam(){
 <div class="mrow"><span class="mrow-l">Tlf</span><span class="mrow-v"><a href="tel:+4793614425">+47 936 14 425</a></span></div>
 <div class="mrow"><span class="mrow-l">Sted</span><span class="mrow-v">Støperigata 25, 4014 Stavanger</span></div>
 <div class="mrow"><span class="mrow-l">Jobb</span><span class="mrow-v">Rigger · NSE Gruppen · Aker Stord (rotasjon)</span></div></div>
-
 <div class="member"><div class="mem-top"><div class="mem-av lo">Lo</div><div><div class="mem-name">Lone Daniela Mercedes Sunde</div><div class="mem-role">Country Director España · B-aksjer 10%</div></div></div>
 <div class="mrow"><span class="mrow-l">E-post</span><span class="mrow-v"><a href="mailto:lone@atongroup.no">lone@atongroup.no</a></span></div>
 <div class="mrow"><span class="mrow-l">Tlf</span><span class="mrow-v"><a href="tel:+4798496631">+47 984 96 631</a></span></div>
-<div class="mrow"><span class="mrow-l">Sted</span><span class="mrow-v">Snarveien 18, 4353 Klepp Stasjon / Marbella</span></div>
-<div class="mrow"><span class="mrow-l">Fokus</span><span class="mrow-v">Country Director España · Aton España SL (planlagt 2027)</span></div></div>
-
+<div class="mrow"><span class="mrow-l">Sted</span><span class="mrow-v">Snarveien 18, 4353 Klepp Stasjon / Marbella</span></div></div>
 <div class="member"><div class="mem-top"><div class="mem-av al">Al</div><div><div class="mem-name">Alexandra Sunde Lindum</div><div class="mem-role">Country Director Denmark · B-aksjer 10%</div></div></div>
 <div class="mrow"><span class="mrow-l">E-post</span><span class="mrow-v"><a href="mailto:alexandra@atongroup.no">alexandra@atongroup.no</a></span></div>
 <div class="mrow"><span class="mrow-l">Tlf</span><span class="mrow-v"><a href="tel:+4522775024">+45 22 77 50 24</a></span></div>
 <div class="mrow"><span class="mrow-l">Sted</span><span class="mrow-v">Villavej 18, 8870 Langå, Danmark</span></div>
 <div class="mrow"><span class="mrow-l">Barnebarn</span><span class="mrow-v">Elias og Isabella 💙</span></div></div>
-
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Aksjestruktur</div><div class="sec-line"></div></div>
-<div class="card">
-<div class="pipe-row"><div><div class="pipe-name">Leif E. Sunde</div><div class="pipe-sub">A-aksjer · 10× stemmerett</div></div><div class="pipe-val">80%</div></div>
-<div class="pipe-row"><div><div class="pipe-name">Lone Daniela Sunde</div><div class="pipe-sub">B-aksjer · 1× stemmerett</div></div><div class="pipe-val">10%</div></div>
-<div class="pipe-row"><div><div class="pipe-name">Alexandra Sunde Lindum</div><div class="pipe-sub">B-aksjer · 1× stemmerett</div></div><div class="pipe-val">10%</div></div>
-</div>
-
 <div class="sec"><div class="sec-line"></div><div class="sec-lbl">Klientselskaper</div><div class="sec-line"></div></div>
 <div class="member"><div class="mem-top"><div class="mem-av ex">VL</div><div><div class="mem-name">Viking Løvneseth</div><div class="mem-role">CEO · Velumen AS · 70% eier · foretrekker e-post</div></div></div></div>
-<div class="member"><div class="mem-top"><div class="mem-av ex">KS</div><div><div class="mem-name">Kim Skjæveland</div><div class="mem-role">Grunnfelt AS · 60% gründer · Aton 40%</div></div></div>
-<div class="mrow"><span class="mrow-l">Møte</span><span class="mrow-v">4. juni 2026 — aksjonæravtale signeres</span></div></div>
+<div class="member"><div class="mem-top"><div class="mem-av ex">KS</div><div><div class="mem-name">Kim Skjæveland</div><div class="mem-role">Grunnfelt AS · 60% gründer · Aton 40%</div></div></div></div>
 </div>`;
-
   const isSelf=CR==='lone';
   return`<div class="page" id="pg-team">
 <div class="sec"><div class="sec-line"></div><div class="sec-lbl">Sunde-familien</div><div class="sec-line"></div></div>
@@ -1325,27 +803,104 @@ ${isSelf?`<div class="member"><div class="mem-top"><div class="mem-av al">Al</di
 <div class="member"><div class="mem-top"><div class="mem-av ex">G3</div><div><div class="mem-name">Elias og Isabella</div><div class="mem-role">Dine barn · G3 Sunde-dynastiet</div></div></div></div>`}
 </div>`;}
 
-// ══════════ CLAUDE ══════════
-function buildClPills(){
-  document.getElementById('clPills').innerHTML=MODES.map(m=>`<button class="cl-pill${m.k===clMode?' act':''}" onclick="setMode('${m.k}')">${m.l}</button>`).join('');
+// ── ATON APP ──
+function pageApp(){return`<div class="page" id="pg-app">
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Aton App — statistikk</div><div class="sec-line"></div></div>
+<div class="app-stat-grid">
+  <div class="app-stat"><div class="app-stat-n" id="appStatUsers">—</div><div class="app-stat-l">Brukere</div></div>
+  <div class="app-stat"><div class="app-stat-n" id="appStatNew">—</div><div class="app-stat-l">Siste 7 dager</div></div>
+  <div class="app-stat"><div class="app-stat-n" id="appStatActive">—</div><div class="app-stat-l">Aktive i dag</div></div>
+</div>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Brukerlisté</div><div class="sec-line"></div></div>
+<div class="card">
+  <div id="appUserList"><div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Laster brukere...</div></div>
+  <button id="refreshUsers" onclick="loadAppUsers()">↻ Oppdater</button>
+</div>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">App-info</div><div class="sec-line"></div></div>
+<div class="card">
+  <div class="pipe-row"><div><div class="pipe-name">Repo</div><div class="pipe-sub">github.com/atongroup/atonapp</div></div><a href="https://github.com/atongroup/atonapp" target="_blank" style="color:var(--gold);font-size:.78rem">Åpne →</a></div>
+  <div class="pipe-row"><div><div class="pipe-name">Stack</div><div class="pipe-sub">React Native · Expo · Supabase · Claude API</div></div></div>
+  <div class="pipe-row"><div><div class="pipe-name">Økonomimodell</div><div class="pipe-sub">Freemium — Gratis (Haiku) + Premium 99 kr/mnd (Opus)</div></div><span class="badge bx">Planlagt</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">Status</div><div class="pipe-sub">Under aktiv utvikling · Expo Go fungerer</div></div><span class="badge by">Beta</span></div>
+</div>
+</div>`;}
+
+async function loadAppUsers(){
+  try{
+    const r=await fetch(`${SB_URL}/rest/v1/profiles?select=id,email,created_at&order=created_at.desc&limit=50`,{
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+    });
+    // Prøv auth.users via admin endpoint
+    const r2=await fetch(`${SB_URL}/rest/v1/users?select=id,email,created_at&order=created_at.desc&limit=50`,{
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+    });
+    let users=[];
+    if(r2.ok){users=await r2.json();}
+    else if(r.ok){users=await r.json();}
+    
+    if(!Array.isArray(users)||users.length===0){
+      // Fallback: hent fra leif_arkiv-tabellen for å se brukere
+      const r3=await fetch(`${SB_URL}/rest/v1/leif_arkiv?select=user_id&limit=100`,{
+        headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+      });
+      if(r3.ok){
+        const rows=await r3.json();
+        const unique=[...new Set(rows.map(x=>x.user_id).filter(Boolean))];
+        document.getElementById('appStatUsers').textContent=unique.length;
+        document.getElementById('appUserList').innerHTML=unique.length?
+          unique.map(uid=>`<div class="user-row"><div class="user-info"><div class="user-dot" style="background:var(--green)"></div><div class="user-email" style="font-family:var(--mono);font-size:.72rem">${uid.substring(0,8)}…</div></div></div>`).join(''):
+          '<div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Ingen brukerdata tilgjengelig</div>';
+        return;
+      }
+      document.getElementById('appUserList').innerHTML='<div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Ingen tilgang til brukerdata (krever service_role)</div>';
+      return;
+    }
+    
+    const now=new Date();
+    const week=new Date(now-7*864e5);
+    const today=new Date(now-864e5);
+    const newUsers=users.filter(u=>new Date(u.created_at)>week).length;
+    const activeToday=users.filter(u=>new Date(u.last_sign_in_at||u.created_at)>today).length;
+    
+    document.getElementById('appStatUsers').textContent=users.length;
+    document.getElementById('appStatNew').textContent=newUsers;
+    document.getElementById('appStatActive').textContent=activeToday||'—';
+    
+    document.getElementById('appUserList').innerHTML=users.map(u=>`
+      <div class="user-row">
+        <div class="user-info">
+          <div class="user-dot" style="background:${new Date(u.created_at)>week?'var(--green)':'var(--bg4)'}"></div>
+          <div class="user-email">${u.email||u.id.substring(0,12)+'…'}</div>
+        </div>
+        <div class="user-date">${new Date(u.created_at).toLocaleDateString('nb-NO')}</div>
+      </div>`).join('');
+  }catch(e){
+    document.getElementById('appUserList').innerHTML='<div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Klarte ikke hente brukerdata</div>';
+  }
+}
+
+// ── CLAUDE ──
+function buildModes(){
+  document.getElementById('clModes').innerHTML=MODES.map(m=>
+    `<button class="cl-pill${m.k===clMode?' act':''}" onclick="setMode('${m.k}')">${m.l}</button>`
+  ).join('');
 }
 
 function setMode(k){
   clMode=k;clHist=[];
   document.getElementById('clMsgs').innerHTML='';
-  buildClPills();
-  const names={general:'Generell',bladeship:'BladeShip',investor:'Investor',email:'E-post',legal:'Juridisk',strategy:'Strategi'};
-  addClMsg('a','Byttet til '+names[k]+'-modus. Hva kan jeg hjelpe med?');
+  buildModes();
+  addMsg('a','Byttet til '+{general:'Generell',bladeship:'BladeShip',investor:'Investor',email:'E-post',strategy:'Strategi'}[k]+'-modus. Hva kan jeg hjelpe med?');
 }
 
 function toggleCl(){
   clOpen=!clOpen;
   document.getElementById('clPanel').classList.toggle('open',clOpen);
-  document.getElementById('clBtn').style.cssText=clOpen?'background:var(--ink);color:#fff;box-shadow:none':'';
+  document.getElementById('hdr').querySelector('.hdr-claude').style.cssText=clOpen?'background:var(--ink);color:#fff;':'';
   if(clOpen)setTimeout(()=>document.getElementById('clIn').focus(),350);
 }
 
-function addClMsg(role,txt){
+function addMsg(role,txt){
   const el=document.getElementById('clMsgs');
   const d=document.createElement('div');
   d.className='cl-msg '+role;
@@ -1369,34 +924,39 @@ async function sendCl(){
   const inp=document.getElementById('clIn');
   const txt=inp.value.trim();if(!txt)return;
   inp.value='';inp.style.height='auto';
-  addClMsg('u',txt);
-  document.getElementById('clSendBtn').disabled=true;
-  const typing=document.createElement('div');
-  typing.className='cl-typing';
-  typing.innerHTML='<span></span><span></span><span></span>';
-  document.getElementById('clMsgs').appendChild(typing);
+  addMsg('u',txt);
+  document.getElementById('clSend').disabled=true;
+  const t=document.createElement('div');t.className='cl-typing';
+  t.innerHTML='<span></span><span></span><span></span>';
+  document.getElementById('clMsgs').appendChild(t);
   document.getElementById('clMsgs').scrollTop=99999;
   const c=USERS[CU.email];
-  const sys=SYS[clMode](c.n);
   clHist.push({role:'user',content:txt});
   try{
     const res=await fetch(PROXY_URL,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({secret:'AtonGroup2026!GmailSender#Leif',system:sys,messages:clHist.slice(-12),model:'claude-sonnet-4-20250514',max_tokens:1500})});
+      body:JSON.stringify({secret:'AtonGroup2026!GmailSender#Leif',system:SYS[clMode](c.n),messages:clHist.slice(-12),model:'claude-sonnet-4-20250514',max_tokens:1500})});
     const data=await res.json();
-    typing.remove();
+    t.remove();
     const reply=data.content?.[0]?.text||data.error||'Ingen respons.';
     clHist.push({role:'assistant',content:reply});
-    addClMsg('a',reply);
-  }catch(e){typing.remove();addClMsg('a','Beklager, noe gikk galt. Prøv igjen.');}
-  document.getElementById('clSendBtn').disabled=false;
+    addMsg('a',reply);
+  }catch(e){t.remove();addMsg('a','Beklager, noe gikk galt. Prøv igjen.');}
+  document.getElementById('clSend').disabled=false;
   document.getElementById('clIn').focus();
+}
+
+// Last app-brukere når app-siden vises
+const _origShowPage=showPage;
+function showPage(id){
+  _origShowPage(id);
+  if(id==='app'&&CU)loadAppUsers();
 }
 
 // Gjenopprett notater
 setTimeout(()=>{
   const ta=document.getElementById('wsNote');
   if(ta&&CR){try{const v=localStorage.getItem('atonNote_'+CR);if(v)ta.value=v;}catch(e){}}
-},100);
+},200);
 </script>
 </body>
 </html>
