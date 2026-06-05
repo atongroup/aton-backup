@@ -1,19 +1,26 @@
-# ATON SYSTEM — SESJONSSTARTER
+# ATON SYSTEM — SESJONSSTARTER v3.0
 
-> **GitHub-basert system. Ingen ZIP nødvendig.**
+> **GitHub + Supabase-basert system.**
 > Repo: github.com/atongroup/aton-backup (privat)
+> Token hentes automatisk fra Supabase aton_tools
 
 ---
 
 ## OPPSTARTSRUTINE (følges alltid ved «hent Aton»)
 
-1. `git clone --depth=1` repo til `/tmp/aton`
-2. Les `SESJONSSTARTER.md` + `00_Aton_Group_AS/FASIT.md` + `00_Aton_Group_AS/HUSKELISTE.md`
-3. Sjekk Gmail — **ALLTID BEGGE**:
-   - Innboks (siste 3 dager): viktige innkommende meldinger
-   - Sendt-mappe (siste 3 dager): hva som allerede er svart/sendt
-4. Vis kortfattet tekstoppsummering: kritiske frister, åpne oppgaver, e-poststatus
-5. **SPØR** om Leif vil se SLAGPLAN som interaktiv widget — aldri vis automatisk
+1. **Hent dato/tid/sted** via weather_fetch (Stavanger) — vises i widget-header
+2. **Hent token** fra Supabase aton_tools WHERE name='GitHub aton-backup'
+3. **Parallelt:**
+   - `git clone --depth=1` repo til `/tmp/aton`
+   - Hent `aton_tools` + `claude_memory` fra Supabase (service key)
+4. **Les** `/tmp/aton/SESJONSSTARTER.md` + `FASIT.md` + `HUSKELISTE.md`
+5. **Generer sesjonstart-widget** (visualize:show_widget):
+   - Header: dato / klokkeslett / sted / vær
+   - Stats: verktøy, direkte/manuell, minner
+   - Verktøyliste med filter MCP / API / Tjeneste
+   - Aktive regler fra claude_memory
+   - Snarveisknapper
+6. **Spør** om Leif vil se SLAGPLAN som interaktiv widget
 
 ---
 
@@ -24,6 +31,7 @@
 | `hent Aton` | Følg oppstartsrutinen over |
 | `hent BladeShip` | Les `01_BladeShip_AS/00_Admin/` fra /tmp/aton |
 | `hent Velumen` | Les `02_Portefolje/Velumen_AS/00_Dashboard/` fra /tmp/aton |
+| `hent admin` | Generer live admin-panel widget mot Supabase |
 | `Exit` | Oppdater SESJON_LOGG.md + git add/commit/push med dato |
 
 ---
@@ -40,8 +48,19 @@
 | Chrome — klikke/sende/endre | ⛔ Alltid bekreftelse fra Leif |
 | GitHub — lese | ✅ Direkte |
 | GitHub — skrive/push | ✅ Ved Exit (informer om hva pushes) |
+| Supabase — lese | ✅ Direkte via Chrome (publishable key) |
+| Supabase — skrive | ✅ Via SQL-editor i Chrome |
 | SLAGPLAN-widget | ⛔ Spør alltid før visning |
 | Canva / API-kall | ✅ Direkte |
+
+---
+
+## SIKKERHET
+
+- GitHub-token ligger IKKE i Claude-minnet — hentes fra Supabase aton_tools
+- claude_memory og aton_tools har RLS aktivert (kun service_role)
+- Publishable key er trygg å bruke i nettleser for andre tabeller
+- Apps Script secrets: kun tilgjengelig via service key
 
 ---
 
@@ -57,65 +76,25 @@
 
 ---
 
-## KRITISKE FRISTER
+## REPO-STRUKTUR
 
-- **10. juni** — DNV møte kl. 11:30 (lunsj), Veritasveien 25 Stavanger
-- **16. juni** — NSE Gruppen rotasjon starter (Aker Stord)
-- **19. juni** — Altinn gammel løsning skrus av
-- **~20. juni** — Org.nr. forventet Aton Group AS + BladeShip AS
-- **1. september** — SkatteFUNN søknadsfrist
-
----
-
-## NØKKELKONTAKTER
-
-| Navn | Selskap | E-post | Merknad |
-|------|---------|--------|---------|
-| Kjetil Moi Østbø | DNV | kjetil.ostbo@dnv.com | DNV primærkontakt |
-| Tom Trones | Stavanger Regnskap | tt@stavangerregnskap.no | Regnskapsfører |
-| Viking Løvneseth | Velumen AS (70%) | — | Operativ leder, foretrekker e-post |
-| Kim Skjæveland | Grunnfelt AS (40%) | — | Grunnfelt-partner |
-
-**SPERRET:** Anders Valland (SINTEF Ocean) — aldri kontakt, aldri foreslå oppfølging
-
----
-
-## E-POST KVALITETSSJEKKISTE
-*Kjøres automatisk før ethvert utkast presenteres — uten unntak*
-
-| # | Sjekk | Handling ved funn |
-|---|-------|-------------------|
-| 1 | **Anti-dobbelsend** — er det allerede sendt svar i denne tråden? | Ikke lag utkast — informer om hva som ble sendt og når |
-| 2 | **Hel tråd lest** — er alle tidligere meldinger i tråden gjennomgått? | Les hele tråden bakover før utkast skrives |
-| 3 | **Delivery failure** — har denne adressen feilet tidligere? | Bruk bekreftet fungerende adresse, flagg feilen |
-| 4 | **Avsenderadresse** — hvilket alias fungerer faktisk? | Bruk sist bekreftet fungerende alias (sjekk sendt-mappe) |
-| 5 | **NDA-status** — sendes teknisk info til ny part? | Bekreft at NDA er signert før tekniske docs vedlegges |
-| 6 | **Partnerstatus** — omtales noen som partner/samarbeidspartner? | Kun «dialog pågår» / «kontaktet» / «bekreftet» basert på faktisk status |
-| 7 | **Kalender-kollisjon** — bekreftes møte eller tidspunkt? | Sjekk Google Calendar for konflikt før bekreftelse sendes |
-| 8 | **Vedlegg eksisterer** — refereres det til vedlegg i teksten? | Bekreft at filen finnes i GitHub/Drive og er riktig versjon |
-
----
-
-## OPERATIVE REGLER (sammendrag)
-
-- **E-post:** Kjør alltid E-POST KVALITETSSJEKKISTE før utkast. Vis utkast, vent på «send» fra Leif
-- **Dokumenter:** Advokatsjekk før ferdigstilling — parter, datoer, beløp, forpliktelser
-- **Filer:** GitHub = master. Nettside = ZIP → Leif laster opp selv
-- **Nettside-ZIP:** Hvis nettsidefiler er endret i løpet av en sesjon (atongroup.no, bladeship.no, grunnfelt.no eller andre), lag alltid ZIP av den aktuelle Nettside-mappen og tilby som nedlasting før Exit — uten at Leif trenger å be om det
-- **Partner:** Aldri skriv «partner/avtale/samarbeider» uten skriftlig bekreftelse
-- **NDA:** Aldri foreslå å sende tekniske BladeShip-dokumenter uten bekreftet signert NDA fra mottaker
-- **Gavebrev:** Lone (Scrive ID 09222115557579576827) + Alexandra (09222115557579576821) — signert 30.mai.2026
-
----
-
-## EXIT-RUTINE
-
-1. Oppdater `HUSKELISTE.md` med endringer fra sesjonen
-2. Skriv datostemplet logg til `logs/YYYY-MM-DD.md`
-3. Oppdater `SESJON_LOGG.md` med peker til ny logg
-4. `git add -A && git commit -m "Sesjon YYYY-MM-DD" && git push`
-5. Bekreft push-URL til Leif
-
----
-
-*Sist oppdatert: 3. juni 2026 v2 | Versjon: live-github*
+```
+aton-backup/
+├── .github/workflows/
+│   ├── supabase-backup.yml   # Nattlig Supabase-backup kl. 02:00
+│   └── sesjon-push.yml       # Exit-workflow
+├── 00_Aton_Group_AS/         # Aton Group — hub, nettside, FASIT
+├── 01_BladeShip_AS/          # BladeShip — patenter, teknisk, tilskudd
+├── 02_Portefolje/            # Velumen AS og andre porteføljeselskaper
+├── 03_Launchpad/             # Grunnfelt og nye konsepter
+├── 04_Familie_Dynasti/       # Familie, gavebrev, arv
+├── 05_Selskap_Mal/           # Maler for nye selskaper
+├── 06_Arkiv/                 # Avsluttede/utgåtte dokumenter
+├── 08_Aton_Teknologi_AS/     # Aton App (tidl. HeyMom)
+├── backups/supabase/         # Nattlige Supabase-backups (30 dager)
+├── logs/                     # Sesjonslogger per dato
+├── meetings/                 # Møtepakker (DNV, investorer, etc.)
+├── SESJONSSTARTER.md         # Denne filen
+├── SESJON_LOGG.md            # Peker på siste logg
+└── README.md
+```
