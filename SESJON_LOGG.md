@@ -18,3 +18,17 @@
 #### Gjenstår
 - Last opp hub.html + arkiv/index.html til one.com
 - supabase functions deploy document-secretary (fra terminal)
+
+## Siste sesjon: 5. juni 2026 (del 4 — kveld)
+
+### Utført
+- Aton Hub rebuilt from scratch
+- Ny arkitektur: hub.html (innlogging+redirect) → leif.html / lone.html / alex.html
+- Felles CSS (aton-hub.css) og JS (aton-hub.js) — halvparten av gammel filstørrelse
+- 7 sider: Hjem, Slagplan, Portefølje, Kalender, Workspace, Team/Familie, Aton App
+- Eierandel-donut øverst på hjem
+- Claude AI-panel med knapp
+- Aton App-brukeroversikt via Supabase
+- Google Sign-In → sessionStorage → redirect til riktig brukerside
+- Auth-sjekk på hver side — redirect til hub.html hvis ikke logget inn
+- Alle filer live på atongroup.no ✅
