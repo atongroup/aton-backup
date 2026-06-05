@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aton — Your Divine Intelligence</title>
+<meta name="description" content="Norges første personlige AI-assistent. Kjenner deg. Hjelper deg. Snakker norsk.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#C9A84C;
+  --gold-light:#E8C96A;
+  --gold-dim:rgba(201,168,76,0.15);
+  --bg:#0A0805;
+  --bg2:#110E09;
+  --ink:#F5EDD8;
+  --ink2:rgba(245,237,216,0.6);
+  --ink3:rgba(245,237,216,0.35);
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'DM Sans',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* Bakgrunnstekstur */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(201,168,76,0.04) 0%, transparent 50%);
+  pointer-events:none;
+  z-index:0;
+}
+
+.wrap{
+  position:relative;
+  z-index:1;
+  max-width:520px;
+  margin:0 auto;
+  padding:0 24px;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+}
+
+/* Logo */
+.logo-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-bottom:48px;
+  animation:fadeUp 1s ease both;
+}
+.sun{
+  width:80px;
+  height:80px;
+  margin-bottom:20px;
+  animation:spinSlow 30s linear infinite;
+}
+.logo-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3rem;
+  font-weight:300;
+  letter-spacing:0.3em;
+  color:var(--gold);
+}
+.logo-tag{
+  font-size:0.62rem;
+  letter-spacing:0.35em;
+  text-transform:uppercase;
+  color:var(--ink3);
+  margin-top:6px;
+}
+
+/* Overskrift */
+.hero{
+  text-align:center;
+  margin-bottom:48px;
+  animation:fadeUp 1s 0.2s ease both;
+}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.1rem;
+  font-weight:300;
+  line-height:1.3;
+  color:var(--ink);
+  margin-bottom:16px;
+}
+.hero h1 em{
+  font-style:italic;
+  color:var(--gold-light);
+}
+.hero p{
+  font-size:0.9rem;
+  color:var(--ink2);
+  line-height:1.7;
+  max-width:380px;
+  margin:0 auto;
+}
+
+/* Early Access badge */
+.badge-ea{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:var(--gold-dim);
+  border:1px solid rgba(201,168,76,0.3);
+  border-radius:20px;
+  padding:5px 14px;
+  font-size:0.7rem;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:24px;
+  animation:fadeUp 1s 0.1s ease both;
+}
+.badge-dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--gold);
+  animation:pulse 2s ease infinite;
+}
+
+/* Features */
+.features{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  width:100%;
+  margin-bottom:40px;
+  animation:fadeUp 1s 0.3s ease both;
+}
+.feat{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(201,168,76,0.1);
+  border-radius:12px;
+  padding:14px 16px;
+}
+.feat-icon{
+  font-size:1.2rem;
+  flex-shrink:0;
+  width:28px;
+  text-align:center;
+}
+.feat-text{
+  font-size:0.85rem;
+  color:var(--ink2);
+  line-height:1.4;
+}
+.feat-text strong{
+  color:var(--ink);
+  font-weight:500;
+  display:block;
+  font-size:0.9rem;
+}
+
+/* Download knapp */
+.btn-wrap{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  margin-bottom:32px;
+  animation:fadeUp 1s 0.4s ease both;
+}
+.btn-dl{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  max-width:320px;
+  padding:16px 24px;
+  background:var(--gold);
+  color:#0A0805;
+  border:none;
+  border-radius:14px;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.95rem;
+  font-weight:500;
+  cursor:pointer;
+  text-decoration:none;
+  transition:all 0.2s ease;
+  position:relative;
+  overflow:hidden;
+}
+.btn-dl::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.15),transparent);
+  opacity:0;
+  transition:opacity 0.2s;
+}
+.btn-dl:hover{
+  background:var(--gold-light);
+  transform:translateY(-1px);
+  box-shadow:0 8px 24px rgba(201,168,76,0.25);
+}
+.btn-dl:hover::before{opacity:1}
+.btn-dl:active{transform:translateY(0)}
+.btn-dl svg{width:20px;height:20px;flex-shrink:0}
+
+.btn-note{
+  font-size:0.72rem;
+  color:var(--ink3);
+  text-align:center;
+}
+
+/* Priser */
+.pricing{
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:40px;
+  animation:fadeUp 1s 0.5s ease both;
+}
+.plan{
+  border:1px solid rgba(201,168,76,0.15);
+  border-radius:14px;
+  padding:20px 16px;
+  text-align:center;
+}
+.plan.premium{
+  border-color:rgba(201,168,76,0.4);
+  background:rgba(201,168,76,0.05);
+}
+.plan-name{
+  font-size:0.65rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--ink3);
+  margin-bottom:8px;
+}
+.plan.premium .plan-name{color:var(--gold)}
+.plan-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;
+  font-weight:300;
+  color:var(--ink);
+  line-height:1;
+  margin-bottom:4px;
+}
+.plan-unit{
+  font-size:0.72rem;
+  color:var(--ink3);
+  margin-bottom:12px;
+}
+.plan-feat{
+  font-size:0.75rem;
+  color:var(--ink2);
+  line-height:1.6;
+}
+.plan.premium .plan-feat{color:var(--ink)}
+
+/* Footer */
+.footer{
+  text-align:center;
+  padding-bottom:40px;
+  animation:fadeUp 1s 0.6s ease both;
+}
+.footer a{
+  font-size:0.72rem;
+  color:var(--ink3);
+  text-decoration:none;
+  margin:0 10px;
+  transition:color 0.2s;
+}
+.footer a:hover{color:var(--gold)}
+.footer-div{
+  width:40px;
+  height:1px;
+  background:rgba(201,168,76,0.2);
+  margin:0 auto 16px;
+}
+
+/* Instruksjoner */
+.install-note{
+  background:rgba(201,168,76,0.06);
+  border:1px solid rgba(201,168,76,0.15);
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:32px;
+  width:100%;
+  animation:fadeUp 1s 0.45s ease both;
+}
+.install-note p{
+  font-size:0.78rem;
+  color:var(--ink2);
+  line-height:1.6;
+}
+.install-note p strong{
+  color:var(--gold);
+  font-weight:500;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes spinSlow{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.5;transform:scale(0.8)}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="logo-wrap">
+    <svg class="sun" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="18" fill="#C9A84C" opacity="0.9"/>
+      <circle cx="50" cy="50" r="24" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="50" cy="50" r="32" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.25"/>
+      <!-- Stråler -->
+      <line x1="50" y1="8" x2="50" y2="18" stroke="#C9A84C" stroke-width="1.5" opacity="0.7"/>
+      <line x1="50" y1="82" x2="50" y2="92" stroke="#C9A84C" stroke-width="1.5" opacity="0.7"/>
+      <line x1="8" y1="50" x2="18" y2="50" stroke="#C9A84C" stroke-width="1.5" opacity="0.7"/>
+      <line x1="82" y1="50" x2="92" y2="50" stroke="#C9A84C" stroke-width="1.5" opacity="0.7"/>
+      <line x1="21" y1="21" x2="28" y2="28" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/>
+      <line x1="72" y1="72" x2="79" y2="79" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/>
+      <line x1="79" y1="21" x2="72" y2="28" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/>
+      <line x1="28" y1="72" x2="21" y2="79" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/>
+      <!-- Halvstråler -->
+      <line x1="50" y1="12" x2="50" y2="16" stroke="#C9A84C" stroke-width="1" opacity="0.35" transform="rotate(22.5 50 50)"/>
+      <line x1="50" y1="12" x2="50" y2="16" stroke="#C9A84C" stroke-width="1" opacity="0.35" transform="rotate(45 50 50)"/>
+      <line x1="50" y1="12" x2="50" y2="16" stroke="#C9A84C" stroke-width="1" opacity="0.35" transform="rotate(67.5 50 50)"/>
+      <line x1="50" y1="12" x2="50" y2="16" stroke="#C9A84C" stroke-width="1" opacity="0.35" transform="rotate(112.5 50 50)"/>
+      <line x1="50" y1="12" x2="50" y2="16" stroke="#C9A84C" stroke-width="1" opacity="0.35" transform="rotate(135 50 50)"/>
+      <line x1="50" y1="12" x2="50" y2="16" stroke="#C9A84C" stroke-width="1" opacity="0.35" transform="rotate(157.5 50 50)"/>
+      <line x1="50" y1="12" x2="50" y2="16" stroke="#C9A84C" stroke-width="1" opacity="0.35" transform="rotate(202.5 50 50)"/>
+      <line x1="50" y1="12" x2="50" y2="16" stroke="#C9A84C" stroke-width="1" opacity="0.35" transform="rotate(225 50 50)"/>
+      <line x1="50" y1="12" x2="50" y2="16" stroke="#C9A84C" stroke-width="1" opacity="0.35" transform="rotate(247.5 50 50)"/>
+      <line x1="50" y1="12" x2="50" y2="16" stroke="#C9A84C" stroke-width="1" opacity="0.35" transform="rotate(292.5 50 50)"/>
+      <line x1="50" y1="12" x2="50" y2="16" stroke="#C9A84C" stroke-width="1" opacity="0.35" transform="rotate(315 50 50)"/>
+      <line x1="50" y1="12" x2="50" y2="16" stroke="#C9A84C" stroke-width="1" opacity="0.35" transform="rotate(337.5 50 50)"/>
+    </svg>
+    <div class="logo-name">ATON</div>
+    <div class="logo-tag">Your Divine Intelligence</div>
+  </div>
+
+  <div class="badge-ea"><span class="badge-dot"></span>Early Access — Android</div>
+
+  <div class="hero">
+    <h1>Din personlige AI<br>som <em>kjenner deg</em></h1>
+    <p>Norges første AI-assistent bygget på Claude. Snakker norsk, husker deg, og hjelper deg med det som faktisk betyr noe.</p>
+  </div>
+
+  <div class="features">
+    <div class="feat">
+      <div class="feat-icon">🌅</div>
+      <div class="feat-text"><strong>Morgenbrief</strong>Daglig oversikt over kalender, e-post og prioriteringer</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🧠</div>
+      <div class="feat-text"><strong>Husker deg</strong>Bygger opp kunnskap om deg over tid</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🎙️</div>
+      <div class="feat-text"><strong>Snakker norsk</strong>Tale og tekst — naturlig, ikke robotaktig</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">✅</div>
+      <div class="feat-text"><strong>Oppgaver og mål</strong>AI-prioritering av hva du bør gjøre nå</div>
+    </div>
+  </div>
+
+  <div class="btn-wrap">
+    <a href="aton-app.apk" class="btn-dl" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Last ned for Android
+    </a>
+    <p class="btn-note">APK-fil · Android 8.0+ · ~45 MB</p>
+  </div>
+
+  <div class="install-note">
+    <p><strong>Installer APK:</strong> Åpne filen etter nedlasting → tillat "Installer fra ukjente kilder" → følg instruksjonene. Tar under 1 minutt.</p>
+  </div>
+
+  <div class="pricing">
+    <div class="plan">
+      <div class="plan-name">Gratis</div>
+      <div class="plan-price">0</div>
+      <div class="plan-unit">for alltid</div>
+      <div class="plan-feat">Ubegrenset chat<br>AI-assistent<br>Oppgaver og mål</div>
+    </div>
+    <div class="plan premium">
+      <div class="plan-name">Premium</div>
+      <div class="plan-price">129</div>
+      <div class="plan-unit">kr / måned</div>
+      <div class="plan-feat">Kraftigere AI<br>Stemme · Bilder<br>Gmail · Minne</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-div"></div>
+    <a href="/personvern">Personvern</a>
+    <a href="personvern.html">Vilkår</a>
+    <a href="mailto:leif@atongroup.no">Kontakt</a>
+    <p style="font-size:0.65rem;color:var(--ink3);margin-top:12px">© 2026 Aton Teknologi AS</p>
+  </div>
+
+</div>
+</body>
+</html>
