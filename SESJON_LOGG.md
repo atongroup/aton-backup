@@ -1,19 +1,25 @@
-# SESJON_LOGG.md — Siste sesjon
-*Peker alltid på siste datostemplede logg. Oppdateres automatisk ved Exit.*
+# Sesjonslogg — 2026-06-05
 
----
+## Hva ble gjort
 
-## Siste sesjon
-**Dato:** 5. juni 2026
-**Loggfil:** [logs/2026-06-05.md](logs/2026-06-05.md)
+### GitHub
+- Nytt token via Chrome: aton-backup-claude (ingen utlop, repo+workflow)
 
----
+### Aton App (atongroup/atonapp)
+- Syntaksfeil fikset: manglende GestureHandlerRootView lukketag i TasksScreen
+- expo-audio + expo-location + expo-notifications wrappet for Expo Go
+- App.tsx refaktorert fra 2641 til 366 linjer, 13 nye komponentfiler
+- Pakker oppdatert til SDK 54
+- EAS Free brukt opp, nytt bygg 1. juli
 
-## Neste kritiske frister
-| Frist | Hva | Kritisk? |
-|-------|-----|----------|
-| 8. juni 2026 08:00 | Ukentlig verdivurdering | 🟡 |
-| 8. juni 2026 09:00 | Siste frist bank — bestem deg før Stord | 🔴 |
-| 9. juni 2026 | Mobilisering Aker Stord (NSE) | 🔵 |
-| 9. juni 2026 | Folio: sett inn NOK 30 000 Aton Group AS | 🔴 |
-| 10. juni 2026 11:30 | DNV-møte, Veritasveien 25 Stavanger | 🔴 |
+### Google Play
+- Konto Aton Group allerede opprettet (ID 7290479224110219777)
+- Venter pa Google identitetsbekreftelse
+
+### Personvern
+- personvern.html (NO/EN) laget og levert for opplasting til one.com
+
+## Neste sesjon
+- Last opp personvern.html til atongroup.no/app/personvern.html
+- Implementer RevenueCat
+- 1. juli: bygg APK
