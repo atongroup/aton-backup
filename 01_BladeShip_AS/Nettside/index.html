@@ -549,7 +549,7 @@ img,video,svg,table{max-width:100%}
     <div class="hero-btns">
       <a href="#contact" class="btn-ink" id="h-btn1">Get in touch</a>
       <a href="#problem"  class="btn-ghost" id="h-btn2">Read the story →</a>
-      <button onclick="openPitchModal()" class="btn-ghost" id="h-btn3" style="border-color:rgba(0,95,95,.5);display:flex;align-items:center;gap:8px"><svg width="12" height="14" viewBox="0 0 12 14" fill="none" style="flex-shrink:0"><path d="M1 1L11 7L1 13V1Z" fill="currentColor"/></svg>Watch pitch</button>
+      <button onclick="openPitchModal()" class="btn-ghost" id="h-btn3t" style="border-color:rgba(0,95,95,.5);display:flex;align-items:center;gap:8px"><svg width="12" height="14" viewBox="0 0 12 14" fill="none" style="flex-shrink:0"><path d="M1 1L11 7L1 13V1Z" fill="currentColor"/></svg>Pitch-video</button>
     </div>
   </div>
   <div class="hero-visual">
@@ -630,7 +630,7 @@ img,video,svg,table{max-width:100%}
               <svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M2 2L20 13L2 24V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
             </div>
           </div>
-          <span style="font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.85);text-shadow:0 1px 8px rgba(0,0,0,.6)">Watch the pitch &middot; 3:56</span>
+          <span style="font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.85);text-shadow:0 1px 8px rgba(0,0,0,.6)" id="vid-pitch-lbl">Se pitchen · 3:56</span>
         </div>
       </div>
     </div>
@@ -678,7 +678,7 @@ img,video,svg,table{max-width:100%}
         <!-- ban badge -->
         <rect x="155" y="108" width="94" height="44" rx="6" fill="#b83228"/>
         <text x="202" y="126" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" font-weight="700" fill="white">LANDFILL BAN</text>
-        <text x="202" y="141" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" fill="rgba(255,255,255,.85)">In force Jan 2026</text>
+        <text x="202" y="141" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" fill="rgba(255,255,255,.85)" id="svg-tk1v">I kraft jan 2026</text>
         <!-- turbines -->
         <g opacity=".7">
           <line x1="108" y1="60" x2="108" y2="78" stroke="#005f5f" stroke-width="2"/>
@@ -704,7 +704,7 @@ img,video,svg,table{max-width:100%}
         <!-- CAGR badge -->
         <rect x="8" y="108" width="90" height="44" rx="6" fill="#a06000"/>
         <text x="53" y="126" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" font-weight="700" fill="white">19.3% CAGR</text>
-        <text x="53" y="141" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" fill="rgba(255,255,255,.85)">Fastest growing</text>
+        <text x="53" y="141" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" fill="rgba(255,255,255,.85)" id="svg-tk2v">Raskest voksende</text>
         <!-- Taiwan star -->
         <circle cx="188" cy="72" r="6" fill="#a06000" opacity=".6"/>
         <text x="188" y="76" text-anchor="middle" font-family="Jost" font-size="8" fill="white">★</text>
@@ -740,7 +740,7 @@ img,video,svg,table{max-width:100%}
         <!-- crisis badge -->
         <rect x="8" y="108" width="90" height="44" rx="6" fill="#b83228"/>
         <text x="53" y="126" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" font-weight="700" fill="white">CRISIS 2026</text>
-        <text x="53" y="141" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" fill="rgba(255,255,255,.85)">AG enforcement</text>
+        <text x="53" y="141" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" fill="rgba(255,255,255,.85)" id="svg-tk3v">AG-håndhevelse</text>
       </svg>
       <div class="rc-body">
         <div class="rc-region">🌎 North America</div>
@@ -960,10 +960,10 @@ img,video,svg,table{max-width:100%}
   <div class="tbl-scroll"><table class="comp-tbl fade-up d1">
     <thead><tr><th id="cth1">Operator</th><th id="cth2">Offshore capable</th><th id="cth3">Globally mobile</th><th id="cth4">Scale (t/yr)</th><th id="cth5">Regions served</th></tr></thead>
     <tbody>
-      <tr><td>Veolia North America</td><td class="no" id="cno1">✗ No</td><td class="no" id="cno2">✗ No</td><td class="dim">7,000 blades</td><td class="dim">USA only</td></tr>
-      <tr><td>Regen Fiber (Iowa)</td><td class="no">✗ No</td><td class="no">✗ No</td><td class="dim">30,000</td><td class="dim">USA only</td></tr>
-      <tr><td>Carbon Rivers (TN)</td><td class="no">✗ No</td><td class="no">✗ No</td><td class="dim">50,000</td><td class="dim">USA only</td></tr>
-      <tr><td>Gjenkraft AS (NO)</td><td class="no">✗ No</td><td class="no">✗ No</td><td class="dim">2,800</td><td class="dim">Norway only</td></tr>
+      <tr><td>Veolia North America</td><td class="no" id="cno1">✗ No</td><td class="no" id="cno2">✗ No</td><td class="dim">7,000 blades</td><td class="dim" id="cusa1">USA only</td></tr>
+      <tr><td>Regen Fiber (Iowa)</td><td class="no" id="cno3">✗ No</td><td class="no" id="cno4">✗ No</td><td class="dim">30,000</td><td class="dim" id="cusa2">USA only</td></tr>
+      <tr><td>Carbon Rivers (TN)</td><td class="no" id="cno5">✗ No</td><td class="no" id="cno6">✗ No</td><td class="dim">50,000</td><td class="dim" id="cusa3">USA only</td></tr>
+      <tr><td>Gjenkraft AS (NO)</td><td class="no" id="cno7">✗ No</td><td class="no" id="cno8">✗ No</td><td class="dim">2,800</td><td class="dim" id="cnor1">Norway only</td></tr>
       <tr class="bsr"><td><strong>BladeShip AS ★</strong></td><td class="yes" id="cyes1">✓ Yes — unique</td><td class="yes" id="cyes2">✓ Yes — by design</td><td class="yes">30–50,000</td><td class="yes">Europe + APAC + USA</td></tr>
     </tbody>
   </table></div>
@@ -995,7 +995,7 @@ img,video,svg,table{max-width:100%}
   </div>
   <div class="fade-up d2" style="margin-top:3.5rem;background:var(--teal-dark);border-radius:8px;padding:2.5rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center">
     <div>
-      <div style="font-family:var(--sans);font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(208,234,234,.7);margin-bottom:.6rem">The Røkke Analogy</div>
+      <div style="font-family:var(--sans);font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(208,234,234,.7);margin-bottom:.6rem" id="lic-rokke-lbl">The Røkke Analogy</div>
       <div style="font-family:var(--serif);font-size:1.3rem;font-weight:700;color:white;line-height:1.4;margin-bottom:1rem" id="lic-qt">Røkke did not build one factory trawler. He built a platform — and licensed it globally.</div>
       <p style="font-size:.88rem;color:rgba(208,234,234,.85);line-height:1.7" id="lic-qb">BladeShip follows the same logic. Patents No. 20260735 and 20260736 protect the core IP. Every vessel built by a licensed yard generates royalty revenue for BladeShip AS — independent of who operates the vessel. The licensing model transforms BladeShip from a shipping company into a global maritime IP platform with a defensible moat and recurring revenue.</p>
     </div>
@@ -1725,6 +1725,31 @@ const T = {
   fc4:{en:'EU LIFE — Sept 2026',no:'EU LIFE — sept. 2026',de:'EU LIFE — Sept. 2026',zh:'EU LIFE — 2026年9月'},
   fcopy:{en:'© 2026 BladeShip Holding AS ✅ Incorporated + Capital transferred · BladeShip AS ⏳ being incorporated · Stavanger, Norway · v20.0',no:'© 2026 BladeShip Holding AS ✅ STIFTET + Aksjekapital overført · BladeShip AS ⏳ stiftet 28. mai 2026 · Stavanger, Norge · v20.0',de:'© 2026 BladeShip AS (in Gründung) · Stavanger, Norwegen · v20.0',zh:'© 2026 BladeShip AS（筹建中）· 挪威斯塔万格 · v20.0'},
   fbadge:{en:'EIC Accelerator 2026 · ✅ Submitted',no:'EIC Accelerator 2026 · Under forberedelse',de:'EIC Accelerator 2026 · In Vorbereitung',zh:'EIC加速器2026 · 准备中'},
+  'h-btn3t':{en:'Watch pitch',no:'Se pitch',de:'Pitch ansehen',zh:'观看演讲'},
+  'vid-pitch-lbl':{en:'Watch the pitch · 3:56',no:'Se pitchen · 3:56',de:'Pitch ansehen · 3:56',zh:'观看演讲 · 3:56'},
+  'svg-tk1v':{en:'In force Jan 2026',no:'I kraft jan 2026',de:'In Kraft Jan 2026',zh:'2026年1月生效'},
+  'svg-tk2v':{en:'Fastest growing',no:'Raskest voksende',de:'Am schnellsten wachsend',zh:'增长最快'},
+  'svg-tk3v':{en:'AG enforcement',no:'AG-håndhevelse',de:'AG-Durchsetzung',zh:'AG执法'},
+  cno3:{en:'✗ No',no:'✗ Nei',de:'✗ Nein',zh:'✗ 无'},
+  cno4:{en:'✗ No',no:'✗ Nei',de:'✗ Nein',zh:'✗ 无'},
+  cno5:{en:'✗ No',no:'✗ Nei',de:'✗ Nein',zh:'✗ 无'},
+  cno6:{en:'✗ No',no:'✗ Nei',de:'✗ Nein',zh:'✗ 无'},
+  cno7:{en:'✗ No',no:'✗ Nei',de:'✗ Nein',zh:'✗ 无'},
+  cno8:{en:'✗ No',no:'✗ Nei',de:'✗ Nein',zh:'✗ 无'},
+  cusa1:{en:'USA only',no:'Kun USA',de:'Nur USA',zh:'仅美国'},
+  cusa2:{en:'USA only',no:'Kun USA',de:'Nur USA',zh:'仅美国'},
+  cusa3:{en:'USA only',no:'Kun USA',de:'Nur USA',zh:'仅美国'},
+  cnor1:{en:'Norway only',no:'Kun Norge',de:'Nur Norwegen',zh:'仅挪威'},
+  'lic-s1':{en:'Vessels by 2038',no:'Fartøy innen 2038',de:'Schiffe bis 2038',zh:'2038年前船舶数'},
+  'lic-s2':{en:'EBITDA/yr — fleet',no:'EBITDA/år — flåte',de:'EBITDA/Jahr — Flotte',zh:'EBITDA/年——舰队'},
+  'lic-s3':{en:'Yards in dialogue',no:'Verft i dialog',de:'Werften im Dialog',zh:'对话中的船厂'},
+  'lic-s4':{en:'Patents filed 28 May',no:'Patenter innlevert 28. mai',de:'Patente eingereicht 28. Mai',zh:'5月28日提交专利'},
+  'lic-qt':{en:'Røkke did not build one factory trawler. He built a platform — and licensed it globally.',no:'Røkke bygde ikke én fabrikktrål. Han bygde en plattform — og lisensierte den globalt.',de:'Røkke baute nicht einen Fabrikfischkutter. Er baute eine Plattform — und lizenzierte sie global.',zh:'Røkke没有建造一艘工厂拖网船。他建造了一个平台——并在全球授权。'},
+  'lic-qb':{en:'BladeShip follows the same logic. Patents No. 20260735 and 20260736 protect the core IP. Every vessel built by a licensed yard generates royalty revenue for BladeShip AS — independent of who operates the vessel. The licensing model transforms BladeShip from a shipping company into a global maritime IP platform with a defensible moat and recurring revenue.',no:'BladeShip følger samme logikk. Patenter nr. 20260735 og 20260736 beskytter kjerne-IP. Hvert fartøy bygget av et lisensiert verft genererer royaltyinntekter til BladeShip AS — uavhengig av hvem som opererer fartøyet. Lisensieringsmodellen transformerer BladeShip fra et rederi til en global maritim IP-plattform med et forsvarlig forsprang og gjentakende inntekter.',de:'BladeShip folgt derselben Logik. Patente Nr. 20260735 und 20260736 schützen das Kern-IP. Jedes von einer lizenzierten Werft gebaute Schiff generiert Lizenzeinnahmen für BladeShip AS.',zh:'BladeShip遵循同样的逻辑。专利号20260735和20260736保护核心知识产权。每艘由获许可船厂建造的船舶都为BladeShip AS产生特许权使用费收入。'},
+
+  'ch-lic-n':{en:'Technology Platform',no:'Teknologiplattform',de:'Technologieplattform',zh:'技术平台'},
+  'lic-rokke-lbl':{en:'The Røkke Analogy',no:'Røkke-analogien',de:'Die Røkke-Analogie',zh:'Røkke类比'},
+
 };
 
 // ── setLang: update all elements + placeholders + options ──────
