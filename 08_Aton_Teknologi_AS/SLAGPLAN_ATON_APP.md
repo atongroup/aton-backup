@@ -34,7 +34,7 @@ Dette gir Aton en automatisk fordel: når Anthropic lanserer nye modeller (Opus 
 | Meta AI | Muse Spark | Gratis | Ingen personlig minneprofil |
 | Microsoft Copilot | GPT-4o | $18/mnd | Krever M365, enterprise-fokus |
 | Siri (Apple Intelligence) | Eget | Gratis | Generisk, ingen norsk AI-dybde |
-| **Aton Premium** | **Claude Opus** | **99 kr/mnd** | Norsk, personlig, brief, stemme, bilder, minneprofil |
+| **Aton Premium** | **Claude Sonnet 4.6** | **129 kr/mnd** | Norsk, personlig, brief, stemme, bilder, minneprofil |
 
 **Aton er 3–5× billigere enn konkurrentene og den eneste norskspråklige personlige AI-assistenten bygget på Claude.**
 
@@ -78,8 +78,8 @@ Dette gir Aton en automatisk fordel: når Anthropic lanserer nye modeller (Opus 
 ### Inntektsstruktur
 | Nivå | Pris | Modell |
 |------|------|--------|
-| **Gratis** | 0 kr | Haiku-modell, 5 meldinger/dag, ingen stemme |
-| **Premium** | 99 kr/mnd | Opus-modell, ubegrenset, stemme, bilder, minne |
+| **Gratis** | 0 kr | Haiku 4.5, ubegrenset meldinger, chat |
+| **Premium** | 129 kr/mnd | Sonnet 4.6, ubegrenset, stemme, bilder, minne, Gmail |
 | **Aton Business** | 299 kr/mnd (fremtidig) | Team-funksjoner, API-tilgang, admin-panel |
 
 ### Kostnadsstruktur per bruker/mnd
@@ -88,7 +88,7 @@ Dette gir Aton en automatisk fordel: når Anthropic lanserer nye modeller (Opus 
 | Gratis (Haiku) | ~kr 5 | kr 0 | kr 0 | **~kr 5** |
 | Premium (Opus) | ~kr 60 | ~kr 10 | kr 0 | **~kr 70** |
 
-**Margin Premium:** 99 kr − 70 kr = **29 kr (~29%)**
+**Margin Premium:** 129 kr − ~100 kr kostnad = **~29 kr (~22%)**
 
 ---
 
