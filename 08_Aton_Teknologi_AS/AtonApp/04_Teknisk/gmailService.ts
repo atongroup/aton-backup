@@ -1,7 +1,7 @@
 // services/gmailService.ts
 // Legg denne filen i: atonapp/services/gmailService.ts
 
-const GMAIL_PROXY_URL = 'LIMES_INN_URL_HER'; // Apps Script URL etter deploy
+const GMAIL_PROXY_URL = 'https://script.google.com/macros/s/AKfycbwH1Z_sZEDiYZvmK0jhYYfLOFWugC4_AhPceQbg7cTph3P7IHB88c9Ewte4FOvs5VYC/exec'; // Apps Script URL etter deploy
 const GMAIL_SECRET = 'AtonMail2026!';
 
 export interface GmailMessage {
