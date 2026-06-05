@@ -19,12 +19,27 @@ jobs:
         run: |
           mkdir -p backups/supabase
           DATE=$(date +%Y-%m-%d)
-          for TABLE in aton_tools claude_memory messages tasks goals contacts memories rules profiles; do
+          for TABLE in aton_tools claude_memory messages tasks goals contacts memories rules profiles user_meta; do
             curl -s "${SUPA_URL}/rest/v1/${TABLE}?select=*" \
               -H "apikey: ${SUPA_KEY}" \
               -H "Authorization: Bearer ${SUPA_KEY}" \
               > "backups/supabase/${TABLE}_${DATE}.json"
             echo "Backed up ${TABLE}"
+          done
+
+      - name: Cleanup old backups (keep last 30 days + monthly snapshots)
+        run: |
+          cd backups/supabase
+          TODAY=$(date +%Y-%m-%d)
+          CUTOFF=$(date -d '30 days ago' +%Y-%m-%d 2>/dev/null || date -v-30d +%Y-%m-%d)
+          for f in *.json; do
+            FILEDATE=$(echo "$f" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}')
+            if [ -z "$FILEDATE" ]; then continue; fi
+            DAY=$(echo "$FILEDATE" | cut -d- -f3)
+            if [[ "$FILEDATE" < "$CUTOFF" ]] && [ "$DAY" != "01" ]; then
+              rm "$f"
+              echo "Removed old backup: $f"
+            fi
           done
 
       - name: Commit backup
