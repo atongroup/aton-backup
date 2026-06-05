@@ -157,3 +157,61 @@ async function loadAppUsers(){
     list.innerHTML='<div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Krever admin-tilgang (service_role)</div>';
   }
 }
+
+// ── UTVIDET APP-STATISTIKK ──
+async function loadAppUsersExtended(){
+  const list=document.getElementById('appUserList');
+  const count=document.getElementById('appUserCount');
+  if(!list)return;
+  list.innerHTML='<div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Laster...</div>';
+  try{
+    const r=await fetch(`${SB_URL}/auth/v1/admin/users?per_page=200`,{
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+    });
+    if(!r.ok)throw new Error('no access');
+    const d=await r.json();
+    const users=(d.users||d||[]).sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+    const now=new Date(),week=new Date(now-7*864e5);
+    const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+    const month=new Date(now.getFullYear(),now.getMonth(),1);
+    const elT=document.getElementById('appStatUsers');if(elT)elT.textContent=users.length;
+    const elW=document.getElementById('appStatNew');if(elW)elW.textContent=users.filter(u=>new Date(u.created_at)>week).length;
+    const elD=document.getElementById('appStatToday');if(elD)elD.textContent=users.filter(u=>new Date(u.created_at)>today).length;
+    const elM=document.getElementById('appStatMonth');if(elM)elM.textContent=users.filter(u=>new Date(u.created_at)>month).length;
+    if(count)count.textContent=`${users.length} brukere totalt`;
+    // Vekstbar
+    const chart=document.getElementById('appGrowthChart');
+    const lbl=document.getElementById('appGrowthLabel');
+    if(chart){
+      const days=[];
+      for(let i=6;i>=0;i--){
+        const d0=new Date(today);d0.setDate(d0.getDate()-i);
+        const d1=new Date(d0);d1.setDate(d1.getDate()+1);
+        const n=users.filter(u=>{const t=new Date(u.created_at);return t>=d0&&t<d1;}).length;
+        days.push({n,dn:d0.toLocaleDateString('nb-NO',{weekday:'short'})});
+      }
+      const max=Math.max(...days.map(d=>d.n),1);
+      chart.innerHTML=days.map(d=>`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:.55rem;color:var(--ink4)">${d.n||''}</div><div style="width:100%;height:${Math.max(4,Math.round((d.n/max)*44))}px;background:var(--gold);border-radius:3px 3px 0 0;opacity:${d.n?1:.2}"></div><div style="font-size:.55rem;color:var(--ink3)">${d.dn}</div></div>`).join('');
+      if(lbl)lbl.textContent='Nye registreringer siste 7 dager';
+    }
+    // Brukerliste
+    list.innerHTML=users.length?users.map(u=>`<div class="user-row"><div class="user-info"><div class="user-dot" style="background:${new Date(u.created_at)>week?'var(--green)':'var(--bg4)'}"></div><div><div class="user-email">${u.email||u.phone||u.id?.substring(0,14)+'…'}</div><div style="font-size:.6rem;color:var(--ink4)">${u.app_metadata?.provider||'email'}</div></div></div><div style="text-align:right"><div class="user-date">${new Date(u.created_at).toLocaleDateString('nb-NO')}</div></div></div>`).join(''):'<div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Ingen brukere</div>';
+  }catch(e){
+    // Fallback: profiles-tabell
+    try{
+      const r2=await fetch(`${SB_URL}/rest/v1/profiles?select=id,created_at&order=created_at.desc`,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}});
+      if(r2.ok){
+        const profiles=await r2.json();
+        const now2=new Date(),week2=new Date(now2-7*864e5);
+        const today2=new Date(now2.getFullYear(),now2.getMonth(),now2.getDate());
+        const month2=new Date(now2.getFullYear(),now2.getMonth(),1);
+        const elT=document.getElementById('appStatUsers');if(elT)elT.textContent=profiles.length;
+        const elW=document.getElementById('appStatNew');if(elW)elW.textContent=profiles.filter(p=>new Date(p.created_at)>week2).length;
+        const elD=document.getElementById('appStatToday');if(elD)elD.textContent=profiles.filter(p=>new Date(p.created_at)>today2).length;
+        const elM=document.getElementById('appStatMonth');if(elM)elM.textContent=profiles.filter(p=>new Date(p.created_at)>month2).length;
+        if(count)count.textContent=`${profiles.length} profiler`;
+        list.innerHTML=profiles.map(p=>`<div class="user-row"><div class="user-info"><div class="user-dot" style="background:var(--bg4)"></div><div class="user-email">${p.id?.substring(0,16)}…</div></div><div class="user-date">${new Date(p.created_at).toLocaleDateString('nb-NO')}</div></div>`).join('')||'<div style="text-align:center;padding:12px;color:var(--ink4);font-size:.8rem">Ingen profiler</div>';
+      }else{list.innerHTML='<div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Krever admin-tilgang</div>';}
+    }catch(e2){list.innerHTML='<div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Feil ved lasting</div>';}
+  }
+}
