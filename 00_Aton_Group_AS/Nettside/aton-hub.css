@@ -151,6 +151,7 @@ button{cursor:pointer;font-family:var(--sans);border:none;background:none}
 .port-icon.ve{background:var(--lone-bg);color:var(--lone);border:1px solid var(--lone-bd)}
 .port-icon.ts{background:var(--alex-bg);color:var(--alex);border:1px solid var(--alex-bd)}
 .port-icon.co{background:var(--bg3);color:var(--ink3);border:1px solid var(--bg4)}
+.port-icon.at{background:#e8f4f0;color:#0f6e56;border:1px solid #9FE1CB}
 .port-head{flex:1}
 .port-title{font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:2px}
 .port-sub{font-size:.72rem;color:var(--ink4)}
