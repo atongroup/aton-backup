@@ -148,5 +148,82 @@ Dette gir Aton en automatisk fordel: når Anthropic lanserer nye modeller (Opus 
 
 ---
 
+## Skaleringsplan (lagt til 5. juni 2026)
+
+> Analysen under er basert på oppdatert prisinformasjon fra Supabase juni 2026.
+
+### Kapasitet i dag — Supabase gratis plan
+
+| Ressurs | Grense | Status |
+|---------|--------|--------|
+| Database | 500 MB | ✅ God margin |
+| Fil-lagring | 1 GB | ✅ God margin |
+| Båndbredde | 5 GB/mnd | ⚠️ Kritisk grense |
+| MAU (månedlige aktive brukere) | 50 000 | ✅ Trygt lenge |
+| Samtidige tilkoblinger | 200 | ✅ God margin |
+| Inaktivitet-pause | 7 dager | ⚠️ Risiko — krever keepalive |
+| Backup | Ingen automatisk | ❌ Risiko — tap av data ved feil |
+
+**Smerteterskel:** ~300–500 daglige aktive brukere. 500 brukere × 20 API-kall × 50 KB = 500 MB trafikk per dag → 5 GB båndbredde brukt på 10 dager.
+
+### Steg 1: Fix nå (gratis plan)
+
+- [ ] **Keepalive-ping** — sett opp GitHub Actions eller Uptime Robot til å pinge Supabase hver 5. dag → unngår automatisk pause
+- [ ] **Ekstern backup** — eksporter databasen ukentlig til Google Drive (script i GitHub Actions)
+- [ ] **CDN for statiske filer** — aktiver Supabase Storage CDN → CDN-trafikk teller ikke mot båndbreddegrensen
+
+### Steg 2: Ved første betalende brukere → Supabase Pro ($25/mnd)
+
+Oppgrader umiddelbart når vi har første betalende bruker. Ikke vent til vi treffer grensen.
+
+| Ressurs | Supabase Pro |
+|---------|-------------|
+| Database | 8 GB |
+| MAU | 100 000 |
+| Lagring | 100 GB |
+| Backup | 7 dager automatisk |
+| Pris | $25/mnd (~kr 270) |
+
+Supabase Pro holder komfortabelt til ~5 000 daglige aktive brukere.
+
+### Steg 3: 5 000–50 000 brukere
+
+- Legg til Supabase compute add-on (2-core ARM, 2 GB RAM, ~$50/mnd) om responstid øker
+- Cloudflare Workers som CDN-lag foran appen (gratis plan holder lenge)
+- Vurder read replica for databasen ved høy lesetrafikk
+- På dette nivået er **Claude API den største utgiftsposten**, ikke infrastrukturen
+
+### Steg 4: 50 000+ brukere
+
+Evaluer ett av to alternativ:
+- **Supabase Team** ($599/mnd): SOC2, 14-dagers backup, prioritert support, 14-dagers backups
+- **Selvhostet Supabase** på Railway eller Fly.io: full kontroll, betaler kun server (~$40–80/mnd), men krever DevOps-kompetanse
+
+### Alternativer vurdert (og forkastet)
+
+| Alternativ | Vurdering |
+|-----------|-----------|
+| Firebase | ❌ Uforutsigbar pris ved vekst, sterk Google-binding, storage fjernet fra gratis plan |
+| PlanetScale | ❌ Fjernet gratis plan i 2024, minste plan $39/mnd |
+| Neon | 🟡 Godt for ren PostgreSQL, men mangler auth/storage/realtime — krever 3 ekstra tjenester |
+| AWS RDS | ❌ Mye dyrere og langt mer komplekst å drifte |
+
+**Konklusjon: Bli på Supabase. Oppgrader til Pro ved første inntekt.**
+
+### Den egentlige skaleringsutfordringen: Claude API-kostnadene
+
+| Brukere (daglig aktive) | Claude API-kostnad/mnd (estimat) |
+|------------------------|----------------------------------|
+| 100 | ~kr 500 |
+| 1 000 | ~kr 5 000 |
+| 5 000 | ~kr 25 000 |
+| 10 000 | ~kr 50 000 |
+
+Dette understreker at freemium-modellen (gratis = Haiku, premium = Opus) er kritisk. Gratis-brukere må ikke skalere kostnadene ukontrollert.
+
+**Neste handling:** Sett opp keepalive-ping + ekstern backup. Gjøres før soft launch.
+
+---
+
 *Aton Teknologi AS — under Aton Group AS (100%)*
 *Dokument opprettet: 4. juni 2026 | Sist oppdatert: 5. juni 2026*
