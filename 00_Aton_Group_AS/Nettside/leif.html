@@ -318,142 +318,34 @@ ${eierBar()}
   <div class="app-stat"><div class="app-stat-n" id="appStatToday">—</div><div class="app-stat-l">I dag</div></div>
   <div class="app-stat"><div class="app-stat-n" id="appStatMonth">—</div><div class="app-stat-l">Denne mnd</div></div>
 </div>
-
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Vekst</div><div class="sec-line"></div></div>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Vekst siste 7 dager</div><div class="sec-line"></div></div>
 <div class="card" style="padding:14px">
   <div id="appGrowthChart" style="height:60px;display:flex;align-items:flex-end;gap:3px"></div>
   <div id="appGrowthLabel" style="font-size:.6rem;color:var(--ink4);margin-top:5px;text-align:center">Laster...</div>
 </div>
-
 <div class="sec"><div class="sec-line"></div><div class="sec-lbl">Registrerte brukere</div><div class="sec-line"></div></div>
 <div class="card">
   <div id="appUserList"><div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Laster...</div></div>
   <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
     <span id="appUserCount" style="font-size:.68rem;color:var(--ink4)"></span>
-    <button onclick="loadAppUsersExtended()" style="font-size:.72rem;color:var(--gold);font-weight:500;text-decoration:underline;background:none;border:none;cursor:pointer">↻ Oppdater</button>
+    <button onclick="loadAppUsersExtended()" style="font-size:.72rem;color:var(--gold);font-weight:500;text-decoration:underline;background:none;border:none;cursor:pointer">&#8635; Oppdater</button>
   </div>
 </div>
-
 <div class="sec"><div class="sec-line"></div><div class="sec-lbl">App-info</div><div class="sec-line"></div></div>
 <div class="card">
   <div class="pipe-row"><div><div class="pipe-name">Stack</div><div class="pipe-sub">React Native · Expo SDK 52 · Supabase · Claude API · ElevenLabs</div></div></div>
   <div class="pipe-row"><div><div class="pipe-name">Økonomimodell</div><div class="pipe-sub">Gratis (Haiku · 5 meld/dag) + Premium 99 kr/mnd (Opus · ubegrenset)</div></div><span class="badge bx">Planlagt</span></div>
   <div class="pipe-row"><div><div class="pipe-name">Plattform</div><div class="pipe-sub">Android (APK) → Google Play → App Store</div></div><span class="badge by">Beta</span></div>
-  <div class="pipe-row"><div><div class="pipe-name">Package</div><div class="pipe-sub">no.atongroup.aton · EAS projectId e04ccc4f</div></div></div>
-  <div class="pipe-row"><div><div class="pipe-name">Supabase</div><div class="pipe-sub">wbwpobojxighhnmrabmj.supabase.co</div></div><a href="https://supabase.com/dashboard/project/wbwpobojxighhnmrabmj" target="_blank" style="color:var(--gold);font-size:.76rem">Åpne →</a></div>
-  <div class="pipe-row"><div><div class="pipe-name">Repo</div><div class="pipe-sub">github.com/atongroup/atonapp</div></div><a href="https://github.com/atongroup/atonapp" target="_blank" style="color:var(--gold);font-size:.76rem">Åpne →</a></div>
-  <div class="pipe-row"><div><div class="pipe-name">Landingsside</div><div class="pipe-sub">atongroup.no/app/</div></div><a href="https://www.atongroup.no/app/" target="_blank" style="color:var(--gold);font-size:.76rem">Åpne →</a></div>
+  <div class="pipe-row"><div><div class="pipe-name">Supabase</div><div class="pipe-sub">wbwpobojxighhnmrabmj.supabase.co</div></div><a href="https://supabase.com/dashboard/project/wbwpobojxighhnmrabmj" target="_blank" style="color:var(--gold);font-size:.76rem">Åpne &rarr;</a></div>
+  <div class="pipe-row"><div><div class="pipe-name">Repo</div><div class="pipe-sub">github.com/atongroup/atonapp</div></div><a href="https://github.com/atongroup/atonapp" target="_blank" style="color:var(--gold);font-size:.76rem">Åpne &rarr;</a></div>
 </div>
-
 <div class="sec"><div class="sec-line"></div><div class="sec-lbl">Skaleringsplan</div><div class="sec-line"></div></div>
 <div class="card">
   <div class="pipe-row"><div><div class="pipe-name">Nå → 300 daglige brukere</div><div class="pipe-sub">Supabase gratis · Keepalive-ping nødvendig</div></div><span class="badge by">Pågår</span></div>
   <div class="pipe-row"><div><div class="pipe-name">Første inntekt → Supabase Pro</div><div class="pipe-sub">$25/mnd · 8 GB DB · 100K MAU · 7-dagers backup</div></div><span class="badge bx">Klar</span></div>
-  <div class="pipe-row"><div><div class="pipe-name">1 000+ brukere → Cloudflare CDN</div><div class="pipe-sub">Gratis · Reduserer båndbredde drastisk</div></div><span class="badge bx">Planlagt</span></div>
   <div class="pipe-row"><div><div class="pipe-name">Kritisk kostnad: Claude API</div><div class="pipe-sub">1 000 brukere × 20 kall/dag ≈ kr 5 000/mnd</div></div><span class="badge br">Monitor</span></div>
 </div>
-</div>`;
-
-// Utvidet app-statistikk
-async function loadAppUsersExtended(){
-  const list=document.getElementById('appUserList');
-  const count=document.getElementById('appUserCount');
-  if(!list)return;
-  list.innerHTML='<div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Laster...</div>';
-  try{
-    const r=await fetch(`${SB_URL}/auth/v1/admin/users?per_page=200`,{
-      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
-    });
-    if(!r.ok)throw new Error('no access');
-    const d=await r.json();
-    const users=(d.users||d||[]).sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
-    const now=new Date();
-    const week=new Date(now-7*864e5);
-    const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
-    const month=new Date(now.getFullYear(),now.getMonth(),1);
-
-    // Oppdater stats
-    const total=users.length;
-    const newWeek=users.filter(u=>new Date(u.created_at)>week).length;
-    const newToday=users.filter(u=>new Date(u.created_at)>today).length;
-    const newMonth=users.filter(u=>new Date(u.created_at)>month).length;
-
-    const elT=document.getElementById('appStatUsers');if(elT)elT.textContent=total;
-    const elW=document.getElementById('appStatNew');if(elW)elW.textContent=newWeek;
-    const elD=document.getElementById('appStatToday');if(elD)elD.textContent=newToday;
-    const elM=document.getElementById('appStatMonth');if(elM)elM.textContent=newMonth;
-    if(count)count.textContent=`${total} brukere totalt`;
-
-    // Vekstbar (siste 7 dager)
-    const chart=document.getElementById('appGrowthChart');
-    const label=document.getElementById('appGrowthLabel');
-    if(chart){
-      const days=[];
-      for(let i=6;i>=0;i--){
-        const d0=new Date(today);d0.setDate(d0.getDate()-i);
-        const d1=new Date(d0);d1.setDate(d1.getDate()+1);
-        const n=users.filter(u=>{const t=new Date(u.created_at);return t>=d0&&t<d1;}).length;
-        const dn=d0.toLocaleDateString('nb-NO',{weekday:'short'});
-        days.push({n,dn});
-      }
-      const max=Math.max(...days.map(d=>d.n),1);
-      chart.innerHTML=days.map(d=>`
-        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px">
-          <div style="font-size:.56rem;color:var(--ink4)">${d.n||''}</div>
-          <div style="width:100%;height:${Math.max(4,Math.round((d.n/max)*44))}px;background:var(--gold);border-radius:3px 3px 0 0;opacity:${d.n?1:.2}"></div>
-          <div style="font-size:.56rem;color:var(--ink3)">${d.dn}</div>
-        </div>`).join('');
-      if(label)label.textContent=`Nye registreringer siste 7 dager (totalt ${newWeek})`;
-    }
-
-    // Brukerliste
-    list.innerHTML=users.length?users.map(u=>`
-      <div class="user-row">
-        <div class="user-info">
-          <div class="user-dot" style="background:${new Date(u.created_at)>week?'var(--green)':'var(--bg4)'}"></div>
-          <div>
-            <div class="user-email">${u.email||u.phone||u.id?.substring(0,12)+'…'}</div>
-            <div style="font-size:.6rem;color:var(--ink4)">${u.app_metadata?.provider||'email'} · ${u.email_confirmed_at?'bekreftet':'ubekreftet'}</div>
-          </div>
-        </div>
-        <div style="text-align:right">
-          <div class="user-date">${new Date(u.created_at).toLocaleDateString('nb-NO')}</div>
-          <div style="font-size:.58rem;color:var(--ink4)">${new Date(u.created_at).toLocaleTimeString('nb-NO',{hour:'2-digit',minute:'2-digit'})}</div>
-        </div>
-      </div>`).join('')
-    :'<div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Ingen brukere funnet</div>';
-  }catch(e){
-    list.innerHTML='<div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Krever Supabase service_role nøkkel for admin-tilgang</div>';
-    // Fallback: last fra public profile-tabell
-    try{
-      const r2=await fetch(`${SB_URL}/rest/v1/profiles?select=id,created_at&order=created_at.desc`,{
-        headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
-      });
-      if(r2.ok){
-        const profiles=await r2.json();
-        const now2=new Date(),week2=new Date(now2-7*864e5);
-        const today2=new Date(now2.getFullYear(),now2.getMonth(),now2.getDate());
-        const month2=new Date(now2.getFullYear(),now2.getMonth(),1);
-        const elT=document.getElementById('appStatUsers');if(elT)elT.textContent=profiles.length;
-        const elW=document.getElementById('appStatNew');if(elW)elW.textContent=profiles.filter(p=>new Date(p.created_at)>week2).length;
-        const elD=document.getElementById('appStatToday');if(elD)elD.textContent=profiles.filter(p=>new Date(p.created_at)>today2).length;
-        const elM=document.getElementById('appStatMonth');if(elM)elM.textContent=profiles.filter(p=>new Date(p.created_at)>month2).length;
-        if(count)count.textContent=`${profiles.length} profiler (fra profiles-tabell)`;
-        list.innerHTML=profiles.map(p=>`
-          <div class="user-row">
-            <div class="user-info"><div class="user-dot" style="background:var(--bg4)"></div><div class="user-email">${p.id?.substring(0,16)}…</div></div>
-            <div class="user-date">${new Date(p.created_at).toLocaleDateString('nb-NO')}</div>
-          </div>`).join('') || '<div style="text-align:center;padding:12px;color:var(--ink4);font-size:.8rem">Ingen profiler</div>';
-      }
-    }catch(e2){}
-  }
-}
-
-// Init app-side automatisk
-document.getElementById('pg-app')&&setTimeout(()=>{
-  if(document.getElementById('pg-app').classList.contains('on'))loadAppUsersExtended();
-},100);
-
+</div>
 buildModes(NAME);
 addMsg('a','Hei, '+name+'! 👋 Klar til å hjelpe. Velg modus eller still meg et spørsmål.');
 showPage('hjem',ITEMS);
