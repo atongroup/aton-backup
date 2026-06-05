@@ -1,25 +1,41 @@
-# Sesjonslogg — 2026-06-05
+# SESJON_LOGG — Aton System
 
-## Hva ble gjort
+## Siste sesjon: 5. juni 2026 (del 2)
 
-### GitHub
-- Nytt token via Chrome: aton-backup-claude (ingen utlop, repo+workflow)
+### Arbeidsøkt: 5. juni 2026 kl. 10:00–14:00
 
-### Aton App (atongroup/atonapp)
-- Syntaksfeil fikset: manglende GestureHandlerRootView lukketag i TasksScreen
-- expo-audio + expo-location + expo-notifications wrappet for Expo Go
-- App.tsx refaktorert fra 2641 til 366 linjer, 13 nye komponentfiler
-- Pakker oppdatert til SDK 54
-- EAS Free brukt opp, nytt bygg 1. juli
+#### BladeShip
+- VARD: Håvard Lien svarte — Teams-møte 2. juli kl. 15:00, Google Meet-link sendt
+- VARD: Q&A-forberedelse lagret i Google Drive
+- DNV-møte 10. juni bekreftet
+- Kleven/Greenyard: dialog pågår
 
-### Google Play
-- Konto Aton Group allerede opprettet (ID 7290479224110219777)
-- Venter pa Google identitetsbekreftelse
+#### Bank/Økonomi
+- DNB: Søknad fylt ut, lånesaldo + kontonumre sendt til Birgitte
+- Birgitte svar: klar til å sende rammelån for signering — venter på leiekontrakt fra Ahmad
+- SR-Bank ringte: kunne ikke matche DNB-tilbud → besluttet å bytte til DNB
+- Ahmad kontaktet via SMS for leiekontrakt
 
-### Personvern
-- personvern.html (NO/EN) laget og levert for opplasting til one.com
+#### Aton App (github.com/atongroup/atonapp)
+Implementert i denne sesjonen:
+- ✅ JWT-auth fix i alle proxy-kall (fjernet PROXY_SECRET)
+- ✅ Supabase Edge Function claude-proxy deployet med JWT-auth
+- ✅ 3-lags minnesystem (smartMemory.ts) — profil + episoder + korttid
+- ✅ Supabase tabeller: user_profile_memory + user_episodes
+- ✅ Sekretær-tjenester (secretaryService.ts) — kalender, e-post, prioritering, kontakter, intent
+- ✅ HomeScreen: kalender + e-post oppsummering
+- ✅ TasksScreen: AI-oppgaveprioritering med minneprofil
+- ✅ ContactsScreen: kontakthukommelse
+- ✅ Aton-identitet: pulserende sol, ny tagline, ny onboarding-tone
+- ✅ PermissionsScreen: tilgangsspørring etter innlogging
+- ✅ Google Sign-In knapp i LoginScreen
+- ✅ PermissionsSettings i SettingsScreen (Konto-fanen)
+- ✅ Konkurranseanalyse: Aton er eneste Claude-baserte personlige AI-assistent-app
+- 🔄 APK-bygg: bygg #13+, Gradle APK-sti-feil under utbedring
 
-## Neste sesjon
-- Last opp personvern.html til atongroup.no/app/personvern.html
-- Implementer RevenueCat
-- 1. juli: bygg APK
+#### Strategisk innsikt
+- Aton er bygget på Claude (Anthropic) — ingen kjente konkurrenter bruker Claude som base
+- Automatisk oppgradering ved nye Claude-modeller
+- Eneste norskspråklige personlige AI-assistent med minneprofil
+
+---
