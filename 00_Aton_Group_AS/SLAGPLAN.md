@@ -38,7 +38,7 @@
 | 3 | ~~Slett spraymask.no + velumen.info~~ | ✅ Fullført 6. juni |
 | 4 | ~~Sjekk Creditsafe i Digipost~~ | ✅ Fullført 6. juni |
 | 5 | Registrer Aton Group AS i Fiken etter org.nr. | ~20. juni | Chrome → fiken.no |
-| 6 | NDA + VB-avtale Sprayvisir (Esther) | Snarest | Scrive |
+| 6 | ~~NDA + VB-avtale Sprayvisir (Esther)~~ | ⏸ Total pause — Esther (mor) |
 
 ---
 
