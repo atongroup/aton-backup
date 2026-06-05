@@ -106,7 +106,7 @@ document.getElementById('mob').innerHTML=m;
 
 function goto(id){
   showPage(id,ITEMS);
-  if(id==='app')loadAppUsers();
+  if(id==='app')loadAppUsersExtended();
 }
 
 function eierBar(){
@@ -220,19 +220,33 @@ ${eierBar()}
 </div>
 
 <div class="page" id="pg-app">
-<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Aton App</div><div class="sec-line"></div></div>
-<div class="card">
-  <div class="pipe-row"><div><div class="pipe-name">Stack</div><div class="pipe-sub">React Native · Expo · Supabase · Claude API</div></div></div>
-  <div class="pipe-row"><div><div class="pipe-name">Økonomimodell</div><div class="pipe-sub">Freemium — Gratis (Haiku) + Premium 99 kr/mnd (Opus)</div></div><span class="badge bx">Planlagt</span></div>
-  <div class="pipe-row"><div><div class="pipe-name">Status</div><div class="pipe-sub">Under utvikling · Beta</div></div><span class="badge by">Beta</span></div>
-</div>
-<div class="app-stat-grid">
-  <div class="app-stat"><div class="app-stat-n" id="appStatUsers">—</div><div class="app-stat-l">Brukere totalt</div></div>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Live statistikk</div><div class="sec-line"></div></div>
+<div class="app-stat-grid" style="grid-template-columns:repeat(auto-fill,minmax(90px,1fr))">
+  <div class="app-stat"><div class="app-stat-n" id="appStatUsers">—</div><div class="app-stat-l">Totalt</div></div>
   <div class="app-stat"><div class="app-stat-n" id="appStatNew">—</div><div class="app-stat-l">Siste 7 dager</div></div>
+  <div class="app-stat"><div class="app-stat-n" id="appStatToday">—</div><div class="app-stat-l">I dag</div></div>
+  <div class="app-stat"><div class="app-stat-n" id="appStatMonth">—</div><div class="app-stat-l">Denne mnd</div></div>
 </div>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Vekst siste 7 dager</div><div class="sec-line"></div></div>
+<div class="card" style="padding:14px">
+  <div id="appGrowthChart" style="height:60px;display:flex;align-items:flex-end;gap:3px"></div>
+  <div id="appGrowthLabel" style="font-size:.6rem;color:var(--ink4);margin-top:5px;text-align:center">Laster...</div>
+</div>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">Registrerte brukere</div><div class="sec-line"></div></div>
 <div class="card">
-  <div id="appUserList"><div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Trykk Oppdater for å laste</div></div>
-  <button onclick="loadAppUsers()" style="margin-top:8px;font-size:.72rem;color:var(--alex);font-weight:500;text-decoration:underline;background:none;border:none;cursor:pointer">↻ Oppdater</button>
+  <div id="appUserList"><div style="color:var(--ink4);font-size:.8rem;text-align:center;padding:12px">Laster...</div></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+    <span id="appUserCount" style="font-size:.68rem;color:var(--ink4)"></span>
+    <button onclick="loadAppUsersExtended()" style="font-size:.72rem;color:var(--gold);font-weight:500;text-decoration:underline;background:none;border:none;cursor:pointer">&#8635; Oppdater</button>
+  </div>
+</div>
+<div class="sec"><div class="sec-line"></div><div class="sec-lbl">App-info</div><div class="sec-line"></div></div>
+<div class="card">
+  <div class="pipe-row"><div><div class="pipe-name">Stack</div><div class="pipe-sub">React Native · Expo SDK 52 · Supabase · Claude API · ElevenLabs</div></div></div>
+  <div class="pipe-row"><div><div class="pipe-name">Økonomimodell</div><div class="pipe-sub">Gratis (Haiku · 5 meld/dag) + Premium 99 kr/mnd (Opus · ubegrenset)</div></div><span class="badge bx">Planlagt</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">Plattform</div><div class="pipe-sub">Android (APK) → Google Play → App Store</div></div><span class="badge by">Beta</span></div>
+  <div class="pipe-row"><div><div class="pipe-name">Supabase</div><div class="pipe-sub">wbwpobojxighhnmrabmj.supabase.co</div></div><a href="https://supabase.com/dashboard/project/wbwpobojxighhnmrabmj" target="_blank" style="color:var(--gold);font-size:.76rem">Åpne &rarr;</a></div>
+  <div class="pipe-row"><div><div class="pipe-name">Repo</div><div class="pipe-sub">github.com/atongroup/atonapp</div></div><a href="https://github.com/atongroup/atonapp" target="_blank" style="color:var(--gold);font-size:.76rem">Åpne &rarr;</a></div>
 </div>
 </div>`;
 
