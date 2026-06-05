@@ -645,10 +645,12 @@ Claude gjør da:
 
 
 ---
-## Aton Teknologi AS — Aton App (lagt til 4. juni 2026)
-- **Status:** Under aktiv utvikling — Expo Go fungerer, APK-bygg pågår
+## Aton Teknologi AS — Aton App (oppdatert 5. juni 2026)
+- **Status:** Under aktiv utvikling — Expo Go fungerer
+- **APK-bygg:** Feilet på alle bygg 5. juni pga. manglende `WebBrowser`-import i LoginScreen.tsx. Fix pushet kl. 12:58 — nytt bygg startet, resultat ukjent ved sesjonslutt.
 - **Repo:** github.com/atongroup/atonapp
+- **Siste commits:** Google Sign-In knapp, permissions-flyt, tilgangsoversikt i Konto-fanen
 - **Økonomimodell:** Freemium — Gratis (Haiku) + Premium 99 kr/mnd (Opus)
-- **Eierskap:** Aton Group AS 100% — Aton Teknologi AS stiftes ved markedslanser
-- **Neste steg:** Fikse APK-bygg, RevenueCat, Premium-skjerm
+- **Eierskap:** Aton Group AS 100% — Aton Teknologi AS stiftes ved markedslansering
+- **Neste steg:** Bekreft at APK-bygg lander, RevenueCat, Premium-skjerm, UX-forbedringer (TabBar, HomeScreen)
 - **Slagplan:** 08_Aton_Teknologi_AS/AtonApp/SLAGPLAN_ATON_APP.md

@@ -64,7 +64,7 @@ Aldri skriv «partner», «samarbeider» eller «avtale» uten skriftlig bekreft
 |---------|---------|--------|--------------------|------|
 | DNV | Kjetil Moi Østbø + Ole Johan Harnes | Dialog pågår | Møte bekreftet 10. juni kl. 11:30, Veritasveien 25. Dokumentpakke + NDA sendt 3. juni. | 2026-06-03 |
 | Green Yard Kleven (Greenyard) | Karl Johan Barstad, CCO | Dialog pågår | Konseptnotat (PDF) sendt 4. juni. Greenyards standard NDA mottatt — til gjennomgang. Neste steg: gjennomgå NDA + avvente respons fra engineering-team. | 2026-06-04 |
-| VARD | Håvard Vollset Lien, VP R&I (Ålesund) | Dialog pågår | Sendte konseptmail. Håvard inviterte til Teams-møte. Svar sendt 4. juni med forslag om 11. juni. | 2026-06-04 |
+| VARD | Håvard Vollset Lien, VP R&I (Ålesund) | Dialog pågår | Full tråd: Håvard foreslo 2. juli kl. 15. Leif svarte 5. juni kl. 12:11 — bekreftet 2. juli men tilbød også tidligere dato denne/neste uke. Ballen hos Håvard. Purring tidligst 12. juni. | 2026-06-05 |
 | Ulstein Group | post@ulstein.com | Kontaktet | Konseptmail sendt 3. juni. Ingen svar ennå. | 2026-06-03 |
 | Aker ASA | contact@akerasa.com | Kontaktet | Konseptmail sendt 3. juni. Ingen svar ennå. | 2026-06-03 |
 | Kleven AS | post@kleven.no | Kontaktet — FEILET | Delivery failure — adressen finnes ikke. | 2026-06-03 |
