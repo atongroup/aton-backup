@@ -81,6 +81,22 @@ Repo: `github.com/atongroup/atonapp` | Docs: `08_Aton_Teknologi_AS/HeyMom/`
 
 ---
 
+## 📁 SEKRETÆR-ARKITEKTUR — Dokumenthåndtering (Aton App)
+
+Arkitektur planlagt 5. juni 2026. Referanse: `08_Aton_Teknologi_AS/AtonApp/ARKITEKTUR_SEKRETAER.md`
+
+| # | Oppgave | Avhengighet | Status |
+|---|---------|-------------|--------|
+| SA1 | Opprett Supabase Storage-bucket `user-documents` med RLS | — | ⏳ |
+| SA2 | Legg til `storage_path`-kolonne i `leif_arkiv`-tabellen | SA1 | ⏳ |
+| SA3 | Bygg opplastingsfunksjon (base64 → Storage via Edge Function) | SA1–2 | ⏳ |
+| SA4 | Bygg Claude-prompt for automatisk metadata-tolkning | SA3 | ⏳ |
+| SA5 | Bygg søkefunksjon med signerte nedlastingslenker | SA1–4 | ⏳ |
+| SA6 | Integrer i Aton-appen (opplastingsskjerm + søkeskjerm) | SA1–5 | ⏳ |
+| SA7 | Rulle ut til alle Aton-brukere (RLS per bruker) | SA6 | ⏳ |
+
+---
+
 ## 🐙 GITHUB BACKUP
 | # | Hva | URL |
 |---|-----|-----|
