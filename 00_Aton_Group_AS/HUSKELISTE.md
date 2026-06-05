@@ -92,8 +92,8 @@ Arkitektur planlagt 5. juni 2026. Referanse: `08_Aton_Teknologi_AS/AtonApp/ARKIT
 | SA3 | Bygg opplastingsfunksjon (base64 → Storage via Edge Function) | SA1–2 | ✅ Kode i GitHub — deploy med Supabase CLI |
 | SA4 | Bygg Claude-prompt for automatisk metadata-tolkning | SA3 | ✅ Integrert i Edge Function |
 | SA5 | Bygg søkefunksjon med signerte nedlastingslenker | SA1–4 | ✅ Integrert i Edge Function |
-| SA6 | Integrer i Aton-appen (opplastingsskjerm + søkeskjerm) | SA1–5 | ⏳ Neste |
-| SA7 | Rulle ut til alle Aton-brukere (RLS per bruker) | SA6 | ⏳ |
+| SA6 | Integrer i Aton-appen (opplastingsskjerm + søkeskjerm) | SA1–5 | ✅ 5. juni 2026 |
+| SA7 | Rulle ut til alle Aton-brukere (RLS per bruker) | SA6 | ✅ 5. juni 2026 |
 
 ---
 
