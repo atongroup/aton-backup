@@ -1,4 +1,4 @@
-# HUSKELISTE v2.6.1
+# HUSKELISTE v2.6.2
 *Oppdateres ved slutten av HVER sesjon*
 
 ---
@@ -64,20 +64,20 @@
 
 ---
 
-## 📱 HEYMOM — Aton Teknologi AS
+## 📱 ATONAPP — Aton Teknologi AS
 
 | # | Oppgave | Frist | Status |
 |---|---------|-------|--------|
 | HM1 | Fiks mute-knapp synlig + SafeArea Android | v0.8 | ✅ Løst |
 | HM2 | Bygg Innstillinger-skjerm | v0.8 | ✅ Løst |
 | HM3 | Implementer mikrofon / tale-til-tekst | v0.9 | ⏳ |
-| HM4 | SkatteFUNN-søknad for HeyMom FoU | 1. sep 2026 | ⏳ |
+| HM4 | SkatteFUNN-søknad for AtonApp FoU | 1. sep 2026 | ⏳ |
 | HM5 | messages-tabell i Supabase | v0.8 | ✅ Løst |
 | HM6 | Google Apps Script proxy med riktig API-nøkkel | v0.8 | ✅ Løst |
 | HM7 | HeyMom persona (systemmelding) | v0.8 | ✅ Løst |
 | HM8 | Samtalehistorikk lagres i Supabase | v0.8 | ✅ Løst |
 
-Repo: `github.com/atongroup/atonapp` | Docs: `08_Aton_Teknologi_AS/HeyMom/`
+Repo: `github.com/atongroup/atonapp` | Docs: `08_Aton_Teknologi_AS/03_Apps/AtonApp/`
 
 ---
 
@@ -135,7 +135,16 @@ Arkitektur planlagt 5. juni 2026. Referanse: `08_Aton_Teknologi_AS/AtonApp/ARKIT
 
 ---
 
-## ✅ FULLFØRT — denne sesjonen (3. juni 2026)
+## ✅ FULLFØRT — sesjon 6. juni 2026
+
+- [x] ROUTINES.md opprettet — smart kommandosystem (hent Aton, Exit, sjekk mail, osv.)
+- [x] GitHub bekreftet som system-backbone (aton-backup, 653+ commits)
+- [x] HeyMom slettet fra GitHub (28 filer) — appen heter nå Aton / AtonApp
+- [x] AtonApp flyttet til 08_Aton_Teknologi_AS/03_Apps/AtonApp/
+- [x] HUSKELISTE oppdatert: HEYMOM → ATONAPP-seksjon
+- [x] Supabase MCP tilkoblet via claude.ai Connectors
+
+## ✅ FULLFØRT — sesjon 3. juni 2026
 
 - [x] Claude Console Aton Group AS opprettet (platform.claude.com)
 - [x] 3 workspaces: Default, Aton Hub, Grunnfelt Pipeline
@@ -152,4 +161,4 @@ Arkitektur planlagt 5. juni 2026. Referanse: `08_Aton_Teknologi_AS/AtonApp/ARKIT
 - [x] SESJONSSTARTER, HUSKELISTE, SLAGPLAN oppdatert
 
 ---
-*v2.6.1 · 3. juni 2026 (GitHub backup aktiv)*
+*v2.6.2 · 6. juni 2026 (GitHub backup aktiv)*

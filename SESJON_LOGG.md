@@ -1,5 +1,28 @@
 # SESJON_LOGG — Aton System
 
+
+## Sesjon: 6. juni 2026 (dag — Exit-sesjon)
+
+### Utført
+- Supabase MCP tilkoblet via claude.ai Connectors (wbwpobojxighhnmrabmj, eu-central-1)
+- Undersøkte Supabase Storage — storage.objects tom; leif_arkiv har metadata men NULL storage_paths
+- GitHub aton-backup bekreftet som system-backbone (653+ commits, hele Aton-systemet)
+- ROUTINES.md opprettet med smart kommandosystem: hent Aton, Exit, sjekk mail, sjekk kalender, status [selskap], jobbe med appen, bygg APK, sjekk supa
+- SESJONSSTARTER.md oppdatert med referanse til ROUTINES.md
+- HeyMom fjernet fra 08_Aton_Teknologi_AS (28 filer slettet)
+- AtonApp (ekte) flyttet til 08_Aton_Teknologi_AS/03_Apps/AtonApp/
+- HUSKELISTE oppdatert: HEYMOM-seksjon omdøpt til ATONAPP
+- Versjon bumped til v2.6.2
+
+### Gjenstår (videreføres)
+- K1: Sett inn NOK 30k Folio (~9. juni)
+- K3: Bekreft leif@bladeship.no alias i Gmail
+- K4/K5: Vent bekreftelse slett spraymask.no + velumen.info → registrer sprayvisir.no
+- K7: Signer stiftelsesdokument Aton Group AS (venter Tom Trones)
+- V1: Send IN Miljøteknologi NOK 2M (etter org.nr. ~20. juni)
+- T1-T3: Last opp nettsider til one.com
+- G7: Signer aksjonæravtale Grunnfelt med Kim
+
 ## Siste sesjon: 5. juni 2026 (del 3 — kveld)
 
 ### Arbeidsøkt: 5. juni 2026 kl. 16:00–21:00
