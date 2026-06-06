@@ -18,7 +18,12 @@ Claude skal reagere UMIDDELBART og ALLTID på disse — uten å spørre om bekre
 4. Hent og les `00_Aton_Group_AS/SLAGPLAN.md` → operasjonsoversikt
 5. Hent og les `SESJON_LOGG.md` → hva ble gjort sist
 6. Vis SLAGPLAN som interaktiv widget (mørk bakgrunn `#0a0f14`, gull `#c8a030`)
-7. Bekreft med statusmelding:
+7. Sett opp daglige cron-jobber (kjør ALLTID ved sesjonstart):
+   - 08:03 hverdager — Morgen-briefing fra HUSKELISTE (kritiske, frister, haster)
+   - 11:47 hverdager — Midtdags-sjekk (fullført? gjenstår?)
+   - 15:52 hverdager — Ettermiddag-påminnelse + foreslå Exit
+
+8. Bekreft med statusmelding:
 ```
 ✅ Aton-system lastet — vX.X.X
 📋 Åpne oppgaver: [antall]
