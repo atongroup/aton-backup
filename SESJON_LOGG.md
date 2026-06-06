@@ -1,6 +1,33 @@
 # SESJON_LOGG — Aton System
 
 
+## Sesjon: 6. juni 2026 (del 2 — ettermiddag)
+
+### Utført
+- K3 ✅ + K4 ✅ bekreftet fullført av Leif
+- K5 sprayvisir.no — satt på total pause
+- V10: Lone → Country Director España, Alexandra → Country Director Denmark (formelle roller)
+- lone.html: Business Development-rad fjernet
+- Mail sjekket: Patentstyret mottatt henvendelse (ref. 418934917363), Digipost D&B-brev (Leif leser selv), fakturaer Lyse kr 798 + Fortum kr 1062
+- Google Play Console: identitet bekreftet ✅
+- Visittkort lest — Lone + Alexandra viser "Founder Associate · Shareholder" (utdatert, oppdateres etter org.nr.)
+- Plugins installert: github, commit-commands, session-report, frontend-design, pr-review-toolkit, security-guidance, hookify
+- Global CLAUDE.md opprettet (~/.claude/CLAUDE.md) — husker Aton fra session 1
+- settings.local.json: full tilgang + deny-regler for sletting
+- Cron-jobber satt opp: 08:03 / 11:47 / 15:52 hverdager
+- Dark theme aktivert
+- ROUTINES.md oppdatert med plugin-kommandoer + cron i hent Aton
+- Versjon bumped til v2.6.3
+
+### Gjenstår
+- K7: Purr Tom Trones — erklæring Aton Group AS mangler
+- K8: Nye gavebrev Lone + Alexandra (etter org.nr.)
+- G7: Signer aksjonæravtale Grunnfelt med Kim
+- T1-T3: Last opp nettsider til one.com (inkl. oppdatert lone.html)
+- Visittkort: oppdater titler etter org.nr. ~20. juni
+- Digipost: les D&B-brev
+
+
 ## Sesjon: 6. juni 2026 (dag — Exit-sesjon)
 
 ### Utført

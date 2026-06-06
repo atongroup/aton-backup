@@ -1,4 +1,4 @@
-# HUSKELISTE v2.6.2
+# HUSKELISTE v2.6.3
 *Oppdateres ved slutten av HVER sesjon*
 
 ---
@@ -145,7 +145,14 @@ Arkitektur planlagt 5. juni 2026. Referanse: `08_Aton_Teknologi_AS/AtonApp/ARKIT
 - [x] Supabase MCP tilkoblet via claude.ai Connectors
 - [x] K3: leif@bladeship.no alias i Gmail — fullført ✅
 - [x] K4: spraymask.no + velumen.info slettet — fullført ✅
-- [x] K5: sprayvisir.no klar til registrering (neste steg)
+- [x] K5: sprayvisir.no — satt på TOTAL PAUSE
+- [x] V10: Lone → Country Director España, Alexandra → Country Director Denmark
+- [x] lone.html: Business Development-rad fjernet
+- [x] Plugins installert: github, commit-commands, session-report, frontend-design, pr-review-toolkit, security-guidance, hookify
+- [x] Global CLAUDE.md opprettet — Claude husker Aton fra dag 1
+- [x] settings.local.json: full tilgang + deny på sletting
+- [x] Cron-jobber: morgen 08:03, midtdag 11:47, ettermiddag 15:52 (hverdager)
+- [x] Dark theme aktivert
 
 ## ✅ FULLFØRT — sesjon 3. juni 2026
 
@@ -164,4 +171,4 @@ Arkitektur planlagt 5. juni 2026. Referanse: `08_Aton_Teknologi_AS/AtonApp/ARKIT
 - [x] SESJONSSTARTER, HUSKELISTE, SLAGPLAN oppdatert
 
 ---
-*v2.6.2 · 6. juni 2026 — oppdatert kl. 06:00*
+*v2.6.3 · 6. juni 2026*
