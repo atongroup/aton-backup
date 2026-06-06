@@ -9,9 +9,9 @@
 |---|---------|-------|---------|--------|
 | K1 | Sett inn NOK 30 000 Folio Aton Group AS (venter kontonummer ~9. juni) | ~9. juni | — Leif gjør selv | ⏳ Venter |
 | K2 | Svar Sparebanken Norge KYC hvis de tar kontakt | Løpende | Gmail MCP søk | ⚡ Overvåk |
-| K3 | Fiks leif@bladeship.no alias i Gmail (Send e-post som) | ASAP | Chrome → Gmail settings | 🔄 DNS fikset (Google MX slettet) — bekreft Gmail-alias i morgen når DNS propagert |
-| K4 | Slett spraymask.no + velumen.info på one.com | 4. juni | one.com support | ✅ E-post sendt — venter bekreftelse |
-| K5 | Registrer sprayvisir.no etter K4 | Etter K4 | Chrome → one.com | ⏳ Venter |
+| K3 | Fiks leif@bladeship.no alias i Gmail (Send e-post som) | ASAP | Chrome → Gmail settings | ✅ Fullført 6. juni |
+| K4 | Slett spraymask.no + velumen.info på one.com | 4. juni | one.com support | ✅ Fullført 6. juni |
+| K5 | Registrer sprayvisir.no etter K4 | Snarest | Chrome → one.com | 🔴 K4 fullført — klar til registrering |
 | K6 | ~~Creditsafe-brev Digipost~~ | — | — | ✅ Ikke relevant — kun kredittvurdering |
 | K7 | Signer stiftelsesdokument Aton Group AS + last opp erklæring fra Tom Trones | Etter Tom bekrefter | Altinn → brreg.no | 🔄 Skjema åpnet i Altinn — mangler erklæring fra finansinst. E-post til Tom sendes i morgen |
 | K8 | Nye gavebrev Lone + Alexandra (3 000 aksjer à NOK 1) | Etter org.nr. | Claude → Scrive | ⏳ Gamle feil |
@@ -123,7 +123,7 @@ Arkitektur planlagt 5. juni 2026. Referanse: `08_Aton_Teknologi_AS/AtonApp/ARKIT
 |------|-----|-----------|--------|
 | 4. juni 2026 | Møte Kim Skjæveland — aksjonæravtale Grunnfelt | 9 (business) | ⏳ |
 | 9. juni 2026 | Folio kontonummer klar — sett inn NOK 30 000 | 11 (kritisk) | ⏳ |
-| 16. juni 2026 | Mobilisering Stord/NSE — 2 uker på | 10 (privat) | ✅ Bekreftet |
+| 16. juni 2026 | Avreise Stord — 2 uker på plattform | 10 (privat) | ✅ Bekreftet |
 | ~20. juni 2026 | Org.nr. forventet begge selskaper | 11 (kritisk) | ⏳ |
 | 30. juni 2026 | Hjemkomst fra Stord | 10 (privat) | ⏳ |
 | 1.–21. juli 2026 | Fri — 3 uker av | 10 (privat) | ⏳ |
@@ -143,6 +143,9 @@ Arkitektur planlagt 5. juni 2026. Referanse: `08_Aton_Teknologi_AS/AtonApp/ARKIT
 - [x] AtonApp flyttet til 08_Aton_Teknologi_AS/03_Apps/AtonApp/
 - [x] HUSKELISTE oppdatert: HEYMOM → ATONAPP-seksjon
 - [x] Supabase MCP tilkoblet via claude.ai Connectors
+- [x] K3: leif@bladeship.no alias i Gmail — fullført ✅
+- [x] K4: spraymask.no + velumen.info slettet — fullført ✅
+- [x] K5: sprayvisir.no klar til registrering (neste steg)
 
 ## ✅ FULLFØRT — sesjon 3. juni 2026
 
@@ -161,4 +164,4 @@ Arkitektur planlagt 5. juni 2026. Referanse: `08_Aton_Teknologi_AS/AtonApp/ARKIT
 - [x] SESJONSSTARTER, HUSKELISTE, SLAGPLAN oppdatert
 
 ---
-*v2.6.2 · 6. juni 2026 (GitHub backup aktiv)*
+*v2.6.2 · 6. juni 2026 — oppdatert kl. 06:00*
