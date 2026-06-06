@@ -11,7 +11,7 @@
 | K2 | Svar Sparebanken Norge KYC hvis de tar kontakt | Løpende | Gmail MCP søk | ⚡ Overvåk |
 | K3 | Fiks leif@bladeship.no alias i Gmail (Send e-post som) | ASAP | Chrome → Gmail settings | ✅ Fullført 6. juni |
 | K4 | Slett spraymask.no + velumen.info på one.com | 4. juni | one.com support | ✅ Fullført 6. juni |
-| K5 | Registrer sprayvisir.no etter K4 | Snarest | Chrome → one.com | 🔴 K4 fullført — klar til registrering |
+| K5 | Registrer sprayvisir.no | PAUSE | — | ⏸️ Total pause |
 | K6 | ~~Creditsafe-brev Digipost~~ | — | — | ✅ Ikke relevant — kun kredittvurdering |
 | K7 | Signer stiftelsesdokument Aton Group AS + last opp erklæring fra Tom Trones | Etter Tom bekrefter | Altinn → brreg.no | 🔄 Skjema åpnet i Altinn — mangler erklæring fra finansinst. E-post til Tom sendes i morgen |
 | K8 | Nye gavebrev Lone + Alexandra (3 000 aksjer à NOK 1) | Etter org.nr. | Claude → Scrive | ⏳ Gamle feil |
