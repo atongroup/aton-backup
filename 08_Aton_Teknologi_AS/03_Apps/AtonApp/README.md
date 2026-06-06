@@ -1,24 +1,24 @@
-# Aton App — Aton Teknologi AS
-**Status:** ✅ APK live (Android)
-**Versjon:** v1.5.0
-**Tech-stack:** React Native / Expo SDK 52, Supabase, Claude API, ElevenLabs
+# Aton App — Prosjektmappe
+**Utviklet av:** Aton Teknologi AS | **Eid av:** Aton Group AS (100%)
 
-## Dokumentasjon
-Kildekode og utvikling: github.com/atongroup/atonapp
+## Mappestruktur
 
-## Undermapper
-- 02_Okonomi/ — Prismodell, verdivurdering
-- 04_Teknisk/ — Arkitektur, Supabase-functions
-- 06_Juss_IP/ — IP-avtale
-- 07_Lansering/ — Go-to-Market, Google Play
+| Mappe | Innhold |
+|-------|---------|
+| 00_Admin | Vedtak, beslutninger, møtereferat |
+| 01_Produkt | Produktbeskrivelse, features, roadmap |
+| 02_Okonomi | Budsjett, prismodell, break-even, RevenueCat |
+| 03_Marked | Konkurrenter, målgruppe, markedsplan |
+| 04_Teknisk | Arkitektur, API-docs, bygglogg |
+| 05_Design | Designguide, assets, skjermbilder |
+| 06_Juss_IP | Personvern, vilkår, varemerkesøknad |
+| 07_Lansering | Go-to-market, pressemateriell |
 
-## Kjernefunksjoner
-- Morgenbrief (AI-generert, daglig)
-- Chat med AI (tekst, tale, bilde)
-- 3-lags minnesystem
-- Oppgavestyring med AI-prioritering
-- ElevenLabs stemme (norsk/engelsk)
+## Hurtiglenker
+- Repo: github.com/atongroup/atonapp
+- Supabase: supabase.com/dashboard/project/wbwpobojxighhnmrabmj
+- Expo: expo.dev/accounts/leifsunde/projects/heymom
+- Landingsside: atongroup.no/app/
 
-## Prismodell
-- Gratis: 5 meldinger/dag (Haiku)
-- Premium: 129 kr/mnd — 50 meldinger/dag (Sonnet)
+## Status
+Se SLAGPLAN_ATON_APP.md for fullstendig status og roadmap.
