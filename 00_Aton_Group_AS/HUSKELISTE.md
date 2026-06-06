@@ -32,7 +32,7 @@
 | V7 | Kontakt Equinor etter org.nr. | ~20. juni | Claude → Gmail | ⏳ Åpen dør |
 | V8 | EIC Accelerator — forbered intervju | August 2026 | Claude → pitchdokumenter | 🔄 Pågår |
 | V9 | Bekreft EIC-batch (mai eller juli?) | Snarest | Chrome → ec.europa.eu | ⏳ Sjekk portal |
-| V10 | Gi Lone formell rolle som Business Development | Snarest | Gmail → lone@atongroup.no | ⏳ Ikke gjort |
+| V10 | Lone + Alexandra — formelle roller tildelt | 6. juni | — | ✅ Fullført 6. juni |
 | V11 | Auto-reload aktivere Claude Console | Snarest | Chrome → platform.claude.com | ⏳ Leif gjør selv |
 
 ---
