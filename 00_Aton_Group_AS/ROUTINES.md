@@ -142,5 +142,45 @@ https://supabase.com/dashboard/project/wbwpobojxighhnmrabmj/editor
 
 ---
 
+---
+
+## 🔌 PLUGIN-KOMMANDOER
+
+### `/github`
+→ GitHub-integrasjon direkte i Claude:
+- Se siste commits, issues og PRs på `atongroup/aton-backup` og `atongroup/atonapp`
+- Lag issues, commenter på PRs, sjekk byggestatus
+
+### `/commit`
+→ Smart git-commit med automatisk god melding basert på hva som er endret.
+Brukes i stedet for manuell `git commit -m` — sparer tid og gir konsistente meldinger.
+
+### `/session-report`
+→ Generer full sesjonsrapport — liste over alt gjort, filer endret, neste steg.
+Brukes som del av Exit-sekvensen for å lage SESJON_LOGG-innlegget automatisk.
+
+### `/frontend-design`
+→ Hjelp med HTML/CSS for Aton-nettsider:
+- hub.html, leif/lone/alex.html
+- bladeship.no, grunnfelt.no, atongroup.no
+- Holder seg til Aton design-profil (mørk `#0a0f14`, gull `#c8a030`)
+
+### `/pr-review`
+→ Code review av AtonApp pull requests:
+- Sjekker TypeScript-kode, React Native-komponenter
+- Gir konkrete forbedringsforslag før merge
+
+### `/security`
+→ Sikkerhetssjekk:
+- Supabase RLS-regler
+- API-nøkler og hemmeligheter i kode
+- Edge Functions og autentiseringslogikk
+
+### `/hookify`
+→ Sett opp git hooks:
+- Auto-kjør sjekker ved commit/push
+- Kan trigge Exit-sekvensen automatisk ved push til aton-backup
+
+
 *Legg til nye kommandoer her etter hvert som behovet oppstår.*
-*Sist oppdatert: 6. juni 2026 · Leif Sunde / Claude*
+*Sist oppdatert: 6. juni 2026 (v2) · Leif Sunde / Claude*
