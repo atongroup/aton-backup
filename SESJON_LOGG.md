@@ -32,3 +32,32 @@
 - Google Sign-In → sessionStorage → redirect til riktig brukerside
 - Auth-sjekk på hver side — redirect til hub.html hvis ikke logget inn
 - Alle filer live på atongroup.no ✅
+
+## Siste sesjon: 6. juni 2026 (natt)
+
+### Utført
+- Aton Teknologi AS restrukturert i GitHub (00_Admin, 01_Strategi, 02_Felles_Teknisk, 03_Apps)
+- BackgammonApp lagt inn som prosjekt under 03_Apps (på pause)
+- Verdivurdering AT oppdatert: Post-trigger NOK 5M, Forhandling NOK 6,75M
+- Gmail-proxy (Aton Gmail Proxy) deployet og live på Apps Script
+- Prismodell v2: ubegrenset gratis Haiku, Premium Sonnet 129 kr/mnd
+- Early Access-side live: atongroup.no/app/
+- Aton Teknologi AS lagt inn i portefølje på alle tre hub-sider (leif/lone/alex.html)
+- Scrollbar atongroup.no: 2px → 5px, scroll-line tykkere
+- Supabase: user_folders + lagringskvoter (5MB gratis, 50MB premium) installert
+- Supabase: rules-tabell fikset med active + created_at + RLS
+- Aton App v1.4.0 bygget og klar:
+  - Persona: HeyMom → Aton
+  - Brukerregler fra rules-tabellen (du er sjefen)
+  - Ubegrenset gratis (Haiku)
+  - 📷 Kamera + 📎 Galleri for alle brukere
+  - 🎤 Tale inn (Whisper) for alle
+  - 🔊 Stemme ut (ElevenLabs) kun Premium
+  - SJEKK MAIL via Gmail-proxy
+- APK: https://expo.dev/artifacts/eas/kaS6gCsb4quhDu8R7TNVqB.apk
+
+### Gjenstår
+- Last opp ny APK til atongroup.no/app/aton-app.apk (one.com)
+- supabase functions deploy document-secretary (fra terminal)
+- Google Drive-integrasjon (neste sesjon — v1.5.0)
+- Google Play-publisering
