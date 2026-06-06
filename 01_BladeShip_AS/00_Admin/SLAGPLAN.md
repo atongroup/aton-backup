@@ -178,3 +178,33 @@
 - Prosesseringsrom: Zone 21 (Cat 2D utstyr), siloer: Zone 20 (Cat 1D)
 - Enclosed negativt trykk rom + HEPA-filtrering + eksplosjonssikring
 
+
+---
+
+## Research-oppdatering — 6. juni 2026
+
+### Nye markedstall (verifisert)
+- **Dekommisjoneringsmarked (separat fra resirkulering):** $6,1 mrd innen 2034, 21% CAGR (Invrecovery 2026)
+- Dekommisjoneringskostnad: $100 000–410 000 per turbin
+- ~90% av turbinmasse er allerede resirkulerbar — kompositt-bladet er det uløste problemet (BladeShips nisje)
+- 1 800 offshore-turbiner skal dekommisjoneres i Europa de neste 4 årene (NTNU/EurekAlert)
+
+### GFG-validering (nytt vitenskapelig grunnlag 2025–2026)
+- Studie april 2026 (MDPI Recycling): glassfiberavfall som sementtilsetning ga høyest mekanisk ytelse blant 5 industrielle biprodukter, overgikk referanse-trykkstyrke
+- Bekrefter GFG som dokumentert avtaker-produkt for betongindustrien
+
+### Konkurransebilde — oppdatert
+- **"Design for recycling" øker:** RWE Thor (april 2026) = 40 turbiner med 120 resirkulerbare blader. Sofia (2026) = 150 resirkulerbare Siemens Gamesa-blader.
+- KONSEKVENS: Nye blader designes for resirkulering, MEN ~20 000 gamle thermoset-blader (ikke designet for resirkulering) skal fortsatt dekommisjoneres innen 2040 → BladeShips tidsvindu er eksisterende blader
+- Vattenfall/Plaswire, Stena/Vestas CETEC, Regen Fiber, Acciona Waste2Fiber — alle fortsatt LANDBASERT
+
+### ⚠️ IP-RISIKO — må avklares
+- Publisert patent PCT/EP2021/057595: "Mobile on-site recycling system for wind turbine blade" — LANDBASERT mobilt (trailer)
+- MÅ sjekkes av patentadvokat opp mot 20260735/20260736 før EIC-intervju
+- BladeShips offshore/havgående krav må være tydelig avgrenset fra dette landbaserte patentet
+
+### Finansiering — oppdatert status
+- EIC Accelerator 2026: budsjett €634M, investeringskomponent €1–10M, STEP Scale-up egenkapital opptil €30M. Cleantech/sirkulær sterkt representert blant vinnere (61 av 923 i okt-2025-runden)
+- ⚠️ Enova kuttet 1,9 mrd i 2026 → strengere prioritering, høyere terskel
+
+*Research utført 6. juni 2026 via web*
