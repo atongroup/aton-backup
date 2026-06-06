@@ -121,6 +121,7 @@ https://supabase.com/dashboard/project/wbwpobojxighhnmrabmj/editor
 - Aldri publiser innhold uten Leifs godkjenning
 - Aldri omtal noen som «partner» basert på én e-post alene
 - Aldri forhandle Aton-andel under 15% uten eksplisitt godkjenning
+- **Aldri slett filer eller mapper uten at Leif eksplisitt bekrefter** — vis alltid liste over hva som skal slettes og vent på «ja»
 
 ---
 
