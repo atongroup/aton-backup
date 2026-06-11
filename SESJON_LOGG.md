@@ -111,3 +111,28 @@
 - supabase functions deploy document-secretary (fra terminal)
 - Google Drive-integrasjon (neste sesjon — v1.5.0)
 - Google Play-publisering
+
+
+## Sesjon: 11. juni 2026
+
+### Utført
+- BladeShip AS bekreftet registrert i Brønnøysund — org.nr. 937 865 171 (Leif signerte Altinn-dokumenter)
+- IN Miljøteknologi søknad innsendt via portal (bekreftet i mail)
+- DNV-møte 10. juni gjennomført — AiP-prosess avklart, skipsdesign kreves først
+- Konseptbeslutning: ett fartøy, DP2+ dynamisk posisjonering (jackup droppet) — kommunisert til DNV, VARD, Greenyard
+- VARD (Håvard Vollset Lien): møte 2. juli bekreftet, VARD vil bruke eget designhus
+- Nordic Innovators (Kenneth Junge Hermansen): no-cure-no-pay bekreftet, detaljer etterspurt. EIC-tidslinje: cut-off 8. juli, intervju 31. aug–5. sep, pitch Brussel 19.–24. okt
+- Heidelberg Materials (Tor Halvorsrud): positiv respons, videresendt til kolleger. Ingen masing.
+- GEP ECOTECH (Ethan Wu) + ZAECOTECH: dialog åpnet, tekniske spesifikasjoner sendt til GEP
+- Enova brukerregistrering startet
+- Patentstyret IP-veiledning: feil e-postadresse (bounced) — må finnes ny adresse
+- NSE Gruppen: nytt kontonummer DNB 1229.78.50685 bekreftet
+- BladeShip HUSKELISTE oppdatert til v1.1.0
+
+### Gjenstår
+- Patentstyret: finn riktig adresse for IP-veiledning
+- SkatteFUNN: send straks etter org.nr. er aktivt
+- Skaff revisor
+- Enova: fullfør søknad etter Stord-rotasjon
+- VARD-agenda: forbered til 2. juli
+- Avventer svar: Greenyard, DNV, Huisman, Optilift, BDO, Nordic Innovators
